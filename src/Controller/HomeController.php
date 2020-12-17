@@ -11,7 +11,9 @@ class HomeController extends AbstractController
     /**
      * @Route("/", name="home")
      */
+
+
     public function home() {
-        return $this->render('home/home.html.twig');
+        return $this->render('home/home.html.twig'); // renvoie vers le twig de la page d'accueil
     }
 }

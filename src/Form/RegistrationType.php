@@ -16,16 +16,16 @@ class RegistrationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('email', TextType::class)
-            ->add('password', RepeatedType::class, [
+            ->add('email', TextType::class)               //on enregistre la variable email
+            ->add('password', RepeatedType::class, [        //on enregistre la variable password
                 'type' => PasswordType::class,
-                'invalid_message' => 'Répéter le même mot de passe',
+                'invalid_message' => 'Répéter le même mot de passe',    //message affiché en cas d'invalidité du mdp
                 'options' => ['attr' => ['class' => 'password-field']],
                 'required' => true,
                 'first_options'  => ['label' => 'Password'],
                 'second_options' => ['label' => 'Répéter Password'],
             ])
-            ->add('SuperAdmin')
+            ->add('SuperAdmin')                                     //on enregistre la variable superadmin
         ;
     }
 
