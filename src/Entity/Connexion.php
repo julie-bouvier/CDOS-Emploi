@@ -24,8 +24,6 @@ class Connexion
      */
     private $password;
 
-    private string $confirmPassword;
-
     /**
      * @ORM\Column(name="superAdmin", type="boolean")
      */

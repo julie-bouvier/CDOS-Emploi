@@ -18,3 +18,8 @@
 ### Test coucou ###
 ### hello la famille###
 #wesh les amies#
+CDOS-Emploi.iml
+dataSources.xml
+php.xml
+composer.lock
+symfony.lock

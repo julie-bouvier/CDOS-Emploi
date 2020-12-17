@@ -17,8 +17,14 @@ class RegistrationType extends AbstractType
     {
         $builder
             ->add('email', TextType::class)
-            ->add('password', RepeatedType::class)
-            ->add('confirmPassword', TextType::class)
+            ->add('password', RepeatedType::class, [
+                'type' => PasswordType::class,
+                'invalid_message' => 'Répéter le même mot de passe',
+                'options' => ['attr' => ['class' => 'password-field']],
+                'required' => true,
+                'first_options'  => ['label' => 'Password'],
+                'second_options' => ['label' => 'Répéter Password'],
+            ])
             ->add('SuperAdmin')
         ;
     }
