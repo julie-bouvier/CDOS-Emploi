@@ -4,17 +4,20 @@ namespace App\Entity;
 
 use App\Repository\ConnexionRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=ConnexionRepository::class)
  * @ORM\Table(name="Connexion")
+ * @UniqueEntity(fields={"email"},message="Cet email est déjà enregisté")
  */
-class Connexion
+class Connexion implements UserInterface
 {
     /**
      * @ORM\Id()
-     * @ORM\Column(type="string", length=255, name="email")
+     * @ORM\Column(type="string", length=255, name="email", unique=true)
      */
     private string $email;
 
@@ -65,20 +68,24 @@ class Connexion
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getConfirmPassword()
+    public function getUsername(): ?string
     {
-        return $this->confirmPassword;
+        return $this->email;
     }
 
-    /**
-     * @param mixed $confirmPassword
-     */
-    public function setConfirmPassword($confirmPassword): void
+    public function eraseCredentials()
     {
-        $this->confirmPassword = $confirmPassword;
+        // TODO: Implement eraseCredentials() method.
     }
 
+    public function getSalt()
+    {
+        // TODO: Implement getSalt() method.
+    }
+
+    public function getRoles()
+    {
+        // TODO: Implement getRoles() method.
+        return ['Role_USER'];
+    }
 }
