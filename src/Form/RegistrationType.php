@@ -25,7 +25,7 @@ class RegistrationType extends AbstractType
                 'first_options'  => ['label' => 'Password'],
                 'second_options' => ['label' => 'Répéter Password'],
             ])
-            ->add('SuperAdmin')                                     //on enregistre la variable superadmin
+            ->add('SuperAdmin')                                     //on enregistre la variable superadminnn
         ;
     }
 

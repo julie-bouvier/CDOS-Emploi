@@ -12,7 +12,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Connexion[]    findAll()
  * @method Connexion[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class ConnexionRepository extends ServiceEntityRepository
+class ConnexionRepository extends ServiceEntityRepository //oui
 {
     public function __construct(ManagerRegistry $registry)
     {

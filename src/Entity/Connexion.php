@@ -41,7 +41,7 @@ class Connexion implements UserInterface
     {
         $this->email = $email;
 
-        return $this;
+        return $this; //oui
     }
 
     public function getPassword(): ?string

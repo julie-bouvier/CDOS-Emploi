@@ -38,7 +38,7 @@ class SecurityController extends AbstractController
         }
 
         return $this->render('security/registration.html.twig', [                       //si mal  rempli : on retourne registration (on reste sur ce formulaire)
-            'form' => $form->createView()                                           //on renvoie au formulaire
+            'form' => $form->createView()                                           //on renvoie au formulairee
         ]);
     }
 }
