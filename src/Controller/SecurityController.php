@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Connexion;
+use App\Form\ConnexionType;
 use App\Form\RegistrationType;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManagerInterface;
@@ -21,24 +22,39 @@ class SecurityController extends AbstractController
      * @param UserPasswordEncoderInterface $encoder
      * @return Response
      */
+
     public function registration(Request $request, EntityManagerInterface $entityManager, UserPasswordEncoderInterface $encoder)
     {
-        $connexion=new Connexion();         //on crée la variable connexion
-        $form=$this->createForm(RegistrationType::class, $connexion);           //on crée le form en utilisant le form RegistrationType
+        $connexion=new Connexion();
+        $form=$this->createForm(ConnexionType::class, $connexion);
 
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()){                              //si le form est valide
-            $hash = $encoder->encodePassword($connexion, $connexion->getPassword());    //on hashe le mdp: recupere+hash
-            $connexion->setPassword($hash);                                             //on lie le mdp hashé à la variable connexio
+        if ($form->isSubmitted() && $form->isValid()){
+            //Hasher le password
+            $hash = $encoder->encodePassword($connexion, $connexion->getPassword());
+            $connexion->setPassword($hash);
+
             $entityManager->persist($connexion);
-            $entityManager->flush();                                                    //persist+flush : les informations sont misent à jour dans la bdd
-            return $this->redirectToRoute('home');                                     //on retourne à la page home
+            $entityManager->flush();
+            return $this->redirectToRoute('home');
 
         }
 
-        return $this->render('security/registration.html.twig', [                       //si mal  rempli : on retourne registration (on reste sur ce formulaire)
-            'form' => $form->createView()                                           //on renvoie au formulairee
+        return $this->render('security/registration.html.twig', [
+            'form' => $form->createView()
         ]);
     }
+
+    /**
+     * @Route ("/login",name="login")
+     */
+    public function login(){
+        return $this->render('security/login.html.twig');
+    }
+
+    /**
+     * @Route ("/logout", name="logout")
+     */
+    public function logout(){}
 }

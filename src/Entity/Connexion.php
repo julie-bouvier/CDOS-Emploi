@@ -23,14 +23,30 @@ class Connexion implements UserInterface
 
     /**
      * @ORM\Column(name="password", type="string", length=255)
-     * @Assert\Length(min=8)
+     * @Assert\Length(min=8, minMessage="Votre mot de passe doit faire au minimum 8 caractères")
      */
     private $password;
 
     /**
-     * @ORM\Column(name="superAdmin", type="boolean")
+     * @ORM\Column(name="roles", type="string")
      */
-    private $SuperAdmin;
+    private $role;
+
+    /**
+     * @return mixed
+     */
+    public function getRole()
+    {
+        return $this->role;
+    }
+
+    /**
+     * @param mixed $role
+     */
+    public function setRole($role): void
+    {
+        $this->role = $role;
+    }
 
     public function getEmail(): ?string
     {
@@ -49,24 +65,15 @@ class Connexion implements UserInterface
         return $this->password;
     }
 
-    public function setPassword(string $password): self
+    public function setPassword($password): void
     {
         $this->password = $password;
-
-        return $this;
     }
 
-    public function getSuperAdmin(): ?bool
+    /*public function setRoles(array $roles): void
     {
-        return $this->SuperAdmin;
-    }
-
-    public function setSuperAdmin(bool $SuperAdmin): self
-    {
-        $this->SuperAdmin = $SuperAdmin;
-
-        return $this;
-    }
+        $this->roles = $roles;
+    }*/
 
     public function getUsername(): ?string
     {
@@ -83,9 +90,14 @@ class Connexion implements UserInterface
         // TODO: Implement getSalt() method.
     }
 
-    public function getRoles()
+    public function getRoles() :array
     {
         // TODO: Implement getRoles() method.
-        return ['Role_USER'];
+        $roles= [] ;
+        // tout le monde à le role user
+        $roles[] = 'ROLE_USER';
+        // on  attribut le role super admin ou admin en fonction de la variable $roles
+        $roles[] = $this->role;
+        return array_unique($roles);
     }
 }
