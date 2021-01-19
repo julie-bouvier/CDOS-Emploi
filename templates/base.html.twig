@@ -16,20 +16,38 @@
     <div class="collapse navbar-collapse" id="navbarColor01">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="/">Accueil
-                </a>
+                <a class="nav-link" href="/">Accueil</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/inscription">Créer un compte</a>
-            </li>
+            {% if app.user %}
+                {% for role in app.user.roles() %}
+                    {% if role == 'ROLE_SUPER_ADMIN' %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/inscription">Créer un compte</a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
         </ul>
         {% if not app.user %}
-            <a class="nav-link" href="/login">Conexion</a>
+            <a class="nav-link" href="/login">Connexion</a>
         {% else %}
-            <a class="nav-link" href="/logout">Déconexion</a>
+            {% for role in app.user.roles() %}
+                {% if role == 'ROLE_SUPER_ADMIN' %}
+                    <span>Super ADMIN</span>
+                {% endif %}
+                {% if role == 'ROLE_ADMIN' %}
+                    <span>Association</span>
+                {% endif %}
+            {% endfor %}
+            <a class="nav-link" href="/logout">Déconnexion</a>
         {% endif %}
     </div>
 </nav>
+{% if app.user %}
+    {% for role in app.user.roles() %}
+        {{ role }} <br>
+    {% endfor %}
+{% endif %}
 <div class="container">
     {% block body %}{% endblock %}
 </div>

@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Connexion;
 use App\Form\ConnexionType;
-use App\Form\RegistrationType;
+use App\Form\InscriptionType;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -26,14 +26,14 @@ class SecurityController extends AbstractController
     public function registration(Request $request, EntityManagerInterface $entityManager, UserPasswordEncoderInterface $encoder)
     {
         $connexion=new Connexion();
-        $form=$this->createForm(ConnexionType::class, $connexion);
+        $form=$this->createForm(InscriptionType::class, $connexion);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()){
             //Hasher le password
-            $hash = $encoder->encodePassword($connexion, $connexion->getPassword());
-            $connexion->setPassword($hash);
+            $hash = $encoder->encodePassword($connexion, $connexion->getComdp());
+            $connexion->setComdp($hash);
 
             $entityManager->persist($connexion);
             $entityManager->flush();
@@ -41,7 +41,7 @@ class SecurityController extends AbstractController
 
         }
 
-        return $this->render('security/registration.html.twig', [
+        return $this->render('security/admin/registration.html.twig', [
             'form' => $form->createView()
         ]);
     }

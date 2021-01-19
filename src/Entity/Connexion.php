@@ -2,82 +2,148 @@
 
 namespace App\Entity;
 
-use App\Repository\ConnexionRepository;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass=ConnexionRepository::class)
- * @ORM\Table(name="Connexion")
- * @UniqueEntity(fields={"email"},message="Cet email est déjà enregisté")
+ * Connexion
+ *
+ * @ORM\Table(name="connexion")
+ * @ORM\Entity
  */
-class Connexion implements UserInterface
+class Connexion implements \Symfony\Component\Security\Core\User\UserInterface
 {
     /**
-     * @ORM\Id()
-     * @ORM\Column(type="string", length=255, name="email", unique=true)
+     * @var string
+     *
+     * @ORM\Column(name="coMail", type="string", length=25, nullable=false)
+     * @ORM\Id
      */
-    private string $email;
+    private $comail;
 
     /**
-     * @ORM\Column(name="password", type="string", length=255)
-     * @Assert\Length(min=8, minMessage="Votre mot de passe doit faire au minimum 8 caractères")
+     * @var string
+     *
+     * @ORM\Column(name="coMdp", type="string", length=25, nullable=false)
      */
-    private $password;
+    private $comdp;
 
     /**
-     * @ORM\Column(name="roles", type="string")
+     * @var string|null
+     *
+     * @ORM\Column(name="coNom", type="string", length=25, nullable=true)
      */
-    private $role;
+    private $conom;
 
     /**
-     * @return mixed
+     * @var string|null
+     *
+     * @ORM\Column(name="coRoles", type="string", length=50, nullable=true)
      */
-    public function getRole()
+    private $coroles;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="Association", mappedBy="comail")
+     */
+    private $amail;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
     {
-        return $this->role;
+        $this->amail = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
-     * @param mixed $role
+     * @return string
      */
-    public function setRole($role): void
+    public function getComail(): string
     {
-        $this->role = $role;
+        return $this->comail;
     }
 
-    public function getEmail(): ?string
+    /**
+     * @param string $comail
+     */
+    public function setComail(string $comail): void
     {
-        return $this->email;
+        $this->comail = $comail;
     }
 
-    public function setEmail(string $email): self
+    /**
+     * @return string
+     */
+    public function getComdp(): string
     {
-        $this->email = $email;
+        return $this->comdp;
+    }
 
-        return $this; //oui
+    /**
+     * @param string $comdp
+     */
+    public function setComdp(string $comdp): void
+    {
+        $this->comdp = $comdp;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getConom(): ?string
+    {
+        return $this->conom;
+    }
+
+    /**
+     * @param string|null $conom
+     */
+    public function setConom(?string $conom): void
+    {
+        $this->conom = $conom;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getCoroles(): ?string
+    {
+        return $this->coroles;
+    }
+
+    /**
+     * @param string|null $coroles
+     */
+    public function setCoroles(?string $coroles): void
+    {
+        $this->coroles = $coroles;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getAmail()
+    {
+        return $this->amail;
+    }
+
+    /**
+     * @param \Doctrine\Common\Collections\Collection $amail
+     */
+    public function setAmail($amail): void
+    {
+        $this->amail = $amail;
     }
 
     public function getPassword(): ?string
     {
-        return $this->password;
+        return $this->comdp;
     }
-
-    public function setPassword($password): void
-    {
-        $this->password = $password;
-    }
-
-    /*public function setRoles(array $roles): void
-    {
-        $this->roles = $roles;
-    }*/
 
     public function getUsername(): ?string
     {
-        return $this->email;
+        return $this->comail;
     }
 
     public function eraseCredentials()
@@ -97,7 +163,8 @@ class Connexion implements UserInterface
         // tout le monde à le role user
         $roles[] = 'ROLE_USER';
         // on  attribut le role super admin ou admin en fonction de la variable $roles
-        $roles[] = $this->role;
+        $roles[] = $this->coroles;
         return array_unique($roles);
     }
+
 }
