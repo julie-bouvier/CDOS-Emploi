@@ -46,15 +46,22 @@ class Connexion implements \Symfony\Component\Security\Core\User\UserInterface
      *
      * @ORM\ManyToMany(targetEntity="Association", mappedBy="comail")
      */
-    private $amail;
+    private $associations;
 
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->amail = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->associations = new \Doctrine\Common\Collections\ArrayCollection();
     }
+
+
+    /**
+     * GETTER & SETTER
+     */
+
+
 
     /**
      * @return string
@@ -123,17 +130,17 @@ class Connexion implements \Symfony\Component\Security\Core\User\UserInterface
     /**
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getAmail()
+    public function getassociations()
     {
-        return $this->amail;
+        return $this->associations;
     }
 
     /**
-     * @param \Doctrine\Common\Collections\Collection $amail
+     * @param \Doctrine\Common\Collections\Collection $associations
      */
-    public function setAmail($amail): void
+    public function setassociations($associations): void
     {
-        $this->amail = $amail;
+        $this->associations = $associations;
     }
 
     public function getPassword(): ?string

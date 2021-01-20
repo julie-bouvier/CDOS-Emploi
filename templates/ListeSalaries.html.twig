@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+  <fieldset>
+    <legend>Voici la liste des Salariés de votre association :</legend>
+
+    <table id="" class="display" style="width:100%">
+      <thead>
+      <tr>
+        <th>Nom</th>
+        <th>Prénom</th>
+        <th>Voir plus d'informations</th>
+        <th>Modifier</th>
+        <th>Supprimer</th>
+      </tr>
+      </thead>
+      <tbody>
+
+      {% for salarie in ListeSalaries %}
+
+        <td>{{ salarie.snom }}</td>
+        <td>{{ salarie.sprenom }}</td>
+        <td>
+          <a href="{{ path('PlusInfos',{'id': salarie.getSpersoid()}) }}" method="post">Voir Plus</a>
+        </td>
+        <td>
+          <a href="" method="post">Modifier</a>
+        </td>
+        <td>
+          <a href="" method="post">Supprimer</a>
+        </td>
+      {% endfor %}
+
+      </tbody>
+    </table>
+    <br>
+    <hr>
+    <br>
+  </fieldset>
+{% endblock %}
+
+{% block javascripts %}
+
+  <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+  <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/keytable/2.5.0/js/dataTables.keyTable.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('table.display').DataTable();
+    } );
+  </script>
+
+{% endblock %}
+
+{% block stylesheets %}
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/keytable/2.5.0/css/keyTable.dataTables.min.css">
+{% endblock %}

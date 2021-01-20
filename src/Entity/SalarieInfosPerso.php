@@ -134,4 +134,261 @@ class SalarieInfosPerso
         $this->amail = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
+    /**
+     * @return int
+     */
+    public function getSpersoid(): int
+    {
+        return $this->spersoid;
+    }
+
+    /**
+     * @param int $spersoid
+     */
+    public function setSpersoid(int $spersoid): void
+    {
+        $this->spersoid = $spersoid;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getSnom(): ?string
+    {
+        return $this->snom;
+    }
+
+    /**
+     * @param string|null $snom
+     */
+    public function setSnom(?string $snom): void
+    {
+        $this->snom = $snom;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getSnomjeunefille(): ?string
+    {
+        return $this->snomjeunefille;
+    }
+
+    /**
+     * @param string|null $snomjeunefille
+     */
+    public function setSnomjeunefille(?string $snomjeunefille): void
+    {
+        $this->snomjeunefille = $snomjeunefille;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getSprenom(): ?string
+    {
+        return $this->sprenom;
+    }
+
+    /**
+     * @param string|null $sprenom
+     */
+    public function setSprenom(?string $sprenom): void
+    {
+        $this->sprenom = $sprenom;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getSadresse(): ?string
+    {
+        return $this->sadresse;
+    }
+
+    /**
+     * @param string|null $sadresse
+     */
+    public function setSadresse(?string $sadresse): void
+    {
+        $this->sadresse = $sadresse;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getSportable(): ?string
+    {
+        return $this->sportable;
+    }
+
+    /**
+     * @param string|null $sportable
+     */
+    public function setSportable(?string $sportable): void
+    {
+        $this->sportable = $sportable;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getStel(): ?string
+    {
+        return $this->stel;
+    }
+
+    /**
+     * @param string|null $stel
+     */
+    public function setStel(?string $stel): void
+    {
+        $this->stel = $stel;
+    }
+
+    /**
+     * @return \DateTime|null
+     */
+    public function getSdatenaissance(): ?\DateTime
+    {
+        return $this->sdatenaissance;
+    }
+
+    /**
+     * @param \DateTime|null $sdatenaissance
+     */
+    public function setSdatenaissance(?\DateTime $sdatenaissance): void
+    {
+        $this->sdatenaissance = $sdatenaissance;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getSlieunaissance(): ?string
+    {
+        return $this->slieunaissance;
+    }
+
+    /**
+     * @param string|null $slieunaissance
+     */
+    public function setSlieunaissance(?string $slieunaissance): void
+    {
+        $this->slieunaissance = $slieunaissance;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getSdptnaissance(): ?int
+    {
+        return $this->sdptnaissance;
+    }
+
+    /**
+     * @param int|null $sdptnaissance
+     */
+    public function setSdptnaissance(?int $sdptnaissance): void
+    {
+        $this->sdptnaissance = $sdptnaissance;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getSnationalite(): ?int
+    {
+        return $this->snationalite;
+    }
+
+    /**
+     * @param int|null $snationalite
+     */
+    public function setSnationalite(?int $snationalite): void
+    {
+        $this->snationalite = $snationalite;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getSautre(): ?string
+    {
+        return $this->sautre;
+    }
+
+    /**
+     * @param string|null $sautre
+     */
+    public function setSautre(?string $sautre): void
+    {
+        $this->sautre = $sautre;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getSnumsecu(): ?int
+    {
+        return $this->snumsecu;
+    }
+
+    /**
+     * @param int|null $snumsecu
+     */
+    public function setSnumsecu(?int $snumsecu): void
+    {
+        $this->snumsecu = $snumsecu;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getSsituationfam(): ?string
+    {
+        return $this->ssituationfam;
+    }
+
+    /**
+     * @param string|null $ssituationfam
+     */
+    public function setSsituationfam(?string $ssituationfam): void
+    {
+        $this->ssituationfam = $ssituationfam;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getSnbenfant(): ?int
+    {
+        return $this->snbenfant;
+    }
+
+    /**
+     * @param int|null $snbenfant
+     */
+    public function setSnbenfant(?int $snbenfant): void
+    {
+        $this->snbenfant = $snbenfant;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getAmail(): \Doctrine\Common\Collections\Collection
+    {
+        return $this->amail;
+    }
+
+    /**
+     * @param \Doctrine\Common\Collections\Collection $amail
+     */
+    public function setAmail(\Doctrine\Common\Collections\Collection $amail): void
+    {
+        $this->amail = $amail;
+    }
+
+
 }
