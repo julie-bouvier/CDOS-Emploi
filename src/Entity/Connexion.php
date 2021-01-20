@@ -169,7 +169,7 @@ class Connexion implements \Symfony\Component\Security\Core\User\UserInterface
         $roles= [] ;
         // tout le monde à le role user
         $roles[] = 'ROLE_USER';
-        // on  attribut le role super admin ou admin en fonction de la variable $roles
+        // on  attribut le role super Sadmin ou Sadmin en fonction de la variable $roles
         $roles[] = $this->coroles;
         return array_unique($roles);
     }

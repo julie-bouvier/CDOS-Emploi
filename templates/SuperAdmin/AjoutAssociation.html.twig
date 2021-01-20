@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Ajouts des informations d'une association</h1>
+    <br>
+    {{ form_start(form) }}
+{#    {{ form_widget(form) }}#}
+    <h6>Nom de l'association :
+        {{ form_widget(form.anom) }}
+    </h6>
+    <h6>Adresse :
+        {{ form_widget(form.aadresse) }}
+    </h6>
+    <h6>Téléphone :
+        {{ form_widget(form.atel) }}
+    </h6>
+    <h6>Date de création :
+        {{ form_widget(form.adatecreation) }}
+    </h6>
+    <h6>Date d'embauche du premier salarié' :
+        {{ form_widget(form.adateembauche) }}
+    </h6>
+
+    <button type="submit" class="btn btn-success">Inscription</button>
+    {{ form_end(form) }}
+
+{% endblock %}

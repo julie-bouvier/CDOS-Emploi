@@ -37,11 +37,14 @@ class SecurityController extends AbstractController
 
             $entityManager->persist($connexion);
             $entityManager->flush();
-            return $this->redirectToRoute('home');
+            $comail=$connexion->getComail();
+            return $this->redirectToRoute('EnregistrerAssociation',[
+                'comail'=> $comail
+            ]);
 
         }
 
-        return $this->render('security/admin/registration.html.twig', [
+        return $this->render('security/Sadmin/registration.html.twig', [
             'form' => $form->createView()
         ]);
     }
