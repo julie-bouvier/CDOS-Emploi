@@ -154,25 +154,26 @@ class AssociationType extends AbstractType
                 'attr' => ['class' => 'form-control'],
                 'required'=>false
             ])
-            ->add('acourriersinternet', CheckboxType::class)
+            ->add('acourriersinternet', CheckboxType::class,[
+                'required'=>false
+            ])
             ->add('aenvoicourrier',ChoiceType::class, [
                 'choices' => [
                     'du correspondant' => 'correspondant',
                     'de l\'associaion' => 'association'
                 ],
-                'attr' => ['class' => 'form-control']
+                'attr' => ['class' => 'form-control'],
+                'required'=>false
             ])
-
             ->add('amodepaiement',ChoiceType::class, [
                 'choices' => [
                     'virement' => 'virement',
                     'chèque' => 'cheque',
                     'espèce' => 'espece'
                 ],
-                'attr' => ['class' => 'form-control']
+                'attr' => ['class' => 'form-control'],
+                'required'=>false
             ])
-
-
             ->add('arib',TextType::class,[
                 'attr' => ['class' => 'form-control'],
                 'required'=>false

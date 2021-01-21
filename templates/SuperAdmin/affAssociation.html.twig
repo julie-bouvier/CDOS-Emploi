@@ -6,52 +6,30 @@
     <fieldset>
 
 
-            <legend>Liste des associations : </legend>
+        <legend>Liste des associations : </legend>
+        <p>Nom : {{ association.anom }}</p>
+        <p>Mail : {{ association.amail }}</p>
+        <p>Adresse: {{ association.aadresse }}</p>
+        <p>Téléphone: {{ association.atel }}</p>
+        <p>Date de création: {{ association.adatecreation|date("d/m/Y") }}</p>
+        <p>Date d'embauche du premier salarié: {{ association.adateembauche|date("d/m/Y") }}</p>
+        <p>Fédération: {{ association.afederation }}</p>
+        <p>SIRET: {{ association.asiret }}</p>
+        <p>Code APE: {{ association.aape }}</p>
+        <p>Immatriculation U.R.S.S.A.F. : {{ association.aurssaf}}</p>
+        <p>Code risque : {{ association.acoderisque }}</p>
+        <p>Taux accident de travail : {{ association.atauxaccidenttravail }}</p>
+        <p>Numéro POLE EMPLOI: {{ association.apeidentifiant }}  code personnel: {{ association.apecodeperso }}</p>
+        <p>Caisse retraite complémentaire: {{ association.acaisseretraite }} n° d'adhérent {{ association.acaisseretraitenumadh }}</p>
+        <p>N: {{ association.aape }}</p>
 
-            <table id="" class="display" style="width:100%">
-                <thead>
-                <tr>
-                    <th>Nom</th>
-                    <th>Email</th>
-                    <th>Ajouter/modifier des informations</th>
-                    <th>Supprimer une association</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for association in associations %}
-                <tr>
-                    <td>{{ association.anom }}</td>
-                    <td>{{ association.amail}}</td>
 
-                    <td>
-                        <a href="" method="post">Modifier</a>
-                    </td>
-                    <td>
-                        <a href="" method="post">Supprimer</a>
-                    </td>
-                </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-            <br>
+
+
+
+
+
 
     </fieldset>
 {% endblock %}
 
-{% block javascripts %}
-
-    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/keytable/2.5.0/js/dataTables.keyTable.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('table.display').DataTable();
-        } );
-    </script>
-
-{% endblock %}
-
-{% block stylesheets %}
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/keytable/2.5.0/css/keyTable.dataTables.min.css">
-{% endblock %}

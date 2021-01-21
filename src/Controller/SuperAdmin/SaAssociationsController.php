@@ -17,7 +17,7 @@ class SaAssociationsController extends AbstractController
      */
     public function affAssociation(){
         $associations=$this->getDoctrine()->getRepository(Association::class)->findAll();
-        return $this->render('SuperAdmin/affAssociation.html.twig', [
+        return $this->render('SuperAdmin/affAllAssociations.html.twig', [
             'associations' => $associations,
         ]);
     }
@@ -56,5 +56,15 @@ class SaAssociationsController extends AbstractController
                 'comail'=> $comail
             ]);
         }
+    }
+
+    /**
+     * @Route("/voirAssociation/{assomail}", name="voirAssociation")
+     */
+    public function voirAssociation($assomail){
+        $association=$this->getDoctrine()->getRepository(Association::class)->find($assomail);
+        return $this->render('SuperAdmin/affAssociation.html.twig', [
+            'association' => $association
+        ]);
     }
 }
