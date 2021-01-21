@@ -4,7 +4,11 @@
     <h1>Ajouts des informations d'une association</h1>
     <br>
     {{ form_start(form) }}
-{#    {{ form_widget(form) }}#}
+
+    <h6>mail de l'association :
+        {{ form_widget(form.amail) }}
+    </h6>
+
     <h6>Nom de l'association :
         {{ form_widget(form.anom) }}
     </h6>
@@ -17,8 +21,115 @@
     <h6>Date de création :
         {{ form_widget(form.adatecreation) }}
     </h6>
-    <h6>Date d'embauche du premier salarié' :
+    <h6>Date d'embauche du premier salarié :
         {{ form_widget(form.adateembauche) }}
+    </h6>
+    <h6>Agréé par la fédération de :
+        {{ form_widget(form.afederation) }}
+    </h6>
+    <h6>Numéro de S.I.R.E.T. :
+        {{ form_widget(form.asiret) }}
+    </h6>
+    <h6>Code APE :
+        {{ form_widget(form.aape) }}
+    </h6>
+    <h3> Organisme Collecteur</h3>
+    <h6>Immatriculation URSSAF :
+        {{ form_widget(form.aurssaf) }}
+    </h6>
+    <h6>Code risque :
+        {{ form_widget(form.acoderisque) }}
+    </h6>
+    <h6>Taux d’accident de travail :
+        {{ form_widget(form.atauxaccidenttravail) }}
+    </h6>
+    <h6>Numéro pole emploi identifiant :
+        {{ form_widget(form.apeidentifiant) }}
+    </h6>
+    <h6>Numéro pole emploi code personnel :
+        {{ form_widget(form.apecodeperso) }}
+    </h6>
+    <h6>Caisse retraite complémentaire :
+        {{ form_widget(form.acaisseretraite) }}
+    </h6>
+    <h6>Caisse retraite complémentaire n° adhérent :
+        {{ form_widget(form.acaisseretraitenumadh) }}
+    </h6>
+    <h6>N° adhérent caisse de prévoyance Humanis GNP :
+        {{ form_widget(form.acaisseprevoyance) }}
+    </h6>
+    <h6>Adhésion à des services de prévoyance optionnels : PP__:
+        {{ form_widget(form.app) }}
+    </h6>
+    <h6>Adhésion à des services de prévoyance optionnels : PO__:
+        {{ form_widget(form.ap0) }}
+    </h6>
+    <h6>Complémentaire santé :
+        {{ form_widget(form.acomplementaire) }}
+    </h6>
+    <h6>Complémentaire santé n° adhérent :
+        {{ form_widget(form.acomplementaireadh) }}
+    </h6>
+    <h6>N° ICOM  OPCO Afdas (formation professionnelle) :
+        {{ form_widget(form.aicom) }}
+    </h6>
+    <h6>N° adhérent ASSTV :
+        {{ form_widget(form.aasstv) }}
+    </h6>
+
+    <h3> Contacts </h3>
+
+    <h6>Nom présidence :
+        {{ form_widget(form.apresnom) }}
+    </h6>
+    <h6>Presidence adresse postale :
+        {{ form_widget(form.apresadresse) }}
+    </h6>
+    <h6>Presidence portable :
+        {{ form_widget(form.apresportable) }}
+    </h6>
+    <h6>Presidence telephone :
+        {{ form_widget(form.aprestel) }}
+    </h6>
+    <h6>Presidence mail :
+        {{ form_widget(form.apresmail) }}
+    </h6>
+    <h6>Nom correspondant pour la gestion de l’emploi :
+        {{ form_widget(form.agestionnom) }}
+    </h6>
+    <h6>Correspondant adresse postale :
+        {{ form_widget(form.acorrespondadresse) }}
+    </h6>
+    <h6>Correspondant portable :
+        {{ form_widget(form.acorrespondportable) }}
+    </h6>
+    <h6>Correspondant telephone :
+        {{ form_widget(form.acorrespondtel) }}
+    </h6>
+    <h6>Correspondant mail  :
+        {{ form_widget(form.acorrespondmail) }}
+    </h6>
+    <h6>Envoi des courriers par internet oui/non :
+        {{ form_widget(form.acourriersinternet) }}
+    </h6>
+    <h6>Envoi des courriers à l’adresse du correspondant / de l’asso :
+        {{ form_widget(form.aenvoicourrier) }}
+    </h6>
+    <h6>Mode de paiement des salaires virement / chèques / especes :
+        {{ form_widget(form.amodepaiement) }}
+    </h6>
+    <h6>Coordonnées bancaires (joindre rib) :
+        {{ form_widget(form.arib) }}
+    </h6>
+
+    <h3> Autres </h3>
+    <h6>Information complémentaire :
+        {{ form_widget(form.ainfocomplementaire) }}
+    </h6>
+
+    <h3> Réservé CDOS 86 </h3>
+    <h6>Date d’adhésion au service impact emploi :
+        {{ form_widget(form.adateadhesion) }}
     </h6>
 
     <button type="submit" class="btn btn-success">Inscription</button>

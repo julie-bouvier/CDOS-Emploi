@@ -33,23 +33,22 @@ class SaAssociationsController extends AbstractController
         //je veux ajouter des informations dans ma table association
         //liée cette table à la table connexion précédente
 
-        //je récupère le comail de la table connexion précédente
-
         //je crée un objet association
         $asso=new Association();
-
+        $asso->setAmail($comail);
         //je donne un formulaire avec les champs de la table association
         $form=$this->createForm(AssociationType::class, $asso);
         $form->handleRequest($request);
 
-        //je mets automatiquement le champs aMail=coMail
-
         //quand je clique sur valider le form, meme si les champs ne sont pas remplis, je persist and flush avec la bdd
         if ($form->isSubmitted() && $form->isValid()){
+            //je mets automatiquement le champs aMail=coMail
+
+            //j'enregistre la nouvelle asso dans la bdd
             $entityManager->persist($asso);
             $entityManager->flush();
             //je redirecte vers page ou route
-            return $this->redirectToRoute('/');
+            return $this->redirectToRoute('affAssociation',);
         }
         else{
             return $this->render('SuperAdmin/AjoutAssociation.html.twig', [

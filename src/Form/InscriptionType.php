@@ -17,20 +17,23 @@ class InscriptionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('comail', EmailType::class)
+            ->add('comail', EmailType::class,[
+                'attr' => ['class' => 'form-control']
+            ])
             ->add('comdp', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'invalid_message' => 'Répéter le même mot de passe',
                 'options' => ['attr' => ['class' => 'password-field']],
                 'required' => true,
                 'first_options'  => ['label' => 'Mot de passe : '],
-                'second_options' => ['label' => 'Répéter le mot de passe : '],
+                'second_options' => ['label' => 'Répéter le mot de passe : ']
             ])
             ->add('coroles', ChoiceType::class, [
                 'choices' => [
                     'Admin Association' => 'ROLE_ADMIN',
                     'Super Administrateur' => 'ROLE_SUPER_ADMIN'
-                ]
+                ],
+                'attr' => ['class' => 'form-control']
             ])
         ;
     }
