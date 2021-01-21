@@ -38,9 +38,14 @@ class SecurityController extends AbstractController
             $entityManager->persist($connexion);
             $entityManager->flush();
             $comail=$connexion->getComail();
-            return $this->redirectToRoute('EnregistrerAssociation',[
-                'comail'=> $comail
-            ]);
+            if ($connexion->getCoroles()=='ROLE_ADMIN'){
+                return $this->redirectToRoute('EnregistrerAssociation',[
+                    'comail'=> $comail
+                ]);
+            }
+            else{
+                return $this->redirectToRoute('home');
+            }
 
         }
 

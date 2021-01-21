@@ -252,9 +252,9 @@ class Association
     private $acourriersinternet;
 
     /**
-     * @var int|null
+     * @var string|null
      *
-     * @ORM\Column(name="aEnvoiCourrier", type="integer", nullable=true)
+     * @ORM\Column(name="aEnvoiCourrier", type="string", nullable=true)
      */
     private $aenvoicourrier;
 
@@ -876,17 +876,17 @@ class Association
     }
 
     /**
-     * @return int|null
+     * @return string|null
      */
-    public function getAenvoicourrier(): ?int
+    public function getAenvoicourrier(): ?string
     {
         return $this->aenvoicourrier;
     }
 
     /**
-     * @param int|null $aenvoicourrier
+     * @param string|null $aenvoicourrier
      */
-    public function setAenvoicourrier(?int $aenvoicourrier): void
+    public function setAenvoicourrier(?string $aenvoicourrier): void
     {
         $this->aenvoicourrier = $aenvoicourrier;
     }
