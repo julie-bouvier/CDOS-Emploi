@@ -1,0 +1,77 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} salaries {% endblock %}
+
+{% block body %}
+    <fieldset>
+
+        <legend>Informations du salarié : </legend>
+        <table>
+            <tr>
+                <td>
+                    Nom : {{ salarie.snom }}<br>
+                    Nom de Jeune fille : {{ salarie.snomjeunefille }}<br>
+                    Prénom : {{ salarie.sprenom }}<br>
+                    Adresse : {{ salarie.sadresse }}<br>
+                    Portable : {{ salarie.sportable }}<br>
+                    Téléphone : {{ salarie.stel }}<br>
+                    Date de naissance : {{ salarie.sdatenaissance|date("d/m/Y") }}<br>
+                </td>
+                <td> <br> </td>
+                <td> <br> </td>
+                <td> <br> </td>
+                <td>
+                    Lieu de naissance : {{ salarie.slieunaissance }}<br>
+                    Département de naissance : {{ salarie.sdptnaissance }}<br>
+                    Nationalité : {{ salarie.snationalite}}<br>
+                    Autre : {{ salarie.sautre }}<br>
+                    Numéro de sécurité social : {{ salarie.snumsecu }}<br>
+                    Situation familial : {{ salarie.ssituationfam }}<br>
+                    Nombre denfant : {{ salarie.snbenfant }}<br>
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+    <br>
+    <fieldset>
+        <legend>Informations du salarié : </legend>
+
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#Association1">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#Association4">Profile</a>
+            </li>
+        </ul>
+        <div id="myTabContent" class="tab-content">
+            <div class="tab-pane fade" id="Association1">
+
+                11111111111111111111111111111111111
+                truc bidule
+                infos pro de cette associations liées à ce salarié
+                petits boutons pour afficher/ modifier les sous-tables
+                </p>
+            </div>
+            <div class="tab-pane fade" id="Association4">
+
+                2222222222222222222222222222222222222
+                truc bidule
+                infos pro de cette associations liées à ce salarié
+                petits boutons pour afficher/ modifier les sous-tables
+                </p>
+            </div>
+        </div>
+    </fieldset>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br><br><br>
+    <br>
+
+
+{% endblock %}
+
+

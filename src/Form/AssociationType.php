@@ -154,7 +154,12 @@ class AssociationType extends AbstractType
                 'attr' => ['class' => 'form-control'],
                 'required'=>false
             ])
-            ->add('acourriersinternet', CheckboxType::class,[
+            ->add('acourriersinternet',ChoiceType::class, [
+                'choices' => [
+                    'Oui' => 'oui',
+                    'Non' => 'non'
+                ],
+                'attr' => ['class' => 'form-control'],
                 'required'=>false
             ])
             ->add('aenvoicourrier',ChoiceType::class, [

@@ -1,42 +1,48 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Associations{% endblock %}
+{% block title %}Salariés{% endblock %}
 
 {% block body %}
     <fieldset>
-
-
-            <legend>Liste des associations : </legend>
+        {% if listsalaries is defined %}
+            <legend>Liste des salariés : </legend>
 
             <table id="" class="display" style="width:100%">
                 <thead>
                 <tr>
                     <th>Nom</th>
-                    <th>Email</th>
+                    <th>Prénom</th>
                     <th>Voir les informations</th>
                     <th>Ajouter/modifier des informations</th>
-                    <th>Supprimer une association</th>
+                    <th>Supprimer un salarié</th>
                 </tr>
                 </thead>
                 <tbody>
-                {% for association in associations %}
-                <tr>
-                    <td>{{ association.anom }}</td>
-                    <td>{{ association.amail}}</td>
-                    <td>
-                        <a href="{{ path('voirAssociation',{'assomail': association.amail}) }}" method="post">Voir</a>
-                    </td>
-                    <td>
-                        <a href="{{ path('modifAssociation',{'assoMail': association.amail}) }}" method="post">Modifier</a>
-                    </td>
-                    <td>
-                        <a href="" method="post">Supprimer</a>
-                    </td>
-                </tr>
+                {% for salarie in listsalaries %}
+                    <tr>
+                        <td>{{ salarie.snom }}</td>
+                        <td>{{ salarie.sprenom}}</td>
+                        <td>
+                            <a href="{{ path('voirSalaries',{'idsalarie': salarie.spersoid}) }}" method="post">Voir</a>
+                        </td>
+                        <td>
+{#                            <a href="" method="post">Voir</a>#}<span>cc</span>
+                        </td>
+                        <td>
+{#                            <a href="" method="post">Modifier</a>#}<span>cc</span>
+                        </td>
+                        <td>
+                            <a href="" method="post">Supprimer</a>
+                        </td>
+                    </tr>
                 {% endfor %}
                 </tbody>
             </table>
             <br>
+        {% endif %}
+        {% if message is defined %}
+            {{ message }}
+        {% endif %}
 
     </fieldset>
 {% endblock %}

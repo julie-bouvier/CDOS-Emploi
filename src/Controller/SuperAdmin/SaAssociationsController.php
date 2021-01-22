@@ -13,13 +13,22 @@ use Symfony\Component\Routing\Annotation\Route;
 class SaAssociationsController extends AbstractController
 {
     /**
-     * @Route("/affAssociation", name="affAssociation")
+     * @Route("/affAssociation/{but}", name="affAssociation")
      */
-    public function affAssociation(){
+    public function affAssociation($but){
         $associations=$this->getDoctrine()->getRepository(Association::class)->findAll();
-        return $this->render('SuperAdmin/affAllAssociations.html.twig', [
-            'associations' => $associations,
-        ]);
+        //si mon but est de gérer les association alors on renvoi vers la page affAllAsso
+        if ($but=="assos"){
+            return $this->render('SuperAdmin/affAllAssociations.html.twig', [
+                'associations' => $associations,
+            ]);
+        }
+        //si mon but est de gérer les salariés alors on renvoi vers la page affassosalaries
+        elseif ($but=="salaries"){
+            return $this->render('SuperAdmin/affAllAssociationsSalaries.html.twig', [
+                'associations' => $associations,
+            ]);
+        }
     }
 
     /**
@@ -48,7 +57,9 @@ class SaAssociationsController extends AbstractController
             $entityManager->persist($asso);
             $entityManager->flush();
             //je redirecte vers page ou route
-            return $this->redirectToRoute('affAssociation',);
+            return $this->redirectToRoute('affAssociation',[
+                'but'=>'assos'
+            ]);
         }
         else{
             return $this->render('SuperAdmin/AjoutAssociation.html.twig', [
@@ -68,5 +79,30 @@ class SaAssociationsController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/modifAssociation{assoMail}", name="modifAssociation")
+     * @param Request $request
+     * @param EntityManagerInterface $entityManager
+     * @param $assoMail
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+     */
+    public function modifAssociation(Request $request,EntityManagerInterface $entityManager,$assoMail){
+        $association=$this->getDoctrine()->getRepository(Association::class)->find($assoMail);
+        $form=$this->createForm(AssociationType::class, $association);
+        $form->handleRequest($request);
 
+        if ($form->isSubmitted() && $form->isValid()){
+            $entityManager->persist($association);
+            $entityManager->flush();
+            return $this->redirectToRoute('affAssociation',[
+                'but'=>'assos'
+            ]);
+        }
+        else{
+            return $this->render('SuperAdmin/AjoutAssociation.html.twig', [
+                'form' => $form->createView(),
+                'assoMail'=> $assoMail
+            ]);
+        }
+    }
 }
