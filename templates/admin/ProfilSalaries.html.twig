@@ -1,97 +1,201 @@
 {% extends 'base.html.twig' %}
 {% block body %}
   <fieldset>
-    <legend>Voici les informations sur votre salarié :</legend>
+    <legend style="color:#18BC9C"><B>Voici les informations sur votre salarié :</B></legend>
 
     <br>
     <hr>
-    <H5> Informations Personnelles </H5>
-    <ul>
-      <li>Nom : {{ infosperso.snom }}</li>
-      <li>Nom de Jeune Fille : {{ infosperso.snomjeunefille }}</li>
-      <li>Prenom : {{ infosperso.sprenom }}</li>
-      <li>Adresse : {{ infosperso.sadresse }} </li>
-      <li>Portable : {{ infosperso.sportable }} </li>
-      <li>Telephone : {{ infosperso.stel }} </li>
-      <li>Date de naissance : {{ infosperso.sdatenaissance|date("d/m/Y") }} </li>
-      <li>Lieu de naissance : {{ infosperso.slieunaissance }} </li>
-      <li>Département de naissance : {{ infosperso.sdptnaissance }} </li>
-      <li>Nationalité Française :
-        {% if infosperso.snationalite==0 %}
-          Oui
-        {% else %}
-          Non
-        {% endif %}
+    <table>
+      <tr>
+        <td>
+          <H4 style="color:#18BC9C"> Informations Personnelles </H4>
+          <br>
+          <li><B>Nom :</B>  {{ infosperso.snom }}</li>
+          <li><B>Nom de Jeune Fille :</B>  {{ infosperso.snomjeunefille }}</li>
+          <li><B>Prenom :</B>  {{ infosperso.sprenom }}</li>
+          <li><B>Adresse :</B>  {{ infosperso.sadresse }} </li>
+          <li><B>Portable :</B>  {{ infosperso.sportable }} </li>
+          <li><B>Telephone :</B>  {{ infosperso.stel }} </li>
+          <li><B>Date de naissance :</B>  {{ infosperso.sdatenaissance|date("d/m/Y") }} </li>
+          <li><B>Lieu de naissance :</B>  {{ infosperso.slieunaissance }} </li>
+          <li><B>Département de naissance :</B>  {{ infosperso.sdptnaissance }} </li>
+          <li><B>Nationalité Française :</B>
+            {% if infosperso.snationalite==0 %}
+              Oui
+            {% else %}
+              Non
+            {% endif %}
+          </li>
+          {% if infosperso.snationalite==1 %}
+            <li> <B>Autre Nationalité (Numéro de carte de séjour):</B>  {{ infosperso.sautre }} </li>
+          {% endif %}
+          <li><B>N° de sécurité sociale :</B>  {{ infosperso.snumsecu }} </li>
+          <li><B>Situation familliale :</B>  {{ infosperso.ssituationfam }} </li>
+          <li><B>Nombre d'enfants a charge :</B> {{ infosperso.snbenfant }} </li>
+        </td>
+        <td>
+          <H4 style="color:#18BC9C"> Informations Professionnelles </H4>
+          <br>
+          <ul>
+            <li><B>Mail de l'association :</B>  {{ infospro.smailasso }}</li>
+            <li><B>Nom employeur :</B>  {{ infospro.snomemployeur }}</li>
+            <li><B>Poste occupé :</B>  {{ infospro.sposteoccupe }}</li>
+            <li><B>Groupe CCNS:</B>  {{ infospro.sccns }}</li>
+            <li><B>Nature du contrat :</B>  {{ infospro.snaturecontrat }}</li>
+            <li><B>Type temps de travail (Partiel, Temps pleins ou intermitant):</B>  {{ infospro.stypetempstravail }}</li>
+            <li><B>Gestion des congés payés:</B>
+              {% if infospro.sgestcp==0 %}
+                Oui
+              {% else %}
+                Non
+              {% endif %}
+            </li>
+            <li><B>Date de début :</B>  {{ infospro.sdatedebut|date("d/m/Y") }}</li>
+            <li><B>Date de fin :</B>
+              {% if infospro.sdatefin==null  %}
+
+              {% else %}
+                {{ infospro.sdatefin|date("d/m/Y") }}
+              {% endif %}
+            </li>
+            <li><B>Motif de fin:</B>  {{ infospro.sfinmotif }}</li>
+            <li><B>Commentaire de fin:</B>  {{ infospro.scomfin }}</li>
+            <li><B>10% de congés payés versé manuellement:</B>
+              {% if infospro.s10congemois==0 %}
+                Oui
+              {% else %}
+                Non
+              {% endif %}
+            </li>
+            <li><B>Congés à prendre:</B>
+              {% if infospro.sconge==0 %}
+                Oui
+              {% else %}
+                Non
+              {% endif %}
+            </li>
+            <li><B>Type de contrat (si aide/subventionné) :</B>  {{ infospro.stypecontrat }}</li>
+            <li><B>Salarié multi-employeur :</B>
+              {% if infospro.smultiemployeur==0 %}
+                Oui
+              {% else %}
+                Non
+              {% endif %}
+            </li>
+            <li><B>Volume horaire mensuel :</B>  {{ infospro.svolhorairemois }}</li>
+            <li><B>Taux horaire brut (en €) :</B>  {{ infospro.stauxhorairebrut }}</li>
+            <li><B>Salaire mensuel brut (en €) par mois :</B>  {{ infospro.ssalmoisbrut }}</li>
+            <li><B>Adhésion complémentaire santé obligatoire proposé par l'employeur :</B>
+              {% if infospro.scomplemsante==0 %}
+                Oui
+              {% else %}
+                Non
+              {% endif %}
+            </li>
+            <li><B> Autres éléments de rémunération :</B>  {{ infospro.sautreelement }}</li>
+          </ul>
+        </td>
+      </tr>
+    </table>
+    <hr>
+    <br>
+
+    {#Début de la Nav-bar, Les noms des ongles#}
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#conges" role="tab" aria-controls="home" aria-selected="true">Congés</a>
       </li>
-      {% if infosperso.snationalite==1 %}
-        <li> Autre Nationalité (Numéro de carte de séjour): {{ infosperso.sautre }} </li>
-      {% endif %}
-      <li>N° de sécurité sociale : {{ infosperso.snumsecu }} </li>
-      <li>Situation familliale : {{ infosperso.ssituationfam }} </li>
-      <li>Nombre d'enfants a charge : {{ infosperso.snbenfant }} </li>
+      <li class="nav-item">
+        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#arrets_travail" role="tab" aria-controls="profile" aria-selected="false">Arrêts de travail</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#chomages">Chomages</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#autres_adsences">Autres absences</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#primes">Primes</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#frais">Frais</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#heures">Heures</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#avenants">Avenants</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Gestion</a>
+        <div class="dropdown-menu" style="">
+          <a class="dropdown-item" href="#">Gestion des congés</a>
+          <a class="dropdown-item" href="#">Gestion des arrêts de travail</a>
+          <a class="dropdown-item" href="#">Gestion du chomage </a>
+          <a class="dropdown-item" href="#">Gestion des autres absence </a>
+          <a class="dropdown-item" href="#">Gestion des primes </a>
+          <a class="dropdown-item" href="#">Gestion des frais </a>
+          <a class="dropdown-item" href="#">Gestion des heures </a>
+          <a class="dropdown-item" href="#">Gestion des avenants </a>
+          <div class="dropdown-divider"></div>
+        </div>
+      </li>
     </ul>
-    <hr>
-    <br>
-    <H5> Informations Professionnelles </H5>
-      <ul>
-        <li>Mail de l'association {{ infospro.smailasso }}</li>
-        <li>Nom employeur: {{ infospro.snomemployeur }}</li>
-        <li>Poste occupé : {{ infospro.sposteoccupe }}</li>
-        <li>Groupe CCNS: {{ infospro.sccns }}</li>
-        <li>Nature du contrat : {{ infospro.snaturecontrat }}</li>
-        <li>Type temps de travail (Partiel, Temps pleins ou intermitant): {{ infospro.stypetempstravail }}</li>
-        <li>Gestion des congés payés:
-          {% if infospro.sgestcp==0 %}
-            Oui
-          {% else %}
-            Non
-          {% endif %}
-          </li>
-        <li>Date de début : {{ infospro.sdatedebut|date("d/m/Y") }}</li>
-        <li>Date de fin :
-          {% if infospro.sdatefin==null  %}
 
-          {% else %}
-            {{ infospro.sdatefin|date("d/m/Y") }}
-          {% endif %}
-        </li>
-        <li>Motif de fin: {{ infospro.sfinmotif }}</li>
-        <li>Commentaire de fin: {{ infospro.scomfin }}</li>
-        <li>10% de congés payés versé manuellement:
-          {% if infospro.s10congemois==0 %}
-            Oui
-          {% else %}
-            Non
-          {% endif %}
-        </li>
-        <li>Congés à prendre:
-          {% if infospro.sconge==0 %}
-            Oui
-          {% else %}
-            Non
-          {% endif %}
-          </li>
-        <li>Type de contrat (si aide/subventionné): {{ infospro.stypecontrat }}</li>
-        <li>Salarié multi-employeur:
-          {% if infospro.smultiemployeur==0 %}
-            Oui
-          {% else %}
-            Non
-          {% endif %}
-        </li>
-        <li>Volume horaire mensuel: {{ infospro.svolhorairemois }}</li>
-        <li>Taux horaire brut (en €): {{ infospro.stauxhorairebrut }}</li>
-        <li>Salaire mensuel brut (en €) par mois: {{ infospro.ssalmoisbrut }}</li>
-        <li>Adhésion complémentaire santé obligatoire proposé par l'employeur:
-          {% if infospro.scomplemsante==0 %}
-            Oui
-          {% else %}
-            Non
-          {% endif %}
-         </li>
-        <li>Autres éléments de rémunération: {{ infospro.sautreelement }}</li>
-      </ul>
-    <hr>
-    <br>
+    {#Début du contenu des onglets#}
+    <div class="tab-content">
+      <div class="tab-pane active" id="conges" role="tabpanel" aria-labelledby="home-tab">
+        <p>Voici la page des congés</p>
+      </div>
+      <div class="tab-pane" id="arrets_travail" role="tabpanel" aria-labelledby="profile-tab">
+        <p>Voici la page des arrêts de travail</p>
+      </div>
+      <div class="tab-pane fade" id="chomages">
+        <p>Voici la page du chomage</p>
+      </div>
+      <div class="tab-pane fade" id="autres_absence">
+        <p>Voici la page des autres absences</p>
+      </div>
+      <div class="tab-pane fade" id="prime">
+        <p>Voici la page des primes</p>
+      </div>
+      <div class="tab-pane fade" id="frais">
+        <p>Voici la page des frais</p>
+      </div>
+      <div class="tab-pane fade" id="heures">
+        <p>Voici la page des heures</p>
+      </div>
+      <div class="tab-pane fade" id="avenants">
+        <p>Voici la page des avenants</p>
+      </div>
+      <div class="tab-pane fade" id="dropdown2">
+        <p>Trust fund seitan letterpress, keytar raw denim keffiyeh etsy art party before they sold out master cleanse gluten-free squid scenester freegan cosby sweater. Fanny pack portland seitan DIY, art party locavore wolf cliche high life echo park Austin. Cred vinyl keffiyeh DIY salvia PBR, banh mi before they sold out farm-to-table VHS viral locavore cosby sweater.</p>
+      </div>
+    </div>
   </fieldset>
+
+{% block javascripts %}
+  <script src="../_vendor/jquery/dist/jquery.min.js"></script>
+  <script src="../_vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../_assets/js/custom.js"></script>
+{% endblock %}
+
+{#  {% block javascripts %}
+
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/keytable/2.5.0/js/dataTables.keyTable.min.js"></script>
+    <script>
+      $(document).ready(function() {
+        $('table.display').DataTable();
+      } );
+    </script>
+
+  {% endblock %}
+
+  {% block stylesheets %}
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/keytable/2.5.0/css/keyTable.dataTables.min.css">
+  {% endblock %}#}
+
 {% endblock %}

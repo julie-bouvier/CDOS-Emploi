@@ -1,71 +1,58 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Liste des Salariés existant déjà</h1>
+    <h1>Ajouts des informations personnelles d'un salarié</h1>
     <br>
     {{ form_start(form) }}
-    {#    {{ form_widget(form) }}#}
-    <div class="form-row align-items-end">
-        <div class="col">
-        Numéro de sécu :
-            {{ form_widget(form.snumsecu) }}
 
-    </div>
-    <div class="col">
-        <div class="form-group">
-            <button type="submit" class="btn btn-success">Rechercher</button>
-        </div>
-    </div>
-    </div>
+    <h6>Mail de l'association :
+        {{ form_widget(form.amail) }}
+    </h6>
+
+    <h6>Nom :
+        {{ form_widget(form.snom) }}
+    </h6>
+    <h6>Nom de jeune fille :
+        {{ form_widget(form.snomjeunefille) }}
+    </h6>
+    <h6>Prénom:
+        {{ form_widget(form.sprenom) }}
+    </h6>
+    <h6>Adresse Postale:
+        {{ form_widget(form.sadresse) }}
+    </h6>
+    <h6>Portable :
+        {{ form_widget(form.sportable) }}
+    </h6>
+    <h6>Téléphone :
+        {{ form_widget(form.stel) }}
+    </h6>
+    <h6>Date de naissance :
+        {{ form_widget(form.sdatenaissance) }}
+    </h6>
+    <h6>Lieu de Naissance :
+        {{ form_widget(form.slieunaissance) }}
+    </h6>
+    <h6>Département de naissance :
+        {{ form_widget(form.sdptnaissance) }}
+    </h6>
+    <h6>Nationalité Française:
+        {{ form_widget(form.snationalite) }}
+    </h6>
+    <h6>Autre nationalité :
+        {{ form_widget(form.sautre) }}
+    </h6>
+    <h6>Numéro de sécurité sociale :
+        {{ form_widget(form.snumsecu) }}
+    </h6>
+    <h6>Situation familliale :
+        {{ form_widget(form.ssituationfam) }}
+    </h6>
+    <h6>Nombre d'enfants à charge :
+        {{ form_widget(form.snbenfant) }}
+    </h6>
+
+    <button type="submit" class="btn btn-success">Inscription</button>
     {{ form_end(form) }}
-
-    {%  if ListeInfoAVerif %}
-    <table id="" class="display" style="width:100%">
-        <thead>
-        <tr>
-            <th>Nom</th>
-            <th>Prénom</th>
-            <th>Date de naissance</th>
-            <th>Numéro de sécurité sociale</th>
-            <th>Séléctionner</th>
-        </tr>
-        </thead>
-        <tbody>
-
-        {% for Info in ListeInfoAVerif %}
-            <tr>
-                <td>{{ Info.snom }}</td>
-                <td>{{ Info.sprenom }}</td>
-                <td>{{ Info.sdatenaissance|date("d/m/Y")}}</td>
-                <td>{{ Info.snumsecu }}</td>
-                <td>
-                    <a href="" method="post">X</a>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-{% else %}
-
-    <td>
-        <a href="" method="post">Ajouter un nouveau Salarié</a>
-    </td>
-
-    {#    <h6>Numéro de sécu :
-            {{ form_widget(form.snumsecu) }}
-        </h6>
-        <h6>Adresse :
-            {{ form_widget(form.aadresse) }}
-        </h6>
-        <h6>Téléphone :
-            {{ form_widget(form.atel) }}
-        </h6>
-        <h6>Date de création :
-            {{ form_widget(form.adatecreation) }}
-        </h6>
-        <h6>Date d'embauche du premier salarié' :
-            {{ form_widget(form.adateembauche) }}
-        </h6>#}
-    {% endif%}
 
 {% endblock %}

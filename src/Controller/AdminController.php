@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\SalarieInfosPerso;
 use App\Entity\SalarieInfosPro;
+use App\Form\AjoutInfosPersoType;
 use App\Form\VerifInfosPersoType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -69,12 +70,8 @@ class AdminController extends AbstractController
                     ]);
                 }
             }
+
         }
-
-        return $this->render('admin/ProfilSalaries.html.twig', [ // renvoie vers le twig qui affiche les infos pros et perso du salarié
-            'infosperso' => $InfosPerso,
-
-        ]);
 
     }
 
@@ -82,26 +79,61 @@ class AdminController extends AbstractController
      * @Route("/VerifInfosPerso/{mailasso}", name="VerifInfosPerso")
      */
 
-    public function VerifInfosPerso($mailasso, Request $request) {
+    public function VerifInfosPerso($mailasso, Request $request)
+    {
 
         $NewInfosPerso = new SalarieInfosPerso();
         $form = $this->createForm(VerifInfosPersoType::class, $NewInfosPerso);
         $form->handleRequest($request);
 
         //Creation du tableau des Informations a vérifier qui est vide
-        $ListeInfoAVerif= [];
+        $ListeInfoAVerif = [];
 
-        if($form->isSubmitted() && $form->isValid()) {
-        //On récupère le numéro de sécu du salarié tapé dans le formulaire
-            $numsecu = $NewInfosPerso ->getSnumsecu();
-            if ($numsecu!=null)
-                $ListeInfoAVerif= $this -> getDoctrine() -> getRepository(SalarieInfosPerso::class) -> findBy(['snumsecu'=>$numsecu]);
+        if ($form->isSubmitted() && $form->isValid()) {
+            //On récupère le numéro de sécu du salarié tapé dans le formulaire
+            $numsecu = $NewInfosPerso->getSnumsecu();
+            if ($numsecu != null)
+                $ListeInfoAVerif = $this->getDoctrine()->getRepository(SalarieInfosPerso::class)->findBy(['snumsecu' => $numsecu]);
         }
 
-        return $this->render('admin/AjoutInfosPerso.html.twig', [
-            'form' => $form->createView(), 'ListeInfoAVerif' => $ListeInfoAVerif
+        return $this->render('admin/RechercheInfosPerso.html.twig', [
+            'form' => $form->createView(),
+            'ListeInfoAVerif' => $ListeInfoAVerif,
+            'mailasso' => $mailasso
         ]);
+    }
 
+
+
+    /**
+     * @Route("/AjoutInfosPerso/{mailasso}", name="AjoutInfosPerso")
+     */
+
+    public function AjoutInfosPerso($mailasso, Request $request, EntityManagerInterface $entityManager) {
+//je crée un objet InfosPerso
+        $InfosPerso = new SalarieInfosPerso();
+        //je mets automatiquement le champs aMail=mailasso
+        $InfosPerso->setAmail($mailasso);
+        //je donne un formulaire avec les champs de la table SalarieInfosPerso
+        $form = $this->createForm(AjoutInfosPersoType::class, $InfosPerso);
+        $form->handleRequest($request);
+
+        //quand je clique sur valider le form, meme si les champs ne sont pas remplis, je persist and flush avec la bdd
+        if ($form->isSubmitted() && $form->isValid()){
+
+            //j'enregistre les nouvelles infos perso dans la bdd
+            $entityManager->persist($InfosPerso);
+            $entityManager->flush();
+            //je redirecte vers page ou route
+            return $this->redirectToRoute('/',[
+            ]);
+        }
+        else{
+            return $this->render('admin/AjoutInfosPerso.html.twig', [
+                'form' => $form->createView(),
+                'mailasso'=> $mailasso
+            ]);
+        }
 
     }
 

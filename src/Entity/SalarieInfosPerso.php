@@ -402,6 +402,7 @@ class SalarieInfosPerso
         $this->amail = $amail;
     }
 
+
     /**
      * @return \Doctrine\Common\Collections\Collection
      */
