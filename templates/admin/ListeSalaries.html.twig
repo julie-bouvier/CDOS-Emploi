@@ -3,6 +3,12 @@
 
   <fieldset>
     <legend>Voici la liste des Salariés de votre association :</legend>
+    <br>
+    <hr>
+    <a href="{{ path('VerifInfosPerso',{'mailasso': MailAsso})}}" method="post">Ajouter un salarié</a>
+    <br>
+    <hr>
+    <br>
 
     <table id="" class="display" style="width:100%">
       <thead>
@@ -17,18 +23,19 @@
       <tbody>
 
       {% for salarie in ListeSalaries %}
-
-        <td>{{ salarie.snom }}</td>
-        <td>{{ salarie.sprenom }}</td>
-        <td>
-          <a href="{{ path('PlusInfos',{'id': salarie.getSpersoid()}) }}" method="post">Voir Plus</a>
-        </td>
-        <td>
-          <a href="" method="post">Modifier</a>
-        </td>
-        <td>
-          <a href="" method="post">Supprimer</a>
-        </td>
+        <tr>
+          <td>{{ salarie.snom }}</td>
+          <td>{{ salarie.sprenom }}</td>
+          <td>
+            <a href="{{ path('ProfilSalarie',{'id': salarie.getSpersoid(), 'idmail' : MailAsso }) }}" method="post">Voir Plus</a>
+          </td>
+          <td>
+            <a href="" method="post">Modifier</a>
+          </td>
+          <td>
+            <a href="" method="post">Supprimer</a>
+          </td>
+        </tr>
       {% endfor %}
 
       </tbody>

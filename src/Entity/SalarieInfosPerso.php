@@ -126,6 +126,18 @@ class SalarieInfosPerso
      */
     private $amail;
 
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\OneToMany(targetEntity="SalarieInfosPro", mappedBy="sPersoId")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="sproid", referencedColumnName="sProId")
+     * })
+     */
+    private $sproid;
+
+
     /**
      * Constructor
      */
@@ -390,5 +402,20 @@ class SalarieInfosPerso
         $this->amail = $amail;
     }
 
+    /**
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getSproid(): \Doctrine\Common\Collections\Collection
+    {
+        return $this->sproid;
+    }
+
+    /**
+     * @param \Doctrine\Common\Collections\Collection $sproid
+     */
+    public function setSproid(\Doctrine\Common\Collections\Collection $sproid): void
+    {
+        $this->sproid = $sproid;
+    }
 
 }

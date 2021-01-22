@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Liste des Salariés existant déjà</h1>
+    <br>
+    {{ form_start(form) }}
+    {#    {{ form_widget(form) }}#}
+    <div class="form-row align-items-end">
+        <div class="col">
+        Numéro de sécu :
+            {{ form_widget(form.snumsecu) }}
+
+    </div>
+    <div class="col">
+        <div class="form-group">
+            <button type="submit" class="btn btn-success">Rechercher</button>
+        </div>
+    </div>
+    </div>
+    {{ form_end(form) }}
+
+    {%  if ListeInfoAVerif %}
+    <table id="" class="display" style="width:100%">
+        <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>Date de naissance</th>
+            <th>Numéro de sécurité sociale</th>
+            <th>Séléctionner</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        {% for Info in ListeInfoAVerif %}
+            <tr>
+                <td>{{ Info.snom }}</td>
+                <td>{{ Info.sprenom }}</td>
+                <td>{{ Info.sdatenaissance|date("d/m/Y")}}</td>
+                <td>{{ Info.snumsecu }}</td>
+                <td>
+                    <a href="" method="post">X</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+
+    <td>
+        <a href="" method="post">Ajouter un nouveau Salarié</a>
+    </td>
+
+    {#    <h6>Numéro de sécu :
+            {{ form_widget(form.snumsecu) }}
+        </h6>
+        <h6>Adresse :
+            {{ form_widget(form.aadresse) }}
+        </h6>
+        <h6>Téléphone :
+            {{ form_widget(form.atel) }}
+        </h6>
+        <h6>Date de création :
+            {{ form_widget(form.adatecreation) }}
+        </h6>
+        <h6>Date d'embauche du premier salarié' :
+            {{ form_widget(form.adateembauche) }}
+        </h6>#}
+    {% endif%}
+
+{% endblock %}

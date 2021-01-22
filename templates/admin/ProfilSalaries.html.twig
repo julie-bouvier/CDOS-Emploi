@@ -1,0 +1,97 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+  <fieldset>
+    <legend>Voici les informations sur votre salarié :</legend>
+
+    <br>
+    <hr>
+    <H5> Informations Personnelles </H5>
+    <ul>
+      <li>Nom : {{ infosperso.snom }}</li>
+      <li>Nom de Jeune Fille : {{ infosperso.snomjeunefille }}</li>
+      <li>Prenom : {{ infosperso.sprenom }}</li>
+      <li>Adresse : {{ infosperso.sadresse }} </li>
+      <li>Portable : {{ infosperso.sportable }} </li>
+      <li>Telephone : {{ infosperso.stel }} </li>
+      <li>Date de naissance : {{ infosperso.sdatenaissance|date("d/m/Y") }} </li>
+      <li>Lieu de naissance : {{ infosperso.slieunaissance }} </li>
+      <li>Département de naissance : {{ infosperso.sdptnaissance }} </li>
+      <li>Nationalité Française :
+        {% if infosperso.snationalite==0 %}
+          Oui
+        {% else %}
+          Non
+        {% endif %}
+      </li>
+      {% if infosperso.snationalite==1 %}
+        <li> Autre Nationalité (Numéro de carte de séjour): {{ infosperso.sautre }} </li>
+      {% endif %}
+      <li>N° de sécurité sociale : {{ infosperso.snumsecu }} </li>
+      <li>Situation familliale : {{ infosperso.ssituationfam }} </li>
+      <li>Nombre d'enfants a charge : {{ infosperso.snbenfant }} </li>
+    </ul>
+    <hr>
+    <br>
+    <H5> Informations Professionnelles </H5>
+      <ul>
+        <li>Mail de l'association {{ infospro.smailasso }}</li>
+        <li>Nom employeur: {{ infospro.snomemployeur }}</li>
+        <li>Poste occupé : {{ infospro.sposteoccupe }}</li>
+        <li>Groupe CCNS: {{ infospro.sccns }}</li>
+        <li>Nature du contrat : {{ infospro.snaturecontrat }}</li>
+        <li>Type temps de travail (Partiel, Temps pleins ou intermitant): {{ infospro.stypetempstravail }}</li>
+        <li>Gestion des congés payés:
+          {% if infospro.sgestcp==0 %}
+            Oui
+          {% else %}
+            Non
+          {% endif %}
+          </li>
+        <li>Date de début : {{ infospro.sdatedebut|date("d/m/Y") }}</li>
+        <li>Date de fin :
+          {% if infospro.sdatefin==null  %}
+
+          {% else %}
+            {{ infospro.sdatefin|date("d/m/Y") }}
+          {% endif %}
+        </li>
+        <li>Motif de fin: {{ infospro.sfinmotif }}</li>
+        <li>Commentaire de fin: {{ infospro.scomfin }}</li>
+        <li>10% de congés payés versé manuellement:
+          {% if infospro.s10congemois==0 %}
+            Oui
+          {% else %}
+            Non
+          {% endif %}
+        </li>
+        <li>Congés à prendre:
+          {% if infospro.sconge==0 %}
+            Oui
+          {% else %}
+            Non
+          {% endif %}
+          </li>
+        <li>Type de contrat (si aide/subventionné): {{ infospro.stypecontrat }}</li>
+        <li>Salarié multi-employeur:
+          {% if infospro.smultiemployeur==0 %}
+            Oui
+          {% else %}
+            Non
+          {% endif %}
+        </li>
+        <li>Volume horaire mensuel: {{ infospro.svolhorairemois }}</li>
+        <li>Taux horaire brut (en €): {{ infospro.stauxhorairebrut }}</li>
+        <li>Salaire mensuel brut (en €) par mois: {{ infospro.ssalmoisbrut }}</li>
+        <li>Adhésion complémentaire santé obligatoire proposé par l'employeur:
+          {% if infospro.scomplemsante==0 %}
+            Oui
+          {% else %}
+            Non
+          {% endif %}
+         </li>
+        <li>Autres éléments de rémunération: {{ infospro.sautreelement }}</li>
+      </ul>
+    <hr>
+    <br>
+  </fieldset>
+{% endblock %}
