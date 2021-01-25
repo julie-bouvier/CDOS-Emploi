@@ -72,6 +72,10 @@ class AdminController extends AbstractController
             }
 
         }
+/*        return $this->render('admin/ProfilSalaries.html.twig', [ // renvoie vers le twig qui affiche les infos pros et perso du salarié
+            'infosperso' => $InfosPerso,
+            'infospro' => $InfosPro
+        ]);*/
 
     }
 
