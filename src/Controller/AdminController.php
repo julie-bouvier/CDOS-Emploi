@@ -70,14 +70,21 @@ class AdminController extends AbstractController
                     ]);
                 }
             }
-
         }
-/*        return $this->render('admin/ProfilSalaries.html.twig', [ // renvoie vers le twig qui affiche les infos pros et perso du salarié
-            'infosperso' => $InfosPerso,
-            'infospro' => $InfosPro
-        ]);*/
-
     }
+
+    /**
+     * @Route("/GestionSalarie/{idInfosPro}", name="GestionSalarie")
+     */
+
+    public function GestionSalarie($idInfosPro) {
+        $InfosPro = $this -> getDoctrine() -> getRepository(SalarieInfosPro::class) -> find($idInfosPro);
+                    return $this->render('admin/GestionSalaries.html.twig', [ // renvoie vers le twig qui affiche les options de gestion du salarié
+                        'infospro' => $InfosPro
+                    ]);
+    }
+
+
 
     /**
      * @Route("/VerifInfosPerso/{mailasso}", name="VerifInfosPerso")
