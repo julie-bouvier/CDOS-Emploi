@@ -35,32 +35,59 @@
                     </li>
                 </ul>
 
+
                 {#Début du contenu des onglets#}
                 <div class="tab-content">
                     <div class="tab-pane active" id="{{idinfospro}}.conges" role="tabpanel" aria-labelledby="home-tab">
-                        <p>Voici la page permettant de gérer les congés :</p>
+                        <br>
+                        <H4 style="color:#F7230C">Voici la page permettant de gérer les congés :</H4>
 
                         {% for conge in conges %}
-                            <li><B>Type de congés :</B>  {{ conge.contype }}</li>
-                            <li><B>Dernier jour travaillé :</B>  {{ conge.condernierjour|date("d/m/Y")}}</li>
-                            <li><B>Jour de reprise :</B>  {{ conge.conjourreprise|date("d/m/Y") }}</li>
-                            <li><B>Jours normalement travaillé :</B>  {{ conge.conjournormaltrav }} </li>
-                            <li><B>Nombre de jour ouvrable pris :</B>  {{ conge.connbjourouvrablepris }} </li>
-                            <li><B>Commentaire :</B>  {{ conge.concommentaire }} </li>
-                            <br>
+                            <div class="card border-primary mb-3" style="max-width: 20rem;">
+                                <div class="card-body">
+                                    <p class="card-text">
+                                    <li><B>Type de congés :</B>  {{ conge.contype }}</li>
+                                    <li><B>Dernier jour travaillé :</B>  {{ conge.condernierjour|date("d/m/Y")}}</li>
+                                    <li><B>Jour de reprise :</B>  {{ conge.conjourreprise|date("d/m/Y") }}</li>
+                                    <li><B>Jours normalement travaillé :</B>  {{ conge.conjournormaltrav | json_encode }} </li>
+                                    <li><B>Nombre de jour ouvrable pris :</B>  {{ conge.connbjourouvrablepris }} </li>
+                                    <li><B>Commentaire :</B>  {{ conge.concommentaire }} </li>
+                                    </p>
+                                </div>
+                            </div>
                         {% endfor %}
                         <br>
                         <a href="{{ path('EnregistrerConge',{'sproid': idinfospro }) }}" method="post" type="button" class="btn btn-danger">Ajouter un congé</a>
                     </div>
-                    <div class="tab-pane" id="{{idinfospro}}.arrets_travail" role="tabpanel" aria-labelledby="profile-tab">
-                        <p>Voici la page des arrêts de travail</p>
 
-                        <br>
-                        <a href="{{ path('EnregistrerArretTravail',{'sproid': idinfospro})}}" method="post" type="button" class="btn btn-danger">Ajouter un arrêt de travail</a>
+                    <div class="tab-pane" id="{{idinfospro}}.arrets_travail" role="tabpanel" aria-labelledby="profile-tab">
 
                     </div>
+
                     <div class="tab-pane" id="{{idinfospro}}.chomages" role="tabpanel" aria-labelledby="profile-tab">
-                        <p>Voici la page du chomage</p>
+                        <br>
+                        <H4 style="color:#F7230C">Voici la page permettant de gérer les périodes de chômage :</H4>
+
+                        {% for chomage in chomages %}
+                            <div class="card border-primary mb-3" style="max-width: 20rem;">
+                                <div class="card-body">
+                                    <p class="card-text">
+                                    <li><B>Date de début :</B>  {{ chomage.chodebut|date("d/m/Y")}}</li>
+                                    <li><B>Date de fin :</B>  {{ chomage.chofin|date("d/m/Y")}}</li>
+                                    <li><B>Nombre d'heures à déduire :</B>  {{ chomage.chonbheure }}</li>
+                                    <li><B>Maintien du chômage à 100% :</B>
+                                        {% if chomage.chomaintien==0 %}
+                                            Oui
+                                        {% else %}
+                                            Non
+                                        {% endif %}
+                                    </li>
+                                    <li><B>Commentaire :</B>  {{ chomage.chocommentaire }} </li>
+                                    </p>
+                                </div>
+                            </div>
+                        {% endfor %}
+                        <br>
                         <p><a href="{{ path('EnregistrerChomage',{'sproid': idinfospro }) }}" method="post" type="button" class="btn btn-danger">Ajouter un chômage</a>
                         </p>
                     </div>

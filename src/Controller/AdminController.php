@@ -87,14 +87,15 @@ class AdminController extends AbstractController
      */
 
     public function GestionSalarie($idinfospro) {
-        $Conges= $this -> getDoctrine() -> getRepository(Conges::class) -> find($idinfospro);
-        $ArretTravails= $this -> getDoctrine() -> getRepository(ArretTravail::class) -> find($idinfospro);
-        $Chomages= $this -> getDoctrine() -> getRepository(Chomage::class) -> find($idinfospro);
-        $AutresAbsences= $this -> getDoctrine() -> getRepository(AutreAbsence::class) -> find($idinfospro);
-        $Primes= $this -> getDoctrine() -> getRepository(Prime::class) -> find($idinfospro);
-        $Frais= $this -> getDoctrine() -> getRepository(Frais::class) -> find($idinfospro);
-        $Heures= $this -> getDoctrine() -> getRepository(Heures::class) -> find($idinfospro);
-        $Avenants= $this -> getDoctrine() -> getRepository(Avenant::class) -> find($idinfospro);
+        $infosPro= $this -> getDoctrine() -> getRepository(SalarieInfosPro::class) -> find($idinfospro);
+        $Conges= $this -> getDoctrine() -> getRepository(Conges::class) -> findBy(['sproid'=> $infosPro]);
+        $ArretTravails= $this -> getDoctrine() -> getRepository(ArretTravail::class) -> findBy(['sproid'=> $infosPro]);
+        $Chomages= $this -> getDoctrine() -> getRepository(Chomage::class) -> findBy(['sproid'=> $infosPro]);
+        $AutresAbsences= $this -> getDoctrine() -> getRepository(AutreAbsence::class) -> findBy(['sproid'=> $infosPro]);
+        $Primes= $this -> getDoctrine() -> getRepository(Prime::class) -> findBy(['sproid'=> $infosPro]);
+        $Frais= $this -> getDoctrine() -> getRepository(Frais::class) -> findBy(['sproid'=> $infosPro]);
+        $Heures= $this -> getDoctrine() -> getRepository(Heures::class) -> findBy(['sproid'=> $infosPro]);
+        $Avenants= $this -> getDoctrine() -> getRepository(Avenant::class) -> findBy(['sproid'=> $infosPro]);
 
         return $this->render('admin/GestionSalaries.html.twig', [ // renvoie vers le twig qui affiche les options de gestion du salarié
             'idinfospro' => $idinfospro,
