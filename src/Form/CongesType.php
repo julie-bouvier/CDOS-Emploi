@@ -47,9 +47,7 @@ class CongesType extends AbstractType
                     ],
                 'expanded' => true,
                 'multiple' => true,
-                /*'attr' => ['class' => 'form-control'],
-                'required'=>true*/
-
+                'required'=>true
 
             ])
             ->add('connbjourouvrablepris', IntegerType::class,[

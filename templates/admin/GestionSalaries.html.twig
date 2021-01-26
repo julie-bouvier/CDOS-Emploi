@@ -96,6 +96,7 @@
                     </div>
                     <div class="tab-pane" id="{{idinfospro}}.primes" role="tabpanel" aria-labelledby="home-tab">
                         <p>Voici la page des primes</p>
+                        <a href="{{ path('EnregistrerPrime',{'sproid': idinfospro }) }}" method="post" type="button" class="btn btn-danger">Ajouter une prime</a>
                     </div>
                     <div class="tab-pane" id="{{idinfospro}}.frais" role="tabpanel" aria-labelledby="home-tab">
                         <p>Voici la page des frais</p>

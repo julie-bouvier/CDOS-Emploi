@@ -284,6 +284,46 @@ class AdminController extends AbstractController
             return $this->render('admin/AjoutChomage.html.twig', [
                 'form' => $form->createView(),
                 'idinfospro' => $sproid,
+            ]);
+        }
+    }
+
+
+    /**
+     * @Route("/EnregistrerPrime/{sproid}", name="EnregistrerPrime")
+     * @param Request $request
+     * @param EntityManagerInterface $entityManager
+     * @param $sproid
+     * @return Response
+     */
+    public function EnregistrerPrime(Request $request, EntityManagerInterface $entityManager, $sproid)
+    {
+        //je veux ajouter des informations dans ma table prime
+        //liée cette table à la table connexion précédente
+
+        //je crée un objet prime
+        $prime = new Prime();
+        $InfosPro = $this->getDoctrine()->getRepository(SalarieInfosPro::class)->find($sproid);
+        $prime->setSproid($InfosPro);
+        //je donne un formulaire avec les champs de la table prime
+        $form = $this->createForm(PrimeType::class, $prime);
+        $form->handleRequest($request);
+
+        //quand je clique sur valider le form, meme si les champs ne sont pas remplis, je persist and flush avec la bdd
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            //j'enregistre la nouvelle prime dans la bdd
+            $entityManager->persist($prime);
+            $entityManager->flush();
+            //je redirecte vers page ou route
+            return $this->redirectToRoute('GestionSalarie', [
+                'idinfospro' => $sproid,
+            ]);
+        } else {
+            return $this->render('admin/AjoutPrime.html.twig', [
+                'form' => $form->createView(),
+                'idinfospro' => $sproid,
+
 
             ]);
         }
