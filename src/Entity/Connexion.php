@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -42,7 +43,7 @@ class Connexion implements \Symfony\Component\Security\Core\User\UserInterface
     private $coroles;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection
+     * @var Collection
      *
      * @ORM\ManyToMany(targetEntity="Association", mappedBy="comail")
      */
@@ -127,8 +128,10 @@ class Connexion implements \Symfony\Component\Security\Core\User\UserInterface
         $this->coroles = $coroles;
     }
 
+    /*######################## ASSOCIATIONS ########################*/
+
     /**
-     * @return \Doctrine\Common\Collections\Collection
+     * @return Collection
      */
     public function getassociations()
     {
@@ -136,12 +139,30 @@ class Connexion implements \Symfony\Component\Security\Core\User\UserInterface
     }
 
     /**
-     * @param \Doctrine\Common\Collections\Collection $associations
+     * @param Collection $associations
      */
     public function setassociations($associations): void
     {
         $this->associations = $associations;
     }
+
+    /**
+     * @param Association $association
+     */
+    public function addAssociation(Association $association): void
+    {
+        $this->associations->add($association);
+    }
+
+    /**
+     * @param Association $association
+     */
+    public function removeAssociation(Association $association):void
+    {
+        $this->associations->remove($association);
+    }
+
+    /*######################## FONCTIONS INDISPENSABLES POUR LA CONNEXION ########################*/
 
     public function getPassword(): ?string
     {

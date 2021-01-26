@@ -507,6 +507,8 @@ class SalarieInfosPro
         $this->scomfin = $scomfin;
     }
 
+    /*######################## SALARIE INFO PERSO ########################*/
+
     /**
      * @return SalarieInfosPerso
      */

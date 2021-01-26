@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -287,7 +288,7 @@ class Association
     private $adateadhesion;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection
+     * @var Collection
      *
      * @ORM\ManyToMany(targetEntity="SalarieInfosPerso", inversedBy="amail")
      * @ORM\JoinTable(name="est_compose_de",
@@ -295,14 +296,14 @@ class Association
      *     @ORM\JoinColumn(name="aMail", referencedColumnName="aMail")
      *   },
      *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="spersoid", referencedColumnName="spersoid")
+     *     @ORM\JoinColumn(name="sPersoId", referencedColumnName="sPersoId")
      *   }
      * )
      */
     private $salarieinfosperso;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection
+     * @var Collection
      *
      * @ORM\ManyToMany(targetEntity="Connexion", inversedBy="amail")
      * @ORM\JoinTable(name="gere",
@@ -955,36 +956,71 @@ class Association
         $this->adateadhesion = $adateadhesion;
     }
 
+    /*######################## SALARIE INFOS PERSO ########################*/
+
     /**
-     * @return \Doctrine\Common\Collections\Collection
+     * @return Collection
      */
-    public function getsalarieinfosperso(): \Doctrine\Common\Collections\Collection
+    public function getsalarieinfosperso(): Collection
     {
         return $this->salarieinfosperso;
     }
 
     /**
-     * @param \Doctrine\Common\Collections\Collection $salarieinfosperso
+     * @param Collection $salarieinfosperso
      */
-    public function setsalarieinfosperso(\Doctrine\Common\Collections\Collection $salarieinfosperso): void
+    public function setsalarieinfosperso(Collection $salarieinfosperso): void
     {
         $this->salarieinfosperso = $salarieinfosperso;
     }
 
     /**
-     * @return \Doctrine\Common\Collections\Collection
+     * @param SalarieInfosPerso $salarieinfosperso
      */
-    public function getComail(): \Doctrine\Common\Collections\Collection
+    public function addSalarieinfosperso(SalarieInfosPerso $salarieinfosperso): void
+    {
+        $this->salarieinfosperso->add($salarieinfosperso);
+    }
+
+    /**
+     * @param SalarieInfosPerso $salarieinfosperso
+     */
+    public function removeSalarieinfosperso(SalarieInfosPerso $salarieinfosperso):void
+    {
+        $this->salarieinfosperso->remove($salarieinfosperso);
+    }
+
+    /*######################## CONNEXION (comail) ########################*/
+
+    /**
+     * @return Collection
+     */
+    public function getComail(): Collection
     {
         return $this->comail;
     }
 
     /**
-     * @param \Doctrine\Common\Collections\Collection $comail
+     * @param Collection $comail
      */
-    public function setComail(\Doctrine\Common\Collections\Collection $comail): void
+    public function setComail(Collection $comail): void
     {
         $this->comail = $comail;
     }
 
+    /**
+     * @param Connexion $connexion
+     */
+    public function addConnexion(Connexion $connexion): void
+    {
+        $this->comail->add($connexion);
+    }
+
+    /**
+     * @param Connexion $connexion
+     */
+    public function removeConnexion(Connexion $connexion):void
+    {
+        $this->comail->remove($connexion);
+    }
 }

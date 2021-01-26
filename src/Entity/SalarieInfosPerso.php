@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -17,7 +18,7 @@ class SalarieInfosPerso
      *
      * @ORM\Column(name="sPersoId", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue()
      */
     private $spersoid;
 
@@ -120,15 +121,14 @@ class SalarieInfosPerso
     private $snbenfant;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection
+     * @var Collection
      *
-     * @ORM\ManyToMany(targetEntity="Association", mappedBy="spersoid")
+     * @ORM\ManyToMany(targetEntity="Association", mappedBy="salarieinfosperso")
      */
     private $amail;
 
-
     /**
-     * @var \Doctrine\Common\Collections\Collection
+     * @var Collection
      *
      * @ORM\OneToMany(targetEntity="SalarieInfosPro", mappedBy="sPersoId")
      * @ORM\JoinColumns({
@@ -386,37 +386,72 @@ class SalarieInfosPerso
         $this->snbenfant = $snbenfant;
     }
 
+    /*######################## ASSOCIATIONS ########################*/
+
     /**
-     * @return \Doctrine\Common\Collections\Collection
+     * @return Collection
      */
-    public function getAmail(): \Doctrine\Common\Collections\Collection
+    public function getAmail(): Collection
     {
         return $this->amail;
     }
 
     /**
-     * @param \Doctrine\Common\Collections\Collection $amail
+     * @param Collection $amail
      */
-    public function setAmail(\Doctrine\Common\Collections\Collection $amail): void
+    public function setAmail(Collection $amail): void
     {
         $this->amail = $amail;
     }
 
+    /**
+     * @param Association $association
+     */
+    public function addAssociation(Association $association): void
+    {
+        $this->amail->add($association);
+    }
 
     /**
-     * @return \Doctrine\Common\Collections\Collection
+     * @param Association $association
      */
-    public function getSproid(): \Doctrine\Common\Collections\Collection
+    public function removeAssociation(Association $association):void
+    {
+        $this->amail->remove($association);
+    }
+
+    /*######################## SALARIE INFO PRO ########################*/
+
+    /**
+     * @return Collection
+     */
+    public function getSproid(): Collection
     {
         return $this->sproid;
     }
 
     /**
-     * @param \Doctrine\Common\Collections\Collection $sproid
+     * @param Collection $sproid
      */
-    public function setSproid(\Doctrine\Common\Collections\Collection $sproid): void
+    public function setSproid(Collection $sproid): void
     {
         $this->sproid = $sproid;
+    }
+
+    /**
+     * @param SalarieInfosPro $salarieinfospro
+     */
+    public function addSalarieinfospro(SalarieInfosPro $salarieinfospro): void
+    {
+        $this->sproid->add($salarieinfospro);
+    }
+
+    /**
+     * @param SalarieInfosPro $salarieinfospro
+     */
+    public function removeSalarieinfospro(SalarieInfosPro $salarieinfospro):void
+    {
+        $this->sproid->remove($salarieinfospro);
     }
 
 }

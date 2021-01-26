@@ -5,9 +5,9 @@
     <br>
     {{ form_start(form) }}
 
-    <h6>Mail de l'association :
+   {# <h6>Mail de l'association :
         {{ form_widget(form.amail) }}
-    </h6>
+    </h6>#}
 
     <h6>Nom :
         {{ form_widget(form.snom) }}
@@ -52,7 +52,7 @@
         {{ form_widget(form.snbenfant) }}
     </h6>
 
-    <button type="submit" class="btn btn-success">Inscription</button>
+    <button type="submit" class="btn btn-success">Valider</button>
     {{ form_end(form) }}
 
 {% endblock %}

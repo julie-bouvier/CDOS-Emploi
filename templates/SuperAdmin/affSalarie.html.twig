@@ -5,63 +5,121 @@
 {% block body %}
     <fieldset>
 
-        <legend>Informations du salarié : </legend>
+        <legend>Informations Personnelles : </legend>
         <table>
             <tr>
                 <td>
-                    Nom : {{ salarie.snom }}<br>
-                    Nom de Jeune fille : {{ salarie.snomjeunefille }}<br>
-                    Prénom : {{ salarie.sprenom }}<br>
-                    Adresse : {{ salarie.sadresse }}<br>
-                    Portable : {{ salarie.sportable }}<br>
-                    Téléphone : {{ salarie.stel }}<br>
-                    Date de naissance : {{ salarie.sdatenaissance|date("d/m/Y") }}<br>
+                    <B>Nom : </B>{{ salarie.snom }}<br>
+                    <B>Nom de Jeune fille :</B> {{ salarie.snomjeunefille }}<br>
+                    <B>Prénom : </B>{{ salarie.sprenom }}<br>
+                    <B>Adresse : </B>{{ salarie.sadresse }}<br>
+                    <B>Portable : </B>{{ salarie.sportable }}<br>
+                    <B>Téléphone : </B>{{ salarie.stel }}<br>
+                    <B>Date de naissance : </B>{{ salarie.sdatenaissance|date("d/m/Y") }}<br>
                 </td>
                 <td> <br> </td>
                 <td> <br> </td>
                 <td> <br> </td>
                 <td>
-                    Lieu de naissance : {{ salarie.slieunaissance }}<br>
-                    Département de naissance : {{ salarie.sdptnaissance }}<br>
-                    Nationalité : {{ salarie.snationalite}}<br>
-                    Autre : {{ salarie.sautre }}<br>
-                    Numéro de sécurité social : {{ salarie.snumsecu }}<br>
-                    Situation familial : {{ salarie.ssituationfam }}<br>
-                    Nombre denfant : {{ salarie.snbenfant }}<br>
+                    <B>Lieu de naissance : </B>{{ salarie.slieunaissance }}<br>
+                    <B>Département de naissance : </B>{{ salarie.sdptnaissance }}<br>
+                    <B>Nationalité : </B>{{ salarie.snationalite}}<br>
+                    <B>Autre : </B>{{ salarie.sautre }}<br>
+                    <B>Numéro de sécurité social : </B>{{ salarie.snumsecu }}<br>
+                    <B>Situation familial : </B>{{ salarie.ssituationfam }}<br>
+                    <B>Nombre denfant : </B>{{ salarie.snbenfant }}<br>
+                </td>
+            </tr>
+           <tr>
+                <td>
+                    <a href="{{ path('modifSalariesPerso',{'idSalarie': salarie.spersoid}) }}" method="post">Modifier</a>
                 </td>
             </tr>
         </table>
     </fieldset>
     <br>
     <fieldset>
-        <legend>Informations du salarié : </legend>
+        <legend>Informations Professionnelles : </legend>
 
-        <ul class="nav nav-tabs">
-            <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#Association1">Home</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#Association4">Profile</a>
-            </li>
-        </ul>
-        <div id="myTabContent" class="tab-content">
-            <div class="tab-pane fade" id="Association1">
 
-                11111111111111111111111111111111111
-                truc bidule
-                infos pro de cette associations liées à ce salarié
-                petits boutons pour afficher/ modifier les sous-tables
-                </p>
+            {#Pour une case de l'accordéon on fait tout ça#}
+            <div class="accordion" id="accordionAsso">
+                <div class="card">
+                    {% for association in associations %}
+                    <div class="card-header" id="headingOne">
+                        {#Ce qu'il y a d'écrit dans l'entête de l'accordéon#}
+                        <h5 class="mb-0">
+                            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#{{association.anom}}" aria-expanded="false" aria-controls="collapseOne">
+                            {{association.anom}}
+                            </button>
+                        </h5>
+                    </div>
+
+                    {#Ce qu'il y a d'écrit dans l'accordéon#}
+                    <div id="{{association.anom}}" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionAsso">
+                        <div class="card-body">
+                            {% for infopro in infospros %}
+                                {% if infopro.sMailAsso==association.amail %}
+                                   <table>
+                                        <tr>
+                                            <td>
+                                                <B>Nom Employeur :</B> {{ infopro.snomemployeur }} <br>
+                                                <B>Poste occupé :</B> {{ infopro.sPosteOccupe }}<br>
+                                                <B>CCNS : </B>{{ infopro.sCCNS }}<br>
+                                                <B>Nature du contrat : </B>{{ infopro.sNatureContrat }}<br>
+                                                <B>Type de temps de travail : </B>{{ infopro.sTypeTempsTravail }}<br>
+                                                <B>Gestion des cp :</B> {{ infopro.sGestCP }}<br>
+                                            </td>
+                                            <td>
+                                                <br>
+                                            </td>
+                                            <td>
+                                                <br>
+                                            </td>
+                                            <td>
+                                                <br>
+                                            </td>
+                                            <td>
+                                                <B>Date de début de contrat : </B>{{ infopro.sDateDebut|date("d/m/Y") }}<br>
+                                                <B>Date de fin de contrat : </B>{{ infopro.sDateFin|date("d/m/Y") }}<br>
+                                                <B>Motif de fin de contrat : </B>{{ infopro.sFinMotif }}<br>
+                                                <B>Commentaire de fin de contrat : </B>{{ infopro.sComFin }}<br>
+                                                <B>10ème mois de congé payé : </B>{{ infopro.s10congeMois }}<br>
+                                                <B>rest-il des congés à prendre ? </B>{{ infopro.sConge }}<br>
+                                            </td>
+                                            <td>
+                                                <br>
+                                            </td>
+                                            <td>
+                                                <br>
+                                            </td>
+                                            <td>
+                                                <br>
+                                            </td>
+                                            <td>
+                                                <B>Type de contrat : </B>{{ infopro.sTypeContrat }}<br>
+                                                <B>Multi-employeur : </B>{{ infopro.sMultiEmployeur }}<br>
+                                                <B>Vol horaire par mois : </B>{{ infopro.sVolHoraireMois }}<br>
+                                                <B>taux horaire brut : </B>{{ infopro.sTauxHoraireBrut }}<br>
+                                                <B>salaire brut mensuel :</B>{{ infopro.sSalMoisBrut }}<br>
+                                                <B>complémentaire santé : </B>{{ infopro.sComplemSante }}<br>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <B>autre éléments :</B>{{ infopro.sAutreElement }} <br>
+                                            </td>
+                                        </tr>
+                                   </table>
+                                    <a href="{{ path('modifSalariesPro',{'idInfoProSalarie': infopro.sproid, 'idSalarie': salarie.spersoid}) }}" method="post">Modifier</a>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
             </div>
-            <div class="tab-pane fade" id="Association4">
 
-                2222222222222222222222222222222222222
-                truc bidule
-                infos pro de cette associations liées à ce salarié
-                petits boutons pour afficher/ modifier les sous-tables
-                </p>
-            </div>
-        </div>
     </fieldset>
 
     <br>
@@ -73,5 +131,6 @@
 
 
 {% endblock %}
+
 
 

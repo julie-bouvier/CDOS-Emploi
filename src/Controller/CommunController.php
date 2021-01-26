@@ -1,14 +1,10 @@
 <?php
 
 namespace App\Controller;
-
 use App\Entity\ArretTravail;
-use App\Entity\AutreAbsence;
-use App\Entity\Avenant;
+use App\Entity\Association;
 use App\Entity\Chomage;
 use App\Entity\Conges;
-use App\Entity\Frais;
-use App\Entity\Heures;
 use App\Entity\Prime;
 use App\Entity\SalarieInfosPerso;
 use App\Entity\SalarieInfosPro;
@@ -16,108 +12,30 @@ use App\Form\AjoutInfosPersoType;
 use App\Form\ArretTravailType;
 use App\Form\ChomageType;
 use App\Form\CongesType;
+use App\Form\PrimeType;
+use App\Form\SalarieInfosProType;
 use App\Form\VerifInfosPersoType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Entity\Association;
-use App\Entity\Connexion;
 
-
-
-class AdminController extends AbstractController
+class CommunController extends AbstractController
 {
+    /*######################## SALARIE INFOS PERSO ########################*/
 
     /**
-     * @Route("/ListeSalaries", name="ListeSalaries")
+     * @Route("/VerifInfosPerso/{mailasso}/{role}", name="VerifInfosPerso")
+     * @param Request $request
+     * @param $mailasso
+     * @param $role
+     * @return Response
      */
 
-    public function ListeSalaries() {
-        $MailPersoConnecte= $this -> getUser() -> getUsername();
-        $PersoConnecte = $this -> getDoctrine() -> getRepository(Connexion::class) -> find($MailPersoConnecte);
-        $Associations = $PersoConnecte -> getassociations();
-        //boucle qui va tourner dans la collection d'associations
-        //pour chaque association :
-        for ($i=0; $i <= count($Associations); $i++)
-        {
-            //if c'est pas null
-            if($Associations[$i]!=null){
-                $ListeSalaries = $Associations[$i] -> getsalarieinfosperso();
-                $MailAsso = $Associations[$i] -> getAmail();
-            }
-        }
-        // renvoie vers le twig affichant la liste des salariés
-        return $this->render('admin/ListeSalaries.html.twig', [ // renvoie vers le twig de la liste des salariés
-            'associations'=> $Associations,
-            'ListeSalaries' => $ListeSalaries,
-            'MailAsso'=> $MailAsso,
-        ]);
-    }
-
-    /**
-     * @Route("/ProfilSalarie/{id}/{idmail}", name="ProfilSalarie")
-     */
-
-    public function ProfilSalarie($id, $idmail) {
-        $InfosPerso = $this -> getDoctrine() -> getRepository(SalarieInfosPerso::class) -> find($id);
-        $InfosPro = $InfosPerso -> getSproid();
-
-        for ($i=0; $i <= count($InfosPro); $i++)
-        {
-            if($InfosPro[$i]!=null){
-                $InfoProMailAsso = $InfosPro[$i] -> getSmailasso();
-                if($InfoProMailAsso==$idmail){
-
-                    $IdInfosPro = $InfosPro[$i] -> getSproid();
-                    $InfosProAsso = $this -> getDoctrine() -> getRepository(SalarieInfosPro::class) -> find($IdInfosPro);
-
-                    return $this->render('admin/ProfilSalaries.html.twig', [ // renvoie vers le twig qui affiche les infos pros et perso du salarié
-                        'infosperso' => $InfosPerso,
-                        'infospro' => $InfosProAsso
-                    ]);
-                }
-            }
-        }
-    }
-
-    /**
-     * @Route("/GestionSalarie/{idinfospro}", name="GestionSalarie")
-     */
-
-    public function GestionSalarie($idinfospro) {
-        $infosPro= $this -> getDoctrine() -> getRepository(SalarieInfosPro::class) -> find($idinfospro);
-        $Conges= $this -> getDoctrine() -> getRepository(Conges::class) -> findBy(['sproid'=> $infosPro]);
-        $ArretTravails= $this -> getDoctrine() -> getRepository(ArretTravail::class) -> findBy(['sproid'=> $infosPro]);
-        $Chomages= $this -> getDoctrine() -> getRepository(Chomage::class) -> findBy(['sproid'=> $infosPro]);
-        $AutresAbsences= $this -> getDoctrine() -> getRepository(AutreAbsence::class) -> findBy(['sproid'=> $infosPro]);
-        $Primes= $this -> getDoctrine() -> getRepository(Prime::class) -> findBy(['sproid'=> $infosPro]);
-        $Frais= $this -> getDoctrine() -> getRepository(Frais::class) -> findBy(['sproid'=> $infosPro]);
-        $Heures= $this -> getDoctrine() -> getRepository(Heures::class) -> findBy(['sproid'=> $infosPro]);
-        $Avenants= $this -> getDoctrine() -> getRepository(Avenant::class) -> findBy(['sproid'=> $infosPro]);
-
-        return $this->render('admin/GestionSalaries.html.twig', [ // renvoie vers le twig qui affiche les options de gestion du salarié
-            'idinfospro' => $idinfospro,
-            'conges' => $Conges,
-            'arrettravails' => $ArretTravails,
-            'chomages' => $Chomages,
-            'autresabsences' => $AutresAbsences,
-            'primes' => $Primes,
-            'frais' => $Frais,
-            'heures' => $Heures,
-            'avenants' => $Avenants
-        ]);
-    }
-
-
-    /**
-     * @Route("/VerifInfosPerso/{mailasso}", name="VerifInfosPerso")
-     */
-
-    public function VerifInfosPerso($mailasso, Request $request)
+    public function VerifInfosPerso($mailasso, $role, Request $request)
     {
-
         $NewInfosPerso = new SalarieInfosPerso();
         $form = $this->createForm(VerifInfosPersoType::class, $NewInfosPerso);
         $form->handleRequest($request);
@@ -132,45 +50,58 @@ class AdminController extends AbstractController
                 $ListeInfoAVerif = $this->getDoctrine()->getRepository(SalarieInfosPerso::class)->findBy(['snumsecu' => $numsecu]);
         }
 
-        return $this->render('admin/RechercheInfosPerso.html.twig', [
+        return $this->render('Commun/RechercheInfosPerso.html.twig', [
             'form' => $form->createView(),
             'ListeInfoAVerif' => $ListeInfoAVerif,
-            'mailasso' => $mailasso
+            'mailasso' => $mailasso,
+            'role'=>$role
         ]);
     }
 
-
     /**
-     * @Route("/AjoutInfosPerso/{mailasso}", name="AjoutInfosPerso")
+     * @Route("/AjoutInfosPerso/{mailasso}/{role}", name="AjoutInfosPerso")
+     * @param $mailasso
+     * @param Request $request
+     * @param EntityManagerInterface $entityManager
+     * @return RedirectResponse|Response
      */
-
-    public function AjoutInfosPerso($mailasso, Request $request, EntityManagerInterface $entityManager) {
-//je crée un objet InfosPerso
+    public function AjoutInfosPerso($mailasso, $role, Request $request, EntityManagerInterface $entityManager) {
+        //je crée un objet InfosPerso
         $InfosPerso = new SalarieInfosPerso();
         //je mets automatiquement le champs aMail=mailasso
-        $InfosPerso->setAmail($mailasso);
+        $association = $this->getDoctrine()->getRepository(Association::class)->find($mailasso);
+        $InfosPerso->addAssociation($association);
+        $association->addSalarieinfosperso($InfosPerso);
         //je donne un formulaire avec les champs de la table SalarieInfosPerso
         $form = $this->createForm(AjoutInfosPersoType::class, $InfosPerso);
         $form->handleRequest($request);
 
         //quand je clique sur valider le form, meme si les champs ne sont pas remplis, je persist and flush avec la bdd
         if ($form->isSubmitted() && $form->isValid()){
-
             //j'enregistre les nouvelles infos perso dans la bdd
             $entityManager->persist($InfosPerso);
             $entityManager->flush();
             //je redirecte vers page ou route
-            return $this->redirectToRoute('/',[
-            ]);
+            if ($role=='SUPER_ADMIN'){
+                return $this->redirectToRoute('affSalaries',[
+                    'assomail'=>$mailasso
+                ]);
+            }
+            elseif ($role=='ADMIN_ASSO'){
+                return $this->redirectToRoute('home',[
+                ]);
+            }
+
         }
         else{
-            return $this->render('admin/AjoutInfosPerso.html.twig', [
+            return $this->render('Commun/AjoutInfosPerso.html.twig', [
                 'form' => $form->createView(),
                 'mailasso'=> $mailasso
             ]);
         }
-
     }
+
+    /*######################## CONGES ########################*/
 
     /**
      * @Route("/EnregistrerConge/{sproid}", name="EnregistrerConge")
@@ -194,7 +125,6 @@ class AdminController extends AbstractController
 
         //quand je clique sur valider le form, meme si les champs ne sont pas remplis, je persist and flush avec la bdd
         if ($form->isSubmitted() && $form->isValid()) {
-
             //j'enregistre le nouveau conge dans la bdd
             $entityManager->persist($conge);
             $entityManager->flush();
@@ -203,12 +133,14 @@ class AdminController extends AbstractController
                 'idinfospro' => $sproid,
             ]);
         } else {
-            return $this->render('admin/AjoutConges.html.twig', [
+            return $this->render('Commun/AjoutConges.html.twig', [
                 'form' => $form->createView(),
                 'idinfospro' => $sproid,
             ]);
         }
     }
+
+    /*######################## ARRET TRAVAIL  ########################*/
 
     /**
      * @Route("/EnregistrerArretTravail/{sproid}", name="EnregistrerArretTravail")
@@ -232,7 +164,6 @@ class AdminController extends AbstractController
 
         //quand je clique sur valider le form, meme si les champs ne sont pas remplis, je persist and flush avec la bdd
         if ($form->isSubmitted() && $form->isValid()) {
-
             //j'enregistre le nouveau arrettravail dans la bdd
             $entityManager->persist($arrettravail);
             $entityManager->flush();
@@ -241,7 +172,7 @@ class AdminController extends AbstractController
                 'idinfospro' => $sproid,
             ]);
         } else {
-            return $this->render('admin/AjoutArretTravail.html.twig', [
+            return $this->render('Commun/AjoutArretTravail.html.twig', [
                 'form' => $form->createView(),
                 'idinfospro' => $sproid,
 
@@ -249,6 +180,7 @@ class AdminController extends AbstractController
         }
     }
 
+    /*######################## CHOMAGE ########################*/
 
     /**
      * @Route("/EnregistrerChomage/{sproid}", name="EnregistrerChomage")
@@ -272,7 +204,6 @@ class AdminController extends AbstractController
 
         //quand je clique sur valider le form, meme si les champs ne sont pas remplis, je persist and flush avec la bdd
         if ($form->isSubmitted() && $form->isValid()) {
-
             //j'enregistre le nouveau chomage dans la bdd
             $entityManager->persist($chomage);
             $entityManager->flush();
@@ -281,13 +212,14 @@ class AdminController extends AbstractController
                 'idinfospro' => $sproid,
             ]);
         } else {
-            return $this->render('admin/AjoutChomage.html.twig', [
+            return $this->render('Commun/AjoutChomage.html.twig', [
                 'form' => $form->createView(),
                 'idinfospro' => $sproid,
             ]);
         }
     }
 
+    /*######################## PRIME ########################*/
 
     /**
      * @Route("/EnregistrerPrime/{sproid}", name="EnregistrerPrime")
@@ -311,7 +243,6 @@ class AdminController extends AbstractController
 
         //quand je clique sur valider le form, meme si les champs ne sont pas remplis, je persist and flush avec la bdd
         if ($form->isSubmitted() && $form->isValid()) {
-
             //j'enregistre la nouvelle prime dans la bdd
             $entityManager->persist($prime);
             $entityManager->flush();
@@ -319,15 +250,12 @@ class AdminController extends AbstractController
             return $this->redirectToRoute('GestionSalarie', [
                 'idinfospro' => $sproid,
             ]);
+
         } else {
-            return $this->render('admin/AjoutPrime.html.twig', [
+            return $this->render('Commun/AjoutPrime.html.twig', [
                 'form' => $form->createView(),
                 'idinfospro' => $sproid,
-
-
             ]);
         }
     }
 }
-
-
