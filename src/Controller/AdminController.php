@@ -78,9 +78,9 @@ class AdminController extends AbstractController
      */
 
     public function GestionSalarie($idInfosPro) {
-        $InfosPro = $this -> getDoctrine() -> getRepository(SalarieInfosPro::class) -> find($idInfosPro);
+
                     return $this->render('admin/GestionSalaries.html.twig', [ // renvoie vers le twig qui affiche les options de gestion du salarié
-                        'infospro' => $InfosPro
+                        'idinfospro' => $idInfosPro,
                     ]);
     }
 
@@ -148,5 +148,83 @@ class AdminController extends AbstractController
 
     }
 
+    /**
+     * @Route("/EnregistrerConges/{sproid}", name="EnregistrerConges")
+     * @param Request $request
+     * @param EntityManagerInterface $entityManager
+     * @param $sproid
+     * @return Response
+     */
+    public function EnregistrerConges(Request $request, EntityManagerInterface $entityManager, $sproid)
+    {
+        //je veux ajouter des informations dans ma table conges
+        //liée cette table à la table connexion précédente
 
+        //je crée un objet conges
+        $conge = new Conges();
+        $InfosPro = $this->getDoctrine()->getRepository(SalarieInfosPro::class)->find($sproid);
+        $conge->setSproid($InfosPro);
+        //je donne un formulaire avec les champs de la table conges
+        $form = $this->createForm(CongesType::class, $conge);
+        $form->handleRequest($request);
+
+        //quand je clique sur valider le form, meme si les champs ne sont pas remplis, je persist and flush avec la bdd
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            //j'enregistre le nouveau conge dans la bdd
+            $entityManager->persist($conge);
+            $entityManager->flush();
+            //je redirecte vers page ou route
+            return $this->redirectToRoute('GestionSalaries', [
+                'idinfospro' => $sproid,
+            ]);
+        } else {
+            return $this->render('admin/AjoutConges.html.twig', [
+                'form' => $form->createView(),
+                'idinfospro' => $sproid,
+            ]);
+        }
+    }
+
+
+    /**
+     * @Route("/EnregistrerChomage/{sproid}", name="EnregistrerChomage")
+     * @param Request $request
+     * @param EntityManagerInterface $entityManager
+     * @param $sproid
+     * @return Response
+     */
+    public function EnregistrerChomage(Request $request, EntityManagerInterface $entityManager, $sproid)
+    {
+        //je veux ajouter des informations dans ma table chomage
+        //liée cette table à la table connexion précédente
+
+        //je crée un objet chomage
+        $chomage = new Chomage();
+        $InfosPro = $this->getDoctrine()->getRepository(SalarieInfosPro::class)->find($sproid);
+        $chomage->setSproid($InfosPro);
+        //je donne un formulaire avec les champs de la table conges
+        $form = $this->createForm(ChomageType::class, $chomage);
+        $form->handleRequest($request);
+
+        //quand je clique sur valider le form, meme si les champs ne sont pas remplis, je persist and flush avec la bdd
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            //j'enregistre le nouveau chomage dans la bdd
+            $entityManager->persist($chomage);
+            $entityManager->flush();
+            //je redirecte vers page ou route
+            return $this->redirectToRoute('GestionSalaries', [
+                'idinfospro' => $idperso,
+            ]);
+        } else {
+            return $this->render('admin/AjoutChomage.html.twig', [
+                'form' => $form->createView(),
+                'idinfospro' => $sproid,
+
+            ]);
+        }
+    }
 }
+
+

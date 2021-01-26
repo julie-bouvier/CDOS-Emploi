@@ -39,12 +39,16 @@
           <div class="tab-content">
               <div class="tab-pane active" id="{{infospro.sproid()}}.conges" role="tabpanel" aria-labelledby="home-tab">
                   <p>Voici la page des congés</p>
+
+                    <a href="{{ path('EnregistrerConges',{'sproid': infospro.sproid }) }}" method="post" type="button" class="btn btn-danger">Ajouter un congé</a>
               </div>
               <div class="tab-pane" id="{{infospro.sproid()}}.arrets_travail" role="tabpanel" aria-labelledby="profile-tab">
                   <p>Voici la page des arrêts de travail</p>
               </div>
               <div class="tab-pane" id="{{infospro.sproid()}}.chomages" role="tabpanel" aria-labelledby="profile-tab">
                   <p>Voici la page du chomage</p>
+                  <p><a href="{{ path('EnregistrerChomage',{'sproid': infospro.sproid }) }}" method="post" type="button" class="btn btn-danger">Ajouter un chômage</a>
+                  </p>
               </div>
               <div class="tab-pane" id="{{infospro.sproid()}}.autres_absences" role="tabpanel" aria-labelledby="home-tab">
                   <p>Voici la page des autres absences</p>
