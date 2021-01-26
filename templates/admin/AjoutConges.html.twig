@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Ajout des congés</h1>
+    <br>
+    {{ form_start(form) }}
+
+    <h6>Type de congés :
+        {{ form_widget(form.contype) }}
+    </h6>
+
+    <h6>Dernier jour travaillé :
+        {{ form_widget(form.condernierjour) }}
+    </h6>
+    <h6>Jour de reprise :
+        {{ form_widget(form.conjourreprise) }}
+    </h6>
+    <h6>Jours normalement travaillés :
+        {{ form_widget(form.conjournormaltrav) }}
+    </h6>
+    <h6>Nombre de jour pris (jour ouvrable) :
+        {{ form_widget(form.connbjourouvrablepris) }}
+    </h6>
+    <h6>Commentaires éventuels :
+        {{ form_widget(form.concommentaire) }}
+    </h6>
+
+    <button type="submit" class="btn btn-success">Ajout des informations</button>
+    {{ form_end(form) }}
+
+{% endblock %}

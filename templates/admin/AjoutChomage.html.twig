@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Ajout des congés</h1>
+    <br>
+    {{ form_start(form) }}
+
+    <h6>Date de début du chômage :
+        {{ form_widget(form.chodebut) }}
+    </h6>
+
+    <h6>Date de fin du chômage :
+        {{ form_widget(form.chofin) }}
+    </h6>
+    <h6>Nombre d'heure à déduire :
+        {{ form_widget(form.chonbheure) }}
+    </h6>
+    <h6>Maintien du chômage à 100% :
+        {{ form_widget(form.chomaintien) }}
+    </h6>
+    <h6>Commentaires :
+        {{ form_widget(form.chocommentaire) }}
+    </h6>
+
+
+    <button type="submit" class="btn btn-success">Ajout des informations</button>
+    {{ form_end(form) }}
+
+{% endblock %}
