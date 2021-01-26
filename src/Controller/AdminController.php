@@ -13,6 +13,7 @@ use App\Entity\Prime;
 use App\Entity\SalarieInfosPerso;
 use App\Entity\SalarieInfosPro;
 use App\Form\AjoutInfosPersoType;
+use App\Form\ArretTravailType;
 use App\Form\ChomageType;
 use App\Form\CongesType;
 use App\Form\VerifInfosPersoType;
@@ -86,7 +87,7 @@ class AdminController extends AbstractController
      */
 
     public function GestionSalarie($idinfospro) {
-        $Conges= $this -> getDoctrine() -> getRepository(Conges::class) -> findby($idinfospro);
+        $Conges= $this -> getDoctrine() -> getRepository(Conges::class) -> find($idinfospro);
         $ArretTravails= $this -> getDoctrine() -> getRepository(ArretTravail::class) -> find($idinfospro);
         $Chomages= $this -> getDoctrine() -> getRepository(Chomage::class) -> find($idinfospro);
         $AutresAbsences= $this -> getDoctrine() -> getRepository(AutreAbsence::class) -> find($idinfospro);
@@ -207,6 +208,46 @@ class AdminController extends AbstractController
             ]);
         }
     }
+
+    /**
+     * @Route("/EnregistrerArretTravail/{sproid}", name="EnregistrerArretTravail")
+     * @param Request $request
+     * @param EntityManagerInterface $entityManager
+     * @param $sproid
+     * @return Response
+     */
+    public function EnregistrerArretTravail(Request $request, EntityManagerInterface $entityManager, $sproid)
+    {
+        //je veux ajouter des informations dans ma table ArretTravail
+        //lier cette table à la table InfosPro précédente
+
+        //je crée un objet ArretTravail
+        $arrettravail = new ArretTravail();
+        $InfosPro = $this->getDoctrine()->getRepository(SalarieInfosPro::class)->find($sproid);
+        $arrettravail->setSproid($InfosPro);
+        //je donne un formulaire avec les champs de la table arrettravail
+        $form = $this->createForm(ArretTravailType::class, $arrettravail);
+        $form->handleRequest($request);
+
+        //quand je clique sur valider le form, meme si les champs ne sont pas remplis, je persist and flush avec la bdd
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            //j'enregistre le nouveau arrettravail dans la bdd
+            $entityManager->persist($arrettravail);
+            $entityManager->flush();
+            //je redirecte vers page ou route
+            return $this->redirectToRoute('GestionSalarie', [
+                'idinfospro' => $sproid,
+            ]);
+        } else {
+            return $this->render('admin/AjoutArretTravail.html.twig', [
+                'form' => $form->createView(),
+                'idinfospro' => $sproid,
+
+            ]);
+        }
+    }
+
 
     /**
      * @Route("/EnregistrerChomage/{sproid}", name="EnregistrerChomage")

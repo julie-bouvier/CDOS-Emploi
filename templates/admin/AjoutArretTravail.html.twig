@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Ajout des arrêts de travail</h1>
+    <br>
+    {{ form_start(form) }}
+
+    <h6>Type d'arrêt de travail :
+        {{ form_widget(form.attype) }}
+    </h6>
+
+    <h6>Initial ou prolongation  :
+        {{ form_widget(form.atprolongation) }}
+    </h6>
+    <h6>Date de début de l'arrêt:
+        {{ form_widget(form.atdebut) }}
+    </h6>
+    <h6>Date de fin prévisionnel de l'arrêt:
+        {{ form_widget(form.atfin) }}
+    </h6>
+    <h6>En cas de maladie : maintient des trois premiers jours:
+        {{ form_widget(form.at3jours) }}
+    </h6>
+    <h6>Si non, nombre d'heures à déduire
+        {{ form_widget(form.at3jnbh) }}
+    </h6>
+    <h6>En cas de maladie, pour les salariés ayant moins d'un an d'ancienneté, maintien à compter du 4ème jour
+        {{ form_widget(form.at4jours) }}
+    </h6>
+    <h6>si non, nombres d'heures à déduire
+        {{ form_widget(form.at4jnbh) }}
+    </h6>
+    <h6>Commentaires :
+        {{ form_widget(form.atcommentaire) }}
+    </h6>
+
+
+    <button type="submit" class="btn btn-success">Ajout des informations</button>
+    {{ form_end(form) }}
+
+{% endblock %}
