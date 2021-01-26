@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Ajout des primes</h1>
+    <br>
+    {{ form_start(form) }}
+
+    <h6>Type de prime :
+        {{ form_widget(form.primtype) }}
+    </h6>
+
+    <h6>Montant de la prime :
+        {{ form_widget(form.primmontant) }}
+    </h6>
+    <h6>Unité :
+        {{ form_widget(form.primnetbrut) }}
+    </h6>
+    <h6>Commentaires :
+        {{ form_widget(form.primcommentaire) }}
+    </h6>
+
+
+    <button type="submit" class="btn btn-success">Ajout des informations</button>
+    {{ form_end(form) }}
+
+{% endblock %}
