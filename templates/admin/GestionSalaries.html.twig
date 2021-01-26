@@ -10,59 +10,69 @@
           {#Début de la Nav-bar, Les noms des ongles#}
           <ul class="nav nav-tabs">
               <li class="nav-item">
-                  <a class="nav-link active" id="home-tab" data-toggle="tab" href="#{{infospro.sproid()}}.conges" role="tab" aria-controls="home" aria-selected="true">Congés</a>
+                  <a class="nav-link active" id="home-tab" data-toggle="tab" href="#{{idinfospro}}.conges" role="tab" aria-controls="home" aria-selected="true">Congés</a>
               </li>
               <li class="nav-item">
-                  <a class="nav-link" id="profile-tab" data-toggle="tab" href="#{{infospro.sproid()}}.arrets_travail" role="tab" aria-controls="profile" aria-selected="false">Arrêts de travail</a>
+                  <a class="nav-link" id="profile-tab" data-toggle="tab" href="#{{idinfospro}}.arrets_travail" role="tab" aria-controls="profile" aria-selected="false">Arrêts de travail</a>
               </li>
               <li class="nav-item">
-                  <a class="nav-link" id="profile-tab" data-toggle="tab" href="#{{infospro.sproid()}}.chomages" role="tab" aria-controls="profile" aria-selected="false">Chomages</a>
+                  <a class="nav-link" id="profile-tab" data-toggle="tab" href="#{{idinfospro}}.chomages" role="tab" aria-controls="profile" aria-selected="false">Chomages</a>
               </li>
               <li class="nav-item">
-                  <a class="nav-link" id="profile-tab" data-toggle="tab" href="#{{infospro.sproid()}}.autres_absences" role="tab" aria-controls="profile" aria-selected="false">Autres absences</a>
+                  <a class="nav-link" id="profile-tab" data-toggle="tab" href="#{{idinfospro}}.autres_absences" role="tab" aria-controls="profile" aria-selected="false">Autres absences</a>
               </li>
               <li class="nav-item">
-                  <a class="nav-link" id="profile-tab" data-toggle="tab" href="#{{infospro.sproid()}}.primes" role="tab" aria-controls="profile" aria-selected="false">Primes</a>
+                  <a class="nav-link" id="profile-tab" data-toggle="tab" href="#{{idinfospro}}.primes" role="tab" aria-controls="profile" aria-selected="false">Primes</a>
               </li>
               <li class="nav-item">
-                  <a class="nav-link" id="profile-tab" data-toggle="tab" href="#{{infospro.sproid()}}.frais" role="tab" aria-controls="profile" aria-selected="false">Frais</a>
+                  <a class="nav-link" id="profile-tab" data-toggle="tab" href="#{{idinfospro}}.frais" role="tab" aria-controls="profile" aria-selected="false">Frais</a>
               </li>
               <li class="nav-item">
-                  <a class="nav-link" id="profile-tab" data-toggle="tab" href="#{{infospro.sproid()}}.heures" role="tab" aria-controls="profile" aria-selected="false">Heures</a>
+                  <a class="nav-link" id="profile-tab" data-toggle="tab" href="#{{idinfospro}}.heures" role="tab" aria-controls="profile" aria-selected="false">Heures</a>
               </li>
               <li class="nav-item">
-                  <a class="nav-link" id="profile-tab" data-toggle="tab" href="#{{infospro.sproid()}}.avenants" role="tab" aria-controls="profile" aria-selected="false">Avenants</a>
+                  <a class="nav-link" id="profile-tab" data-toggle="tab" href="#{{idinfospro}}.avenants" role="tab" aria-controls="profile" aria-selected="false">Avenants</a>
               </li>
           </ul>
 
           {#Début du contenu des onglets#}
           <div class="tab-content">
-              <div class="tab-pane active" id="{{infospro.sproid()}}.conges" role="tabpanel" aria-labelledby="home-tab">
-                  <p>Voici la page des congés</p>
+              <div class="tab-pane active" id="{{idinfospro}}.conges" role="tabpanel" aria-labelledby="home-tab">
+                  <p>Voici la page permettant de gérer les congés :</p>
 
-                    <a href="{{ path('EnregistrerConges',{'sproid': infospro.sproid }) }}" method="post" type="button" class="btn btn-danger">Ajouter un congé</a>
+                  {% for conge in conges %}
+                      <li><B>Type de congés :</B>  {{ conge.contype }}</li>
+                      <li><B>Dernier jour travaillé :</B>  {{ conge.condernierjour|date("d/m/Y")}}</li>
+                      <li><B>Jour de reprise :</B>  {{ conge.conjourreprise|date("d/m/Y") }}</li>
+                      <li><B>Jours normalement travaillé :</B>  {{ conge.conjournormaltrav }} </li>
+                      <li><B>Nombre de jour ouvrable pris :</B>  {{ conge.connbjourouvrablepris }} </li>
+                      <li><B>Commentaire :</B>  {{ conge.concommentaire }} </li>
+                      <br>
+                  {% endfor %}
+                  <br>
+                  <a href="{{ path('EnregistrerConge',{'sproid': idinfospro }) }}" method="post" type="button" class="btn btn-danger">Ajouter un congé</a>
               </div>
-              <div class="tab-pane" id="{{infospro.sproid()}}.arrets_travail" role="tabpanel" aria-labelledby="profile-tab">
+              <div class="tab-pane" id="{{idinfospro}}.arrets_travail" role="tabpanel" aria-labelledby="profile-tab">
                   <p>Voici la page des arrêts de travail</p>
               </div>
-              <div class="tab-pane" id="{{infospro.sproid()}}.chomages" role="tabpanel" aria-labelledby="profile-tab">
+              <div class="tab-pane" id="{{idinfospro}}.chomages" role="tabpanel" aria-labelledby="profile-tab">
                   <p>Voici la page du chomage</p>
-                  <p><a href="{{ path('EnregistrerChomage',{'sproid': infospro.sproid }) }}" method="post" type="button" class="btn btn-danger">Ajouter un chômage</a>
+                  <p><a href="{{ path('EnregistrerChomage',{'sproid': idinfospro }) }}" method="post" type="button" class="btn btn-danger">Ajouter un chômage</a>
                   </p>
               </div>
-              <div class="tab-pane" id="{{infospro.sproid()}}.autres_absences" role="tabpanel" aria-labelledby="home-tab">
+              <div class="tab-pane" id="{{idinfospro}}.autres_absences" role="tabpanel" aria-labelledby="home-tab">
                   <p>Voici la page des autres absences</p>
               </div>
-              <div class="tab-pane" id="{{infospro.sproid()}}.primes" role="tabpanel" aria-labelledby="home-tab">
+              <div class="tab-pane" id="{{idinfospro}}.primes" role="tabpanel" aria-labelledby="home-tab">
                   <p>Voici la page des primes</p>
               </div>
-              <div class="tab-pane" id="{{infospro.sproid()}}.frais" role="tabpanel" aria-labelledby="home-tab">
+              <div class="tab-pane" id="{{idinfospro}}.frais" role="tabpanel" aria-labelledby="home-tab">
                   <p>Voici la page des frais</p>
               </div>
-              <div class="tab-pane" id="{{infospro.sproid()}}.heures" role="tabpanel" aria-labelledby="home-tab">
+              <div class="tab-pane" id="{{idinfospro}}.heures" role="tabpanel" aria-labelledby="home-tab">
                   <p>Voici la page des heures</p>
               </div>
-              <div class="tab-pane" id="{{infospro.sproid()}}.avenants" role="tabpanel" aria-labelledby="home-tab">
+              <div class="tab-pane" id="{{idinfospro}}.avenants" role="tabpanel" aria-labelledby="home-tab">
                   <p>Voici la page des avenants</p>
               </div>
           </div>

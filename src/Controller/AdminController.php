@@ -2,9 +2,19 @@
 
 namespace App\Controller;
 
+use App\Entity\ArretTravail;
+use App\Entity\AutreAbsence;
+use App\Entity\Avenant;
+use App\Entity\Chomage;
+use App\Entity\Conges;
+use App\Entity\Frais;
+use App\Entity\Heures;
+use App\Entity\Prime;
 use App\Entity\SalarieInfosPerso;
 use App\Entity\SalarieInfosPro;
 use App\Form\AjoutInfosPersoType;
+use App\Form\ChomageType;
+use App\Form\CongesType;
 use App\Form\VerifInfosPersoType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -53,8 +63,6 @@ class AdminController extends AbstractController
         $InfosPerso = $this -> getDoctrine() -> getRepository(SalarieInfosPerso::class) -> find($id);
         $InfosPro = $InfosPerso -> getSproid();
 
-
-
         for ($i=0; $i <= count($InfosPro); $i++)
         {
             if($InfosPro[$i]!=null){
@@ -74,16 +82,31 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/GestionSalarie/{idInfosPro}", name="GestionSalarie")
+     * @Route("/GestionSalarie/{idinfospro}", name="GestionSalarie")
      */
 
-    public function GestionSalarie($idInfosPro) {
+    public function GestionSalarie($idinfospro) {
+        $Conges= $this -> getDoctrine() -> getRepository(Conges::class) -> findby($idinfospro);
+        $ArretTravails= $this -> getDoctrine() -> getRepository(ArretTravail::class) -> find($idinfospro);
+        $Chomages= $this -> getDoctrine() -> getRepository(Chomage::class) -> find($idinfospro);
+        $AutresAbsences= $this -> getDoctrine() -> getRepository(AutreAbsence::class) -> find($idinfospro);
+        $Primes= $this -> getDoctrine() -> getRepository(Prime::class) -> find($idinfospro);
+        $Frais= $this -> getDoctrine() -> getRepository(Frais::class) -> find($idinfospro);
+        $Heures= $this -> getDoctrine() -> getRepository(Heures::class) -> find($idinfospro);
+        $Avenants= $this -> getDoctrine() -> getRepository(Avenant::class) -> find($idinfospro);
 
-                    return $this->render('admin/GestionSalaries.html.twig', [ // renvoie vers le twig qui affiche les options de gestion du salarié
-                        'idinfospro' => $idInfosPro,
-                    ]);
+        return $this->render('admin/GestionSalaries.html.twig', [ // renvoie vers le twig qui affiche les options de gestion du salarié
+            'idinfospro' => $idinfospro,
+            'conges' => $Conges,
+            'arrettravails' => $ArretTravails,
+            'chomages' => $Chomages,
+            'autresabsences' => $AutresAbsences,
+            'primes' => $Primes,
+            'frais' => $Frais,
+            'heures' => $Heures,
+            'avenants' => $Avenants
+        ]);
     }
-
 
 
     /**
@@ -113,7 +136,6 @@ class AdminController extends AbstractController
             'mailasso' => $mailasso
         ]);
     }
-
 
 
     /**
@@ -149,13 +171,13 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/EnregistrerConges/{sproid}", name="EnregistrerConges")
+     * @Route("/EnregistrerConge/{sproid}", name="EnregistrerConge")
      * @param Request $request
      * @param EntityManagerInterface $entityManager
      * @param $sproid
      * @return Response
      */
-    public function EnregistrerConges(Request $request, EntityManagerInterface $entityManager, $sproid)
+    public function EnregistrerConge(Request $request, EntityManagerInterface $entityManager, $sproid)
     {
         //je veux ajouter des informations dans ma table conges
         //liée cette table à la table connexion précédente
@@ -175,7 +197,7 @@ class AdminController extends AbstractController
             $entityManager->persist($conge);
             $entityManager->flush();
             //je redirecte vers page ou route
-            return $this->redirectToRoute('GestionSalaries', [
+            return $this->redirectToRoute('GestionSalarie', [
                 'idinfospro' => $sproid,
             ]);
         } else {
@@ -185,7 +207,6 @@ class AdminController extends AbstractController
             ]);
         }
     }
-
 
     /**
      * @Route("/EnregistrerChomage/{sproid}", name="EnregistrerChomage")
@@ -214,8 +235,8 @@ class AdminController extends AbstractController
             $entityManager->persist($chomage);
             $entityManager->flush();
             //je redirecte vers page ou route
-            return $this->redirectToRoute('GestionSalaries', [
-                'idinfospro' => $idperso,
+            return $this->redirectToRoute('GestionSalarie', [
+                'idinfospro' => $sproid,
             ]);
         } else {
             return $this->render('admin/AjoutChomage.html.twig', [
