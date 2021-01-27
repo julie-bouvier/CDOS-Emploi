@@ -101,6 +101,7 @@ class CommunController extends AbstractController
         }
     }
 
+
     /*######################## CONGES ########################*/
 
     /**

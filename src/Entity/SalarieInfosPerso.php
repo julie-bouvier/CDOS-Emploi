@@ -86,9 +86,9 @@ class SalarieInfosPerso
     private $sdptnaissance;
 
     /**
-     * @var int|null
+     * @var string|null
      *
-     * @ORM\Column(name="sNationalite", type="integer", nullable=true)
+     * @ORM\Column(name="sNationalite", type="string", nullable=true)
      */
     private $snationalite;
 
@@ -100,9 +100,9 @@ class SalarieInfosPerso
     private $sautre;
 
     /**
-     * @var int|null
+     * @var string|null
      *
-     * @ORM\Column(name="sNumSecu", type="integer", nullable=true)
+     * @ORM\Column(name="sNumSecu", type="string", nullable=true)
      */
     private $snumsecu;
 

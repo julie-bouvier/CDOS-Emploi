@@ -64,9 +64,9 @@ class SalarieInfosPro
     private $stypetempstravail;
 
     /**
-     * @var int|null
+     * @var string|null
      *
-     * @ORM\Column(name="sGestCP", type="integer", nullable=true)
+     * @ORM\Column(name="sGestCP", type="string", nullable=true)
      */
     private $sgestcp;
 
@@ -92,16 +92,16 @@ class SalarieInfosPro
     private $sfinmotif;
 
     /**
-     * @var int|null
+     * @var string|null
      *
-     * @ORM\Column(name="s10congeMois", type="integer", nullable=true)
+     * @ORM\Column(name="s10congeMois", type="string", nullable=true)
      */
     private $s10congemois;
 
     /**
-     * @var int|null
+     * @var string|null
      *
-     * @ORM\Column(name="sConge", type="integer", nullable=true)
+     * @ORM\Column(name="sConge", type="string", nullable=true)
      */
     private $sconge;
 
@@ -113,9 +113,9 @@ class SalarieInfosPro
     private $stypecontrat;
 
     /**
-     * @var int|null
+     * @var string|null
      *
-     * @ORM\Column(name="sMultiEmployeur", type="integer", nullable=true)
+     * @ORM\Column(name="sMultiEmployeur", type="string", nullable=true)
      */
     private $smultiemployeur;
 
@@ -141,9 +141,9 @@ class SalarieInfosPro
     private $ssalmoisbrut;
 
     /**
-     * @var int|null
+     * @var string|null
      *
-     * @ORM\Column(name="sComplemSante", type="integer", nullable=true)
+     * @ORM\Column(name="sComplemSante", type="string", nullable=true)
      */
     private $scomplemsante;
 
@@ -284,17 +284,17 @@ class SalarieInfosPro
     }
 
     /**
-     * @return int|null
+     * @return string|null
      */
-    public function getSgestcp(): ?int
+    public function getSgestcp(): ?string
     {
         return $this->sgestcp;
     }
 
     /**
-     * @param int|null $sgestcp
+     * @param string|null $sgestcp
      */
-    public function setSgestcp(?int $sgestcp): void
+    public function setSgestcp(?string $sgestcp): void
     {
         $this->sgestcp = $sgestcp;
     }
@@ -348,33 +348,33 @@ class SalarieInfosPro
     }
 
     /**
-     * @return int|null
+     * @return string|null
      */
-    public function getS10congemois(): ?int
+    public function getS10congemois(): ?string
     {
         return $this->s10congemois;
     }
 
     /**
-     * @param int|null $s10congemois
+     * @param string|null $s10congemois
      */
-    public function setS10congemois(?int $s10congemois): void
+    public function setS10congemois(?string $s10congemois): void
     {
         $this->s10congemois = $s10congemois;
     }
 
     /**
-     * @return int|null
+     * @return string|null
      */
-    public function getSconge(): ?int
+    public function getSconge(): ?string
     {
         return $this->sconge;
     }
 
     /**
-     * @param int|null $sconge
+     * @param string|null $sconge
      */
-    public function setSconge(?int $sconge): void
+    public function setSconge(?string $sconge): void
     {
         $this->sconge = $sconge;
     }
@@ -396,17 +396,17 @@ class SalarieInfosPro
     }
 
     /**
-     * @return int|null
+     * @return string|null
      */
-    public function getSmultiemployeur(): ?int
+    public function getSmultiemployeur(): ?string
     {
         return $this->smultiemployeur;
     }
 
     /**
-     * @param int|null $smultiemployeur
+     * @param string|null $smultiemployeur
      */
-    public function setSmultiemployeur(?int $smultiemployeur): void
+    public function setSmultiemployeur(?string $smultiemployeur): void
     {
         $this->smultiemployeur = $smultiemployeur;
     }
@@ -460,17 +460,17 @@ class SalarieInfosPro
     }
 
     /**
-     * @return int|null
+     * @return string|null
      */
-    public function getScomplemsante(): ?int
+    public function getScomplemsante(): ?string
     {
         return $this->scomplemsante;
     }
 
     /**
-     * @param int|null $scomplemsante
+     * @param string|null $scomplemsante
      */
-    public function setScomplemsante(?int $scomplemsante): void
+    public function setScomplemsante(?string $scomplemsante): void
     {
         $this->scomplemsante = $scomplemsante;
     }
