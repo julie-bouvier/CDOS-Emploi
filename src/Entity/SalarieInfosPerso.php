@@ -307,17 +307,17 @@ class SalarieInfosPerso
     }
 
     /**
-     * @return int|null
+     * @return string|null
      */
-    public function getSnationalite(): ?int
+    public function getSnationalite(): ?string
     {
         return $this->snationalite;
     }
 
     /**
-     * @param int|null $snationalite
+     * @param string|null $snationalite
      */
-    public function setSnationalite(?int $snationalite): void
+    public function setSnationalite(?string $snationalite): void
     {
         $this->snationalite = $snationalite;
     }
