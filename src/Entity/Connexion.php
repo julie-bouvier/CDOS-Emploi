@@ -62,8 +62,6 @@ class Connexion implements \Symfony\Component\Security\Core\User\UserInterface
      * GETTER & SETTER
      */
 
-
-
     /**
      * @return string
      */

@@ -3,9 +3,11 @@
 namespace App\Controller\SuperAdmin;
 
 use App\Entity\Association;
+use App\Entity\Connexion;
 use App\Form\AssociationType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -14,6 +16,8 @@ class SaAssociationsController extends AbstractController
 {
     /**
      * @Route("/affAssociation/{but}", name="affAssociation")
+     * @param $but
+     * @return Response
      */
     public function affAssociation($but){
         $associations=$this->getDoctrine()->getRepository(Association::class)->findAll();
@@ -44,6 +48,7 @@ class SaAssociationsController extends AbstractController
 
         //je crée un objet association
         $asso=new Association();
+        //je mets automatiquement le champs aMail=coMail
         $asso->setAmail($comail);
         //je donne un formulaire avec les champs de la table association
         $form=$this->createForm(AssociationType::class, $asso);
@@ -51,7 +56,12 @@ class SaAssociationsController extends AbstractController
 
         //quand je clique sur valider le form, meme si les champs ne sont pas remplis, je persist and flush avec la bdd
         if ($form->isSubmitted() && $form->isValid()){
-            //je mets automatiquement le champs aMail=coMail
+
+            //on lie l'association à la connexion en passant par le addAssociation dans connexion
+            $connexion=$this->getDoctrine()->getRepository(Connexion::class)->find($comail);
+            $connexion->addAssociation($asso);
+            //on lie la connexion à l'association en passant par le addConnexion dans association
+            $asso->addConnexion($connexion);
 
             //j'enregistre la nouvelle asso dans la bdd
             $entityManager->persist($asso);
@@ -71,6 +81,8 @@ class SaAssociationsController extends AbstractController
 
     /**
      * @Route("/voirAssociation/{assomail}", name="voirAssociation")
+     * @param $assomail
+     * @return Response
      */
     public function voirAssociation($assomail){
         $association=$this->getDoctrine()->getRepository(Association::class)->find($assomail);
@@ -84,7 +96,7 @@ class SaAssociationsController extends AbstractController
      * @param Request $request
      * @param EntityManagerInterface $entityManager
      * @param $assoMail
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+     * @return RedirectResponse|Response
      */
     public function modifAssociation(Request $request,EntityManagerInterface $entityManager,$assoMail){
         $association=$this->getDoctrine()->getRepository(Association::class)->find($assoMail);

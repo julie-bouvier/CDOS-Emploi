@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Ajout d'un avenant au contrat de travail</h1>
+    <br>
+    {{ form_start(form) }}
+
+    <h6>Date d'effet :
+        {{ form_widget(form.avdebut) }}
+    </h6>
+
+    <h6> Type de modification (rémunération, classification, volume horaire, …) :
+        {{ form_widget(form.avtypemodif) }}
+    </h6>
+    <h6>Commentaires éventuels
+        {{ form_widget(form.avcommentaire) }}
+    </h6>
+
+
+    <button type="submit" class="btn btn-success">Ajout des informations</button>
+    {{ form_end(form) }}
+
+{% endblock %}

@@ -63,6 +63,7 @@
                     </div>
 
                     <div class="tab-pane" id="{{idinfospro}}.arrets_travail" role="tabpanel" aria-labelledby="profile-tab">
+                        <a href="{{ path('EnregistrerArretTravail',{'sproid': idinfospro }) }}" method="post" type="button" class="btn btn-danger">Ajouter un arrêt de travail</a>
 
                     </div>
 
@@ -96,6 +97,9 @@
                     </div>
                     <div class="tab-pane" id="{{idinfospro}}.autres_absences" role="tabpanel" aria-labelledby="home-tab">
                         <p>Voici la page des autres absences</p>
+                        <a href="{{ path('EnregistrerAutreAbsence',{'sproid': idinfospro }) }}" method="post" type="button" class="btn btn-danger">Ajouter une autre absence</a>
+
+
                     </div>
                     <div class="tab-pane" id="{{idinfospro}}.primes" role="tabpanel" aria-labelledby="home-tab">
                         <p>Voici la page des primes</p>
@@ -103,6 +107,8 @@
                     </div>
                     <div class="tab-pane" id="{{idinfospro}}.frais" role="tabpanel" aria-labelledby="home-tab">
                         <p>Voici la page des frais</p>
+                        <a href="{{ path('EnregistrerFrais',{'sproid': idinfospro }) }}" method="post" type="button" class="btn btn-danger">Ajouter un frais</a>
+
                     </div>
                     <div class="tab-pane" id="{{idinfospro}}.heures" role="tabpanel" aria-labelledby="home-tab">
                         <p>Voici la page des heures</p>
@@ -110,6 +116,9 @@
                     </div>
                     <div class="tab-pane" id="{{idinfospro}}.avenants" role="tabpanel" aria-labelledby="home-tab">
                         <p>Voici la page des avenants</p>
+                        <a href="{{ path('EnregistrerAvenant',{'sproid': idinfospro }) }}" method="post" type="button" class="btn btn-danger">Ajouter un avenant</a>
+
+
                     </div>
                 </div>
             </tr>

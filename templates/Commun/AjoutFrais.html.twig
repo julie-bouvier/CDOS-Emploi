@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Ajout d'un frais</h1>
+    <br>
+    {{ form_start(form) }}
+
+    <h6>Type de frais :
+        {{ form_widget(form.fratype) }}
+    </h6>
+
+    <h6> Quantité :
+        {{ form_widget(form.fraquantite) }}
+    </h6>
+    <h6>Taux unitaire :
+        {{ form_widget(form.frataux) }}
+    </h6>
+    <h6> le total de la note de frais sera visible dans l'affichage
+    </h6>
+    <h6>Commentaires éventuels
+        {{ form_widget(form.fracommentaire) }}
+    </h6>
+
+
+    <button type="submit" class="btn btn-success">Ajout des informations</button>
+    {{ form_end(form) }}
+
+{% endblock %}

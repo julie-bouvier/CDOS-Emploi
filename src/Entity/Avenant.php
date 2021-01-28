@@ -52,5 +52,85 @@ class Avenant
      */
     private $sproid;
 
+    /**
+     * @return int
+     */
+    public function getAvid(): int
+    {
+        return $this->avid;
+    }
+
+    /**
+     * @param int $avid
+     */
+    public function setAvid(int $avid): void
+    {
+        $this->avid = $avid;
+    }
+
+    /**
+     * @return \DateTime|null
+     */
+    public function getAvdebut(): ?\DateTime
+    {
+        return $this->avdebut;
+    }
+
+    /**
+     * @param \DateTime|null $avdebut
+     */
+    public function setAvdebut(?\DateTime $avdebut): void
+    {
+        $this->avdebut = $avdebut;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getAvtypemodif(): ?string
+    {
+        return $this->avtypemodif;
+    }
+
+    /**
+     * @param string|null $avtypemodif
+     */
+    public function setAvtypemodif(?string $avtypemodif): void
+    {
+        $this->avtypemodif = $avtypemodif;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getAvcommentaire(): ?string
+    {
+        return $this->avcommentaire;
+    }
+
+    /**
+     * @param string|null $avcommentaire
+     */
+    public function setAvcommentaire(?string $avcommentaire): void
+    {
+        $this->avcommentaire = $avcommentaire;
+    }
+
+    /**
+     * @return SalarieInfosPro
+     */
+    public function getSproid(): SalarieInfosPro
+    {
+        return $this->sproid;
+    }
+
+    /**
+     * @param SalarieInfosPro $sproid
+     */
+    public function setSproid(SalarieInfosPro $sproid): void
+    {
+        $this->sproid = $sproid;
+    }
+
 
 }
