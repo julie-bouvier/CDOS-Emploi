@@ -8,34 +8,51 @@
         <table>
             <tr>
                 <td>
-                    <H4 style="color:#18BC9C"> Informations Personnelles </H4>
                     <br>
-                    <li><B>Nom :</B>  {{ infosperso.snom }}</li>
-                    <li><B>Nom de Jeune Fille :</B>  {{ infosperso.snomjeunefille }}</li>
-                    <li><B>Prenom :</B>  {{ infosperso.sprenom }}</li>
-                    <li><B>Adresse :</B>  {{ infosperso.sadresse }} </li>
-                    <li><B>Portable :</B>  {{ infosperso.sportable }} </li>
-                    <li><B>Telephone :</B>  {{ infosperso.stel }} </li>
-                    <li><B>Date de naissance :</B>  {{ infosperso.sdatenaissance|date("d/m/Y") }} </li>
-                    <li><B>Lieu de naissance :</B>  {{ infosperso.slieunaissance }} </li>
-                    <li><B>Département de naissance :</B>  {{ infosperso.sdptnaissance }} </li>
-                    <li><B>Nationalité Française :</B>
-                        {% if infosperso.snationalite=='Oui' %}
-                            Oui
-                        {% else %}
-                            Non
-                        {% endif %}
-                    </li>
-                    {% if infosperso.snationalite==1 %}
-                        <li> <B>Autre Nationalité (Numéro de carte de séjour):</B>  {{ infosperso.sautre }} </li>
-                    {% endif %}
-                    <li><B>N° de sécurité sociale :</B>  {{ infosperso.snumsecu }} </li>
-                    <li><B>Situation familliale :</B>  {{ infosperso.ssituationfam }} </li>
-                    <li><B>Nombre d'enfants a charge :</B> {{ infosperso.snbenfant }} </li>
+                    <a href="{{ path('GestionSalarie',{'idinfospro': infospro.sproid})}}" method="post" type="button" class="btn btn-danger">Gestion du salarié</a>
+                    <br>
                 </td>
-                <td>
-                    <H4 style="color:#18BC9C"> Informations Professionnelles </H4>
-                    <br>
+            </tr>
+            <tr>
+                <td style="padding-left: 200px">
+                    <div class="card border-light mb-3" style="max-width: 20rem;">
+                        <div class="card-header">Informations Personnelles</div>
+                        <div class="card-body">
+                            <p class="card-text">
+                            <li><B>Nom :</B>  {{ infosperso.snom }}</li>
+                            <li><B>Nom de Jeune Fille :</B>  {{ infosperso.snomjeunefille }}</li>
+                            <li><B>Prenom :</B>  {{ infosperso.sprenom }}</li>
+                            <li><B>Adresse :</B>  {{ infosperso.sadresse }} </li>
+                            <li><B>Portable :</B>  {{ infosperso.sportable }} </li>
+                            <li><B>Telephone :</B>  {{ infosperso.stel }} </li>
+                            <li><B>Date de naissance :</B>  {{ infosperso.sdatenaissance|date("d/m/Y") }} </li>
+                            <li><B>Lieu de naissance :</B>  {{ infosperso.slieunaissance }} </li>
+                            <li><B>Département de naissance :</B>  {{ infosperso.sdptnaissance }} </li>
+                            <li><B>Nationalité Française :</B>
+                                {% if infosperso.snationalite=='Oui' %}
+                                    Oui
+                                {% else %}
+                                    Non
+                                {% endif %}
+                            </li>
+                            {% if infosperso.snationalite==1 %}
+                                <li> <B>Autre Nationalité (Numéro de carte de séjour):</B>  {{ infosperso.sautre }} </li>
+                            {% endif %}
+                            <li><B>N° de sécurité sociale :</B>  {{ infosperso.snumsecu }} </li>
+                            <li><B>Situation familliale :</B>  {{ infosperso.ssituationfam }} </li>
+                            <li><B>Nombre d'enfants a charge :</B> {{ infosperso.snbenfant }} </li>
+
+                            <br>
+                            <a href="{{ path('modifInfosPerso',{'idInfosPerso': infosperso.spersoid, 'idmail': idmail})}}" method="post" type="button" class="btn btn-success">Modifier les informations personnelles</a>
+                            <br></p>
+                        </div>
+                    </div>
+                </td>
+                <td style="padding-left: 100px">
+                    <div class="card border-light mb-3" style="max-width: 20rem;">
+                        <div class="card-header">Informations Professionnelles</div>
+                        <div class="card-body">
+                            <p class="card-text">
                     <ul>
                         <li><B>Mail de l'association :</B>  {{ infospro.smailasso }}</li>
                         <li><B>Nom employeur :</B>  {{ infospro.snomemployeur }}</li>
@@ -93,14 +110,12 @@
                             {% endif %}
                         </li>
                         <li><B> Autres éléments de rémunération :</B>  {{ infospro.sautreelement }}</li>
+                                <br>
+                                <a href="{{ path('modifInfosPro',{'idInfosPro': infospro.sproid, 'idmail':idmail, 'idPerso':infosperso.spersoid})}}" method="post" type="button" class="btn btn-success">Modifier les informations professionnelles</a>
+                                <br></p>
+                        </div>
+                    </div>
                     </ul>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <br>
-                    <a href="{{ path('GestionSalarie',{'idinfospro': infospro.sproid})}}" method="post" type="button" class="btn btn-danger">Gestion du salarié</a>
-                    <br>
                 </td>
             </tr>
         </table>
