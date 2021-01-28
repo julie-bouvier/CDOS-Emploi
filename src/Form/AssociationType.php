@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Association;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -36,12 +37,12 @@ class AssociationType extends AbstractType
                 'attr' => ['class' => 'form-control'],
                 'required'=>false
             ])
-            ->add('adatecreation', DateType::class, [
+            ->add('adatecreation', BirthdayType::class, [
                 'format'=> 'dd-MM-yyyy',
                 'attr' => ['class' =>'form-control'],
                 'required'=>false
             ])
-            ->add('adateembauche', DateType::class, [
+            ->add('adateembauche', BirthdayType::class, [
                 'format'=> 'dd-MM-yyyy',
                 'attr' => ['class' =>'form-control'],
                 'required'=>false
@@ -187,7 +188,7 @@ class AssociationType extends AbstractType
                 'attr' => ['class' => 'form-control'],
                 'required'=>false
             ])
-            ->add('adateadhesion',DateType::class,[
+            ->add('adateadhesion',BirthdayType::class,[
                 'format'=> 'dd-MM-yyyy',
                 'attr' => ['class' => 'form-control'],
                 'required'=>false

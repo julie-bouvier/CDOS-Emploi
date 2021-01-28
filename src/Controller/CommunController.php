@@ -71,24 +71,31 @@ class CommunController extends AbstractController
     public function AjoutInfosPerso($mailasso, $role, Request $request, EntityManagerInterface $entityManager) {
         //je crée un objet InfosPerso
         $InfosPerso = new SalarieInfosPerso();
-        //je mets automatiquement le champs aMail=mailasso
+        //je li l'association à la bonne entité salarieinfosperso et inversement
         $association = $this->getDoctrine()->getRepository(Association::class)->find($mailasso);
         $InfosPerso->addAssociation($association);
         $association->addSalarieinfosperso($InfosPerso);
-        // Je récupère l'id perso pour l'envoyer à la page suivante pour l'ajout des infos pro
-        $idinfosPerso = $InfosPerso ->getSpersoid();
+
         //je donne un formulaire avec les champs de la table SalarieInfosPerso
         $form = $this->createForm(AjoutInfosPersoType::class, $InfosPerso);
         $form->handleRequest($request);
 
         //quand je clique sur valider le form, meme si les champs ne sont pas remplis, je persist and flush avec la bdd
         if ($form->isSubmitted() && $form->isValid()){
+
             //j'enregistre les nouvelles infos perso dans la bdd
             $entityManager->persist($InfosPerso);
             $entityManager->flush();
+            // Je récupère l'id perso pour l'envoyer à la page suivante pour l'ajout des infos pro
+            $idinfosPerso = $InfosPerso ->getSpersoid();
+            //$numsecu=$InfosPerso->getSnumsecu();
+            //$newsalarieinfosperso=$this->getDoctrine()->getRepository(SalarieInfosPerso::class)->findBy(['snumsecu'=>$numsecu]);
+            //for ($i=0; $i <= 1; $i++){
+                //$newidinfospro=$newsalarieinfosperso[$i]->getSpersoid();
+            //}
             //je redirecte vers page ou route
             return $this->redirectToRoute('AjoutInfosPro', [
-                'idinfosperso' => $idinfosPerso,
+                'idinfoperso' => $idinfosPerso,
                 'mailasso' => $mailasso,
                 'role' => $role
             ]);
@@ -96,10 +103,13 @@ class CommunController extends AbstractController
         else{
             return $this->render('Commun/AjoutInfosPerso.html.twig', [
                 'form' => $form->createView(),
-                'mailasso'=> $mailasso
+                'mailasso'=> $mailasso,
+                'role'=>$role
             ]);
         }
     }
+
+    /*######################## SALARIE INFOS PERSO ########################*/
 
     /**
      * @Route("/AjoutInfosPro/{mailasso}/{idinfoperso}/{role}", name="AjoutInfosPro")

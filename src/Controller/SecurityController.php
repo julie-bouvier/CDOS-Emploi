@@ -46,9 +46,7 @@ class SecurityController extends AbstractController
             else{
                 return $this->redirectToRoute('home');
             }
-
         }
-
         return $this->render('security/Sadmin/registration.html.twig', [
             'form' => $form->createView()
         ]);
