@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Ajout d'une autre absence (injustifiée, autorisée)</h1>
+    <br>
+    {{ form_start(form) }}
+
+    <h6>Du :
+        {{ form_widget(form.absdebut) }}
+    </h6>
+
+    <h6>Au  :
+        {{ form_widget(form.absfin) }}
+    </h6>
+    <h6>Nombre d'heures à déduire :
+        {{ form_widget(form.absnbheure) }}
+    </h6>
+    <h6>Commentaires éventuels sur le type d'absence :
+        {{ form_widget(form.abscommentaire) }}
+    </h6>
+
+    <button type="submit" class="btn btn-success">Ajout des informations</button>
+    {{ form_end(form) }}
+
+{% endblock %}

@@ -66,5 +66,117 @@ class Frais
      */
     private $sproid;
 
+    /**
+     * @return int
+     */
+    public function getFraid(): int
+    {
+        return $this->fraid;
+    }
+
+    /**
+     * @param int $fraid
+     */
+    public function setFraid(int $fraid): void
+    {
+        $this->fraid = $fraid;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getFratype(): ?string
+    {
+        return $this->fratype;
+    }
+
+    /**
+     * @param string|null $fratype
+     */
+    public function setFratype(?string $fratype): void
+    {
+        $this->fratype = $fratype;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getFraquantite(): ?int
+    {
+        return $this->fraquantite;
+    }
+
+    /**
+     * @param int|null $fraquantite
+     */
+    public function setFraquantite(?int $fraquantite): void
+    {
+        $this->fraquantite = $fraquantite;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getFrataux(): ?string
+    {
+        return $this->frataux;
+    }
+
+    /**
+     * @param string|null $frataux
+     */
+    public function setFrataux(?string $frataux): void
+    {
+        $this->frataux = $frataux;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getFratotal(): ?string
+    {
+        return $this->fratotal;
+    }
+
+    /**
+     * @param string|null $fratotal
+     */
+    public function setFratotal(?string $fratotal): void
+    {
+        $this->fratotal = $fratotal;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getFracommentaire(): ?string
+    {
+        return $this->fracommentaire;
+    }
+
+    /**
+     * @param string|null $fracommentaire
+     */
+    public function setFracommentaire(?string $fracommentaire): void
+    {
+        $this->fracommentaire = $fracommentaire;
+    }
+
+    /**
+     * @return SalarieInfosPro
+     */
+    public function getSproid(): SalarieInfosPro
+    {
+        return $this->sproid;
+    }
+
+    /**
+     * @param SalarieInfosPro $sproid
+     */
+    public function setSproid(SalarieInfosPro $sproid): void
+    {
+        $this->sproid = $sproid;
+    }
+
 
 }
