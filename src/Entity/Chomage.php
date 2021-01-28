@@ -43,9 +43,9 @@ class Chomage
     private $chonbheure;
 
     /**
-     * @var int|null
+     * @var string|null
      *
-     * @ORM\Column(name="choMaintien", type="integer", nullable=true)
+     * @ORM\Column(name="choMaintien", type="string", nullable=true)
      */
     private $chomaintien;
 
@@ -147,17 +147,17 @@ class Chomage
     }
 
     /**
-     * @return int|null
+     * @return string|null
      */
-    public function getChomaintien(): ?int
+    public function getChomaintien(): ?string
     {
         return $this->chomaintien;
     }
 
     /**
-     * @param int|null $chomaintien
+     * @param string|null $chomaintien
      */
-    public function setChomaintien(?int $chomaintien): void
+    public function setChomaintien(?string $chomaintien): void
     {
         $this->chomaintien = $chomaintien;
     }

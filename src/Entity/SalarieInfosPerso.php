@@ -86,9 +86,9 @@ class SalarieInfosPerso
     private $sdptnaissance;
 
     /**
-     * @var int|null
+     * @var string|null
      *
-     * @ORM\Column(name="sNationalite", type="integer", nullable=true)
+     * @ORM\Column(name="sNationalite", type="string", nullable=true)
      */
     private $snationalite;
 
@@ -100,9 +100,9 @@ class SalarieInfosPerso
     private $sautre;
 
     /**
-     * @var int|null
+     * @var string|null
      *
-     * @ORM\Column(name="sNumSecu", type="integer", nullable=true)
+     * @ORM\Column(name="sNumSecu", type="string", nullable=true)
      */
     private $snumsecu;
 
@@ -307,17 +307,17 @@ class SalarieInfosPerso
     }
 
     /**
-     * @return int|null
+     * @return string|null
      */
-    public function getSnationalite(): ?int
+    public function getSnationalite(): ?string
     {
         return $this->snationalite;
     }
 
     /**
-     * @param int|null $snationalite
+     * @param string|null $snationalite
      */
-    public function setSnationalite(?int $snationalite): void
+    public function setSnationalite(?string $snationalite): void
     {
         $this->snationalite = $snationalite;
     }

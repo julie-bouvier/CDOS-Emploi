@@ -30,8 +30,8 @@ class ChomageType extends AbstractType
             ])
             ->add('chomaintien', ChoiceType::class,[
                 'choices' => [
-                    'Oui' => 0,
-                    'Non' => 1
+                    'Oui' => 'Oui',
+                    'Non' => 'Non'
                 ],
                 'attr' => ['class' => 'form-control'],
                 'required'=>true

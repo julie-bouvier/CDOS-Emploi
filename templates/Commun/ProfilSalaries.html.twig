@@ -20,7 +20,7 @@
                     <li><B>Lieu de naissance :</B>  {{ infosperso.slieunaissance }} </li>
                     <li><B>Département de naissance :</B>  {{ infosperso.sdptnaissance }} </li>
                     <li><B>Nationalité Française :</B>
-                        {% if infosperso.snationalite==0 %}
+                        {% if infosperso.snationalite=='Oui' %}
                             Oui
                         {% else %}
                             Non
@@ -44,7 +44,7 @@
                         <li><B>Nature du contrat :</B>  {{ infospro.snaturecontrat }}</li>
                         <li><B>Type temps de travail (Partiel, Temps pleins ou intermitant):</B>  {{ infospro.stypetempstravail }}</li>
                         <li><B>Gestion des congés payés:</B>
-                            {% if infospro.sgestcp==0 %}
+                            {% if infospro.sgestcp=='Oui' %}
                                 Oui
                             {% else %}
                                 Non
@@ -61,14 +61,14 @@
                         <li><B>Motif de fin:</B>  {{ infospro.sfinmotif }}</li>
                         <li><B>Commentaire de fin:</B>  {{ infospro.scomfin }}</li>
                         <li><B>10% de congés payés versé manuellement:</B>
-                            {% if infospro.s10congemois==0 %}
+                            {% if infospro.s10congemois=='Oui' %}
                                 Oui
                             {% else %}
                                 Non
                             {% endif %}
                         </li>
                         <li><B>Congés à prendre:</B>
-                            {% if infospro.sconge==0 %}
+                            {% if infospro.sconge=='Oui' %}
                                 Oui
                             {% else %}
                                 Non
@@ -76,7 +76,7 @@
                         </li>
                         <li><B>Type de contrat (si aide/subventionné) :</B>  {{ infospro.stypecontrat }}</li>
                         <li><B>Salarié multi-employeur :</B>
-                            {% if infospro.smultiemployeur==0 %}
+                            {% if infospro.smultiemployeur=='Oui' %}
                                 Oui
                             {% else %}
                                 Non
@@ -86,7 +86,7 @@
                         <li><B>Taux horaire brut (en €) :</B>  {{ infospro.stauxhorairebrut }}</li>
                         <li><B>Salaire mensuel brut (en €) par mois :</B>  {{ infospro.ssalmoisbrut }}</li>
                         <li><B>Adhésion complémentaire santé obligatoire proposé par l'employeur :</B>
-                            {% if infospro.scomplemsante==0 %}
+                            {% if infospro.scomplemsante=='Oui' %}
                                 Oui
                             {% else %}
                                 Non

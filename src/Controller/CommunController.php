@@ -10,6 +10,7 @@ use App\Entity\Prime;
 use App\Entity\SalarieInfosPerso;
 use App\Entity\SalarieInfosPro;
 use App\Form\AjoutInfosPersoType;
+use App\Form\AjoutInfosProType;
 use App\Form\ArretTravailType;
 use App\Form\ChomageType;
 use App\Form\CongesType;
@@ -74,6 +75,8 @@ class CommunController extends AbstractController
         $association = $this->getDoctrine()->getRepository(Association::class)->find($mailasso);
         $InfosPerso->addAssociation($association);
         $association->addSalarieinfosperso($InfosPerso);
+        // Je récupère l'id perso pour l'envoyer à la page suivante pour l'ajout des infos pro
+        $idinfosPerso = $InfosPerso ->getSpersoid();
         //je donne un formulaire avec les champs de la table SalarieInfosPerso
         $form = $this->createForm(AjoutInfosPersoType::class, $InfosPerso);
         $form->handleRequest($request);
@@ -84,16 +87,11 @@ class CommunController extends AbstractController
             $entityManager->persist($InfosPerso);
             $entityManager->flush();
             //je redirecte vers page ou route
-            if ($role=='SUPER_ADMIN'){
-                return $this->redirectToRoute('affSalaries',[
-                    'assomail'=>$mailasso
-                ]);
-            }
-            elseif ($role=='ADMIN_ASSO'){
-                return $this->redirectToRoute('home',[
-                ]);
-            }
-
+            return $this->redirectToRoute('AjoutInfosPro', [
+                'idinfosperso' => $idinfosPerso,
+                'mailasso' => $mailasso,
+                'role' => $role
+            ]);
         }
         else{
             return $this->render('Commun/AjoutInfosPerso.html.twig', [
@@ -102,6 +100,55 @@ class CommunController extends AbstractController
             ]);
         }
     }
+
+    /**
+     * @Route("/AjoutInfosPro/{mailasso}/{idinfoperso}/{role}", name="AjoutInfosPro")
+     * @param $idinfoperso
+     * @param $mailasso
+     * @param Request $request
+     * @param EntityManagerInterface $entityManager
+     * @return RedirectResponse|Response
+     */
+    public function AjoutInfosPro($mailasso, $idinfoperso, $role, Request $request, EntityManagerInterface $entityManager) {
+        //je crée un objet InfosPro
+        $InfosPro = new SalarieInfosPro();
+        //je mets automatiquement le champs smailasso=mailasso
+        $InfosPro->setSmailasso($mailasso);
+        //je mets automatiquement le champs sinfoperso=idinfoperso
+        $InfosPerso = $this->getDoctrine()->getRepository(SalarieInfosPerso::class)->find($idinfoperso);
+        $InfosPro->setSPersoId($InfosPerso);
+        $InfosPerso-> addSalarieinfospro($InfosPro);
+        //je donne un formulaire avec les champs de la table SalarieInfosPro
+        $form = $this->createForm(AjoutInfosProType::class, $InfosPro);
+        $form->handleRequest($request);
+
+        //quand je clique sur valider le form, meme si les champs ne sont pas remplis, je persist and flush avec la bdd
+        if ($form->isSubmitted() && $form->isValid()){
+            //j'enregistre les nouvelles infos perso dans la bdd
+            $entityManager->persist($InfosPro);
+            $entityManager->flush();
+            //je redirecte vers page ou route
+            if ($role=='SUPER_ADMIN'){
+                return $this->redirectToRoute('affSalaries',[
+                    'assomail'=>$mailasso
+                ]);
+            }
+            elseif ($role=='ADMIN_ASSO'){
+                return $this->redirectToRoute('ListeSalaries',[
+                ]);
+            }
+
+        }
+        else{
+            return $this->render('Commun/AjoutInfosPro.html.twig', [
+                'form' => $form->createView(),
+                'mailasso'=> $mailasso,
+                'idinfosperso' => $idinfoperso
+            ]);
+        }
+    }
+
+
 
     /*######################## CONGES ########################*/
 

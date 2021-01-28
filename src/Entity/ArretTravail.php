@@ -29,9 +29,9 @@ class ArretTravail
     private $attype;
 
     /**
-     * @var int|null
+     * @var string|null
      *
-     * @ORM\Column(name="atProlongation", type="integer", nullable=true)
+     * @ORM\Column(name="atProlongation", type="string", nullable=true)
      */
     private $atprolongation;
 
@@ -50,9 +50,9 @@ class ArretTravail
     private $atfin;
 
     /**
-     * @var int|null
+     * @var string|null
      *
-     * @ORM\Column(name="at3jours", type="integer", nullable=true)
+     * @ORM\Column(name="at3jours", type="string", nullable=true)
      */
     private $at3jours;
 
@@ -64,9 +64,9 @@ class ArretTravail
     private $at3jnbh;
 
     /**
-     * @var int|null
+     * @var string|null
      *
-     * @ORM\Column(name="at4jours", type="integer", nullable=true)
+     * @ORM\Column(name="at4jours", type="string", nullable=true)
      */
     private $at4jours;
 
@@ -127,17 +127,17 @@ class ArretTravail
     }
 
     /**
-     * @return int|null
+     * @return string|null
      */
-    public function getAtprolongation(): ?int
+    public function getAtprolongation(): ?string
     {
         return $this->atprolongation;
     }
 
     /**
-     * @param int|null $atprolongation
+     * @param string|null $atprolongation
      */
-    public function setAtprolongation(?int $atprolongation): void
+    public function setAtprolongation(?string $atprolongation): void
     {
         $this->atprolongation = $atprolongation;
     }
@@ -175,17 +175,17 @@ class ArretTravail
     }
 
     /**
-     * @return int|null
+     * @return string|null
      */
-    public function getAt3jours(): ?int
+    public function getAt3jours(): ?string
     {
         return $this->at3jours;
     }
 
     /**
-     * @param int|null $at3jours
+     * @param string|null $at3jours
      */
-    public function setAt3jours(?int $at3jours): void
+    public function setAt3jours(?string $at3jours): void
     {
         $this->at3jours = $at3jours;
     }
@@ -207,17 +207,17 @@ class ArretTravail
     }
 
     /**
-     * @return int|null
+     * @return string|null
      */
-    public function getAt4jours(): ?int
+    public function getAt4jours(): ?string
     {
         return $this->at4jours;
     }
 
     /**
-     * @param int|null $at4jours
+     * @param string|null $at4jours
      */
-    public function setAt4jours(?int $at4jours): void
+    public function setAt4jours(?string $at4jours): void
     {
         $this->at4jours = $at4jours;
     }
