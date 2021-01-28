@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\ArretTravail;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -15,12 +16,19 @@ class ArretTravailType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('attype', TextType::class,[
-                'attr' => ['class' => 'form-control'],
+            ->add('attype', ChoiceType::class,[
+                'choices' => [
+                    'Maladie' => 'Maladie',
+                    'Accident de travail/trajet' => 'Accident de travail/trajet',
+                    'Maternité' => 'Maternité',
+                    'Paternité' => 'Paternité'],
                 'required'=>true
-            ])
-            ->add('atprolongation',IntegerType::class,[
-                'attr' => ['class' => 'form-control'],
+
+                ])
+            ->add('atprolongation',ChoiceType::class,[
+                'choices' => [
+                    'Initial' => 'Initial',
+                    'Prolongation' => 'Prolongation'],
                 'required'=>true
             ])
             ->add('atdebut',DateType::class,[
@@ -31,21 +39,25 @@ class ArretTravailType extends AbstractType
                 'attr' => ['class' => 'form-control'],
                 'required'=>true
             ])
-            ->add('at3jours',IntegerType::class,[
-                'attr' => ['class' => 'form-control'],
+            ->add('at3jours',ChoiceType::class,[
+                'choices' => [
+                    'Oui' => 'oui',
+                    'Non' => 'non'],
                 'required'=>true
             ])
             ->add('at3jnbh',IntegerType::class,[
                 'attr' => ['class' => 'form-control'],
-                'required'=>true
+                'required'=>false
             ])
-            ->add('at4jours',IntegerType::class,[
-                'attr' => ['class' => 'form-control'],
+            ->add('at4jours',ChoiceType::class,[
+                'choices' => [
+                    'Oui' => 'oui',
+                    'Non' => 'non'],
                 'required'=>true
             ])
             ->add('at4jnbh',IntegerType::class,[
                 'attr' => ['class' => 'form-control'],
-                'required'=>true
+                'required'=>false
             ])
             ->add('atcommentaire',TextType::class,[
                 'attr' => ['class' => 'form-control'],

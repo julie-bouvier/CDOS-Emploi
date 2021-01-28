@@ -13,6 +13,7 @@ use App\Entity\Prime;
 use App\Entity\SalarieInfosPerso;
 use App\Entity\SalarieInfosPro;
 use App\Form\AjoutInfosPersoType;
+use App\Form\AjoutInfosProType;
 use App\Form\ArretTravailType;
 use App\Form\ChomageType;
 use App\Form\CongesType;
@@ -59,10 +60,10 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/ProfilSalarie/{id}/{idmail}", name="ProfilSalarie")
+     * @Route("/ProfilSalarie/{idPerso}/{idmail}", name="ProfilSalarie")
      */
-    public function ProfilSalarie($id, $idmail) {
-        $InfosPerso = $this -> getDoctrine() -> getRepository(SalarieInfosPerso::class) -> find($id);
+    public function ProfilSalarie($idPerso, $idmail) {
+        $InfosPerso = $this -> getDoctrine() -> getRepository(SalarieInfosPerso::class) -> find($idPerso);
         $InfosPro = $InfosPerso -> getSproid();
 
         for ($i=0; $i <= count($InfosPro); $i++)
@@ -76,12 +77,77 @@ class AdminController extends AbstractController
 
                     return $this->render('Commun/ProfilSalaries.html.twig', [ // renvoie vers le twig qui affiche les infos pros et perso du salarié
                         'infosperso' => $InfosPerso,
-                        'infospro' => $InfosProAsso
+                        'infospro' => $InfosProAsso,
+                        'idmail'=> $idmail
                     ]);
                 }
             }
         }
     }
+
+    /*######################## MODIFS INFOS SALARIES ########################*/
+
+    /**
+     * @Route("/modifInfosPerso/{idInfosPerso}/{idmail}", name="modifInfosPerso")
+     * @param Request $request
+     * @param EntityManagerInterface $entityManager
+     * @param $idInfosPerso
+     * @return Response
+     */
+    public function modifInfosPerso(Request $request,EntityManagerInterface $entityManager, $idInfosPerso, $idmail){
+        $infosperso=$this->getDoctrine()->getRepository(SalarieInfosPerso::class)->find($idInfosPerso);
+        $form=$this->createForm(AjoutInfosPersoType::class, $infosperso);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()){
+            $entityManager->persist($infosperso);
+            $entityManager->flush();
+            return $this->redirectToRoute('ProfilSalarie',[
+                'idPerso'=>$idInfosPerso,
+                'idmail'=> $idmail
+            ]);
+        }
+        else{
+            return $this->render('Commun/AjoutInfosPerso.html.twig', [
+                'form' => $form->createView(),
+                'idSalarie'=>$idInfosPerso,
+                'idmail'=> $idmail
+            ]);
+        }
+    }
+
+
+    /**
+     * @Route("/modifInfosPro/{idInfosPro}/{idPerso}/{idmail}", name="modifInfosPro")
+     * @param Request $request
+     * @param EntityManagerInterface $entityManager
+     * @param $idInfosPro
+     * @return Response
+     */
+    public function modifInfosPro(Request $request,EntityManagerInterface $entityManager, $idInfosPro, $idmail, $idPerso){
+        $infospro=$this->getDoctrine()->getRepository(SalarieInfosPro::class)->find($idInfosPro);
+        $form=$this->createForm(AjoutInfosProType::class, $infospro);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()){
+            $entityManager->persist($infospro);
+            $entityManager->flush();
+            return $this->redirectToRoute('ProfilSalarie',[
+                'idPro'=>$idInfosPro,
+                'idmail'=> $idmail,
+                'idPerso'=> $idPerso
+            ]);
+        }
+        else{
+            return $this->render('Commun/AjoutInfosPro.html.twig', [
+                'form' => $form->createView(),
+                'idSalarie'=>$idInfosPro,
+                'idmail'=> $idmail
+            ]);
+        }
+    }
+
+    /*######################## GESTION DES SALARIES ########################*/
 
     /**
      * @Route("/GestionSalarie/{idinfospro}", name="GestionSalarie")
@@ -110,7 +176,6 @@ class AdminController extends AbstractController
 
         ]);
     }
-
 }
 
 

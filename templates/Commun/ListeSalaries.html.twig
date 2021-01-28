@@ -27,7 +27,7 @@
           <td>{{ salarie.snom }}</td>
           <td>{{ salarie.sprenom }}</td>
           <td>
-            <a href="{{ path('ProfilSalarie',{'id': salarie.getSpersoid(), 'idmail' : MailAsso }) }}" method="post">Voir Plus</a>
+            <a href="{{ path('ProfilSalarie',{'idPerso': salarie.getSpersoid(), 'idmail' : MailAsso }) }}" method="post">Voir Plus</a>
           </td>
           <td>
             <a href="" method="post">Modifier</a>
