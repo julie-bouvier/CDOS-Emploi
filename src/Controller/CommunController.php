@@ -277,6 +277,35 @@ class CommunController extends AbstractController
         }
     }
 
+    /**
+     * @Route("/modifArretTravail/{sproid}/{idarrettravail}", name="modifArretTravail")
+     * @param Request $request
+     * @param EntityManagerInterface $entityManager
+     * @param $sproid
+     * @return Response
+     */
+    public function modifArretTravail(Request $request,EntityManagerInterface $entityManager,$sproid, $idarrettravail)
+    {
+        $arrettravail = $this->getDoctrine()->getRepository(ArretTravail::class)->find($idarrettravail);
+        //je crée un formulaire avec les champs de l'entité arrettravail
+        $form = $this->createForm(ArretTravailType::class, $arrettravail);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($arrettravail);
+            $entityManager->flush();
+            return $this->redirectToRoute('GestionSalarie', [
+                'idinfospro' => $sproid,
+            ]);
+        } else {
+            return $this->render('Commun/AjoutArretTravail.html.twig', [
+                'form' => $form->createView(),
+                'infosarrettravail' => $arrettravail,
+                'idpro' => $sproid
+            ]);
+        }
+    }
+
     /*######################## CHOMAGE ########################*/
 
     /**
@@ -383,6 +412,35 @@ class CommunController extends AbstractController
             ]);
         }
     }
+
+    /**
+     * @Route("/modifAutreAbsence/{sproid}/{idautreabsence}", name="modifAutreAbsence")
+     * @param Request $request
+     * @param EntityManagerInterface $entityManager
+     * @param $sproid
+     * @return Response
+     */
+    public function modifAutreAbsence(Request $request,EntityManagerInterface $entityManager,$sproid, $idautreabsence)
+    {
+        $autreabsence = $this->getDoctrine()->getRepository(AutreAbsence::class)->find($idautreabsence);
+        //je crée un formulaire avec les champs de l'entité autreabsence
+        $form = $this->createForm(AutreAbsenceType::class, $autreabsence);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($autreabsence);
+            $entityManager->flush();
+            return $this->redirectToRoute('GestionSalarie', [
+                'idinfospro' => $sproid,
+            ]);
+        } else {
+            return $this->render('Commun/AjoutAutreAbsence.html.twig', [
+                'form' => $form->createView(),
+                'infosautreabsence' => $autreabsence,
+                'idpro' => $sproid
+            ]);
+        }
+    }
     /*######################## PRIME ########################*/
 
     /**
@@ -461,6 +519,34 @@ class CommunController extends AbstractController
             ]);
         }
     }
+    /**
+     * @Route("/modifFrais/{sproid}/{idfrais}", name="modifFrais")
+     * @param Request $request
+     * @param EntityManagerInterface $entityManager
+     * @param $sproid
+     * @return Response
+     */
+    public function modifFrais(Request $request,EntityManagerInterface $entityManager,$sproid, $idfrais)
+    {
+        $frais = $this->getDoctrine()->getRepository(Frais::class)->find($idfrais);
+        //je crée un formulaire avec les champs de l'entité frais
+        $form = $this->createForm(FraisType::class, $frais);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($frais);
+            $entityManager->flush();
+            return $this->redirectToRoute('GestionSalarie', [
+                'idinfospro' => $sproid,
+            ]);
+        } else {
+            return $this->render('Commun/AjoutFrais.html.twig', [
+                'form' => $form->createView(),
+                'infosfrais' => $frais,
+                'idpro' => $sproid
+            ]);
+        }
+    }
     /*######################## AVENANTS ########################*/
 
     /**
@@ -501,6 +587,34 @@ class CommunController extends AbstractController
         }
     }
 
+    /**
+     * @Route("/modifAvenant/{sproid}/{idavenant}", name="modifAvenant")
+     * @param Request $request
+     * @param EntityManagerInterface $entityManager
+     * @param $sproid
+     * @return Response
+     */
+    public function modifAvenant(Request $request,EntityManagerInterface $entityManager,$sproid, $idavenant)
+    {
+        $avenant = $this->getDoctrine()->getRepository(Avenant::class)->find($idavenant);
+        //je crée un formulaire avec les champs de l'entité avenant
+        $form = $this->createForm(AvenantType::class, $avenant);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($avenant);
+            $entityManager->flush();
+            return $this->redirectToRoute('GestionSalarie', [
+                'idinfospro' => $sproid,
+            ]);
+        } else {
+            return $this->render('Commun/AjoutAvenant.html.twig', [
+                'form' => $form->createView(),
+                'infosavenant' => $avenant,
+                'idpro' => $sproid
+            ]);
+        }
+    }
     /**
      * @Route("/modifPrime/{sproid}/{idprime}", name="modifPrime")
      * @param Request $request
