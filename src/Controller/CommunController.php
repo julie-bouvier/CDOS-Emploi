@@ -370,6 +370,36 @@ class CommunController extends AbstractController
         }
     }
 
+    /**
+     * @Route("/modifPrime/{sproid}/{idprime}", name="modifPrime")
+     * @param Request $request
+     * @param EntityManagerInterface $entityManager
+     * @param $sproid
+     * @return Response
+     */
+    public function modifPrime(Request $request,EntityManagerInterface $entityManager,$sproid, $idprime){
+        $prime=$this->getDoctrine()->getRepository(Prime::class)->find($idprime);
+        //je crée un formulaire avec les champs de l'entité prime
+        $form=$this->createForm(PrimeType::class, $prime);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()){
+            $entityManager->persist($prime);
+            $entityManager->flush();
+            return $this->redirectToRoute('GestionSalarie',[
+                'idinfospro'=>$sproid,
+            ]);
+        }
+        else{
+            return $this->render('Commun/AjoutPrime.html.twig', [
+                'form' => $form->createView(),
+                'infosprime'=>$prime,
+                'idpro'=>$sproid
+            ]);
+        }
+
+    }
+
     /*######################## HEURES ########################*/
 
     /**
@@ -388,7 +418,7 @@ class CommunController extends AbstractController
         $heure = new Heures();
         $InfosPro = $this->getDoctrine()->getRepository(SalarieInfosPro::class)->find($sproid);
         $heure->setSproid($InfosPro);
-
+        // je récupère le type temps de travail de l'entité salarie info pro
         $type = $InfosPro->getStypetempstravail();
 
         //je donne un formulaire avec les champs de la table heure
@@ -412,5 +442,42 @@ class CommunController extends AbstractController
                 'typetravail' => $type,
             ]);
         }
+    }
+
+    /**
+     * @Route("/modifHeure/{sproid}/{idheure}", name="modifHeure")
+     * @param Request $request
+     * @param EntityManagerInterface $entityManager
+     * @param $sproid
+     * @return Response
+     */
+    public function modifHeure(Request $request,EntityManagerInterface $entityManager,$sproid, $idheure){
+        $heure=$this->getDoctrine()->getRepository(Heures::class)->find($idheure);
+
+        // je récupère le type temps de travail de l'entité salarie info pro
+        $InfosPro = $this->getDoctrine()->getRepository(SalarieInfosPro::class)->find($sproid);
+        $type = $InfosPro->getStypetempstravail();
+
+        //je crée un formulaire avec les champs de l'entité heure
+        $form=$this->createForm(HeuresType::class, $heure);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()){
+            $entityManager->persist($heure);
+            $entityManager->flush();
+            return $this->redirectToRoute('GestionSalarie',[
+                'idinfospro'=>$sproid,
+            ]);
+        }
+        else{
+            return $this->render('Commun/AjoutHeures.html.twig', [
+                'form' => $form->createView(),
+                'infosheure'=>$heure,
+                'idpro'=>$sproid,
+                'typetravail' => $type,
+
+            ]);
+        }
+
     }
 }

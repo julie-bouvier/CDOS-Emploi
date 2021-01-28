@@ -106,7 +106,8 @@ class AdminController extends AbstractController
             'primes' => $Primes,
             'frais' => $Frais,
             'heures' => $Heures,
-            'avenants' => $Avenants
+            'avenants' => $Avenants,
+
         ]);
     }
 

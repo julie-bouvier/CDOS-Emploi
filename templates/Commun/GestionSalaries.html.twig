@@ -77,12 +77,7 @@
                                     <li><B>Date de début :</B>  {{ chomage.chodebut|date("d/m/Y")}}</li>
                                     <li><B>Date de fin :</B>  {{ chomage.chofin|date("d/m/Y")}}</li>
                                     <li><B>Nombre d'heures à déduire :</B>  {{ chomage.chonbheure }}</li>
-                                    <li><B>Maintien du chômage à 100% :</B>
-                                        {% if chomage.chomaintien==0 %}
-                                            Oui
-                                        {% else %}
-                                            Non
-                                        {% endif %}
+                                    <li><B>Maintien du chômage à 100% : {{ chomage.chomaintien }}</B>
                                     </li>
                                     <li><B>Commentaire :</B>  {{ chomage.chocommentaire }} </li>
                                     </p>
@@ -98,14 +93,47 @@
                         <p>Voici la page des autres absences</p>
                     </div>
                     <div class="tab-pane" id="{{idinfospro}}.primes" role="tabpanel" aria-labelledby="home-tab">
-                        <p>Voici la page des primes</p>
+                        <br>
+                        <H4 style="color:#F7230C">Voici la page permettant de gérer les primes :</H4>
+
+                        {% for prime in primes %}
+                            <div class="card border-primary mb-3" style="max-width: 20rem;">
+                                <div class="card-body">
+                                    <p class="card-text">
+                                    <li><B>Type de prime :</B>  {{ prime.primtype}}</li>
+                                    <li><B>Montant de la prime :</B>  {{ prime.primmontant}}</li>
+                                    <li><B>Unité :</B>  {{ prime.primnetbrut }}</li>
+                                    <li><B>Commentaires :</B> {{ prime.primcommentaire }}
+                                    </li>
+                                    </p>
+                                    <a href="{{ path('modifPrime',{'sproid': idinfospro , 'idprime': prime.primid}) }}" method="post" type="button" class="btn btn-danger">Modifier une prime</a>
+                                </div>
+                            </div>
+                        {% endfor %}
                         <a href="{{ path('EnregistrerPrime',{'sproid': idinfospro }) }}" method="post" type="button" class="btn btn-danger">Ajouter une prime</a>
                     </div>
+
                     <div class="tab-pane" id="{{idinfospro}}.frais" role="tabpanel" aria-labelledby="home-tab">
                         <p>Voici la page des frais</p>
                     </div>
                     <div class="tab-pane" id="{{idinfospro}}.heures" role="tabpanel" aria-labelledby="home-tab">
-                        <p>Voici la page des heures</p>
+                        <br>
+                        <H4 style="color:#F7230C">Voici la page permettant de gérer les heures :</H4>
+
+                        {% for heure in heures %}
+                            <div class="card border-primary mb-3" style="max-width: 20rem;">
+                                <div class="card-body">
+                                    <p class="card-text">
+                                    <li><B>Type d'heure :</B>  {{ heure.heurtype}}</li>
+                                    <li><B>Semaine concernée :</B>  {{ heure.heursem}}</li>
+                                    <li><B>Nombre d'heure :</B>  {{ heure.heurnb }}</li>
+                                    <li><B>Commentaires :</B> {{ heure.heurcommentaire }}
+                                    </li>
+                                    </p>
+                                    <a href="{{ path('modifHeure',{'sproid': idinfospro , 'idheure': heure.heurid}) }}" method="post" type="button" class="btn btn-danger">Modifier une heure</a>
+                                </div>
+                            </div>
+                        {% endfor %}
                         <a href="{{ path('EnregistrerHeures',{'sproid': idinfospro }) }}" method="post" type="button" class="btn btn-danger">Ajouter une heure</a>
                     </div>
                     <div class="tab-pane" id="{{idinfospro}}.avenants" role="tabpanel" aria-labelledby="home-tab">
