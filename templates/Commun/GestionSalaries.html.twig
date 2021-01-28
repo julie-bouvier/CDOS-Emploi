@@ -53,11 +53,13 @@
                                     <li><B>Nombre de jour ouvrable pris :</B>  {{ conge.connbjourouvrablepris }} </li>
                                     <li><B>Commentaire :</B>  {{ conge.concommentaire }} </li>
                                     </p>
+                                    <a href="{{ path('modifConge',{'sproid': idinfospro , 'idconge': conge.conid}) }}" method="post" type="button" class="btn btn-danger">Modifier un congé</a>
                                 </div>
                             </div>
                         {% endfor %}
                         <br>
                         <a href="{{ path('EnregistrerConge',{'sproid': idinfospro }) }}" method="post" type="button" class="btn btn-danger">Ajouter un congé</a>
+
                     </div>
 
                     <div class="tab-pane" id="{{idinfospro}}.arrets_travail" role="tabpanel" aria-labelledby="profile-tab">
@@ -84,6 +86,7 @@
                                     </li>
                                     <li><B>Commentaire :</B>  {{ chomage.chocommentaire }} </li>
                                     </p>
+                                    <a href="{{ path('modifChomage',{'sproid': idinfospro , 'idchomage': chomage.choid}) }}" method="post" type="button" class="btn btn-danger">Modifier un chômage</a>
                                 </div>
                             </div>
                         {% endfor %}
@@ -103,6 +106,7 @@
                     </div>
                     <div class="tab-pane" id="{{idinfospro}}.heures" role="tabpanel" aria-labelledby="home-tab">
                         <p>Voici la page des heures</p>
+                        <a href="{{ path('EnregistrerHeures',{'sproid': idinfospro }) }}" method="post" type="button" class="btn btn-danger">Ajouter une heure</a>
                     </div>
                     <div class="tab-pane" id="{{idinfospro}}.avenants" role="tabpanel" aria-labelledby="home-tab">
                         <p>Voici la page des avenants</p>

@@ -5,6 +5,7 @@ use App\Entity\ArretTravail;
 use App\Entity\Association;
 use App\Entity\Chomage;
 use App\Entity\Conges;
+use App\Entity\Heures;
 use App\Entity\Prime;
 use App\Entity\SalarieInfosPerso;
 use App\Entity\SalarieInfosPro;
@@ -12,6 +13,7 @@ use App\Form\AjoutInfosPersoType;
 use App\Form\ArretTravailType;
 use App\Form\ChomageType;
 use App\Form\CongesType;
+use App\Form\HeuresType;
 use App\Form\PrimeType;
 use App\Form\SalarieInfosProType;
 use App\Form\VerifInfosPersoType;
@@ -140,6 +142,38 @@ class CommunController extends AbstractController
         }
     }
 
+
+    /**
+     * @Route("/modifConge/{sproid}/{idconge}", name="modifConge")
+     * @param Request $request
+     * @param EntityManagerInterface $entityManager
+     * @param $sproid
+     * @return Response
+     */
+    public function modifConge(Request $request,EntityManagerInterface $entityManager,$sproid, $idconge){
+        $conge=$this->getDoctrine()->getRepository(Conges::class)->find($idconge);
+        //je crée un formulaire avec les champs de l'entité conge
+            $form=$this->createForm(CongesType::class, $conge);
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid()){
+                $entityManager->persist($conge);
+                $entityManager->flush();
+                return $this->redirectToRoute('GestionSalarie',[
+                    'idinfospro'=>$sproid,
+                ]);
+            }
+            else{
+                return $this->render('Commun/AjoutConges.html.twig', [
+                    'form' => $form->createView(),
+                    'infosconge'=>$conge,
+                    'idpro'=>$sproid
+                ]);
+            }
+
+    }
+
+
     /*######################## ARRET TRAVAIL  ########################*/
 
     /**
@@ -219,6 +253,36 @@ class CommunController extends AbstractController
         }
     }
 
+    /**
+     * @Route("/modifChomage/{sproid}/{idchomage}", name="modifChomage")
+     * @param Request $request
+     * @param EntityManagerInterface $entityManager
+     * @param $sproid
+     * @return Response
+     */
+    public function modifChomage(Request $request,EntityManagerInterface $entityManager,$sproid, $idchomage){
+        $chomage=$this->getDoctrine()->getRepository(Chomage::class)->find($idchomage);
+        //je crée un formulaire avec les champs de l'entité chomage
+        $form=$this->createForm(ChomageType::class, $chomage);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()){
+            $entityManager->persist($chomage);
+            $entityManager->flush();
+            return $this->redirectToRoute('GestionSalarie',[
+                'idinfospro'=>$sproid,
+            ]);
+        }
+        else{
+            return $this->render('Commun/AjoutChomage.html.twig', [
+                'form' => $form->createView(),
+                'infoschomage'=>$chomage,
+                'idpro'=>$sproid
+            ]);
+        }
+
+    }
+
     /*######################## PRIME ########################*/
 
     /**
@@ -255,6 +319,50 @@ class CommunController extends AbstractController
             return $this->render('Commun/AjoutPrime.html.twig', [
                 'form' => $form->createView(),
                 'idinfospro' => $sproid,
+            ]);
+        }
+    }
+
+    /*######################## HEURES ########################*/
+
+    /**
+     * @Route("/EnregistrerHeures/{sproid}", name="EnregistrerHeures")
+     * @param Request $request
+     * @param EntityManagerInterface $entityManager
+     * @param $sproid
+     * @return Response
+     */
+    public function EnregistrerHeures(Request $request, EntityManagerInterface $entityManager, $sproid)
+    {
+        //je veux ajouter des informations dans ma table heure
+        //liée cette table à la table connexion précédente
+
+        //je crée un objet heure
+        $heure = new Heures();
+        $InfosPro = $this->getDoctrine()->getRepository(SalarieInfosPro::class)->find($sproid);
+        $heure->setSproid($InfosPro);
+
+        $type = $InfosPro->getStypetempstravail();
+
+        //je donne un formulaire avec les champs de la table heure
+        $form = $this->createForm(HeuresType::class, $heure);
+        $form->handleRequest($request);
+
+        //quand je clique sur valider le form, meme si les champs ne sont pas remplis, je persist and flush avec la bdd
+        if ($form->isSubmitted() && $form->isValid()) {
+            //j'enregistre la nouvelle prime dans la bdd
+            $entityManager->persist($heure);
+            $entityManager->flush();
+            //je redirecte vers page ou route
+            return $this->redirectToRoute('GestionSalarie', [
+                'idinfospro' => $sproid,
+            ]);
+
+        } else {
+            return $this->render('Commun/AjoutHeures.html.twig', [
+                'form' => $form->createView(),
+                'idinfospro' => $sproid,
+                'typetravail' => $type,
             ]);
         }
     }

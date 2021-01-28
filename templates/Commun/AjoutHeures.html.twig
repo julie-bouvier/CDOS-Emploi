@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Ajout des heures</h1>
+    <br>
+    {{ form_start(form) }}
+    <h6><strong>Type de temps de travail de ce salarié :
+        {{ typetravail }} </strong>
+        <br>
+        Si le salarié est à temps partiel, sélectionner "Heures complémentaires"
+        <br>
+        Si le salarié est à temps plein, sélectionner "Heures supplémentaires"
+        <br>
+        Si le salarié est en contrat intermittant, sélectionner "Heures de dépassement"
+    </h6>
+
+    <h6>Type d'heure :
+        {{ form_widget(form.heurtype) }}
+    </h6>
+    <h6>Semaine concernée :
+        {{ form_widget(form.heursem) }}
+    </h6>
+
+    <h6>Nombre d'heures :
+        {{ form_widget(form.heurnb) }}
+    </h6>
+    <h6>Commentaires :
+        {{ form_widget(form.heurcommentaire) }}
+    </h6>
+
+    <button type="submit" class="btn btn-success">Ajout des informations</button>
+    {{ form_end(form) }}
+
+{% endblock %}
