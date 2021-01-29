@@ -41,6 +41,7 @@ class AdminController extends AbstractController
         $MailPersoConnecte= $this -> getUser() -> getUsername();
         $PersoConnecte = $this -> getDoctrine() -> getRepository(Connexion::class) -> find($MailPersoConnecte);
         $Associations = $PersoConnecte -> getassociations();
+        $Page1 = 'Liste des salariés';
         //boucle qui va tourner dans la collection d'associations
         //pour chaque association :
         for ($i=0; $i <= count($Associations); $i++)
@@ -56,15 +57,17 @@ class AdminController extends AbstractController
             'associations'=> $Associations,
             'ListeSalaries' => $ListeSalaries,
             'MailAsso'=> $MailAsso,
+            'Page1' => $Page1
         ]);
     }
 
     /**
-     * @Route("/ProfilSalarie/{idPerso}/{idmail}", name="ProfilSalarie")
+     * @Route("/ProfilSalarie/{idPerso}/{idmail}/{Page1}", name="ProfilSalarie")
      */
-    public function ProfilSalarie($idPerso, $idmail) {
+    public function ProfilSalarie($idPerso, $idmail, $Page1) {
         $InfosPerso = $this -> getDoctrine() -> getRepository(SalarieInfosPerso::class) -> find($idPerso);
         $InfosPro = $InfosPerso -> getSproid();
+        $Page2 = 'Profile d\'un salarié';
 
         for ($i=0; $i <= count($InfosPro); $i++)
         {
@@ -78,7 +81,9 @@ class AdminController extends AbstractController
                     return $this->render('Commun/ProfilSalaries.html.twig', [ // renvoie vers le twig qui affiche les infos pros et perso du salarié
                         'infosperso' => $InfosPerso,
                         'infospro' => $InfosProAsso,
-                        'idmail'=> $idmail
+                        'idmail'=> $idmail,
+                        'Page1'=> $Page1,
+                        'Page2'=> $Page2
                     ]);
                 }
             }

@@ -36,18 +36,19 @@ class CommunController extends AbstractController
     /*######################## SALARIE INFOS PERSO ########################*/
 
     /**
-     * @Route("/VerifInfosPerso/{mailasso}/{role}", name="VerifInfosPerso")
+     * @Route("/VerifInfosPerso/{mailasso}/{role}/{Page1}", name="VerifInfosPerso")
      * @param Request $request
      * @param $mailasso
      * @param $role
      * @return Response
      */
 
-    public function VerifInfosPerso($mailasso, $role, Request $request)
+    public function VerifInfosPerso($mailasso, $role, Request $request, $Page1)
     {
         $NewInfosPerso = new SalarieInfosPerso();
         $form = $this->createForm(VerifInfosPersoType::class, $NewInfosPerso);
         $form->handleRequest($request);
+        $Page2='Ajout d\'un salarié';
 
         //Creation du tableau des Informations a vérifier qui est vide
         $ListeInfoAVerif = [];
@@ -63,7 +64,9 @@ class CommunController extends AbstractController
             'form' => $form->createView(),
             'ListeInfoAVerif' => $ListeInfoAVerif,
             'mailasso' => $mailasso,
-            'role'=>$role
+            'role'=>$role,
+            'Page1'=>$Page1,
+            'Page2'=>$Page2
         ]);
     }
 

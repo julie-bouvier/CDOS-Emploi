@@ -1,11 +1,18 @@
 {% extends 'base.html.twig' %}
 {% block body %}
 
+  <div class="progress center-block">
+    <div class="progress-bar bg-success" role="progressbar" style="width: 20%;" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+      <span>
+        {{ Page1 }}</span>
+    </div>
+  </div>
+
   <fieldset>
     <legend style="color:#18BC9C"><B>Voici la liste des Salariés de votre association :</B></legend>
     <br>
     <hr>
-    <a href="{{ path('VerifInfosPerso',{'mailasso': MailAsso, 'role' : 'ADMIN_ASSO'}) }}" method="post" type="button" class="btn btn-danger">Ajouter un salarié</a>
+    <a href="{{ path('VerifInfosPerso',{'mailasso': MailAsso, 'role' : 'ADMIN_ASSO', 'Page1': Page1}) }}" method="post" type="button" class="btn btn-danger">Ajouter un salarié</a>
     <br>
     <hr>
     <br>
@@ -16,7 +23,6 @@
         <th>Nom</th>
         <th>Prénom</th>
         <th>Voir plus d'informations</th>
-        <th>Modifier</th>
         <th>Supprimer</th>
       </tr>
       </thead>
@@ -27,10 +33,7 @@
           <td>{{ salarie.snom }}</td>
           <td>{{ salarie.sprenom }}</td>
           <td>
-            <a href="{{ path('ProfilSalarie',{'idPerso': salarie.getSpersoid(), 'idmail' : MailAsso }) }}" method="post">Voir Plus</a>
-          </td>
-          <td>
-            <a href="" method="post">Modifier</a>
+            <a href="{{ path('ProfilSalarie',{'idPerso': salarie.getSpersoid(), 'idmail' : MailAsso, 'Page1': Page1}) }}" method="post">Voir Plus</a>
           </td>
           <td>
             <a href="" method="post">Supprimer</a>
