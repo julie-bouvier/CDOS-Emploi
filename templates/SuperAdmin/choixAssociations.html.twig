@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Associations{% endblock %}
+
+{% block body %}
+    <fieldset>
+
+        <legend>Liste des associations : </legend>
+
+        <table id="" class="display" style="width:100%">
+            <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Email</th>
+                <th>Ajouter un salarié</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for association in associations %}
+                <tr>
+                    <td>{{ association.anom }}</td>
+                    <td>{{ association.amail}}</td>
+                    <td>
+                        <a href="{{ path('VerifInfosPerso',{'mailasso': association.amail, 'role':role}) }}" method="post"> X </a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <br>
+
+    </fieldset>
+{% endblock %}
+
+{% block javascripts %}
+
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/keytable/2.5.0/js/dataTables.keyTable.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('table.display').DataTable();
+        } );
+    </script>
+
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/keytable/2.5.0/css/keyTable.dataTables.min.css">
+{% endblock %}

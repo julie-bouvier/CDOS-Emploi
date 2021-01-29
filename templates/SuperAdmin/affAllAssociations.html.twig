@@ -5,7 +5,6 @@
 {% block body %}
     <fieldset>
 
-
             <legend>Liste des associations : </legend>
 
             <table id="" class="display" style="width:100%">
@@ -15,6 +14,7 @@
                     <th>Email</th>
                     <th>Voir les informations</th>
                     <th>Ajouter/modifier des informations</th>
+                    <th>Voir les salariés</th>
                     <th>Supprimer une association</th>
                 </tr>
                 </thead>
@@ -28,6 +28,9 @@
                     </td>
                     <td>
                         <a href="{{ path('modifAssociation',{'assoMail': association.amail}) }}" method="post">Modifier</a>
+                    </td>
+                    <td>
+                        <a href="{{ path('affSalaries',{'assomail': association.amail}) }}" method="post">Salariés</a>
                     </td>
                     <td>
                         <a href="" method="post">Supprimer</a>
