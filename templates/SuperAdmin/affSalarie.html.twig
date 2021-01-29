@@ -181,13 +181,13 @@
                                                                     {% endif %}
                                                                     <li><B>Commentaires :</B>  {{ arrettravail.atcommentaire }} </li>
                                                                     </p>
-                                                                    <a href="{{ path('modifArretTravail',{'sproid': infopro.sproid , 'idarrettravail': arrettravail.atid}) }}" method="post" type="button" class="btn btn-danger">Modifier un arrêt de travail</a>
+                                                                    <a href="{{ path('modifArretTravail',{'sproid': infopro.sproid , 'idarrettravail': arrettravail.atid,'butForReturn': 'SUPER_ADMIN_SEUL'}) }}" method="post" type="button" class="btn btn-danger">Modifier un arrêt de travail</a>
                                                                 </div>
                                                             </div>
                                                         {% endfor %}
                                                         <br>
 
-                                                        <a href="{{ path('EnregistrerArretTravail',{'sproid': infopro.sproid }) }}" method="post" type="button" class="btn btn-danger">Ajouter un arrêt de travail</a>
+                                                        <a href="{{ path('EnregistrerArretTravail',{'sproid': infopro.sproid,'butForReturn': 'SUPER_ADMIN_SEUL'}) }}" method="post" type="button" class="btn btn-danger">Ajouter un arrêt de travail</a>
 
                                                     </div>
 
@@ -227,13 +227,13 @@
                                                                     <li><B>Nombre d'heures à déduire :</B>  {{ autresabsence.absnbheure }}</li>
                                                                     <li><B>Commentaires éventuels sur le type d'absence :</B>  {{ autresabsence.abscommentaire }} </li>
                                                                     </p>
-                                                                    <a href="{{ path('modifAutreAbsence',{'sproid': infopro.sproid , 'idautreabsence': autresabsence.absid}) }}" method="post" type="button" class="btn btn-danger">Modifier une autre absence</a>
+                                                                    <a href="{{ path('modifAutreAbsence',{'sproid': infopro.sproid , 'idautreabsence': autresabsence.absid,'butForReturn': 'SUPER_ADMIN_SEUL'}) }}" method="post" type="button" class="btn btn-danger">Modifier une autre absence</a>
 
                                                                 </div>
                                                             </div>
                                                         {% endfor %}
                                                         <br>
-                                                        <a href="{{ path('EnregistrerAutreAbsence',{'sproid': infopro.sproid }) }}" method="post" type="button" class="btn btn-danger">Ajouter une autre absence</a>
+                                                        <a href="{{ path('EnregistrerAutreAbsence',{'sproid': infopro.sproid,'butForReturn': 'SUPER_ADMIN_SEUL' }) }}" method="post" type="button" class="btn btn-danger">Ajouter une autre absence</a>
 
 
                                                     </div>
@@ -272,11 +272,11 @@
                                                                     <li><B>Commentaires éventuels:</B> {{ frai.fracommentaire}}
                                                                     </li>
                                                                     </p>
-                                                                    <a href="{{ path('modifFrais',{'sproid': infopro.sproid , 'idfrais': frai.fraid}) }}" method="post" type="button" class="btn btn-danger">Modifier un frais</a>
+                                                                    <a href="{{ path('modifFrais',{'sproid': infopro.sproid , 'idfrais': frai.fraid,'butForReturn': 'SUPER_ADMIN_SEUL'}) }}" method="post" type="button" class="btn btn-danger">Modifier un frais</a>
                                                                 </div>
                                                             </div>
                                                         {% endfor %}
-                                                        <a href="{{ path('EnregistrerFrais',{'sproid': infopro.sproid }) }}" method="post" type="button" class="btn btn-danger">Ajouter un frais</a>
+                                                        <a href="{{ path('EnregistrerFrais',{'sproid': infopro.sproid,'butForReturn': 'SUPER_ADMIN_SEUL' }) }}" method="post" type="button" class="btn btn-danger">Ajouter un frais</a>
 
                                                     </div>
                                                     <div class="tab-pane" id="{{infopro.sproid}}.heures" role="tabpanel" aria-labelledby="home-tab">
@@ -311,11 +311,11 @@
                                                                     <li><B>Commentaires éventuels:</B> {{ avenant.avcommentaire}}
                                                                     </li>
                                                                     </p>
-                                                                    <a href="{{ path('modifAvenant',{'sproid': infopro.sproid , 'idavenant': avenant.avid}) }}" method="post" type="button" class="btn btn-danger">Modifier un avenant</a>
+                                                                    <a href="{{ path('modifAvenant',{'sproid': infopro.sproid , 'idavenant': avenant.avid,'butForReturn': 'SUPER_ADMIN_SEUL'}) }}" method="post" type="button" class="btn btn-danger">Modifier un avenant</a>
                                                                 </div>
                                                             </div>
                                                         {% endfor %}
-                                                        <a href="{{ path('EnregistrerAvenant',{'sproid': infopro.sproid }) }}" method="post" type="button" class="btn btn-danger">Ajouter un avenant</a>
+                                                        <a href="{{ path('EnregistrerAvenant',{'sproid': infopro.sproid ,'butForReturn': 'SUPER_ADMIN_SEUL'}) }}" method="post" type="button" class="btn btn-danger">Ajouter un avenant</a>
 
 
                                                     </div>
