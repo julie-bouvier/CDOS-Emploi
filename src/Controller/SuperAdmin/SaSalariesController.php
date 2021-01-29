@@ -26,25 +26,30 @@ class SaSalariesController extends AbstractController
 {
     /*######################## AFFICHAGE SALARIE ########################*/
     /**
-     * @Route("/affSalaries/{assomail}", name="affSalaries")
+     * @Route("/affSalaries/{assomail}/{Page1}", name="affSalaries")
      */
-    public function affSalaries($assomail){
+    public function affSalaries($assomail,$Page1){
         //je récupère l'association sur laquelle j'ai cliqué
         $association=$this->getDoctrine()->getRepository(Association::class)->find($assomail);
         //je récupère la liste des salariés de cette asso
         $listsalaries=$association->getsalarieinfosperso();
+        $Page2='Liste des Salariés';
 
         if (empty($listsalaries)){
             $message='Il n\'y a pas de salariés enregistrés dans cette association';
             return $this->render('SuperAdmin/affAllSalariesAsso.html.twig', [
                 'message' => $message,
-                'assoMail' => $assomail
+                'assoMail' => $assomail,
+                'Page1'=>$Page1,
+                'Page2'=>$Page2
             ]);
         }
         else{
             return $this->render('SuperAdmin/affAllSalariesAsso.html.twig', [
                 'listsalaries' => $listsalaries,
-                'assoMail' => $assomail
+                'assoMail' => $assomail,
+                'Page1'=>$Page1,
+                'Page2'=>$Page2
             ]);
         }
     }

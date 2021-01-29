@@ -21,10 +21,14 @@ class SaAssociationsController extends AbstractController
      */
     public function affAssociation($but){
         $associations=$this->getDoctrine()->getRepository(Association::class)->findAll();
+
+        //on crée la page 1
+        $Page1='Liste des associations';
         //si mon but est de gérer les association alors on renvoi vers la page affAllAsso
         if ($but=="assos"){
             return $this->render('SuperAdmin/affAllAssociations.html.twig', [
                 'associations' => $associations,
+                'Page1' => $Page1
             ]);
         }
         //si mon but est de gérer les salariés alors on renvoi vers la page affassosalaries
@@ -80,25 +84,28 @@ class SaAssociationsController extends AbstractController
     }
 
     /**
-     * @Route("/voirAssociation/{assomail}", name="voirAssociation")
+     * @Route("/voirAssociation/{assomail}/{Page1}", name="voirAssociation")
      * @param $assomail
      * @return Response
      */
-    public function voirAssociation($assomail){
+    public function voirAssociation($assomail, $Page1){
         $association=$this->getDoctrine()->getRepository(Association::class)->find($assomail);
+        $Page2='Profil de l\'association';
         return $this->render('SuperAdmin/affAssociation.html.twig', [
-            'association' => $association
+            'association' => $association,
+            'Page1'=>$Page1,
+            'Page2'=>$Page2
         ]);
     }
 
     /**
-     * @Route("/modifAssociation{assoMail}", name="modifAssociation")
+     * @Route("/modifAssociation{assoMail}/{Page1}", name="modifAssociation")
      * @param Request $request
      * @param EntityManagerInterface $entityManager
      * @param $assoMail
      * @return RedirectResponse|Response
      */
-    public function modifAssociation(Request $request,EntityManagerInterface $entityManager,$assoMail){
+    public function modifAssociation(Request $request,EntityManagerInterface $entityManager,$assoMail,$Page1){
         $association=$this->getDoctrine()->getRepository(Association::class)->find($assoMail);
         $form=$this->createForm(AssociationType::class, $association);
         $form->handleRequest($request);
@@ -107,13 +114,15 @@ class SaAssociationsController extends AbstractController
             $entityManager->persist($association);
             $entityManager->flush();
             return $this->redirectToRoute('affAssociation',[
-                'but'=>'assos'
+                'but'=>'assos',
+                'Page1'=>$Page1
             ]);
         }
         else{
             return $this->render('SuperAdmin/AjoutAssociation.html.twig', [
                 'form' => $form->createView(),
-                'assoMail'=> $assoMail
+                'assoMail'=> $assoMail,
+                'Page1'=>$Page1
             ]);
         }
     }
