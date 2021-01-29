@@ -6,9 +6,10 @@
     <fieldset>
 
         <legend>Informations Personnelles : </legend>
+        {# Pour le salairés ces infos perso unique #}
         <table>
             <tr>
-                <td>
+                <td style="padding-right: 30px">
                     <B>Nom : </B>{{ salarie.snom }}<br>
                     <B>Nom de Jeune fille :</B> {{ salarie.snomjeunefille }}<br>
                     <B>Prénom : </B>{{ salarie.sprenom }}<br>
@@ -17,10 +18,7 @@
                     <B>Téléphone : </B>{{ salarie.stel }}<br>
                     <B>Date de naissance : </B>{{ salarie.sdatenaissance|date("d/m/Y") }}<br>
                 </td>
-                <td> <br> </td>
-                <td> <br> </td>
-                <td> <br> </td>
-                <td>
+                <td style="padding-right: 30px">
                     <B>Lieu de naissance : </B>{{ salarie.slieunaissance }}<br>
                     <B>Département de naissance : </B>{{ salarie.sdptnaissance }}<br>
                     <B>Nationalité : </B>{{ salarie.snationalite}}<br>
@@ -35,16 +33,20 @@
                     <a href="{{ path('modifSalariesPerso',{'idSalarie': salarie.spersoid}) }}" method="post">Modifier</a>
                 </td>
             </tr>
+
         </table>
     </fieldset>
     <br>
     <fieldset>
+
         <legend>Informations Professionnelles : </legend>
 
+            {#Liste de toutes les assos du salarié#}
 
             {#Pour une case de l'accordéon on fait tout ça#}
             <div class="accordion" id="accordionAsso">
                 <div class="card">
+                    {# En têtes de l'accordions : les associations liées au salarié #}
                     {% for association in associations %}
                     <div class="card-header" id="headingOne">
                         {#Ce qu'il y a d'écrit dans l'entête de l'accordéon#}
@@ -62,7 +64,7 @@
                                 {% if infopro.sMailAsso==association.amail %}
                                    <table>
                                         <tr>
-                                            <td>
+                                            <td style="padding-right: 30px">
                                                 <B>Nom Employeur :</B> {{ infopro.snomemployeur }} <br>
                                                 <B>Poste occupé :</B> {{ infopro.sPosteOccupe }}<br>
                                                 <B>CCNS : </B>{{ infopro.sCCNS }}<br>
@@ -70,31 +72,13 @@
                                                 <B>Type de temps de travail : </B>{{ infopro.sTypeTempsTravail }}<br>
                                                 <B>Gestion des cp :</B> {{ infopro.sGestCP }}<br>
                                             </td>
-                                            <td>
-                                                <br>
-                                            </td>
-                                            <td>
-                                                <br>
-                                            </td>
-                                            <td>
-                                                <br>
-                                            </td>
-                                            <td>
+                                            <td style="padding-right: 30px">
                                                 <B>Date de début de contrat : </B>{{ infopro.sDateDebut|date("d/m/Y") }}<br>
                                                 <B>Date de fin de contrat : </B>{{ infopro.sDateFin|date("d/m/Y") }}<br>
                                                 <B>Motif de fin de contrat : </B>{{ infopro.sFinMotif }}<br>
                                                 <B>Commentaire de fin de contrat : </B>{{ infopro.sComFin }}<br>
                                                 <B>10ème mois de congé payé : </B>{{ infopro.s10congeMois }}<br>
                                                 <B>rest-il des congés à prendre ? </B>{{ infopro.sConge }}<br>
-                                            </td>
-                                            <td>
-                                                <br>
-                                            </td>
-                                            <td>
-                                                <br>
-                                            </td>
-                                            <td>
-                                                <br>
                                             </td>
                                             <td>
                                                 <B>Type de contrat : </B>{{ infopro.sTypeContrat }}<br>
@@ -110,8 +94,237 @@
                                                 <B>autre éléments :</B>{{ infopro.sAutreElement }} <br>
                                             </td>
                                         </tr>
+
+                                       {# Toutes les tables secondaires #}
                                    </table>
                                     <a href="{{ path('modifSalariesPro',{'idInfoProSalarie': infopro.sproid, 'idSalarie': salarie.spersoid}) }}" method="post">Modifier</a>
+                                    <br>
+                                    <br><br>
+                                    {% if conges is defined %}
+
+                                        <table>
+                                            <tr>
+                                                {#Début de la Nav-bar, Les noms des ongles#}
+                                                <ul class="nav nav-tabs">
+                                                    <li class="nav-item">
+                                                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#{{infopro.sproid}}.conges" role="tab" aria-controls="home" aria-selected="true">Congés</a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#{{infopro.sproid}}.arrets_travail" role="tab" aria-controls="profile" aria-selected="false">Arrêts de travail</a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#{{infopro.sproid}}.chomages" role="tab" aria-controls="profile" aria-selected="false">Chomages</a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#{{infopro.sproid}}.autres_absences" role="tab" aria-controls="profile" aria-selected="false">Autres absences</a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#{{infopro.sproid}}.primes" role="tab" aria-controls="profile" aria-selected="false">Primes</a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#{{infopro.sproid}}.frais" role="tab" aria-controls="profile" aria-selected="false">Frais</a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#{{infopro.sproid}}.heures" role="tab" aria-controls="profile" aria-selected="false">Heures</a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#{{infopro.sproid}}.avenants" role="tab" aria-controls="profile" aria-selected="false">Avenants</a>
+                                                    </li>
+                                                </ul>
+
+
+                                                {#Début du contenu des onglets#}
+                                                <div class="tab-content">
+                                                    <div class="tab-pane active" id="{{infopro.sproid}}.conges" role="tabpanel" aria-labelledby="home-tab">
+                                                        <br>
+                                                        <H4 style="color:#F7230C">Voici la page permettant de gérer les congés :</H4>
+
+                                                        {% for conge in conges %}
+                                                            <div class="card border-primary mb-3" style="max-width: 20rem;">
+                                                                <div class="card-body">
+                                                                    <p class="card-text">
+                                                                    <li><B>Type de congés :</B>  {{ conge.contype }}</li>
+                                                                    <li><B>Dernier jour travaillé :</B>  {{ conge.condernierjour|date("d/m/Y")}}</li>
+                                                                    <li><B>Jour de reprise :</B>  {{ conge.conjourreprise|date("d/m/Y") }}</li>
+                                                                    <li><B>Jours normalement travaillé :</B>  {{ conge.conjournormaltrav | json_encode }} </li>
+                                                                    <li><B>Nombre de jour ouvrable pris :</B>  {{ conge.connbjourouvrablepris }} </li>
+                                                                    <li><B>Commentaire :</B>  {{ conge.concommentaire }} </li>
+                                                                    </p>
+                                                                    <a href="{{ path('modifConge',{'sproid': infopro.sproid,'idconge': conge.conid}) }}" method="post" type="button" class="btn btn-danger">Modifier un congé</a>
+                                                                </div>
+                                                            </div>
+                                                        {% endfor %}
+                                                        <br>
+                                                        <a href="{{ path('EnregistrerConge',{'sproid': infopro.sproid, 'butForReturn': 'SUPER_ADMIN_SEUL'}) }}" method="post" type="button" class="btn btn-danger">Ajouter un congé</a>
+
+                                                    </div>
+
+                                                    <div class="tab-pane" id="{{infopro.sproid}}.arrets_travail" role="tabpanel" aria-labelledby="profile-tab">
+                                                        <br>
+                                                        <H4 style="color:#F7230C">Voici la page permettant de gérer les arrêts de de travail :</H4>
+
+                                                        {% for arrettravail in arrettravails %}
+                                                            <div class="card border-primary mb-3" style="max-width: 20rem;">
+                                                                <div class="card-body">
+                                                                    <p class="card-text">
+                                                                    <li><B>Type d'arrêt de travail :</B>  {{ arrettravail.attype }}</li>
+                                                                    <li><B>Initial ou prolongation  :</B>  {{ arrettravail.atprolongation}}</li>
+                                                                    <li><B>Date de début de l'arrêt:</B>  {{ arrettravail.atdebut|date("d/m/Y") }}</li>
+                                                                    <li><B>Date de fin prévisionnel de l'arrêt:</B>  {{ arrettravail.atfin|date("d/m/Y") }} </li>
+                                                                    <li><B>En cas de maladie : maintient des trois premiers jours:</B>  {{ arrettravail.at3jours }} </li>
+                                                                    {% if arrettravail.at3jours=='non' %}
+                                                                        <li> <B>Si non, nombre d'heures à déduire</B>  {{ arrettravail.at3jnbh}} </li>
+                                                                    {% endif %}
+                                                                    <li><B>En cas de maladie, pour les salariés ayant moins d'un an d'ancienneté, maintien à compter du 4ème jour</B>  {{ arrettravail.at4jours }} </li>
+                                                                    {% if arrettravail.at4jours=='non' %}
+                                                                        <li> <B>Si non, nombre d'heures à déduire</B>  {{ arrettravail.at4jnbh}} </li>
+                                                                    {% endif %}
+                                                                    <li><B>Commentaires :</B>  {{ arrettravail.atcommentaire }} </li>
+                                                                    </p>
+                                                                    <a href="{{ path('modifArretTravail',{'sproid': infopro.sproid , 'idarrettravail': arrettravail.atid}) }}" method="post" type="button" class="btn btn-danger">Modifier un arrêt de travail</a>
+                                                                </div>
+                                                            </div>
+                                                        {% endfor %}
+                                                        <br>
+
+                                                        <a href="{{ path('EnregistrerArretTravail',{'sproid': infopro.sproid }) }}" method="post" type="button" class="btn btn-danger">Ajouter un arrêt de travail</a>
+
+                                                    </div>
+
+                                                    <div class="tab-pane" id="{{infopro.sproid}}.chomages" role="tabpanel" aria-labelledby="profile-tab">
+                                                        <br>
+                                                        <H4 style="color:#F7230C">Voici la page permettant de gérer les périodes de chômage :</H4>
+
+                                                        {% for chomage in chomages %}
+                                                            <div class="card border-primary mb-3" style="max-width: 20rem;">
+                                                                <div class="card-body">
+                                                                    <p class="card-text">
+                                                                    <li><B>Date de début :</B>  {{ chomage.chodebut|date("d/m/Y")}}</li>
+                                                                    <li><B>Date de fin :</B>  {{ chomage.chofin|date("d/m/Y")}}</li>
+                                                                    <li><B>Nombre d'heures à déduire :</B>  {{ chomage.chonbheure }}</li>
+                                                                    <li><B>Maintien du chômage à 100% : {{ chomage.chomaintien }}</B>
+                                                                    </li>
+                                                                    <li><B>Commentaire :</B>  {{ chomage.chocommentaire }} </li>
+                                                                    </p>
+                                                                    <a href="{{ path('modifChomage',{'sproid': infopro.sproid , 'idchomage': chomage.choid}) }}" method="post" type="button" class="btn btn-danger">Modifier un chômage</a>
+                                                                </div>
+                                                            </div>
+                                                        {% endfor %}
+                                                        <br>
+                                                        <p><a href="{{ path('EnregistrerChomage',{'sproid': infopro.sproid }) }}" method="post" type="button" class="btn btn-danger">Ajouter un chômage</a>
+                                                        </p>
+                                                    </div>
+                                                    <div class="tab-pane" id="{{infopro.sproid}}.autres_absences" role="tabpanel" aria-labelledby="home-tab">
+                                                        <br>
+                                                        <H4 style="color:#F7230C">Voici la page permettant de gérer les autres absences:</H4>
+
+                                                        {% for autresabsence in autresabsences %}
+                                                            <div class="card border-primary mb-3" style="max-width: 20rem;">
+                                                                <div class="card-body">
+                                                                    <p class="card-text">
+                                                                    <li><B>Du :</B>  {{ autresabsence.absdebut|date("d/m/Y") }}</li>
+                                                                    <li><B>Au :</B>  {{ autresabsence.absfin|date("d/m/Y")}}</li>
+                                                                    <li><B>Nombre d'heures à déduire :</B>  {{ autresabsence.absnbheure }}</li>
+                                                                    <li><B>Commentaires éventuels sur le type d'absence :</B>  {{ autresabsence.abscommentaire }} </li>
+                                                                    </p>
+                                                                    <a href="{{ path('modifAutreAbsence',{'sproid': infopro.sproid , 'idautreabsence': autresabsence.absid}) }}" method="post" type="button" class="btn btn-danger">Modifier une autre absence</a>
+
+                                                                </div>
+                                                            </div>
+                                                        {% endfor %}
+                                                        <br>
+                                                        <a href="{{ path('EnregistrerAutreAbsence',{'sproid': infopro.sproid }) }}" method="post" type="button" class="btn btn-danger">Ajouter une autre absence</a>
+
+
+                                                    </div>
+                                                    <div class="tab-pane" id="{{infopro.sproid}}.primes" role="tabpanel" aria-labelledby="home-tab">
+                                                        <br>
+                                                        <H4 style="color:#F7230C">Voici la page permettant de gérer les primes :</H4>
+
+                                                        {% for prime in primes %}
+                                                            <div class="card border-primary mb-3" style="max-width: 20rem;">
+                                                                <div class="card-body">
+                                                                    <p class="card-text">
+                                                                    <li><B>Type de prime :</B>  {{ prime.primtype}}</li>
+                                                                    <li><B>Montant de la prime :</B>  {{ prime.primmontant}}</li>
+                                                                    <li><B>Unité :</B>  {{ prime.primnetbrut }}</li>
+                                                                    <li><B>Commentaires :</B> {{ prime.primcommentaire }}
+                                                                    </li>
+                                                                    </p>
+                                                                    <a href="{{ path('modifPrime',{'sproid': infopro.sproid , 'idprime': prime.primid}) }}" method="post" type="button" class="btn btn-danger">Modifier une prime</a>
+                                                                </div>
+                                                            </div>
+                                                        {% endfor %}
+                                                        <a href="{{ path('EnregistrerPrime',{'sproid': infopro.sproid }) }}" method="post" type="button" class="btn btn-danger">Ajouter une prime</a>
+                                                    </div>
+
+                                                    <div class="tab-pane" id="{{infopro.sproid}}.frais" role="tabpanel" aria-labelledby="home-tab">
+                                                        <H4 style="color:#F7230C">Voici la page permettant de gérer les frais :</H4>
+
+                                                        {% for frai in frais %}
+                                                            <div class="card border-primary mb-3" style="max-width: 20rem;">
+                                                                <div class="card-body">
+                                                                    <p class="card-text">
+                                                                    <li><B>Type de frais :</B>  {{ frai.fratype}}</li>
+                                                                    <li><B>Quantité :</B>  {{ frai.fraquantite}}</li>
+                                                                    <li><B>Taux unitaire :</B>  {{ frai.frataux }}</li>
+                                                                    <li><B>Total :</B>  </li>  {{ frai.fraquantite * frai.frataux }}
+                                                                    <li><B>Commentaires éventuels:</B> {{ frai.fracommentaire}}
+                                                                    </li>
+                                                                    </p>
+                                                                    <a href="{{ path('modifFrais',{'sproid': infopro.sproid , 'idfrais': frai.fraid}) }}" method="post" type="button" class="btn btn-danger">Modifier un frais</a>
+                                                                </div>
+                                                            </div>
+                                                        {% endfor %}
+                                                        <a href="{{ path('EnregistrerFrais',{'sproid': infopro.sproid }) }}" method="post" type="button" class="btn btn-danger">Ajouter un frais</a>
+
+                                                    </div>
+                                                    <div class="tab-pane" id="{{infopro.sproid}}.heures" role="tabpanel" aria-labelledby="home-tab">
+                                                        <br>
+                                                        <H4 style="color:#F7230C">Voici la page permettant de gérer les heures :</H4>
+
+                                                        {% for heure in heures %}
+                                                            <div class="card border-primary mb-3" style="max-width: 20rem;">
+                                                                <div class="card-body">
+                                                                    <p class="card-text">
+                                                                    <li><B>Type d'heure :</B>  {{ heure.heurtype}}</li>
+                                                                    <li><B>Semaine concernée :</B>  {{ heure.heursem}}</li>
+                                                                    <li><B>Nombre d'heure :</B>  {{ heure.heurnb }}</li>
+                                                                    <li><B>Commentaires :</B> {{ heure.heurcommentaire }}
+                                                                    </li>
+                                                                    </p>
+                                                                    <a href="{{ path('modifHeure',{'sproid': infopro.sproid , 'idheure': heure.heurid}) }}" method="post" type="button" class="btn btn-danger">Modifier une heure</a>
+                                                                </div>
+                                                            </div>
+                                                        {% endfor %}
+                                                        <a href="{{ path('EnregistrerHeures',{'sproid': infopro.sproid }) }}" method="post" type="button" class="btn btn-danger">Ajouter une heure</a>
+                                                    </div>
+                                                    <div class="tab-pane" id="{{infopro.sproid}}.avenants" role="tabpanel" aria-labelledby="home-tab">
+                                                        <H4 style="color:#F7230C">Voici la page permettant de gérer les avenants :</H4>
+
+                                                        {% for avenant in avenants %}
+                                                            <div class="card border-primary mb-3" style="max-width: 20rem;">
+                                                                <div class="card-body">
+                                                                    <p class="card-text">
+                                                                    <li><B>Date d'effet : </B>  {{ avenant.avdebut|date("d/m/Y") }}</li>
+                                                                    <li><B>Type de modification :</B>  {{ avenant.avtypemodif}}</li
+                                                                    <li><B>Commentaires éventuels:</B> {{ avenant.avcommentaire}}
+                                                                    </li>
+                                                                    </p>
+                                                                    <a href="{{ path('modifAvenant',{'sproid': infopro.sproid , 'idavenant': avenant.avid}) }}" method="post" type="button" class="btn btn-danger">Modifier un avenant</a>
+                                                                </div>
+                                                            </div>
+                                                        {% endfor %}
+                                                        <a href="{{ path('EnregistrerAvenant',{'sproid': infopro.sproid }) }}" method="post" type="button" class="btn btn-danger">Ajouter un avenant</a>
+
+
+                                                    </div>
+                                                </div>
+                                            </tr>
+                                        </table>
+
+                                    {% endif %}
+
                                 {% endif %}
                             {% endfor %}
                         </div>
