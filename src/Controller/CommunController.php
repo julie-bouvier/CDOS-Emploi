@@ -233,14 +233,16 @@ class CommunController extends AbstractController
     }
 
     /**
-     * @Route("/modifConge/{sproid}/{idconge}", name="modifConge")
+     * @Route("/modifConge/{sproid}/{idconge}/{butForReturn}", name="modifConge")
      * @param Request $request
      * @param EntityManagerInterface $entityManager
      * @param $sproid
      * @return Response
      */
-    public function modifConge(Request $request,EntityManagerInterface $entityManager,$sproid, $idconge){
+    public function modifConge(Request $request,EntityManagerInterface $entityManager,$sproid, $idconge, $butForReturn){
         $conge=$this->getDoctrine()->getRepository(Conges::class)->find($idconge);
+        $InfosPro = $this->getDoctrine()->getRepository(SalarieInfosPro::class)->find($sproid);
+        $conge->setSproid($InfosPro);
         //je crée un formulaire avec les champs de l'entité conge
             $form=$this->createForm(CongesType::class, $conge);
             $form->handleRequest($request);
@@ -248,9 +250,19 @@ class CommunController extends AbstractController
             if ($form->isSubmitted() && $form->isValid()){
                 $entityManager->persist($conge);
                 $entityManager->flush();
-                return $this->redirectToRoute('GestionSalarie',[
+                //je redirecte vers page ou route en fonction du butForReturn :
+                if ($butForReturn=='SUPER_ADMIN_SEUL'){
+                    $assoMail=$InfosPro->getSmailasso();
+                    $idsalarieperso=$InfosPro->getSPersoId()->getSpersoid();
+                    return $this->redirectToRoute('voirSalarie', [
+                        'idsalarie'=>$idsalarieperso, //id de l'entite salarioinfosperso
+                        'assoMail'=> $assoMail, //id de l'association
+                        'but'=> 'association',
+                    ]);
+                }
+               /* return $this->redirectToRoute('GestionSalarie',[
                     'idinfospro'=>$sproid,
-                ]);
+                ]);*/
             }
             else{
                 return $this->render('Commun/AjoutConges.html.twig', [
@@ -356,13 +368,13 @@ class CommunController extends AbstractController
     /*######################## CHOMAGE ########################*/
 
     /**
-     * @Route("/EnregistrerChomage/{sproid}", name="EnregistrerChomage")
+     * @Route("/EnregistrerChomage/{sproid}/{butForReturn}", name="EnregistrerChomage")
      * @param Request $request
      * @param EntityManagerInterface $entityManager
      * @param $sproid
      * @return Response
      */
-    public function EnregistrerChomage(Request $request, EntityManagerInterface $entityManager, $sproid)
+    public function EnregistrerChomage(Request $request, EntityManagerInterface $entityManager, $sproid, $butForReturn)
     {
         //je veux ajouter des informations dans ma table chomage
         //liée cette table à la table connexion précédente
@@ -380,10 +392,20 @@ class CommunController extends AbstractController
             //j'enregistre le nouveau chomage dans la bdd
             $entityManager->persist($chomage);
             $entityManager->flush();
-            //je redirecte vers page ou route
+            //je redirecte vers page ou route en fonction du butForReturn :
+            if ($butForReturn=='SUPER_ADMIN_SEUL'){
+                $assoMail=$InfosPro->getSmailasso();
+                $idsalarieperso=$InfosPro->getSPersoId()->getSpersoid();
+                return $this->redirectToRoute('voirSalarie', [
+                    'idsalarie'=>$idsalarieperso, //id de l'entite salarioinfosperso
+                    'assoMail'=> $assoMail, //id de l'association
+                    'but'=> 'association',
+                ]);
+            }
+            /*//je redirecte vers page ou route
             return $this->redirectToRoute('GestionSalarie', [
                 'idinfospro' => $sproid,
-            ]);
+            ]);*/
         } else {
             return $this->render('Commun/AjoutChomage.html.twig', [
                 'form' => $form->createView(),
@@ -393,14 +415,16 @@ class CommunController extends AbstractController
     }
 
     /**
-     * @Route("/modifChomage/{sproid}/{idchomage}", name="modifChomage")
+     * @Route("/modifChomage/{sproid}/{idchomage}/{butForReturn}", name="modifChomage")
      * @param Request $request
      * @param EntityManagerInterface $entityManager
      * @param $sproid
      * @return Response
      */
-    public function modifChomage(Request $request,EntityManagerInterface $entityManager,$sproid, $idchomage){
+    public function modifChomage(Request $request,EntityManagerInterface $entityManager,$sproid, $idchomage, $butForReturn){
         $chomage=$this->getDoctrine()->getRepository(Chomage::class)->find($idchomage);
+        $InfosPro = $this->getDoctrine()->getRepository(SalarieInfosPro::class)->find($sproid);
+        $chomage->setSproid($InfosPro);
         //je crée un formulaire avec les champs de l'entité chomage
         $form=$this->createForm(ChomageType::class, $chomage);
         $form->handleRequest($request);
@@ -408,9 +432,19 @@ class CommunController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()){
             $entityManager->persist($chomage);
             $entityManager->flush();
-            return $this->redirectToRoute('GestionSalarie',[
+            //je redirecte vers page ou route en fonction du butForReturn :
+            if ($butForReturn=='SUPER_ADMIN_SEUL'){
+                $assoMail=$InfosPro->getSmailasso();
+                $idsalarieperso=$InfosPro->getSPersoId()->getSpersoid();
+                return $this->redirectToRoute('voirSalarie', [
+                    'idsalarie'=>$idsalarieperso, //id de l'entite salarioinfosperso
+                    'assoMail'=> $assoMail, //id de l'association
+                    'but'=> 'association',
+                ]);
+            }
+           /* return $this->redirectToRoute('GestionSalarie',[
                 'idinfospro'=>$sproid,
-            ]);
+            ]);*/
         }
         else{
             return $this->render('Commun/AjoutChomage.html.twig', [
@@ -512,13 +546,13 @@ class CommunController extends AbstractController
     /*######################## PRIME ########################*/
 
     /**
-     * @Route("/EnregistrerPrime/{sproid}", name="EnregistrerPrime")
+     * @Route("/EnregistrerPrime/{sproid}/{butForReturn}", name="EnregistrerPrime")
      * @param Request $request
      * @param EntityManagerInterface $entityManager
      * @param $sproid
      * @return Response
      */
-    public function EnregistrerPrime(Request $request, EntityManagerInterface $entityManager, $sproid)
+    public function EnregistrerPrime(Request $request, EntityManagerInterface $entityManager, $sproid, $butForReturn)
     {
         //je veux ajouter des informations dans ma table prime
         //liée cette table à la table connexion précédente
@@ -536,10 +570,20 @@ class CommunController extends AbstractController
             //j'enregistre la nouvelle prime dans la bdd
             $entityManager->persist($prime);
             $entityManager->flush();
-            //je redirecte vers page ou route
+            //je redirecte vers page ou route en fonction du butForReturn :
+            if ($butForReturn=='SUPER_ADMIN_SEUL'){
+                $assoMail=$InfosPro->getSmailasso();
+                $idsalarieperso=$InfosPro->getSPersoId()->getSpersoid();
+                return $this->redirectToRoute('voirSalarie', [
+                    'idsalarie'=>$idsalarieperso, //id de l'entite salarioinfosperso
+                    'assoMail'=> $assoMail, //id de l'association
+                    'but'=> 'association',
+                ]);
+            }
+            /*//je redirecte vers page ou route
             return $this->redirectToRoute('GestionSalarie', [
                 'idinfospro' => $sproid,
-            ]);
+            ]);*/
 
         } else {
             return $this->render('Commun/AjoutPrime.html.twig', [
@@ -548,6 +592,49 @@ class CommunController extends AbstractController
             ]);
         }
     }
+
+    /**
+     * @Route("/modifPrime/{sproid}/{idprime}/{butForReturn}", name="modifPrime")
+     * @param Request $request
+     * @param EntityManagerInterface $entityManager
+     * @param $sproid
+     * @return Response
+     */
+    public function modifPrime(Request $request,EntityManagerInterface $entityManager,$sproid, $idprime, $butForReturn){
+        $prime=$this->getDoctrine()->getRepository(Prime::class)->find($idprime);
+        $InfosPro = $this->getDoctrine()->getRepository(SalarieInfosPro::class)->find($sproid);
+        $prime->setSproid($InfosPro);
+        //je crée un formulaire avec les champs de l'entité prime
+        $form=$this->createForm(PrimeType::class, $prime);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()){
+            $entityManager->persist($prime);
+            $entityManager->flush();
+            //je redirecte vers page ou route en fonction du butForReturn :
+            if ($butForReturn=='SUPER_ADMIN_SEUL'){
+                $assoMail=$InfosPro->getSmailasso();
+                $idsalarieperso=$InfosPro->getSPersoId()->getSpersoid();
+                return $this->redirectToRoute('voirSalarie', [
+                    'idsalarie'=>$idsalarieperso, //id de l'entite salarioinfosperso
+                    'assoMail'=> $assoMail, //id de l'association
+                    'but'=> 'association',
+                ]);
+            }
+           /* return $this->redirectToRoute('GestionSalarie',[
+                'idinfospro'=>$sproid,
+            ]);*/
+        }
+        else{
+            return $this->render('Commun/AjoutPrime.html.twig', [
+                'form' => $form->createView(),
+                'infosprime'=>$prime,
+                'idpro'=>$sproid
+            ]);
+        }
+
+    }
+
     /*######################## FRAIS ########################*/
 
     /**
@@ -725,46 +812,18 @@ class CommunController extends AbstractController
             ]);
         }
     }
-    /**
-     * @Route("/modifPrime/{sproid}/{idprime}", name="modifPrime")
-     * @param Request $request
-     * @param EntityManagerInterface $entityManager
-     * @param $sproid
-     * @return Response
-     */
-    public function modifPrime(Request $request,EntityManagerInterface $entityManager,$sproid, $idprime){
-        $prime=$this->getDoctrine()->getRepository(Prime::class)->find($idprime);
-        //je crée un formulaire avec les champs de l'entité prime
-        $form=$this->createForm(PrimeType::class, $prime);
-        $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()){
-            $entityManager->persist($prime);
-            $entityManager->flush();
-            return $this->redirectToRoute('GestionSalarie',[
-                'idinfospro'=>$sproid,
-            ]);
-        }
-        else{
-            return $this->render('Commun/AjoutPrime.html.twig', [
-                'form' => $form->createView(),
-                'infosprime'=>$prime,
-                'idpro'=>$sproid
-            ]);
-        }
-
-    }
 
     /*######################## HEURES ########################*/
 
     /**
-     * @Route("/EnregistrerHeures/{sproid}", name="EnregistrerHeures")
+     * @Route("/EnregistrerHeures/{sproid}/{butForReturn}", name="EnregistrerHeures")
      * @param Request $request
      * @param EntityManagerInterface $entityManager
      * @param $sproid
      * @return Response
      */
-    public function EnregistrerHeures(Request $request, EntityManagerInterface $entityManager, $sproid)
+    public function EnregistrerHeures(Request $request, EntityManagerInterface $entityManager, $sproid, $butForReturn)
     {
         //je veux ajouter des informations dans ma table heure
         //liée cette table à la table connexion précédente
@@ -785,6 +844,16 @@ class CommunController extends AbstractController
             //j'enregistre la nouvelle prime dans la bdd
             $entityManager->persist($heure);
             $entityManager->flush();
+            //je redirecte vers page ou route en fonction du butForReturn :
+            if ($butForReturn=='SUPER_ADMIN_SEUL'){
+                $assoMail=$InfosPro->getSmailasso();
+                $idsalarieperso=$InfosPro->getSPersoId()->getSpersoid();
+                return $this->redirectToRoute('voirSalarie', [
+                    'idsalarie'=>$idsalarieperso, //id de l'entite salarioinfosperso
+                    'assoMail'=> $assoMail, //id de l'association
+                    'but'=> 'association',
+                ]);
+            }
             //je redirecte vers page ou route
             return $this->redirectToRoute('GestionSalarie', [
                 'idinfospro' => $sproid,
@@ -800,13 +869,13 @@ class CommunController extends AbstractController
     }
 
     /**
-     * @Route("/modifHeure/{sproid}/{idheure}", name="modifHeure")
+     * @Route("/modifHeure/{sproid}/{idheure}/{butForReturn}", name="modifHeure")
      * @param Request $request
      * @param EntityManagerInterface $entityManager
      * @param $sproid
      * @return Response
      */
-    public function modifHeure(Request $request,EntityManagerInterface $entityManager,$sproid, $idheure){
+    public function modifHeure(Request $request,EntityManagerInterface $entityManager,$sproid, $idheure, $butForReturn){
         $heure=$this->getDoctrine()->getRepository(Heures::class)->find($idheure);
 
         // je récupère le type temps de travail de l'entité salarie info pro
@@ -820,9 +889,19 @@ class CommunController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()){
             $entityManager->persist($heure);
             $entityManager->flush();
-            return $this->redirectToRoute('GestionSalarie',[
+            //je redirecte vers page ou route en fonction du butForReturn :
+            if ($butForReturn=='SUPER_ADMIN_SEUL'){
+                $assoMail=$InfosPro->getSmailasso();
+                $idsalarieperso=$InfosPro->getSPersoId()->getSpersoid();
+                return $this->redirectToRoute('voirSalarie', [
+                    'idsalarie'=>$idsalarieperso, //id de l'entite salarioinfosperso
+                    'assoMail'=> $assoMail, //id de l'association
+                    'but'=> 'association',
+                ]);
+            }
+           /* return $this->redirectToRoute('GestionSalarie',[
                 'idinfospro'=>$sproid,
-            ]);
+            ]);*/
         }
         else{
             return $this->render('Commun/AjoutHeures.html.twig', [
