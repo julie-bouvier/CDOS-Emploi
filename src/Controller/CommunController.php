@@ -501,13 +501,28 @@ class CommunController extends AbstractController
         //je donne un formulaire avec les champs de la table frais
         $form = $this->createForm(FraisType::class, $frais);
         $form->handleRequest($request);
-        //$frais->setFratotal(($form.fraquantite)*($form.frataux));
+
+
         //quand je clique sur valider le form, meme si les champs ne sont pas remplis, je persist and flush avec la bdd
         if ($form->isSubmitted() && $form->isValid()) {
             //j'enregistre le nouveau frais dans la bdd
 
             $entityManager->persist($frais);
             $entityManager->flush();
+            // on veut entrer le total (quantité*taux) dans la bdd
+            //je recupère la quantité de mon frais
+            $fraquantite = $frais->getFraquantite();
+            //je récupère le taux de mon frais
+            $frataux = $frais->getFrataux();
+            //je fais le calcul que je mets dans une variable $total
+            $total = $fraquantite*$frataux;
+            //j'ajoute mon résulté dans ma variable de l'entité frais
+            $frais->setFratotal($total);
+
+            //j'enregistre le nouveau frais (avec le total) dans la bdd
+            $entityManager->persist($frais);
+            $entityManager->flush();
+
             //je redirecte vers page ou route
             return $this->redirectToRoute('GestionSalarie', [
                 'idinfospro' => $sproid,
