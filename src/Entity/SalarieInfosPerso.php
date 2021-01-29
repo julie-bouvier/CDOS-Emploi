@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\Common\Collections\Collection;
+use App\Entity\SalarieInfosPro;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
