@@ -45,7 +45,7 @@
                             <li><B>Nombre d'enfants a charge :</B> {{ infosperso.snbenfant }} </li>
 
                             <br>
-                            <a href="{{ path('modifInfosPerso',{'idInfosPerso': infosperso.spersoid, 'idmail': idmail})}}" method="post" type="button" class="btn btn-success">Modifier les informations personnelles</a>
+                            <a href="{{ path('modifInfosPerso',{'idInfosPerso': infosperso.spersoid, 'idmail': idmail, 'Page1':Page1, 'Page2':Page2})}}" method="post" type="button" class="btn btn-success">Modifier les informations personnelles</a>
                             <br></p>
                         </div>
                     </div>
@@ -113,7 +113,7 @@
                         </li>
                         <li><B> Autres éléments de rémunération :</B>  {{ infospro.sautreelement }}</li>
                                 <br>
-                                <a href="{{ path('modifInfosPro',{'idInfosPro': infospro.sproid, 'idmail':idmail, 'idPerso':infosperso.spersoid})}}" method="post" type="button" class="btn btn-success">Modifier les informations professionnelles</a>
+                                <a href="{{ path('modifInfosPro',{'idInfosPro': infospro.sproid, 'idmail':idmail, 'idPerso':infosperso.spersoid, 'Page1':Page1, 'Page2':Page2})}}" method="post" type="button" class="btn btn-success">Modifier les informations professionnelles</a>
                                 <br></p>
                         </div>
                     </div>

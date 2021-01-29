@@ -16,8 +16,6 @@
         <div class="col">
             Numéro de sécu :
             {{ form_widget(form.snumsecu) }}
-
-
             <button type="submit" class="btn btn-success">Rechercher</button>
         </div>
     </div>
@@ -43,7 +41,7 @@
                     <td>{{ Info.sdatenaissance|date("d/m/Y")}}</td>
                     <td>{{ Info.snumsecu }}</td>
                     <td>
-                        <a href="{{ path('AjoutInfosPro',{'mailasso': mailasso, 'idinfoperso': Info.spersoid, 'role' : role}) }}" method="post">Selectionner</a>
+                        <a href="{{ path('AjoutInfosPro',{'mailasso': mailasso, 'idinfoperso': Info.spersoid, 'role' : role, 'Page1' : Page1}) }}" method="post">Selectionner</a>
                     </td>
                 </tr>
             {% endfor %}
@@ -70,6 +68,6 @@
     <br>
     <br>
     <td>
-        <a href="{{ path('AjoutInfosPerso',{'mailasso': mailasso, 'role' : role}) }}" method="post" type="button" class="btn btn-danger">Ajouter un nouveau Salarié</a>
+        <a href="{{ path('AjoutInfosPerso',{'mailasso': mailasso, 'role' : role, 'Page1': Page1}) }}" method="post" type="button" class="btn btn-danger">Ajouter un nouveau Salarié</a>
     </td>
 {% endblock %}

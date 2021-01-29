@@ -71,13 +71,13 @@ class CommunController extends AbstractController
     }
 
     /**
-     * @Route("/AjoutInfosPerso/{mailasso}/{role}", name="AjoutInfosPerso")
+     * @Route("/AjoutInfosPerso/{mailasso}/{role}/{Page1}", name="AjoutInfosPerso")
      * @param $mailasso
      * @param Request $request
      * @param EntityManagerInterface $entityManager
      * @return RedirectResponse|Response
      */
-    public function AjoutInfosPerso($mailasso, $role, Request $request, EntityManagerInterface $entityManager) {
+    public function AjoutInfosPerso($mailasso, $role, Request $request, EntityManagerInterface $entityManager, $Page1) {
         //je crée un objet InfosPerso
         $InfosPerso = new SalarieInfosPerso();
         //je li l'association à la bonne entité salarieinfosperso et inversement
@@ -101,14 +101,16 @@ class CommunController extends AbstractController
             return $this->redirectToRoute('AjoutInfosPro', [
                 'idinfoperso' => $idinfosPerso,
                 'mailasso' => $mailasso,
-                'role' => $role
+                'role' => $role,
+                'Page1'=>$Page1
             ]);
         }
         else{
             return $this->render('Commun/AjoutInfosPerso.html.twig', [
                 'form' => $form->createView(),
                 'mailasso'=> $mailasso,
-                'role'=>$role
+                'role'=>$role,
+                'Page1'=>$Page1
             ]);
         }
     }
@@ -116,14 +118,14 @@ class CommunController extends AbstractController
     /*######################## SALARIE INFOS PRO ########################*/
 
     /**
-     * @Route("/AjoutInfosPro/{mailasso}/{idinfoperso}/{role}", name="AjoutInfosPro")
+     * @Route("/AjoutInfosPro/{mailasso}/{idinfoperso}/{role}/{Page1}", name="AjoutInfosPro")
      * @param $idinfoperso
      * @param $mailasso
      * @param Request $request
      * @param EntityManagerInterface $entityManager
      * @return RedirectResponse|Response
      */
-    public function AjoutInfosPro($mailasso, $idinfoperso, $role, Request $request, EntityManagerInterface $entityManager) {
+    public function AjoutInfosPro($mailasso, $idinfoperso, $role, Request $request, EntityManagerInterface $entityManager, $Page1) {
         //trouve l'entité salaireinfoperso à partir de lid
         $salarieinfoperso=$this->getDoctrine()->getRepository(SalarieInfosPerso::class)->find($idinfoperso);
         //on trouve l'association avec le mail asso
@@ -168,11 +170,13 @@ class CommunController extends AbstractController
             //je redirecte vers page ou route
             if ($role=='SUPER_ADMIN'){
                 return $this->redirectToRoute('affSalaries',[
-                    'assomail'=>$mailasso
+                    'assomail'=>$mailasso,
+                    'Page1'=>$Page1,
                 ]);
             }
             elseif ($role=='ADMIN_ASSO'){
                 return $this->redirectToRoute('ListeSalaries',[
+                    'Page1'=>$Page1,
                 ]);
             }
 
@@ -181,7 +185,8 @@ class CommunController extends AbstractController
             return $this->render('Commun/AjoutInfosPro.html.twig', [
                 'form' => $form->createView(),
                 'mailasso'=> $mailasso,
-                'idinfosperso' => $idinfoperso
+                'idinfosperso' => $idinfoperso,
+                'Page1'=>$Page1,
             ]);
         }
     }

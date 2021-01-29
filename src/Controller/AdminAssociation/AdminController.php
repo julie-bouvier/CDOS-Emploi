@@ -93,13 +93,13 @@ class AdminController extends AbstractController
     /*######################## MODIFS INFOS SALARIES ########################*/
 
     /**
-     * @Route("/modifInfosPerso/{idInfosPerso}/{idmail}", name="modifInfosPerso")
+     * @Route("/modifInfosPerso/{idInfosPerso}/{idmail}/{Page1}/{Page2}", name="modifInfosPerso")
      * @param Request $request
      * @param EntityManagerInterface $entityManager
      * @param $idInfosPerso
      * @return Response
      */
-    public function modifInfosPerso(Request $request,EntityManagerInterface $entityManager, $idInfosPerso, $idmail){
+    public function modifInfosPerso(Request $request,EntityManagerInterface $entityManager, $idInfosPerso, $idmail, $Page1, $Page2){
         $infosperso=$this->getDoctrine()->getRepository(SalarieInfosPerso::class)->find($idInfosPerso);
         $form=$this->createForm(AjoutInfosPersoType::class, $infosperso);
         $form->handleRequest($request);
@@ -109,27 +109,31 @@ class AdminController extends AbstractController
             $entityManager->flush();
             return $this->redirectToRoute('ProfilSalarie',[
                 'idPerso'=>$idInfosPerso,
-                'idmail'=> $idmail
+                'idmail'=> $idmail,
+                'Page1'=>$Page1,
+                'Page2'=>$Page2
             ]);
         }
         else{
             return $this->render('Commun/AjoutInfosPerso.html.twig', [
                 'form' => $form->createView(),
                 'idSalarie'=>$idInfosPerso,
-                'idmail'=> $idmail
+                'idmail'=> $idmail,
+                'Page1'=>$Page1,
+                'Page2'=>$Page2
             ]);
         }
     }
 
 
     /**
-     * @Route("/modifInfosPro/{idInfosPro}/{idPerso}/{idmail}", name="modifInfosPro")
+     * @Route("/modifInfosPro/{idInfosPro}/{idPerso}/{idmail}/{Page1}/{Page2}", name="modifInfosPro")
      * @param Request $request
      * @param EntityManagerInterface $entityManager
      * @param $idInfosPro
      * @return Response
      */
-    public function modifInfosPro(Request $request,EntityManagerInterface $entityManager, $idInfosPro, $idmail, $idPerso){
+    public function modifInfosPro(Request $request,EntityManagerInterface $entityManager, $idInfosPro, $idmail, $idPerso, $Page1, $Page2){
         $infospro=$this->getDoctrine()->getRepository(SalarieInfosPro::class)->find($idInfosPro);
         $form=$this->createForm(AjoutInfosProType::class, $infospro);
         $form->handleRequest($request);
@@ -140,14 +144,18 @@ class AdminController extends AbstractController
             return $this->redirectToRoute('ProfilSalarie',[
                 'idPro'=>$idInfosPro,
                 'idmail'=> $idmail,
-                'idPerso'=> $idPerso
+                'idPerso'=> $idPerso,
+                'Page1'=>$Page1,
+                'Page2'=>$Page2
             ]);
         }
         else{
             return $this->render('Commun/AjoutInfosPro.html.twig', [
                 'form' => $form->createView(),
                 'idSalarie'=>$idInfosPro,
-                'idmail'=> $idmail
+                'idmail'=> $idmail,
+                'Page1'=>$Page1,
+                'Page2'=>$Page2
             ]);
         }
     }
