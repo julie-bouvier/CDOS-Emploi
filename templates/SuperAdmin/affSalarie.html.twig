@@ -40,9 +40,15 @@
                 </td>
             </tr>
            <tr>
+               {% if assoMail is defined %}
                 <td>
-                    <a href="{{ path('modifSalariesPerso',{'idSalarie': salarie.spersoid, 'assoMail': assoMail, 'but': but, 'Page1': Page1, 'Page2': Page2}) }}" method="post">Modifier</a>
+                    <a href="{{ path('modifSalariesPerso',{'idSalarie': salarie.spersoid, 'assoMail':assoMail, 'but':but}) }}" method="post">Modifier</a>
                 </td>
+               {% else %}
+                   <td>
+                       <a href="{{ path('modifSalariesPerso',{'idSalarie': salarie.spersoid, 'assoMail':' ', 'but':'salarie'}) }}" method="post">Modifier</a>
+                   </td>
+               {% endif %}
             </tr>
 
         </table>
@@ -108,7 +114,11 @@
 
                                        {# Toutes les tables secondaires #}
                                    </table>
-                                    <a href="{{ path('modifSalariesPro',{'idInfoProSalarie': infopro.sproid, 'idSalarie': salarie.spersoid}) }}" method="post">Modifier</a>
+                                    {% if assoMail is defined %}
+                                        <a href="{{ path('modifSalariesPro',{'idInfoProSalarie': infopro.sproid, 'idSalarie': salarie.spersoid, 'assoMail': assoMail, 'but':but}) }}" method="post">Modifier</a>
+                                    {% else %}
+                                        <a href="{{ path('modifSalariesPro',{'idInfoProSalarie': infopro.sproid, 'idSalarie': salarie.spersoid, 'assoMail': ' ', 'but':'salarie'}) }}" method="post">Modifier</a>
+                                    {% endif %}
                                     <br>
                                     <br><br>
                                     {% if conges is defined %}
@@ -333,7 +343,8 @@
                                                 </div>
                                             </tr>
                                         </table>
-
+                                    {% else %}
+                                        <a href="{{ path('GestionSalarie',{'idinfospro': infopro.sproid}) }}" method="post" type="button" class="btn btn-danger">Gestions des informations</a>
                                     {% endif %}
 
                                 {% endif %}

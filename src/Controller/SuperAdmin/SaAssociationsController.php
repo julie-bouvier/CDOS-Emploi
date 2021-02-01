@@ -86,6 +86,7 @@ class SaAssociationsController extends AbstractController
     /**
      * @Route("/voirAssociation/{assomail}/{Page1}", name="voirAssociation")
      * @param $assomail
+     * @param $Page1
      * @return Response
      */
     public function voirAssociation($assomail, $Page1){

@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>{% block title %}Welcome!{% endblock %}</title>
     <link rel="stylesheet" href="https://bootswatch.com/4/flatly/bootstrap.min.css">
-
     {% block stylesheets %}{% endblock %}
 </head>
 <body>
@@ -12,7 +11,6 @@
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/keytable/2.5.0/js/dataTables.keyTable.min.js"></script>
-
 {% endblock  %}
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <a class="navbar-brand" href="#">CDOS-Emplois</a>
@@ -25,7 +23,6 @@
             <li class="nav-item">
                 <a class="nav-link" href="/">Accueil</a>
             </li>
-
             {% if app.user %}
                 {% for role in app.user.roles() %}
                     {% if role == 'ROLE_SUPER_ADMIN' %}
@@ -38,9 +35,6 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ path('affAllSalaries') }}">Salariés</a>
                         </li>
-{#                        <li class="nav-item">#}
-{#                            <a class="nav-link" href="{{ path('affAssociation',{'but': 'salaries'}) }}">Salariés</a>#}
-{#                        </li>#}
                     {% endif %}
                     {% if role == 'ROLE_ADMIN' %}
                         <li class="nav-item">
@@ -65,11 +59,6 @@
         {% endif %}
     </div>
 </nav>
-{% if app.user %}
-    {% for role in app.user.roles() %}
-        {{ role }} <br>
-    {% endfor %}
-{% endif %}
 <div class="container">
     {% block body %}{% endblock %}
 </div>
