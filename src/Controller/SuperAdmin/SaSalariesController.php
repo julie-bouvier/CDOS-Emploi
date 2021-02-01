@@ -103,7 +103,6 @@ class SaSalariesController extends AbstractController
                 }
             }
 
-
             //toutes les infos des tables secondaires de ce nouvel infopro
             $Conges= $this -> getDoctrine() -> getRepository(Conges::class) -> findBy(['sproid'=> $wantinfospro]);
             $ArretTravails= $this -> getDoctrine() -> getRepository(ArretTravail::class) -> findBy(['sproid'=> $wantinfospro]);
@@ -127,6 +126,8 @@ class SaSalariesController extends AbstractController
                 'heures' => $Heures,
                 'avenants' => $Avenants,
                 'toto'=>$toto,
+                'assoMail'=>$assoMail,
+                'but'=>$but,
             ]);
         }
         elseif ($but=='salarie') {
@@ -142,21 +143,19 @@ class SaSalariesController extends AbstractController
                 'infospros'=>$infospros, //liste des salariésinfospro liés à ce salarié
             ]);
         }
-
-
     }
 
     /*######################## SALARIE INFOS PRO ########################*/
 
     /**
-     * @Route("/modifSalariesPro/{idInfoProSalarie}/{idSalarie}", name="modifSalariesPro")
+     * @Route("/modifSalariesPro/{idInfoProSalarie}/{idSalarie}/{assoMail}/{but}", name="modifSalariesPro")
      * @param Request $request
      * @param EntityManagerInterface $entityManager
      * @param $idInfoProSalarie
      * @param $idSalarie
      * @return Response
      */
-    public function modifSalariesPro(Request $request,EntityManagerInterface $entityManager,$idInfoProSalarie, $idSalarie){
+    public function modifSalariesPro(Request $request,EntityManagerInterface $entityManager,$idInfoProSalarie, $idSalarie, $assoMail, $but){
         $infospros=$this->getDoctrine()->getRepository(SalarieInfosPro::class)->find($idInfoProSalarie);
         $form=$this->createForm(SalarieInfosProType::class, $infospros);
         $form->handleRequest($request);
@@ -164,8 +163,10 @@ class SaSalariesController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()){
             $entityManager->persist($infospros);
             $entityManager->flush();
-            return $this->redirectToRoute('voirSalaries',[
-                'idsalarie'=>$idSalarie
+            return $this->redirectToRoute('voirSalarie',[
+                'idsalarie'=>$idSalarie,
+                'assoMail'=>$assoMail,
+                'but'=>$but
             ]);
         }
         else{
@@ -180,13 +181,13 @@ class SaSalariesController extends AbstractController
     /*######################## SALARIE INFOS PERSO ########################*/
 
     /**
-     * @Route("/modifSalariesPerso/{idSalarie}", name="modifSalariesPerso")
+     * @Route("/modifSalariesPerso/{idSalarie}/{assoMail}/{but}", name="modifSalariesPerso")
      * @param Request $request
      * @param EntityManagerInterface $entityManager
      * @param $idSalarie
      * @return Response
      */
-    public function modifSalariesPerso(Request $request,EntityManagerInterface $entityManager, $idSalarie){
+    public function modifSalariesPerso(Request $request,EntityManagerInterface $entityManager, $idSalarie, $assoMail, $but){
         $infosperso=$this->getDoctrine()->getRepository(SalarieInfosPerso::class)->find($idSalarie);
         $form=$this->createForm(AjoutInfosPersoType::class, $infosperso);
         $form->handleRequest($request);
@@ -194,14 +195,18 @@ class SaSalariesController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()){
             $entityManager->persist($infosperso);
             $entityManager->flush();
-            return $this->redirectToRoute('voirSalaries',[
-                'idsalarie'=>$idSalarie
+            return $this->redirectToRoute('voirSalarie',[
+                'idsalarie'=>$idSalarie,
+                'assoMail'=>$assoMail,
+                'but'=>$but,
             ]);
         }
         else{
             return $this->render('Commun/AjoutInfosPerso.html.twig', [
                 'form' => $form->createView(),
-                'idSalarie'=>$idSalarie
+                'idSalarie'=>$idSalarie,
+                'assoMail'=>$assoMail,
+                'but'=>$but,
             ]);
         }
     }

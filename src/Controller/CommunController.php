@@ -230,9 +230,11 @@ class CommunController extends AbstractController
                     'but'=> 'association',
                 ]);
             }
-            /*return $this->redirectToRoute('GestionSalarie', [
-                'idinfospro' => $sproid,
-            ]);*/
+            elseif ($butForReturn=='SUPER_ADMIN_PLUS'){
+                return $this->redirectToRoute('GestionSalarie', [
+                    'idinfospro'=>$sproid, //id de l'entite salarioinfosperso
+                ]);
+            }
 
         } else {
             return $this->render('Commun/AjoutConges.html.twig', [
@@ -270,9 +272,11 @@ class CommunController extends AbstractController
                         'but'=> 'association',
                     ]);
                 }
-               /* return $this->redirectToRoute('GestionSalarie',[
-                    'idinfospro'=>$sproid,
-                ]);*/
+                elseif ($butForReturn=='SUPER_ADMIN_PLUS'){
+                    return $this->redirectToRoute('GestionSalarie', [
+                        'idinfospro'=>$sproid, //id de l'entite salarioinfosperso
+                    ]);
+                }
             }
             else{
                 return $this->render('Commun/AjoutConges.html.twig', [
@@ -321,9 +325,11 @@ class CommunController extends AbstractController
                     'but'=> 'association',
                 ]);
             }
-            /*return $this->redirectToRoute('GestionSalarie', [
-                'idinfospro' => $sproid,
-            ]);*/
+            elseif ($butForReturn=='SUPER_ADMIN_PLUS'){
+                return $this->redirectToRoute('GestionSalarie', [
+                    'idinfospro'=>$sproid, //id de l'entite salarioinfosperso
+                ]);
+            }
         } else {
             return $this->render('Commun/AjoutArretTravail.html.twig', [
                 'form' => $form->createView(),
@@ -363,9 +369,11 @@ class CommunController extends AbstractController
                     'but'=> 'association',
                 ]);
             }
-            /*return $this->redirectToRoute('GestionSalarie', [
-                'idinfospro' => $sproid,
-            ]);*/
+            elseif ($butForReturn=='SUPER_ADMIN_PLUS'){
+                return $this->redirectToRoute('GestionSalarie', [
+                    'idinfospro'=>$sproid, //id de l'entite salarioinfosperso
+                ]);
+            }
         } else {
             return $this->render('Commun/AjoutArretTravail.html.twig', [
                 'form' => $form->createView(),
@@ -412,10 +420,11 @@ class CommunController extends AbstractController
                     'but'=> 'association',
                 ]);
             }
-            /*//je redirecte vers page ou route
-            return $this->redirectToRoute('GestionSalarie', [
-                'idinfospro' => $sproid,
-            ]);*/
+            elseif ($butForReturn=='SUPER_ADMIN_PLUS'){
+                return $this->redirectToRoute('GestionSalarie', [
+                    'idinfospro'=>$sproid, //id de l'entite salarioinfosperso
+                ]);
+            }
         } else {
             return $this->render('Commun/AjoutChomage.html.twig', [
                 'form' => $form->createView(),
@@ -452,9 +461,11 @@ class CommunController extends AbstractController
                     'but'=> 'association',
                 ]);
             }
-           /* return $this->redirectToRoute('GestionSalarie',[
-                'idinfospro'=>$sproid,
-            ]);*/
+            elseif ($butForReturn=='SUPER_ADMIN_PLUS'){
+                return $this->redirectToRoute('GestionSalarie', [
+                    'idinfospro'=>$sproid, //id de l'entite salarioinfosperso
+                ]);
+            }
         }
         else{
             return $this->render('Commun/AjoutChomage.html.twig', [
@@ -502,10 +513,11 @@ class CommunController extends AbstractController
                     'but'=> 'association',
                 ]);
             }
-            //je redirecte vers page ou route
-            /*return $this->redirectToRoute('GestionSalarie', [
-                'idinfospro' => $sproid,
-            ]);*/
+            elseif ($butForReturn=='SUPER_ADMIN_PLUS'){
+                return $this->redirectToRoute('GestionSalarie', [
+                    'idinfospro'=>$sproid, //id de l'entite salarioinfosperso
+                ]);
+            }
         } else {
             return $this->render('Commun/AjoutAutreAbsence.html.twig', [
                 'form' => $form->createView(),
@@ -542,9 +554,11 @@ class CommunController extends AbstractController
                     'but'=> 'association',
                 ]);
             }
-            /*return $this->redirectToRoute('GestionSalarie', [
-                'idinfospro' => $sproid,
-            ]);*/
+            elseif ($butForReturn=='SUPER_ADMIN_PLUS'){
+                return $this->redirectToRoute('GestionSalarie', [
+                    'idinfospro'=>$sproid, //id de l'entite salarioinfosperso
+                ]);
+            }
         } else {
             return $this->render('Commun/AjoutAutreAbsence.html.twig', [
                 'form' => $form->createView(),
@@ -590,10 +604,11 @@ class CommunController extends AbstractController
                     'but'=> 'association',
                 ]);
             }
-            /*//je redirecte vers page ou route
-            return $this->redirectToRoute('GestionSalarie', [
-                'idinfospro' => $sproid,
-            ]);*/
+            elseif ($butForReturn=='SUPER_ADMIN_PLUS'){
+                return $this->redirectToRoute('GestionSalarie', [
+                    'idinfospro'=>$sproid, //id de l'entite salarioinfosperso
+                ]);
+            }
 
         } else {
             return $this->render('Commun/AjoutPrime.html.twig', [
@@ -631,9 +646,11 @@ class CommunController extends AbstractController
                     'but'=> 'association',
                 ]);
             }
-           /* return $this->redirectToRoute('GestionSalarie',[
-                'idinfospro'=>$sproid,
-            ]);*/
+            elseif ($butForReturn=='SUPER_ADMIN_PLUS'){
+                return $this->redirectToRoute('GestionSalarie', [
+                    'idinfospro'=>$sproid, //id de l'entite salarioinfosperso
+                ]);
+            }
         }
         else{
             return $this->render('Commun/AjoutPrime.html.twig', [
@@ -698,10 +715,11 @@ class CommunController extends AbstractController
                     'but'=> 'association',
                 ]);
             }
-            //je redirecte vers page ou route
-            /*return $this->redirectToRoute('GestionSalarie', [
-                'idinfospro' => $sproid,
-            ]);*/
+            elseif ($butForReturn=='SUPER_ADMIN_PLUS'){
+                return $this->redirectToRoute('GestionSalarie', [
+                    'idinfospro'=>$sproid, //id de l'entite salarioinfosperso
+                ]);
+            }
         } else {
             return $this->render('Commun/AjoutFrais.html.twig', [
                 'form' => $form->createView(),
@@ -737,9 +755,11 @@ class CommunController extends AbstractController
                     'but'=> 'association',
                 ]);
             }
-            /*return $this->redirectToRoute('GestionSalarie', [
-                'idinfospro' => $sproid,
-            ]);*/
+            elseif ($butForReturn=='SUPER_ADMIN_PLUS'){
+                return $this->redirectToRoute('GestionSalarie', [
+                    'idinfospro'=>$sproid, //id de l'entite salarioinfosperso
+                ]);
+            }
         } else {
             return $this->render('Commun/AjoutFrais.html.twig', [
                 'form' => $form->createView(),
@@ -786,10 +806,11 @@ class CommunController extends AbstractController
                     'but'=> 'association',
                 ]);
             }
-            //je redirecte vers page ou route
-            /*return $this->redirectToRoute('GestionSalarie', [
-                'idinfospro' => $sproid,
-            ]);*/
+            elseif ($butForReturn=='SUPER_ADMIN_PLUS'){
+                return $this->redirectToRoute('GestionSalarie', [
+                    'idinfospro'=>$sproid, //id de l'entite salarioinfosperso
+                ]);
+            }
         } else {
             return $this->render('Commun/AjoutAvenant.html.twig', [
                 'form' => $form->createView(),
@@ -826,9 +847,11 @@ class CommunController extends AbstractController
                     'but'=> 'association',
                 ]);
             }
-            /*return $this->redirectToRoute('GestionSalarie', [
-                'idinfospro' => $sproid,
-            ]);*/
+            elseif ($butForReturn=='SUPER_ADMIN_PLUS'){
+                return $this->redirectToRoute('GestionSalarie', [
+                    'idinfospro'=>$sproid, //id de l'entite salarioinfosperso
+                ]);
+            }
         } else {
             return $this->render('Commun/AjoutAvenant.html.twig', [
                 'form' => $form->createView(),
@@ -879,10 +902,11 @@ class CommunController extends AbstractController
                     'but'=> 'association',
                 ]);
             }
-            //je redirecte vers page ou route
-            return $this->redirectToRoute('GestionSalarie', [
-                'idinfospro' => $sproid,
-            ]);
+            elseif ($butForReturn=='SUPER_ADMIN_PLUS'){
+                return $this->redirectToRoute('GestionSalarie', [
+                    'idinfospro'=>$sproid, //id de l'entite salarioinfosperso
+                ]);
+            }
 
         } else {
             return $this->render('Commun/AjoutHeures.html.twig', [
@@ -924,9 +948,11 @@ class CommunController extends AbstractController
                     'but'=> 'association',
                 ]);
             }
-           /* return $this->redirectToRoute('GestionSalarie',[
-                'idinfospro'=>$sproid,
-            ]);*/
+            elseif ($butForReturn=='SUPER_ADMIN_PLUS'){
+                return $this->redirectToRoute('GestionSalarie', [
+                    'idinfospro'=>$sproid, //id de l'entite salarioinfosperso
+                ]);
+            }
         }
         else{
             return $this->render('Commun/AjoutHeures.html.twig', [
