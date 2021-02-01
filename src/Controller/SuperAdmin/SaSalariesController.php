@@ -67,15 +67,16 @@ class SaSalariesController extends AbstractController
     }
 
     /**
-     * @Route("/voirSalarie/{idsalarie}/{assoMail}/{but}", name="voirSalarie")
+     * @Route("/voirSalarie/{idsalarie}/{assoMail}/{but}/{Page1}/{Page2}", name="voirSalarie")
      * @param $idsalarie
      * @param $assoMail
      * @param $but
      * @return Response
      */
-    public function voirSalarie($idsalarie, $assoMail, $but){
+    public function voirSalarie($idsalarie, $assoMail, $but, $Page1, $Page2){
         //récupérer l'objet salarié avec notre id
         $salarie=$this->getDoctrine()->getRepository(SalarieInfosPerso::class)->find($idsalarie);
+        $Page3='Profil d\'un salarié';
         //if but = association alors je trouve l'aaso avec  assomail et les infos pro de cette asso
         //on veut afficher les informations du salariés QUE de l'asso cliquée (assoMail)
         if ($but=='association'){
@@ -84,10 +85,8 @@ class SaSalariesController extends AbstractController
             // on a une liste d'entité salarie infos pro = $infospros
             $infospros=$salarie->getSproid();
 
-            $toto='je suis dehors';
             // TOURNER dans cette liste
             if ($infospros!=null){
-                $toto='$infor pro est pas vide';
                 for ($i=0; $i<count($infospros); $i++){
                     if ($infospros[$i]!=null){
                         $toto='$infopro[$i] est aps null';
@@ -127,6 +126,11 @@ class SaSalariesController extends AbstractController
                 'heures' => $Heures,
                 'avenants' => $Avenants,
                 'toto'=>$toto,
+                'assoMail'=>$assoMail,
+                'but'=>$but,
+                'Page1'=>$Page1,
+                'Page2'=>$Page2,
+                'Page3'=>$Page3
             ]);
         }
         elseif ($but=='salarie') {
@@ -139,7 +143,12 @@ class SaSalariesController extends AbstractController
             return $this->render('SuperAdmin/affSalarie.html.twig', [
                 'salarie' => $salarie, //entité salariéinfoperso
                 'associations'=>$associations, //liste des associations liées à ce salarié
-                'infospros'=>$infospros, //liste des salariésinfospro liés à ce salarié
+                'infospros'=>$infospros, //liste des salariés infos pro liés à ce salarié
+                'assoMail'=>$assoMail,
+                'but'=>$but,
+                'Page1'=>$Page1,
+                'Page2'=>$Page2,
+                'Page3'=>$Page3
             ]);
         }
 
@@ -194,7 +203,7 @@ class SaSalariesController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()){
             $entityManager->persist($infosperso);
             $entityManager->flush();
-            return $this->redirectToRoute('voirSalaries',[
+            return $this->redirectToRoute('voirSalarie',[
                 'idsalarie'=>$idSalarie
             ]);
         }

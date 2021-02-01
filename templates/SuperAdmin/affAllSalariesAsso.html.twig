@@ -32,11 +32,11 @@
 
                         {% if assoMail is defined%}
                             <td>
-                                <a href="{{ path('voirSalarie',{'idsalarie': salarie.spersoid, 'assoMail': assoMail, 'but':'association'}) }}" method="post">Voir</a>
+                                <a href="{{ path('voirSalarie',{'idsalarie': salarie.spersoid, 'assoMail': assoMail, 'but':'association', 'Page1':Page1, 'Page2':Page2}) }}" method="post">Voir</a>
                             </td>
                         {% else %}
                             <td>
-                                <a href="{{ path('voirSalarie',{'idsalarie': salarie.spersoid, 'assoMail': ' ', 'but':'salarie'}) }}" method="post">Voir</a>
+                                <a href="{{ path('voirSalarie',{'idsalarie': salarie.spersoid, 'assoMail': ' ', 'but':'salarie', 'Page1':Page1, 'Page2':Page2}) }}" method="post">Voir</a>
                             </td>
                         {% endif %}
 
@@ -57,7 +57,7 @@
         {% if assoMail is defined%}
             <a href="{{ path('VerifInfosPerso',{'mailasso': assoMail, 'role':'SUPER_ADMIN', 'Page1':Page1, 'Page2':Page2}) }}" method="post" type="button" class="btn btn-success">Ajouter un salarié</a>
         {% else %}
-            <a href="{{ path('Choixasso',{'role':'SUPER_ADMIN'}) }}" method="post" type="button" class="btn btn-success">Ajouter un salarié</a>
+            <a href="{{ path('Choixasso',{'role':'SUPER_ADMIN', 'Page1':Page1, 'Page2':Page2}) }}" method="post" type="button" class="btn btn-success">Ajouter un salarié</a>
         {% endif %}
 
     </fieldset>
