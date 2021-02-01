@@ -170,7 +170,7 @@ class SaSalariesController extends AbstractController
             ]);
         }
         else{
-            return $this->render('SuperAdmin/AjoutSalarieInfosPro.html.twig', [
+            return $this->render('Commun/AjoutInfosPro.html.twig', [
                 'form' => $form->createView(),
                 'idInfoProSalarie'=> $idInfoProSalarie,
                 'idSalarie'=>$idSalarie
