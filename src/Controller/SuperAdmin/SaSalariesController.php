@@ -138,6 +138,7 @@ class SaSalariesController extends AbstractController
             ]);
         }
         elseif ($but=='salarie') {
+            $Page2='Profil d\'un salarié';
             //if but = salarie alors je cherhe toutes les assos et les infos pro du salarie
             //trouver la liste des associations liées à ce salarié
             $associations = $salarie->getAmail();
