@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Associations{% endblock %}
+
+{% block body %}
+
+    <fieldset>
+
+        <legend>informations de mon Association : </legend>
+
+        <p>Nom : {{ monAsso.anom }}</p>
+        <p>Mail : {{ monAsso.amail }}</p>
+        <p>Adresse: {{ monAsso.aadresse }}</p>
+        <p>Téléphone: {{ monAsso.atel }}</p>
+        <p>Date de création: {{ monAsso.adatecreation|date("d/m/Y") }}</p>
+        <p>Date d'embauche du premier salarié: {{ monAsso.adateembauche|date("d/m/Y") }}</p>
+        <p>Fédération: {{ monAsso.afederation }}</p>
+        <p>SIRET: {{ monAsso.asiret }}</p>
+        <p>Code APE: {{ monAsso.aape }}</p>
+        <p>Immatriculation U.R.S.S.A.F. : {{ monAsso.aurssaf}}</p>
+        <p>Code risque : {{ monAsso.acoderisque }}</p>
+        <p>Taux accident de travail : {{ monAsso.atauxaccidenttravail }}</p>
+        <p>Numéro POLE EMPLOI: {{ monAsso.apeidentifiant }}  code personnel: {{ monAsso.apecodeperso }}</p>
+        <p>Caisse retraite complémentaire: {{ monAsso.acaisseretraite }} n° d'adhérent {{ monAsso.acaisseretraitenumadh }}</p>
+        <p>N° d'adhérent Caisse de Prévoyance Humanis GNP : {{ monAsso.acaisseprevoyance }}</p>
+        <p>En cas d'adhésion à des services de prévoyance optionnels : PP {{ monAsso.app}} PO {{monAsso.ap0}}</p>
+        <p>Complémentaire Santé : {{ monAsso.acomplementaire }}       n°d'adhérent:{{monAsso.acaisseretraitenumadh}}</p>
+        <p>N°ICOM :{{ monAsso.aicom }}</p>
+        <p>N° adhérent ASSTV :{{ monAsso.aasstv}}</p>
+        <p>Nom du/de la Président(e): {{ monAsso.apresnom}}</p>
+        <p>Adresse postale: {{ monAsso.apresadresse }}</p>
+        <p>Portable:  {{ monAsso.apresportable}}</p>
+        <p>Téléphone :{{ monAsso.aprestel }}</p>
+        <p>Mail: {{ monAsso.acaisseprevoyance }}</p>
+        <p>Nom du/de la correspondant(e) pour la gestion de l'emploi: {{ monAsso.agestionnom}}</p>
+        <p>Adresse postale: {{ monAsso.acorrespondadresse }}</p>
+        <p>Portable:  {{ monAsso.acorrespondportable}}</p>
+        <p>Téléphone :{{ monAsso.acorrespondtel }}</p>
+        <p>Mail: {{ monAsso.acorrespondmail }}</p>
+        <p>Envoi des courriers par internet :   {{ monAsso.acourriersinternet }}</p>
+        <p>Envoi des courriers à l'adresse du/de la  :   {{ monAsso.aenvoicourrier }}</p>
+        <p>Mode de paiement des salaires : {{ monAsso.amodepaiement }}</p>
+        <p>Coordonnées bancaires  :   {{ monAsso.arib }}</p>
+        <p>Informations complémentaires :   {{ monAsso.ainfocomplementaire}}</p>
+        <p>Date d'adhésion au service impact emploi :   {{ monAsso.adateadhesion|date("d/m/Y") }}</p>
+        <a href="{{ path('modifMonAsso',{'idMonAsso': idAsso}) }}" method="post" type="button" class="btn btn-success">Modifier mes informations</a>
+        <br><br>
+    </fieldset>
+
+{% endblock %}
+
