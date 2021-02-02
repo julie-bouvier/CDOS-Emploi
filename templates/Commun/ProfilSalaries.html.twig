@@ -55,76 +55,293 @@
                         <div class="card-header">Informations Professionnelles</div>
                         <div class="card-body">
                             <p class="card-text">
-                    <ul>
-                        <li><B>Mail de l'association :</B>  {{ infospro.smailasso }}</li>
-                        <li><B>Nom employeur :</B>  {{ infospro.snomemployeur }}</li>
-                        <li><B>Poste occupé :</B>  {{ infospro.sposteoccupe }}</li>
-                        <li><B>Groupe CCNS:</B>  {{ infospro.sccns }}</li>
-                        <li><B>Nature du contrat :</B>  {{ infospro.snaturecontrat }}</li>
-                        <li><B>Type temps de travail (Partiel, Temps pleins ou intermitant):</B>  {{ infospro.stypetempstravail }}</li>
-                        <li><B>Gestion des congés payés:</B>
-                            {% if infospro.sgestcp=='Oui' %}
-                                Oui
-                            {% else %}
-                                Non
-                            {% endif %}
-                        </li>
-                        <li><B>Date de début :</B>  {{ infospro.sdatedebut|date("d/m/Y") }}</li>
-                        <li><B>Date de fin :</B>
-                            {% if infospro.sdatefin==null  %}
+                            <ul>
+                                <li><B>Mail de l'association :</B>  {{ Infospro.smailasso }}</li>
+                                <li><B>Nom employeur :</B>  {{ Infospro.snomemployeur }}</li>
+                                <li><B>Poste occupé :</B>  {{ Infospro.sposteoccupe }}</li>
+                                <li><B>Groupe CCNS:</B>  {{ Infospro.sccns }}</li>
+                                <li><B>Nature du contrat :</B>  {{ Infospro.snaturecontrat }}</li>
+                                <li><B>Type temps de travail (Partiel, Temps pleins ou intermitant):</B>  {{ Infospro.stypetempstravail }}</li>
+                                <li><B>Gestion des congés payés:</B>
+                                    {% if Infospro.sgestcp=='Oui' %}
+                                        Oui
+                                    {% else %}
+                                        Non
+                                    {% endif %}
+                                </li>
+                                <li><B>Date de début :</B>  {{ Infospro.sdatedebut|date("d/m/Y") }}</li>
+                                <li><B>Date de fin :</B>
+                                    {% if Infospro.sdatefin==null  %}
 
-                            {% else %}
-                                {{ infospro.sdatefin|date("d/m/Y") }}
-                            {% endif %}
-                        </li>
-                        <li><B>Motif de fin:</B>  {{ infospro.sfinmotif }}</li>
-                        <li><B>Commentaire de fin:</B>  {{ infospro.scomfin }}</li>
-                        <li><B>10% de congés payés versé manuellement:</B>
-                            {% if infospro.s10congemois=='Oui' %}
-                                Oui
-                            {% else %}
-                                Non
-                            {% endif %}
-                        </li>
-                        <li><B>Congés à prendre:</B>
-                            {% if infospro.sconge=='Oui' %}
-                                Oui
-                            {% else %}
-                                Non
-                            {% endif %}
-                        </li>
-                        <li><B>Type de contrat (si aide/subventionné) :</B>  {{ infospro.stypecontrat }}</li>
-                        <li><B>Salarié multi-employeur :</B>
-                            {% if infospro.smultiemployeur=='Oui' %}
-                                Oui
-                            {% else %}
-                                Non
-                            {% endif %}
-                        </li>
-                        <li><B>Volume horaire mensuel :</B>  {{ infospro.svolhorairemois }}</li>
-                        <li><B>Taux horaire brut (en €) :</B>  {{ infospro.stauxhorairebrut }}</li>
-                        <li><B>Salaire mensuel brut (en €) par mois :</B>  {{ infospro.ssalmoisbrut }}</li>
-                        <li><B>Adhésion complémentaire santé obligatoire proposé par l'employeur :</B>
-                            {% if infospro.scomplemsante=='Oui' %}
-                                Oui
-                            {% else %}
-                                Non
-                            {% endif %}
-                        </li>
-                        <li><B> Autres éléments de rémunération :</B>  {{ infospro.sautreelement }}</li>
+                                    {% else %}
+                                        {{ Infospro.sdatefin|date("d/m/Y") }}
+                                    {% endif %}
+                                </li>
+                                <li><B>Motif de fin:</B>  {{ Infospro.sfinmotif }}</li>
+                                <li><B>Commentaire de fin:</B>  {{ Infospro.scomfin }}</li>
+                                <li><B>10% de congés payés versé manuellement:</B>
+                                    {% if Infospro.s10congemois=='Oui' %}
+                                        Oui
+                                    {% else %}
+                                        Non
+                                    {% endif %}
+                                </li>
+                                <li><B>Congés à prendre:</B>
+                                    {% if Infospro.sconge=='Oui' %}
+                                        Oui
+                                    {% else %}
+                                        Non
+                                    {% endif %}
+                                </li>
+                                <li><B>Type de contrat (si aide/subventionné) :</B>  {{ Infospro.stypecontrat }}</li>
+                                <li><B>Salarié multi-employeur :</B>
+                                    {% if Infospro.smultiemployeur=='Oui' %}
+                                        Oui
+                                    {% else %}
+                                        Non
+                                    {% endif %}
+                                </li>
+                                <li><B>Volume horaire mensuel :</B>  {{ Infospro.svolhorairemois }}</li>
+                                <li><B>Taux horaire brut (en €) :</B>  {{ Infospro.stauxhorairebrut }}</li>
+                                <li><B>Salaire mensuel brut (en €) par mois :</B>  {{ Infospro.ssalmoisbrut }}</li>
+                                <li><B>Adhésion complémentaire santé obligatoire proposé par l'employeur :</B>
+                                    {% if Infospro.scomplemsante=='Oui' %}
+                                        Oui
+                                    {% else %}
+                                        Non
+                                    {% endif %}
+                                </li>
+                                <li><B> Autres éléments de rémunération :</B>  {{ Infospro.sautreelement }}</li>
                                 <br>
-                                <a href="{{ path('modifInfosPro',{'idInfosPro': infospro.sproid, 'idmail':idmail, 'idPerso':infosperso.spersoid, 'Page1':Page1, 'Page2':Page2})}}" method="post" type="button" class="btn btn-success">Modifier les informations professionnelles</a>
-                                <br></p>
+                                <a href="{{ path('modifInfosPro',{'idInfosPro': Infospro.sproid, 'idmail':idmail, 'idPerso':infosperso.spersoid, 'Page1':Page1, 'Page2':Page2})}}" method="post" type="button" class="btn btn-success">Modifier les informations professionnelles</a>
+                                <br>
+                            </ul></p>
                         </div>
                     </div>
-                    </ul>
+                    </div>
                 </td>
             </tr>
+        </table>
+        <br>
+        <hr>
+        <br>
+        <table>
             <tr>
                 <td>
-                    <br>
-                    <a href="{{ path('GestionSalarie',{'idinfospro': infospro.sproid})}}" method="post" type="button" class="btn btn-danger">Gestion du salarié</a>
-                    <br>
+                    {#Début de la Nav-bar, Les noms des ongles#}
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#{{idInfoPro}}.conges" role="tab" aria-controls="home" aria-selected="true">Congés</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#{{idInfoPro}}.arrets_travail" role="tab" aria-controls="profile" aria-selected="false">Arrêts de travail</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#{{idInfoPro}}.chomages" role="tab" aria-controls="profile" aria-selected="false">Chomages</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#{{idInfoPro}}.autres_absences" role="tab" aria-controls="profile" aria-selected="false">Autres absences</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#{{idInfoPro}}.primes" role="tab" aria-controls="profile" aria-selected="false">Primes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#{{idInfoPro}}.frais" role="tab" aria-controls="profile" aria-selected="false">Frais</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#{{idInfoPro}}.heures" role="tab" aria-controls="profile" aria-selected="false">Heures</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#{{idInfoPro}}.avenants" role="tab" aria-controls="profile" aria-selected="false">Avenants</a>
+                        </li>
+                    </ul>
+
+                    {#Début du contenu des onglets#}
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="{{idInfoPro}}.conges" role="tabpanel" aria-labelledby="home-tab">
+                            <br>
+                            <H4 style="color:#F7230C">Voici la page permettant de gérer les congés :</H4>
+
+                            {% for conge in conges %}
+                                <div class="card border-primary mb-3" style="max-width: 20rem;">
+                                    <div class="card-body">
+                                        <p class="card-text">
+                                        <li><B>Type de congés :</B>  {{ conge.contype }}</li>
+                                        <li><B>Dernier jour travaillé :</B>  {{ conge.condernierjour|date("d/m/Y")}}</li>
+                                        <li><B>Jour de reprise :</B>  {{ conge.conjourreprise|date("d/m/Y") }}</li>
+                                        <li><B>Jours normalement travaillé :</B>  {{ conge.conjournormaltrav | json_encode }} </li>
+                                        <li><B>Nombre de jour ouvrable pris :</B>  {{ conge.connbjourouvrablepris }} </li>
+                                        <li><B>Commentaire :</B>  {{ conge.concommentaire }} </li>
+                                        </p>
+                                        <a href="{{ path('modifConge',{'sproid': idInfoPro , 'idconge': conge.conid,'butForReturn': 'ADMIN_ASSO', 'Page1': Page1, 'Page2': Page2}) }}" method="post" type="button" class="btn btn-danger">Modifier un congé</a>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                            <br>
+                            <a href="{{ path('EnregistrerConge',{'sproid': idInfoPro ,'butForReturn': 'ADMIN_ASSO', 'Page1': Page1, 'Page2': Page2}) }}" method="post" type="button" class="btn btn-danger">Ajouter un congé</a>
+
+                        </div>
+
+                        <div class="tab-pane" id="{{idInfoPro}}.arrets_travail" role="tabpanel" aria-labelledby="profile-tab">
+                            <br>
+                            <H4 style="color:#F7230C">Voici la page permettant de gérer les arrêts de de travail :</H4>
+
+                            {% for arrettravail in arrettravails %}
+                                <div class="card border-primary mb-3" style="max-width: 20rem;">
+                                    <div class="card-body">
+                                        <p class="card-text">
+                                        <li><B>Type d'arrêt de travail :</B>  {{ arrettravail.attype }}</li>
+                                        <li><B>Initial ou prolongation  :</B>  {{ arrettravail.atprolongation}}</li>
+                                        <li><B>Date de début de l'arrêt:</B>  {{ arrettravail.atdebut|date("d/m/Y") }}</li>
+                                        <li><B>Date de fin prévisionnel de l'arrêt:</B>  {{ arrettravail.atfin|date("d/m/Y") }} </li>
+                                        <li><B>En cas de maladie : maintient des trois premiers jours:</B>  {{ arrettravail.at3jours }} </li>
+                                        {% if arrettravail.at3jours=='non' %}
+                                            <li> <B>Si non, nombre d'heures à déduire</B>  {{ arrettravail.at3jnbh}} </li>
+                                        {% endif %}
+                                        <li><B>En cas de maladie, pour les salariés ayant moins d'un an d'ancienneté, maintien à compter du 4ème jour</B>  {{ arrettravail.at4jours }} </li>
+                                        {% if arrettravail.at4jours=='non' %}
+                                            <li> <B>Si non, nombre d'heures à déduire</B>  {{ arrettravail.at4jnbh}} </li>
+                                        {% endif %}
+                                        <li><B>Commentaires :</B>  {{ arrettravail.atcommentaire }} </li>
+                                        </p>
+                                        <a href="{{ path('modifArretTravail',{'sproid': idInfoPro , 'idarrettravail': arrettravail.atid,'butForReturn': 'ADMIN_ASSO', 'Page1': Page1, 'Page2': Page2}) }}" method="post" type="button" class="btn btn-danger">Modifier un arrêt de travail</a>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                            <br>
+
+                            <a href="{{ path('EnregistrerArretTravail',{'sproid': idInfoPro,'butForReturn': 'ADMIN_ASSO', 'Page1': Page1, 'Page2': Page2}) }}" method="post" type="button" class="btn btn-danger">Ajouter un arrêt de travail</a>
+
+                        </div>
+
+                        <div class="tab-pane" id="{{idInfoPro}}.chomages" role="tabpanel" aria-labelledby="profile-tab">
+                            <br>
+                            <H4 style="color:#F7230C">Voici la page permettant de gérer les périodes de chômage :</H4>
+
+                            {% for chomage in chomages %}
+                                <div class="card border-primary mb-3" style="max-width: 20rem;">
+                                    <div class="card-body">
+                                        <p class="card-text">
+                                        <li><B>Date de début :</B>  {{ chomage.chodebut|date("d/m/Y")}}</li>
+                                        <li><B>Date de fin :</B>  {{ chomage.chofin|date("d/m/Y")}}</li>
+                                        <li><B>Nombre d'heures à déduire :</B>  {{ chomage.chonbheure }}</li>
+                                        <li><B>Maintien du chômage à 100% : {{ chomage.chomaintien }}</B>
+                                        </li>
+                                        <li><B>Commentaire :</B>  {{ chomage.chocommentaire }} </li>
+                                        </p>
+                                        <a href="{{ path('modifChomage',{'sproid': idInfoPro , 'idchomage': chomage.choid,'butForReturn': 'ADMIN_ASSO', 'Page1': Page1, 'Page2': Page2}) }}" method="post" type="button" class="btn btn-danger">Modifier un chômage</a>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                            <br>
+                            <p><a href="{{ path('EnregistrerChomage',{'sproid': idInfoPro ,'butForReturn': 'ADMIN_ASSO', 'Page1': Page1, 'Page2': Page2}) }}" method="post" type="button" class="btn btn-danger">Ajouter un chômage</a>
+                            </p>
+                        </div>
+                        <div class="tab-pane" id="{{idInfoPro}}.autres_absences" role="tabpanel" aria-labelledby="home-tab">
+                            <br>
+                            <H4 style="color:#F7230C">Voici la page permettant de gérer les autres absences:</H4>
+
+                            {% for autresabsence in autresabsences %}
+                                <div class="card border-primary mb-3" style="max-width: 20rem;">
+                                    <div class="card-body">
+                                        <p class="card-text">
+                                        <li><B>Du :</B>  {{ autresabsence.absdebut|date("d/m/Y") }}</li>
+                                        <li><B>Au :</B>  {{ autresabsence.absfin|date("d/m/Y")}}</li>
+                                        <li><B>Nombre d'heures à déduire :</B>  {{ autresabsence.absnbheure }}</li>
+                                        <li><B>Commentaires éventuels sur le type d'absence :</B>  {{ autresabsence.abscommentaire }} </li>
+                                        </p>
+                                        <a href="{{ path('modifAutreAbsence',{'sproid': idInfoPro , 'idautreabsence': autresabsence.absid,'butForReturn': 'ADMIN_ASSO', 'Page1': Page1, 'Page2': Page2}) }}" method="post" type="button" class="btn btn-danger">Modifier une autre absence</a>
+
+                                    </div>
+                                </div>
+                            {% endfor %}
+                            <br>
+                            <a href="{{ path('EnregistrerAutreAbsence',{'sproid': idInfoPro ,'butForReturn': 'ADMIN_ASSO', 'Page1': Page1, 'Page2': Page2}) }}" method="post" type="button" class="btn btn-danger">Ajouter une autre absence</a>
+
+
+                        </div>
+                        <div class="tab-pane" id="{{idInfoPro}}.primes" role="tabpanel" aria-labelledby="home-tab">
+                            <br>
+                            <H4 style="color:#F7230C">Voici la page permettant de gérer les primes :</H4>
+
+                            {% for prime in primes %}
+                                <div class="card border-primary mb-3" style="max-width: 20rem;">
+                                    <div class="card-body">
+                                        <p class="card-text">
+                                        <li><B>Type de prime :</B>  {{ prime.primtype}}</li>
+                                        <li><B>Montant de la prime :</B>  {{ prime.primmontant}}</li>
+                                        <li><B>Unité :</B>  {{ prime.primnetbrut }}</li>
+                                        <li><B>Commentaires :</B> {{ prime.primcommentaire }}
+                                        </li>
+                                        </p>
+                                        <a href="{{ path('modifPrime',{'sproid': idInfoPro , 'idprime': prime.primid,'butForReturn': 'ADMIN_ASSO', 'Page1': Page1, 'Page2': Page2}) }}" method="post" type="button" class="btn btn-danger">Modifier une prime</a>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                            <a href="{{ path('EnregistrerPrime',{'sproid': idInfoPro ,'butForReturn': 'ADMIN_ASSO', 'Page1': Page1, 'Page2': Page2}) }}" method="post" type="button" class="btn btn-danger">Ajouter une prime</a>
+                        </div>
+
+                        <div class="tab-pane" id="{{idInfoPro}}.frais" role="tabpanel" aria-labelledby="home-tab">
+                            <H4 style="color:#F7230C">Voici la page permettant de gérer les frais :</H4>
+
+                            {% for frai in frais %}
+                                <div class="card border-primary mb-3" style="max-width: 20rem;">
+                                    <div class="card-body">
+                                        <p class="card-text">
+                                        <li><B>Type de frais :</B>  {{ frai.fratype}}</li>
+                                        <li><B>Quantité :</B>  {{ frai.fraquantite}}</li>
+                                        <li><B>Taux unitaire :</B>  {{ frai.frataux }}</li>
+                                        <li><B>Total :</B>  </li>  {{ frai.fraquantite * frai.frataux }}
+                                        <li><B>Commentaires éventuels:</B> {{ frai.fracommentaire}}
+                                        </li>
+                                        </p>
+                                        <a href="{{ path('modifFrais',{'sproid': idInfoPro , 'idfrais': frai.fraid,'butForReturn': 'ADMIN_ASSO', 'Page1': Page1, 'Page2': Page2}) }}" method="post" type="button" class="btn btn-danger">Modifier un frais</a>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                            <a href="{{ path('EnregistrerFrais',{'sproid': idInfoPro ,'butForReturn': 'ADMIN_ASSO', 'Page1': Page1, 'Page2': Page2}) }}" method="post" type="button" class="btn btn-danger">Ajouter un frais</a>
+
+                        </div>
+                        <div class="tab-pane" id="{{idInfoPro}}.heures" role="tabpanel" aria-labelledby="home-tab">
+                            <br>
+                            <H4 style="color:#F7230C">Voici la page permettant de gérer les heures :</H4>
+
+                            {% for heure in heures %}
+                                <div class="card border-primary mb-3" style="max-width: 20rem;">
+                                    <div class="card-body">
+                                        <p class="card-text">
+                                        <li><B>Type d'heure :</B>  {{ heure.heurtype}}</li>
+                                        <li><B>Semaine concernée :</B>  {{ heure.heursem}}</li>
+                                        <li><B>Nombre d'heure :</B>  {{ heure.heurnb }}</li>
+                                        <li><B>Commentaires :</B> {{ heure.heurcommentaire }}
+                                        </li>
+                                        </p>
+                                        <a href="{{ path('modifHeure',{'sproid': idInfoPro , 'idheure': heure.heurid,'butForReturn': 'ADMIN_ASSO', 'Page1': Page1, 'Page2': Page2}) }}" method="post" type="button" class="btn btn-danger">Modifier une heure</a>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                            <a href="{{ path('EnregistrerHeures',{'sproid': idInfoPro,'butForReturn': 'ADMIN_ASSO', 'Page1': Page1, 'Page2': Page2}) }}" method="post" type="button" class="btn btn-danger">Ajouter une heure</a>
+                        </div>
+                        <div class="tab-pane" id="{{idInfoPro}}.avenants" role="tabpanel" aria-labelledby="home-tab">
+                            <H4 style="color:#F7230C">Voici la page permettant de gérer les avenants :</H4>
+
+                            {% for avenant in avenants %}
+                                <div class="card border-primary mb-3" style="max-width: 20rem;">
+                                    <div class="card-body">
+                                        <p class="card-text">
+                                        <li><B>Date d'effet : </B>  {{ avenant.avdebut|date("d/m/Y") }}</li>
+                                        <li><B>Type de modification :</B>  {{ avenant.avtypemodif}}</li
+                                        <li><B>Commentaires éventuels:</B> {{ avenant.avcommentaire}}
+                                        </li>
+                                        </p>
+                                        <a href="{{ path('modifAvenant',{'sproid': idInfoPro , 'idavenant': avenant.avid,'butForReturn': 'ADMIN_ASSO', 'Page1': Page1, 'Page2': Page2}) }}" method="post" type="button" class="btn btn-danger">Modifier un avenant</a>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                            <a href="{{ path('EnregistrerAvenant',{'sproid': idInfoPro,'butForReturn': 'ADMIN_ASSO', 'Page1': Page1, 'Page2': Page2}) }}" method="post" type="button" class="btn btn-danger">Ajouter un avenant</a>
+
+                        </div>
+                    </div>
                 </td>
             </tr>
         </table>
@@ -132,28 +349,12 @@
         <br>
     </fieldset>
 
-    {#  {% block javascripts %}
-        <script src="../_vendor/jquery/dist/jquery.min.js"></script>
-        <script src="../_vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="../_assets/js/custom.js"></script>
-      {% endblock %}#}
+    {% block javascripts %}
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    {% endblock %}
 
-    {#  {% block javascripts %}
 
-        <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-        <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-        <script src="https://cdn.datatables.net/keytable/2.5.0/js/dataTables.keyTable.min.js"></script>
-        <script>
-          $(document).ready(function() {
-            $('table.display').DataTable();
-          } );
-        </script>
-
-      {% endblock %}
-
-      {% block stylesheets %}
-        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
-        <link rel="stylesheet" href="https://cdn.datatables.net/keytable/2.5.0/css/keyTable.dataTables.min.css">
-      {% endblock %}#}
 
 {% endblock %}

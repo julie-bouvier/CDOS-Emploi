@@ -129,19 +129,18 @@ class SaAssociationsController extends AbstractController
     }
 
     /**
-     * @Route("/Choixasso/{role}/{Page1}/{Page2}", name="Choixasso")
+     * @Route("/Choixasso/{role}/{Page1}", name="Choixasso")
      * @param $role
      * @return Response
      */
-    public function Choixasso($role, $Page1, $Page2){
+    public function Choixasso($role, $Page1){
         $associations=$this->getDoctrine()->getRepository(Association::class)->findAll();
-        $Page3='Ajouter un salarié';
+        $Page2='Ajout : Choix d\'une association';
         return $this->render('SuperAdmin/choixAssociations.html.twig', [
             'associations' => $associations,
             'role'=>$role,
             'Page1'=>$Page1,
-            'Page2'=>$Page2,
-            'Page3'=>$Page3
+            'Page2'=>$Page2
         ]);
     }
 

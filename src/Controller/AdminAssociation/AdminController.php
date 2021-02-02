@@ -77,11 +77,29 @@ class AdminController extends AbstractController
 
                     $IdInfosPro = $InfosPro[$i] -> getSproid();
                     $InfosProAsso = $this -> getDoctrine() -> getRepository(SalarieInfosPro::class) -> find($IdInfosPro);
+                    $Conges= $this -> getDoctrine() -> getRepository(Conges::class) -> findBy(['sproid'=> $IdInfosPro]);
+                    $ArretTravails= $this -> getDoctrine() -> getRepository(ArretTravail::class) -> findBy(['sproid'=> $IdInfosPro]);
+                    $Chomages= $this -> getDoctrine() -> getRepository(Chomage::class) -> findBy(['sproid'=> $IdInfosPro]);
+                    $AutresAbsences= $this -> getDoctrine() -> getRepository(AutreAbsence::class) -> findBy(['sproid'=> $IdInfosPro]);
+                    $Primes= $this -> getDoctrine() -> getRepository(Prime::class) -> findBy(['sproid'=> $IdInfosPro]);
+                    $Frais= $this -> getDoctrine() -> getRepository(Frais::class) -> findBy(['sproid'=> $IdInfosPro]);
+                    $Heures= $this -> getDoctrine() -> getRepository(Heures::class) -> findBy(['sproid'=> $IdInfosPro]);
+                    $Avenants= $this -> getDoctrine() -> getRepository(Avenant::class) -> findBy(['sproid'=> $IdInfosPro]);
 
                     return $this->render('Commun/ProfilSalaries.html.twig', [ // renvoie vers le twig qui affiche les infos pros et perso du salarié
+                        'idPerso' => $idPerso,
+                        'idInfoPro' => $IdInfosPro,
                         'infosperso' => $InfosPerso,
-                        'infospro' => $InfosProAsso,
+                        'Infospro' => $InfosProAsso,
                         'idmail'=> $idmail,
+                        'conges' => $Conges,
+                        'arrettravails' => $ArretTravails,
+                        'chomages' => $Chomages,
+                        'autresabsences' => $AutresAbsences,
+                        'primes' => $Primes,
+                        'frais' => $Frais,
+                        'heures' => $Heures,
+                        'avenants' => $Avenants,
                         'Page1'=> $Page1,
                         'Page2'=> $Page2
                     ]);
@@ -158,36 +176,6 @@ class AdminController extends AbstractController
                 'Page2'=>$Page2
             ]);
         }
-    }
-
-    /*######################## GESTION DES SALARIES ########################*/
-
-    /**
-     * @Route("/GestionSalarie/{idinfospro}", name="GestionSalarie")
-     */
-    public function GestionSalarie($idinfospro) {
-        $infosPro= $this -> getDoctrine() -> getRepository(SalarieInfosPro::class) -> find($idinfospro);
-        $Conges= $this -> getDoctrine() -> getRepository(Conges::class) -> findBy(['sproid'=> $infosPro]);
-        $ArretTravails= $this -> getDoctrine() -> getRepository(ArretTravail::class) -> findBy(['sproid'=> $infosPro]);
-        $Chomages= $this -> getDoctrine() -> getRepository(Chomage::class) -> findBy(['sproid'=> $infosPro]);
-        $AutresAbsences= $this -> getDoctrine() -> getRepository(AutreAbsence::class) -> findBy(['sproid'=> $infosPro]);
-        $Primes= $this -> getDoctrine() -> getRepository(Prime::class) -> findBy(['sproid'=> $infosPro]);
-        $Frais= $this -> getDoctrine() -> getRepository(Frais::class) -> findBy(['sproid'=> $infosPro]);
-        $Heures= $this -> getDoctrine() -> getRepository(Heures::class) -> findBy(['sproid'=> $infosPro]);
-        $Avenants= $this -> getDoctrine() -> getRepository(Avenant::class) -> findBy(['sproid'=> $infosPro]);
-
-        return $this->render('Commun/GestionSalaries.html.twig', [ // renvoie vers le twig qui affiche les options de gestion du salarié
-            'idinfospro' => $idinfospro,
-            'conges' => $Conges,
-            'arrettravails' => $ArretTravails,
-            'chomages' => $Chomages,
-            'autresabsences' => $AutresAbsences,
-            'primes' => $Primes,
-            'frais' => $Frais,
-            'heures' => $Heures,
-            'avenants' => $Avenants,
-
-        ]);
     }
 }
 
