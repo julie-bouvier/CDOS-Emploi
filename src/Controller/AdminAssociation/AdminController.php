@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Controller\AdminAssociation;
-
 use App\Entity\ArretTravail;
 use App\Entity\AutreAbsence;
 use App\Entity\Avenant;
@@ -69,7 +68,7 @@ class AdminController extends AbstractController
     public function ProfilSalarie($idPerso, $idmail, $Page1) {
         $InfosPerso = $this -> getDoctrine() -> getRepository(SalarieInfosPerso::class) -> find($idPerso);
         $InfosPro = $InfosPerso -> getSproid();
-        $Page2 = 'Profile d\'un salarié';
+        $Page2 = 'Profil d\'un salarié';
 
         for ($i=0; $i <= count($InfosPro); $i++)
         {
@@ -176,6 +175,48 @@ class AdminController extends AbstractController
                 'idmail'=> $idmail,
                 'Page1'=>$Page1,
                 'Page2'=>$Page2
+            ]);
+        }
+    }
+
+    /*######################## GESTION DE MON ASSO ########################*/
+
+    /**
+     * @Route("/MonAssociation/", name="MonAssociation")
+     */
+    public function MonAssociation() {
+        $MailPersoConnecte= $this -> getUser() -> getUsername();
+        $PersoConnecte = $this -> getDoctrine() -> getRepository(Connexion::class) -> find($MailPersoConnecte);
+        $monAsso = $PersoConnecte -> getassociations();
+        $Page1 = 'Profil d\'une association';
+        return $this->render('/Commun/affMonAsso.html.twig', [
+            'monAsso'=> $monAsso,
+            'idAsso'=>$MailPersoConnecte,
+            'Page1'=>$Page1
+        ]);
+    }
+
+    /**
+     * @Route("/modifMonAsso/{idMonAsso}", name="modifMonAsso")
+     * @param Request $request
+     * @param EntityManagerInterface $entityManager
+     * @param $idMonAsso
+     * @return RedirectResponse|Response
+     */
+    public function modifMonAsso(Request $request,EntityManagerInterface $entityManager,$idMonAsso){
+        $association=$this->getDoctrine()->getRepository(Association::class)->find($idMonAsso);
+        $form=$this->createForm(AssociationType::class, $association);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()){
+            $entityManager->persist($association);
+            $entityManager->flush();
+            return $this->redirectToRoute('MonAssociation');
+        }
+        else{
+            return $this->render('SuperAdmin/AjoutAssociation.html.twig', [
+                'form' => $form->createView(),
+                'assoMail'=> $idMonAsso
             ]);
         }
     }
