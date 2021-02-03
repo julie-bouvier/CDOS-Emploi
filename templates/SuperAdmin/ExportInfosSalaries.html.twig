@@ -1,0 +1,726 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Infos Associations{% endblock %}
+
+{% block body %}
+    <head>
+        <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.10.20/b-1.6.1/b-html5-1.6.1/b-print-1.6.1/datatables.min.css"/>
+
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.10.20/b-1.6.1/b-html5-1.6.1/b-print-1.6.1/datatables.min.js"></script>
+
+        <meta charset=utf-8 />
+        <title>DataTables - JS Bin</title>
+    </head>
+    <body>
+    <div class="container">
+        <table id="example" class="display nowrap" width="100%">
+            <thead>
+            <tr>
+                <th>Nom du salarié</th>
+                <th>Prénom du salarié</th>
+                <th>Nom de l'association</th>
+                <th>Type arret de travail</th> {# penser a mettre les types des colonnes  #}
+                <th>Initial ou prolongation</th>
+                <th>Date de début </th>
+                <th>Date de fin prévisionnelle</th>
+                <th>Maintient des 3 premiers jours </th>
+                <th>Si non, nombre d'heures à déduire  </th>
+                <th>Maintient à compter du 4eme jour  </th>
+                <th>Si non, nombre d'heures à déduire </th>
+                <th>Commentaires </th>
+
+            </tr>
+            </thead>
+
+            <tfoot>
+            <tr>
+                <th>Nom du salarié</th>
+                <th>Prénom du salarié</th>
+                <th>Nom de l'association</th>
+                <th>Type arret de travail</th>  {# penser a mettre les types des colonnes  #}
+                <th>Initial ou prolongation</th>
+                <th>Date de début </th>
+                <th>Date de fin prévisionnelle</th>
+                <th>Maintient des 3 premiers jours </th>
+                <th>Si non, nombre d'heures à déduire  </th>
+                <th>Maintient à compter du 4eme jour  </th>
+                <th>Si non, nombre d'heures à déduire </th>
+                <th>Commentaires </th>
+
+            </tr>
+            </tfoot>
+
+            <tbody>
+            {% for association in associations %}
+                {% for salariepro in salariespros %}
+                    {% if salariepro.smailasso==association.amail %}
+                        {% for salarieperso in salariespersos%} {#                            pour chaque salarié perso#}
+                            {% if salarieperso.spersoid == salariepro.sPersoId.spersoid %}{#                                            integer                  object#}
+                                {% for arrettravail in arrettravails %}
+                                    {% if arrettravail.sproid.sproid==salariepro.sproid %}
+                                        <tr>
+                                            <td>{{ salarieperso.snom }}</td>
+                                            <td>{{ salarieperso.sprenom }}</td>
+                                            <td>{{ association.anom}}</td>
+                                            <td>{{ arrettravail.attype }}</td>
+                                            <td>{{ arrettravail.atprolongation }}</td>
+                                            <td>{{ arrettravail.atdebut|date("d/m/Y") }}</td>
+                                            <td>{{ arrettravail.atfin|date("d/m/Y") }}</td>
+                                            <td>{{ arrettravail.at3jours}}</td>
+                                            <td>{{ arrettravail.at3jnbh}}</td>
+                                            <td>{{ arrettravail.at4jours}}</td>
+                                            <td>{{ arrettravail.at4jnbh}}</td>
+                                            <td>{{ arrettravail.atcommentaire}}</td>
+                                        </tr>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+
+            </tbody>
+        </table>
+        <hr/>
+        <table id="example2" class="display nowrap" width="100%">
+            <thead>
+            <tr>
+                <th>Nom du salarié</th>
+                <th>Prénom du salarié</th>
+                <th>Nom de l'association</th>
+                <th>Type congé</th>
+                <th>Dernier jour travaillé</th>
+                <th>Jour de reprise</th>
+                <th>Jours normalement travaillés</th>
+                <th>Nombre de jours ouvrables pris</th>
+                <th>Commentaires</th>
+            </tr>
+            </thead>
+
+            <tfoot>
+            <tr>
+                <th>Nom du salarié</th>
+                <th>Prénom du salarié</th>
+                <th>Nom de l'association</th>
+                <th>Type congé</th>
+                <th>Dernier jour travaillé</th>
+                <th>Jour de reprise</th>
+                <th>Jours normalement travaillés</th>
+                <th>Nombre de jours ouvrables pris</th>
+                <th>Commentaires</th>
+            </tr>
+            </tfoot>
+
+            <tbody>
+            {% for association in associations %}
+                {% for salariepro in salariespros %}
+                    {% if salariepro.smailasso==association.amail %}
+                        {% for salarieperso in salariespersos%}
+                            {% if salarieperso.spersoid == salariepro.sPersoId.spersoid %}
+                                {% for conge in conges %}
+                                    {% if conge.sproid.sproid==salariepro.sproid %}
+                                        <tr>
+                                            <td>{{ salarieperso.snom }}</td>
+                                            <td>{{ salarieperso.sprenom }}</td>
+                                            <td>{{ association.anom}}</td>
+                                            <td>{{ conge.contype }}</td>
+                                            <td>{{ conge.condernierjour|date("d/m/Y") }}</td>
+                                            <td>{{ conge.conjourreprise|date("d/m/Y") }}</td>
+                                            <td>{{ conge.conjournormaltrav| json_encode }}</td>
+                                            <td>{{ conge.connbjourouvrablepris}}</td>
+                                            <td>{{ conge.concommentaire}}</td>
+                                        </tr>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+            </tbody>
+        </table>
+        <hr/>
+        <table id="example3" class="display nowrap" width="100%">
+            <thead>
+            <tr>
+                <th>Nom du salarié</th>
+                <th>Prénom du salarié</th>
+                <th>Nom de l'association</th>
+                <th>Du </th>
+                <th>Au </th>
+                <th>Nombre d'heures à déduire </th>
+                <th>Maintient à 100% </th>
+                <th>Commentaires</th>
+            </tr>
+            </thead>
+
+            <tfoot>
+            <tr>
+                <th>Nom du salarié</th>
+                <th>Prénom du salarié</th>
+                <th>Nom de l'association</th>
+                <th>Du </th>
+                <th>Au </th>
+                <th>Nombre d'heures à déduire </th>
+                <th>Maintient à 100% </th>
+                <th>Commentaires</th>
+            </tr>
+            </tfoot>
+
+            <tbody>
+            {% for association in associations %}
+                {% for salariepro in salariespros %}
+                    {% if salariepro.smailasso==association.amail %}
+                        {% for salarieperso in salariespersos%}
+                            {% if salarieperso.spersoid == salariepro.sPersoId.spersoid %}
+                                {% for chomage in chomages %}
+                                    {% if chomage.sproid.sproid==salariepro.sproid %}
+                                        <tr>
+                                            <td>{{ salarieperso.snom }}</td>
+                                            <td>{{ salarieperso.sprenom }}</td>
+                                            <td>{{ association.anom}}</td>
+                                            <td>{{ chomage.chodebut|date("d/m/Y") }}</td>
+                                            <td>{{ chomage.chofin|date("d/m/Y") }}</td>
+                                            <td>{{ chomage.chonbheure }}</td>
+                                            <td>{{ chomage.chomaintien }}</td>
+                                            <td>{{ chomage.chocommentaire}}</td>
+                                        </tr>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+            </tbody>
+        </table>
+        <table id="example4" class="display nowrap" width="100%">
+            <thead>
+            <tr>
+                <th>Nom du salarié</th>
+                <th>Prénom du salarié</th>
+                <th>Nom de l'association</th>
+                <th>Du : </th>
+                <th>Au : </th>
+                <th>Nombre d'heures à déduire </th>
+                <th>Commentaires </th>
+
+            </tr>
+            </thead>
+
+            <tfoot>
+            <tr>
+                <th>Nom du salarié</th>
+                <th>Prénom du salarié</th>
+                <th>Nom de l'association</th>
+                <th>Du : </th>
+                <th>Au : </th>
+                <th>Nombre d'heures à déduire </th>
+                <th>Commentaires </th>
+            </tr>
+            </tfoot>
+
+            <tbody>
+            {% for association in associations %}
+                {% for salariepro in salariespros %}
+                    {% if salariepro.smailasso==association.amail %}
+                        {% for salarieperso in salariespersos%}
+                            {% if salarieperso.spersoid == salariepro.sPersoId.spersoid %}
+                                {% for autreabsence in autreabsences %}
+                                    {% if autreabsence.sproid.sproid==salariepro.sproid %}
+                                        <tr>
+                                            <td>{{ salarieperso.snom }}</td>
+                                            <td>{{ salarieperso.sprenom }}</td>
+                                            <td>{{ association.anom}}</td>
+                                            <td>{{ autreabsence.absdebut|date("d/m/Y") }}</td>
+                                            <td>{{ autreabsence.absfin|date("d/m/Y") }}</td>
+                                            <td>{{ autreabsence.absnbheure }}</td>
+                                            <td>{{ autreabsence.abscommentaire}}</td>
+                                        </tr>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+            </tbody>
+        </table>
+        <table id="example5" class="display nowrap" width="100%">
+            <thead>
+            <tr>
+                <th>Nom du salarié</th>
+                <th>Prénom du salarié</th>
+                <th>Nom de l'association</th>
+                <th>Type de prime </th>
+                <th>Montant </th>
+                <th>Unité </th>
+                <th>Commentaires </th>
+            </tr>
+            </thead>
+
+            <tfoot>
+            <tr>
+                <th>Nom du salarié</th>
+                <th>Prénom du salarié</th>
+                <th>Nom de l'association</th>
+                <th>Type de prime </th>
+                <th>Montant </th>
+                <th>Unité </th>
+                <th>Commentaires </th>
+            </tr>
+            </tfoot>
+
+            <tbody>
+            {% for association in associations %}
+                {% for salariepro in salariespros %}
+                    {% if salariepro.smailasso==association.amail %}
+                        {% for salarieperso in salariespersos%}
+                            {% if salarieperso.spersoid == salariepro.sPersoId.spersoid %}
+                                {% for prime in primes %}
+                                    {% if prime.sproid.sproid==salariepro.sproid %}
+                                        <tr>
+                                            <td>{{ salarieperso.snom }}</td>
+                                            <td>{{ salarieperso.sprenom }}</td>
+                                            <td>{{ association.anom}}</td>
+                                            <td>{{ prime.primtype }}</td>
+                                            <td>{{ prime.primmontant }}</td>
+                                            <td>{{ prime.primnetbrut }}</td>
+                                            <td>{{ prime.primcommentaire}}</td>
+                                        </tr>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+            </tbody>
+        </table>
+        <table id="example6" class="display nowrap" width="100%">
+            <thead>
+            <tr>
+                <th>Nom du salarié</th>
+                <th>Prénom du salarié</th>
+                <th>Nom de l'association</th>
+                <th>Type de frais</th>
+                <th>Quantité </th>
+                <th>Taux Unitaire </th>
+                <th>Total </th>
+                <th>Commentaires </th>
+            </tr>
+            </thead>
+
+            <tfoot>
+            <tr>
+                <th>Nom du salarié</th>
+                <th>Prénom du salarié</th>
+                <th>Nom de l'association</th>
+                <th>Type de frais</th>
+                <th>Quantité </th>
+                <th>Taux Unitaire </th>
+                <th>Total </th>
+                <th>Commentaires </th>
+            </tr>
+            </tfoot>
+
+            <tbody>
+            {% for association in associations %}
+                {% for salariepro in salariespros %}
+                    {% if salariepro.smailasso==association.amail %}
+                        {% for salarieperso in salariespersos%}
+                            {% if salarieperso.spersoid == salariepro.sPersoId.spersoid %}
+                                {% for frai in frais %}
+                                    {% if frai.sproid.sproid==salariepro.sproid %}
+                                        <tr>
+                                            <td>{{ salarieperso.snom }}</td>
+                                            <td>{{ salarieperso.sprenom }}</td>
+                                            <td>{{ association.anom}}</td>
+                                            <td>{{ frai.fratype }}</td>
+                                            <td>{{ frai.fraquantite }}</td>
+                                            <td>{{ frai.frataux }}</td>
+                                            <td>{{ frai.fratotal }}</td>
+                                            <td>{{ frai.fracommentaire}}</td>
+                                        </tr>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+            </tbody>
+        </table>
+        <table id="example7" class="display nowrap" width="100%">
+            <thead>
+            <tr>
+                <th>Nom du salarié</th>
+                <th>Prénom du salarié</th>
+                <th>Nom de l'association</th>
+                <th>Type d'Heures</th>
+                <th>Semaine concernée </th>
+                <th>Nombre d'Heures </th>
+                <th>Commentaires </th>
+            </tr>
+            </thead>
+
+            <tfoot>
+            <tr>
+                <th>Nom du salarié</th>
+                <th>Prénom du salarié</th>
+                <th>Nom de l'association</th>
+                <th>Type d'Heures</th>
+                <th>Semaine concernée </th>
+                <th>Nombre d'Heures </th>
+                <th>Commentaires </th>
+            </tr>
+            </tfoot>
+
+            <tbody>
+            {% for association in associations %}
+                {% for salariepro in salariespros %}
+                    {% if salariepro.smailasso==association.amail %}
+                        {% for salarieperso in salariespersos%}
+                            {% if salarieperso.spersoid == salariepro.sPersoId.spersoid %}
+                                {% for heure in heures %}
+                                    {% if heure.sproid.sproid==salariepro.sproid %}
+                                        <tr>
+                                            <td>{{ salarieperso.snom }}</td>
+                                            <td>{{ salarieperso.sprenom }}</td>
+                                            <td>{{ association.anom}}</td>
+                                            <td>{{ heure.heurtype }}</td>
+                                            <td>{{ heure.heursem }}</td>
+                                            <td>{{ heure.heurnb }}</td>
+                                            <td>{{ heure.heurcommentaire}}</td>
+                                        </tr>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+            </tbody>
+        </table>
+        <table id="example8" class="display nowrap" width="100%">
+            <thead>
+            <tr>
+                <th>Nom du salarié</th>
+                <th>Prénom du salarié</th>
+                <th>Nom de l'association</th>
+                <th>Date d'effet</th>
+                <th>Type de modification </th>
+                <th>Commentaires </th>
+            </tr>
+            </thead>
+
+            <tfoot>
+            <tr>
+                <th>Nom du salarié</th>
+                <th>Prénom du salarié</th>
+                <th>Nom de l'association</th>
+                <th>Date d'effet</th>
+                <th>Type de modification </th>
+                <th>Commentaires </th>
+            </tr>
+            </tfoot>
+
+            <tbody>
+            {% for association in associations %}
+                {% for salariepro in salariespros %}
+                    {% if salariepro.smailasso==association.amail %}
+                        {% for salarieperso in salariespersos%}
+                            {% if salarieperso.spersoid == salariepro.sPersoId.spersoid %}
+                                {% for avenant in avenants %}
+                                    {% if avenant.sproid.sproid==salariepro.sproid %}
+                                        <tr>
+                                            <td>{{ salarieperso.snom }}</td>
+                                            <td>{{ salarieperso.sprenom }}</td>
+                                            <td>{{ association.anom}}</td>
+                                            <td>{{ avenant.avdebut|date("d/m/Y") }}</td>
+                                            <td>{{ avenant.avtypemodif }}</td>
+                                            <td>{{ avenant.avcommentaire}}</td>
+                                        </tr>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+            </tbody>
+        </table>
+        <table id="example9" class="display nowrap" width="100%">
+            <thead>
+            <tr>
+                <th>Nom du salarié</th>
+                <th>Prénom du salarié</th>
+                <th>Nom de l'association</th>
+                <th>Date de fin </th>
+                <th>Motif de fin  </th>
+                <th>Commentaires </th>
+            </tr>
+            </thead>
+
+            <tfoot>
+            <tr>
+                <th>Nom du salarié</th>
+                <th>Prénom du salarié</th>
+                <th>Nom de l'association</th>
+                <th>Date de fin </th>
+                <th>Motif de fin  </th>
+                <th>Commentaires </th>
+            </tr>
+            </tfoot>
+
+            <tbody>
+            {% for association in associations %}
+                {% for salariepro in salariespros %}
+                    {% if salariepro.smailasso==association.amail %}
+                        {% for salarieperso in salariespersos%}
+                            {% if salarieperso.spersoid == salariepro.sPersoId.spersoid %}
+                                <tr>
+                                    <td>{{ salarieperso.snom }}</td>
+                                    <td>{{ salarieperso.sprenom }}</td>
+                                    <td>{{ association.anom}}</td>
+                                    <td>{{ salariepro.sdatefin|date("d/m/Y") }}</td>
+                                    <td>{{ salariepro.sfinmotif }}</td>
+                                    <td>{{ salariepro.scomfin}}</td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+    </body>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        // Based on example from:
+        // https://datatables.net/forums/discussion/49457
+        $(document).ready( function () {
+
+            function getHeaderNames(table) {
+                // Gets header names.
+                //params:
+                //  table: table ID.
+                //Returns:
+                //  Array of column header names.
+
+                var header = $(table).DataTable().columns().header().toArray();
+
+                var names = [];
+                header.forEach(function(th) {
+                    names.push($(th).html());
+                });
+
+                return names;
+            }
+
+            function buildCols(data) {
+                // Builds cols XML.
+                //To do: deifne widths for each column.
+                //Params:
+                //  data: row data.
+                //Returns:
+                //  String of XML formatted column widths.
+
+                var cols = '<cols>';
+
+                for (i=0; i<data.length; i++) {
+                    colNum = i + 1;
+                    cols += '<col min="' + colNum + '" max="' + colNum + '" width="20" customWidth="1"/>';
+                }
+
+                cols += '</cols>';
+
+                return cols;
+            }
+
+            function buildRow(data, rowNum, styleNum) {
+                // Builds row XML.
+                //Params:
+                //  data: Row data.
+                //  rowNum: Excel row number.
+                //  styleNum: style number or empty string for no style.
+                //Returns:
+                //  String of XML formatted row.
+
+                var style = styleNum ? ' s="' + styleNum + '"' : '';
+
+                var row = '<row r="' + rowNum + '">';
+
+                for (i=0; i<data.length; i++) {
+                    colNum = (i + 10).toString(36).toUpperCase();  // Convert to alpha
+
+                    var cr = colNum + rowNum;
+
+                    row += '<c t="inlineStr" r="' + cr + '"' + style + '>' +
+                        '<is>' +
+                        '<t>' + data[i] + '</t>' +
+                        '</is>' +
+                        '</c>';
+                }
+
+                row += '</row>';
+
+                return row;
+            }
+
+            function getTableData(table, title) {
+                // Processes Datatable row data to build sheet.
+                //Params:
+                //  table: table ID.
+                //  title: Title displayed at top of SS or empty str for no title.
+                //Returns:
+                //  String of XML formatted worksheet.
+
+                var header = getHeaderNames(table);
+                var table = $(table).DataTable();
+                var rowNum = 1;
+                var mergeCells = '';
+                var ws = '';
+
+                ws += buildCols(header);
+                ws += '<sheetData>';
+
+                if (title.length > 0) {
+                    ws += buildRow([title], rowNum, 51);
+                    rowNum++;
+
+                    mergeCol = ((header.length - 1) + 10).toString(36).toUpperCase();
+
+                    mergeCells = '<mergeCells count="1">'+
+                        '<mergeCell ref="A1:' + mergeCol + '1"/>' +
+                        '</mergeCells>';
+                }
+
+                ws += buildRow(header, rowNum, 2);
+                rowNum++;
+
+                // Loop through each row to append to sheet.
+                table.rows().every( function ( rowIdx, tableLoop, rowLoop ) {
+                    var data = this.data();
+
+                    // If data is object based then it needs to be converted
+                    // to an array before sending to buildRow()
+                    ws += buildRow(data, rowNum, '');
+
+                    rowNum++;
+                } );
+
+                ws += '</sheetData>' + mergeCells;
+
+                return ws;
+
+            }
+
+            function setSheetName(xlsx, name) {
+                // Changes tab title for sheet.
+                //Params:
+                //  xlsx: xlxs worksheet object.
+                //  name: name for sheet.
+
+                if (name.length > 0) {
+                    var source = xlsx.xl['workbook.xml'].getElementsByTagName('sheet')[0];
+                    source.setAttribute('name', name);
+                }
+            }
+
+            function addSheet(xlsx, table, title, name, sheetId) {
+                //Clones sheet from Sheet1 to build new sheet.
+                //Params:
+                //  xlsx: xlsx object.
+                //  table: table ID.
+                //  title: Title for top row or blank if no title.
+                //  name: Name of new sheet.
+                //  sheetId: string containing sheetId for new sheet.
+                //Returns:
+                //  Updated sheet object.
+
+                //Add sheet2 to [Content_Types].xml => <Types>
+                //============================================
+                var source = xlsx['[Content_Types].xml'].getElementsByTagName('Override')[1];
+                var clone = source.cloneNode(true);
+                clone.setAttribute('PartName','/xl/worksheets/sheet' + sheetId + '.xml');
+                xlsx['[Content_Types].xml'].getElementsByTagName('Types')[0].appendChild(clone);
+
+                //Add sheet relationship to xl/_rels/workbook.xml.rels => Relationships
+                //=====================================================================
+                var source = xlsx.xl._rels['workbook.xml.rels'].getElementsByTagName('Relationship')[0];
+                var clone = source.cloneNode(true);
+                clone.setAttribute('Id','rId'+sheetId+1);
+                clone.setAttribute('Target','worksheets/sheet' + sheetId + '.xml');
+                xlsx.xl._rels['workbook.xml.rels'].getElementsByTagName('Relationships')[0].appendChild(clone);
+
+                //Add second sheet to xl/workbook.xml => <workbook><sheets>
+                //=========================================================
+                var source = xlsx.xl['workbook.xml'].getElementsByTagName('sheet')[0];
+                var clone = source.cloneNode(true);
+                clone.setAttribute('name', name);
+                clone.setAttribute('sheetId', sheetId);
+                clone.setAttribute('r:id','rId'+sheetId+1);
+                xlsx.xl['workbook.xml'].getElementsByTagName('sheets')[0].appendChild(clone);
+
+                //Add sheet2.xml to xl/worksheets
+                //===============================
+                var newSheet = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'+
+                    '<worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:x14ac="http://schemas.microsoft.com/office/spreadsheetml/2009/9/ac" mc:Ignorable="x14ac">'+
+                    getTableData(table, title) +
+
+                    '</worksheet>';
+
+                xlsx.xl.worksheets['sheet' + sheetId + '.xml'] = $.parseXML(newSheet);
+
+            }
+
+
+
+            var table = $('#example').DataTable({
+                dom: 'Bftrip',
+                buttons: [
+                    {
+                        extend: 'excelHtml5',
+                        text: 'Excel',
+                        customize: function( xlsx ) {
+                            setSheetName(xlsx, 'Calls');
+                            addSheet(xlsx, '#example2', 'My Sheet2', 'Summary2', '2');
+                            addSheet(xlsx, '#example3', 'My Sheet3', 'Summary3', '3');
+                            addSheet(xlsx, '#example4', 'My Sheet4', 'Summary4', '4');
+                            addSheet(xlsx, '#example5', 'My Sheet5', 'Summary5', '5');
+                            addSheet(xlsx, '#example6', 'My Sheet6', 'Summary6', '6');
+                            addSheet(xlsx, '#example7', 'My Sheet7', 'Summary7', '7');
+                            addSheet(xlsx, '#example8', 'My Sheet8', 'Summary8', '8');
+                            addSheet(xlsx, '#example9', 'My Sheet9', 'Summary9', '9');
+
+                        }
+
+                    }
+                ]
+
+            });
+
+            $('#example2').DataTable();
+
+            $('#example3').DataTable();
+            $('#example4').DataTable();
+            $('#example5').DataTable();
+            $('#example6').DataTable();
+            $('#example7').DataTable();
+            $('#example8').DataTable();
+            $('#example9').DataTable();
+
+
+        } );
+
+    </script>
+{% endblock %}

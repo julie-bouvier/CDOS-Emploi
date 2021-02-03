@@ -147,5 +147,22 @@ class SaAssociationsController extends AbstractController
             'Page2'=>$Page2
         ]);
     }
+    /*########################EXPORT INFOS SALARIES #####################*/
+
+    /**
+     * @Route("/ExportInfosAsso", name="ExportInfosAsso")
+     * @return Response
+     */
+    public function ExportInfosAsso(){
+        $associations=$this->getDoctrine()->getRepository(Association::class)->findAll();
+
+
+        return $this->render('SuperAdmin/ExportInfosAssos.html.twig', [
+            'associations'=>$associations,
+
+        ]);
+
+    }
+
 
 }
