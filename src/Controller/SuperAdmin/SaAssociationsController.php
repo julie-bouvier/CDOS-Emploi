@@ -25,9 +25,10 @@ class SaAssociationsController extends AbstractController
         //on crée la page 1
         $Page1='Liste des associations';
         //si mon but est de gérer les association alors on renvoi vers la page affAllAsso
-        if ($but=="assos"){
+        if ($but=="association"){
             return $this->render('SuperAdmin/affAllAssociations.html.twig', [
                 'associations' => $associations,
+                'but'=> $but,
                 'Page1' => $Page1
             ]);
         }
@@ -84,16 +85,17 @@ class SaAssociationsController extends AbstractController
     }
 
     /**
-     * @Route("/voirAssociation/{assomail}/{Page1}", name="voirAssociation")
+     * @Route("/voirAssociation/{but}/{assomail}/{Page1}", name="voirAssociation")
      * @param $assomail
      * @param $Page1
      * @return Response
      */
-    public function voirAssociation($assomail, $Page1){
+    public function voirAssociation($but, $assomail, $Page1){
         $association=$this->getDoctrine()->getRepository(Association::class)->find($assomail);
         $Page2='Profil de l\'association';
         return $this->render('SuperAdmin/affAssociation.html.twig', [
             'association' => $association,
+            'but'=> $but,
             'Page1'=>$Page1,
             'Page2'=>$Page2
         ]);
@@ -136,8 +138,10 @@ class SaAssociationsController extends AbstractController
     public function Choixasso($role, $Page1){
         $associations=$this->getDoctrine()->getRepository(Association::class)->findAll();
         $Page2='Ajout : Choix d\'une association';
+        $but='salarie';
         return $this->render('SuperAdmin/choixAssociations.html.twig', [
             'associations' => $associations,
+            'but'=> $but,
             'role'=>$role,
             'Page1'=>$Page1,
             'Page2'=>$Page2

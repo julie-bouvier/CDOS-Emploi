@@ -121,6 +121,7 @@ class SaSalariesController extends AbstractController
                 'salarie' => $salarie, //entité salariéinfoperso
                 'associations'=>$associations, //liste des associations liées à ce salarié
                 'infospros'=>$infospros, //liste des salariésinfospro liés à ce salarié
+                'idsalarie'=> $idsalarie,
                 'conges' => $Conges,
                 'arrettravails' => $ArretTravails,
                 'chomages' => $Chomages,
@@ -149,6 +150,7 @@ class SaSalariesController extends AbstractController
                 'salarie' => $salarie, //entité salariéinfoperso
                 'associations'=>$associations, //liste des associations liées à ce salarié
                 'infospros'=>$infospros, //liste des salariés infos pro liés à ce salarié
+                'idsalarie'=> $idsalarie,
                 'assoMail'=>$assoMail,
                 'but'=>$but,
                 'Page1'=>$Page1,

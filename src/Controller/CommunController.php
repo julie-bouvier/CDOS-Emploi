@@ -36,14 +36,14 @@ class CommunController extends AbstractController
     /*######################## SALARIE INFOS PERSO ########################*/
 
     /**
-     * @Route("/VerifInfosPerso/{mailasso}/{role}/{Page1}/{Page2}", name="VerifInfosPerso")
+     * @Route("/VerifInfosPerso/{mailasso}/{but}/{role}/{Page1}/{Page2}", name="VerifInfosPerso")
      * @param Request $request
      * @param $mailasso
      * @param $role
      * @return Response
      */
 
-    public function VerifInfosPerso($mailasso, $role, Request $request, $Page1, $Page2)
+    public function VerifInfosPerso($mailasso, $but, $role, Request $request, $Page1, $Page2)
     {
         $NewInfosPerso = new SalarieInfosPerso();
         $form = $this->createForm(VerifInfosPersoType::class, $NewInfosPerso);
@@ -62,6 +62,7 @@ class CommunController extends AbstractController
 
         return $this->render('Commun/RechercheInfosPerso.html.twig', [
             'form' => $form->createView(),
+            'but'=> $but,
             'ListeInfoAVerif' => $ListeInfoAVerif,
             'mailasso' => $mailasso,
             'role'=>$role,
@@ -197,9 +198,9 @@ class CommunController extends AbstractController
     /*######################## GESTION DES SALARIES ########################*/
 
     /**
-     * @Route("/GestionSalarie/{idinfospro}/{Page1}/{Page2}", name="GestionSalarie")
+     * @Route("/GestionSalarie/{but}/{assoMail}/{idsalarie}/{idinfospro}/{Page1}/{Page2}", name="GestionSalarie")
      */
-    public function GestionSalarie($idinfospro, $Page1, $Page2) {
+    public function GestionSalarie($but, $assoMail, $idsalarie, $idinfospro, $Page1, $Page2) {
         $infosPro= $this -> getDoctrine() -> getRepository(SalarieInfosPro::class) -> find($idinfospro);
         $Conges= $this -> getDoctrine() -> getRepository(Conges::class) -> findBy(['sproid'=> $infosPro]);
         $ArretTravails= $this -> getDoctrine() -> getRepository(ArretTravail::class) -> findBy(['sproid'=> $infosPro]);
@@ -212,7 +213,10 @@ class CommunController extends AbstractController
         $Page3 = 'Gestion des informations';
 
         return $this->render('Commun/GestionSalaries.html.twig', [ // renvoie vers le twig qui affiche les options de gestion du salarié
+            'but'=>$but,
+            'assoMail'=>$assoMail,
             'idinfospro' => $idinfospro,
+            'idsalarie'=> $idsalarie,
             'conges' => $Conges,
             'arrettravails' => $ArretTravails,
             'chomages' => $Chomages,
