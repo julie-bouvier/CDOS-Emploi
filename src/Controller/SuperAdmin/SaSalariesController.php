@@ -40,8 +40,8 @@ class SaSalariesController extends AbstractController
             return $this->render('SuperAdmin/affAllSalariesAsso.html.twig', [
                 'message' => $message,
                 'assoMail' => $assomail,
-                'Page1'=>$Page1,
-                'Page2'=>$Page2
+               // 'Page1'=>$Page1,
+               // 'Page2'=>$Page2
             ]);
         }
         else{
@@ -155,6 +155,41 @@ class SaSalariesController extends AbstractController
                 'Page2'=>$Page2,
             ]);
         }
+    }
+
+    /*########################EXPORT INFOS SALARIES #####################*/
+
+    /**
+     * @Route("/ExportInfosSalaries/", name="ExportInfosSalaries")
+     * @return Response
+     */
+    public function ExportInfosSalaries(){
+        $associations=$this->getDoctrine()->getRepository(Association::class)->findAll();
+        $salariespros=$this->getDoctrine()->getRepository(SalarieInfosPro::class)->findAll();
+        $salariespersos=$this->getDoctrine()->getRepository(SalarieInfosPerso::class)->findAll();
+        $arrettravails=$this->getDoctrine()->getRepository(ArretTravail::class)->findAll();
+        $conges=$this->getDoctrine()->getRepository(Conges::class)->findAll();
+        $chomages=$this->getDoctrine()->getRepository(Chomage::class)->findAll();
+        $autreabsences=$this->getDoctrine()->getRepository(AutreAbsence::class)->findAll();
+        $primes=$this->getDoctrine()->getRepository(Prime::class)->findAll();
+        $frais=$this->getDoctrine()->getRepository(Frais::class)->findAll();
+        $heures=$this->getDoctrine()->getRepository(Heures::class)->findAll();
+        $avenants=$this->getDoctrine()->getRepository(Avenant::class)->findAll();
+
+        return $this->render('SuperAdmin/ExportInfosSalaries.html.twig', [
+            'associations'=>$associations,
+            'salariespros'=>$salariespros,
+            'salariespersos'=>$salariespersos,
+            'arrettravails' => $arrettravails,
+            'conges' => $conges,
+            'chomages' => $chomages,
+            'autreabsences' => $autreabsences,
+            'primes' => $primes,
+            'frais' => $frais,
+            'heures' => $heures,
+            'avenants' => $avenants,
+        ]);
+
     }
 
     /*######################## SALARIE INFOS PRO ########################*/

@@ -1,0 +1,160 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Infos Associations{% endblock %}
+
+{% block body %}
+    <fieldset>
+
+        <legend>Liste des associations et leurs informations : </legend>
+
+        <table id="titi" class="display nowrap" style="width:100%">
+            <thead>
+            <tr>
+                <th>Nom de l'association</th>
+                <th>Adresse du siège social</th>
+                <th>Téléphone</th>
+                <th>Mail</th>
+                <th>Date de création de l'association</th>
+                <th>Data d'embauche deu premier salarié</th>
+                <th>Agrée par la Fédération de : </th>
+                <th>Numéro de SIRET</th>
+                <th>Code APE:</th>
+                <th>Immatriculation U.R.S.S.A.F. :</th>
+                <th>Code risque </th>
+                <th>Taux accident de travail : </th>
+                <th>Numéro POLE EMPLOI:</th>
+                <th>Numéro POLE EMPLOI code personnel:</th>
+                <th>Caisse retraite complémentaire:</th>
+                <th>Caisse retraite complémentaire n° d'adhérent</th>
+                <th>N° d'adhérent Caisse de Prévoyance Humanis GNP :</th>
+                <th>PP</th>
+                <th>PO </th>
+                <th>Complémentaire Santé :</th>
+                <th>Complémentaire Santé : n°d'adhérent:</th>
+                <th>N°ICOM </th>
+                <th>N° adhérent ASSTV :</th>
+                <th>Nom du de la Président(e):</th>
+                <th>Adresse postale</th>
+                <th>Portable:</th>
+                <th>Téléphone </th>
+                <th>Mail: </th>
+                <th>Nom du de la correspondant(e) pour la gestion de l'emploi:</th>
+                <th>Adresse postale:</th>
+                <th>Portable:</th>
+                <th>Téléphone </th>
+                <th>Mail: </th>
+                <th>Envoi des courriers par internet :</th>
+                <th>Envoi des courriers à l'adresse du de la  :  </th>
+                <th>Mode de paiement des salaires : </th>
+                <th>Coordonnées bancaires  : </th>
+                <th>Informations complémentaires : </th>
+                <th>Date d'adhésion au service impact emploi :    </th>
+            </tr>
+            </thead>
+
+            <tbody>
+            {% for association in associations %}
+                <tr>
+                    <td>{{ association.anom }}</td>
+                    <td>{{ association.amail}}</td>
+                    <td>{{ association.aadresse }}</td>
+                    <td>{{ association.atel }}</td>
+                    <td>{{ association.adatecreation|date("d/m/Y") }}</td>
+                    <td>{{ association.adateembauche|date("d/m/Y") }}</td>
+                    <td>{{ association.afederation }}</td>
+                    <td>{{ association.asiret }}</td>
+                    <td>{{ association.aape }}</td>
+                    <td>{{ association.aurssaf}}</td>
+                    <td>{{ association.acoderisque }}</td>
+                    <td>{{ association.atauxaccidenttravail }}</td>
+                    <td>{{ association.apeidentifiant }}</td>
+                    <td>{{ association.apecodeperso }}</td>
+                    <td>{{ association.acaisseretraite }}</td>
+                    <td>{{ association.acaisseretraitenumadh }}</td>
+                    <td>{{ association.acaisseprevoyance }}</td>
+                    <td>{{ association.app}}</td>
+                    <td>{{association.ap0}}</td>
+                    <td>{{ association.acomplementaire }}</td>
+                    <td>{{association.acaisseretraitenumadh}}</td>
+                    <td>{{ association.aicom }}</td>
+                    <td>{{ association.aasstv}}</td>
+                    <td>{{ association.apresnom}}</td>
+                    <td>{{ association.apresadresse }}</td>
+                    <td>{{ association.apresportable}}</td>
+                    <td>{{ association.aprestel }}</td>
+                    <td>{{ association.acaisseprevoyance }}</td>
+                    <td>{{ association.agestionnom}}</td>
+                    <td>{{ association.acorrespondadresse }}</td>
+                    <td>{{ association.acorrespondportable}}</td>
+                    <td>{{ association.acorrespondtel }}</td>
+                    <td>{{ association.acorrespondmail }}</td>
+                    <td>{{ association.acourriersinternet }}</td>
+                    <td>{{ association.aenvoicourrier }}</td>
+                    <td>{{ association.amodepaiement }}</td>
+                    <td>{{ association.arib }}</td>
+                    <td>{{ association.ainfocomplementaire}}</td>
+                    <td>{{ association.adateadhesion|date("d/m/Y") }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <br>
+
+    </fieldset>
+    <table id="toto">
+        <thead>
+        <tr>
+            <th>
+                bidule
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+{% endblock %}
+
+{% block javascripts %}
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/keytable/2.5.0/js/dataTables.keyTable.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.html5.min.js"></script>
+
+
+
+
+
+
+    <script>
+        $(document).ready(function() {
+            $('#titi').DataTable( {
+                "scrollX": true,
+                dom: 'Bfrtip',
+                buttons: [ {
+                    extend: 'excelHtml5',
+                    autoFilter: true,
+                    sheetName: 'Exported data'
+                } ]
+            });
+
+        } );
+    </script>
+
+
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/keytable/2.5.0/css/keyTable.dataTables.min.css">
+
+
+{% endblock %}
