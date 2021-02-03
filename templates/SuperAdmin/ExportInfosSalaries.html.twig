@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Infos Associations{% endblock %}
+{% block title %} Salariés et leurs variables {% endblock %}
 
 {% block body %}
     <head>
@@ -16,7 +16,12 @@
     </head>
     <body>
     <div class="container">
-        <table id="example" class="display nowrap" width="100%">
+        <legend>Liste des salariés et leurs variables  : </legend>
+
+
+        <table id="arrettravails" class="display nowrap" width="100%" title="Arrets de travail :">
+            <h5 style="color:#052876" > <strong> Arrêts de travail </strong> </h5>
+
             <thead>
             <tr>
                 <th>Nom du salarié</th>
@@ -34,24 +39,6 @@
 
             </tr>
             </thead>
-
-            <tfoot>
-            <tr>
-                <th>Nom du salarié</th>
-                <th>Prénom du salarié</th>
-                <th>Nom de l'association</th>
-                <th>Type arret de travail</th>  {# penser a mettre les types des colonnes  #}
-                <th>Initial ou prolongation</th>
-                <th>Date de début </th>
-                <th>Date de fin prévisionnelle</th>
-                <th>Maintient des 3 premiers jours </th>
-                <th>Si non, nombre d'heures à déduire  </th>
-                <th>Maintient à compter du 4eme jour  </th>
-                <th>Si non, nombre d'heures à déduire </th>
-                <th>Commentaires </th>
-
-            </tr>
-            </tfoot>
 
             <tbody>
             {% for association in associations %}
@@ -86,7 +73,9 @@
             </tbody>
         </table>
         <hr/>
-        <table id="example2" class="display nowrap" width="100%">
+
+        <table id="conges" class="display nowrap" width="100%">
+            <h5 style="color:#052876" > <strong> Congés </strong> </h5>
             <thead>
             <tr>
                 <th>Nom du salarié</th>
@@ -100,20 +89,6 @@
                 <th>Commentaires</th>
             </tr>
             </thead>
-
-            <tfoot>
-            <tr>
-                <th>Nom du salarié</th>
-                <th>Prénom du salarié</th>
-                <th>Nom de l'association</th>
-                <th>Type congé</th>
-                <th>Dernier jour travaillé</th>
-                <th>Jour de reprise</th>
-                <th>Jours normalement travaillés</th>
-                <th>Nombre de jours ouvrables pris</th>
-                <th>Commentaires</th>
-            </tr>
-            </tfoot>
 
             <tbody>
             {% for association in associations %}
@@ -144,7 +119,8 @@
             </tbody>
         </table>
         <hr/>
-        <table id="example3" class="display nowrap" width="100%">
+        <table id="chomages" class="display nowrap" width="100%">
+            <h5 style="color:#052876" > <strong> Chômage </strong> </h5>
             <thead>
             <tr>
                 <th>Nom du salarié</th>
@@ -158,18 +134,6 @@
             </tr>
             </thead>
 
-            <tfoot>
-            <tr>
-                <th>Nom du salarié</th>
-                <th>Prénom du salarié</th>
-                <th>Nom de l'association</th>
-                <th>Du </th>
-                <th>Au </th>
-                <th>Nombre d'heures à déduire </th>
-                <th>Maintient à 100% </th>
-                <th>Commentaires</th>
-            </tr>
-            </tfoot>
 
             <tbody>
             {% for association in associations %}
@@ -198,7 +162,8 @@
             {% endfor %}
             </tbody>
         </table>
-        <table id="example4" class="display nowrap" width="100%">
+        <table id="absences" class="display nowrap" width="100%">
+            <h5 style="color:#052876" > <strong> Autres absences </strong> </h5>
             <thead>
             <tr>
                 <th>Nom du salarié</th>
@@ -212,17 +177,6 @@
             </tr>
             </thead>
 
-            <tfoot>
-            <tr>
-                <th>Nom du salarié</th>
-                <th>Prénom du salarié</th>
-                <th>Nom de l'association</th>
-                <th>Du : </th>
-                <th>Au : </th>
-                <th>Nombre d'heures à déduire </th>
-                <th>Commentaires </th>
-            </tr>
-            </tfoot>
 
             <tbody>
             {% for association in associations %}
@@ -250,7 +204,8 @@
             {% endfor %}
             </tbody>
         </table>
-        <table id="example5" class="display nowrap" width="100%">
+        <table id="primes" class="display nowrap" width="100%">
+            <h5 style="color:#052876" > <strong> Primes </strong> </h5>
             <thead>
             <tr>
                 <th>Nom du salarié</th>
@@ -262,18 +217,6 @@
                 <th>Commentaires </th>
             </tr>
             </thead>
-
-            <tfoot>
-            <tr>
-                <th>Nom du salarié</th>
-                <th>Prénom du salarié</th>
-                <th>Nom de l'association</th>
-                <th>Type de prime </th>
-                <th>Montant </th>
-                <th>Unité </th>
-                <th>Commentaires </th>
-            </tr>
-            </tfoot>
 
             <tbody>
             {% for association in associations %}
@@ -301,7 +244,8 @@
             {% endfor %}
             </tbody>
         </table>
-        <table id="example6" class="display nowrap" width="100%">
+        <table id="frais" class="display nowrap" width="100%">
+            <h5 style="color:#052876" > <strong> Frais </strong> </h5>
             <thead>
             <tr>
                 <th>Nom du salarié</th>
@@ -314,19 +258,6 @@
                 <th>Commentaires </th>
             </tr>
             </thead>
-
-            <tfoot>
-            <tr>
-                <th>Nom du salarié</th>
-                <th>Prénom du salarié</th>
-                <th>Nom de l'association</th>
-                <th>Type de frais</th>
-                <th>Quantité </th>
-                <th>Taux Unitaire </th>
-                <th>Total </th>
-                <th>Commentaires </th>
-            </tr>
-            </tfoot>
 
             <tbody>
             {% for association in associations %}
@@ -355,7 +286,8 @@
             {% endfor %}
             </tbody>
         </table>
-        <table id="example7" class="display nowrap" width="100%">
+        <table id="heures" class="display nowrap" width="100%">
+            <h5 style="color:#052876" > <strong> Heures </strong> </h5>
             <thead>
             <tr>
                 <th>Nom du salarié</th>
@@ -367,18 +299,6 @@
                 <th>Commentaires </th>
             </tr>
             </thead>
-
-            <tfoot>
-            <tr>
-                <th>Nom du salarié</th>
-                <th>Prénom du salarié</th>
-                <th>Nom de l'association</th>
-                <th>Type d'Heures</th>
-                <th>Semaine concernée </th>
-                <th>Nombre d'Heures </th>
-                <th>Commentaires </th>
-            </tr>
-            </tfoot>
 
             <tbody>
             {% for association in associations %}
@@ -406,7 +326,8 @@
             {% endfor %}
             </tbody>
         </table>
-        <table id="example8" class="display nowrap" width="100%">
+        <table id="avenants" class="display nowrap" width="100%">
+            <h5 style="color:#052876" > <strong> Avenants </strong> </h5>
             <thead>
             <tr>
                 <th>Nom du salarié</th>
@@ -417,17 +338,6 @@
                 <th>Commentaires </th>
             </tr>
             </thead>
-
-            <tfoot>
-            <tr>
-                <th>Nom du salarié</th>
-                <th>Prénom du salarié</th>
-                <th>Nom de l'association</th>
-                <th>Date d'effet</th>
-                <th>Type de modification </th>
-                <th>Commentaires </th>
-            </tr>
-            </tfoot>
 
             <tbody>
             {% for association in associations %}
@@ -454,7 +364,8 @@
             {% endfor %}
             </tbody>
         </table>
-        <table id="example9" class="display nowrap" width="100%">
+        <table id="fincontrat" class="display nowrap" width="100%">
+            <h5 style="color:#052876" > <strong> Fin de contracts </strong> </h5>
             <thead>
             <tr>
                 <th>Nom du salarié</th>
@@ -465,17 +376,6 @@
                 <th>Commentaires </th>
             </tr>
             </thead>
-
-            <tfoot>
-            <tr>
-                <th>Nom du salarié</th>
-                <th>Prénom du salarié</th>
-                <th>Nom de l'association</th>
-                <th>Date de fin </th>
-                <th>Motif de fin  </th>
-                <th>Commentaires </th>
-            </tr>
-            </tfoot>
 
             <tbody>
             {% for association in associations %}
@@ -685,22 +585,23 @@
 
 
 
-            var table = $('#example').DataTable({
+            var table = $('#arrettravails').DataTable({
+                "scrollX": true,
                 dom: 'Bftrip',
                 buttons: [
                     {
                         extend: 'excelHtml5',
                         text: 'Excel',
                         customize: function( xlsx ) {
-                            setSheetName(xlsx, 'Calls');
-                            addSheet(xlsx, '#example2', 'My Sheet2', 'Summary2', '2');
-                            addSheet(xlsx, '#example3', 'My Sheet3', 'Summary3', '3');
-                            addSheet(xlsx, '#example4', 'My Sheet4', 'Summary4', '4');
-                            addSheet(xlsx, '#example5', 'My Sheet5', 'Summary5', '5');
-                            addSheet(xlsx, '#example6', 'My Sheet6', 'Summary6', '6');
-                            addSheet(xlsx, '#example7', 'My Sheet7', 'Summary7', '7');
-                            addSheet(xlsx, '#example8', 'My Sheet8', 'Summary8', '8');
-                            addSheet(xlsx, '#example9', 'My Sheet9', 'Summary9', '9');
+                            setSheetName(xlsx, 'ArretsTravail');
+                            addSheet(xlsx, '#conges', 'Salariés et leurs variables', 'Congés', '2');
+                            addSheet(xlsx, '#chomages', 'Salariés et leurs variables', 'Chomages', '3');
+                            addSheet(xlsx, '#absences', 'Salariés et leurs variables', 'AutresAbsences', '4');
+                            addSheet(xlsx, '#primes', 'Salariés et leurs variables', 'Primes', '5');
+                            addSheet(xlsx, '#frais',  'Salariés et leurs variables','Frais', '6');
+                            addSheet(xlsx, '#heures',  'Salariés et leurs variables','Heures', '7');
+                            addSheet(xlsx, '#avenants',  'Salariés et leurs variables','Avenants', '8');
+                            addSheet(xlsx, '#fincontrat',  'Salariés et leurs variables','Fin Contrats', '9');
 
                         }
 
@@ -709,15 +610,30 @@
 
             });
 
-            $('#example2').DataTable();
-
-            $('#example3').DataTable();
-            $('#example4').DataTable();
-            $('#example5').DataTable();
-            $('#example6').DataTable();
-            $('#example7').DataTable();
-            $('#example8').DataTable();
-            $('#example9').DataTable();
+            $('#conges').DataTable({
+                "scrollX": true,
+            });
+            $('#chomages').DataTable({
+                "scrollX": true,
+            });
+            $('#absences').DataTable({
+                "scrollX": true,
+            });
+            $('#primes').DataTable({
+                "scrollX": true,
+            });
+            $('#frais').DataTable({
+                "scrollX": true,
+            });
+            $('#heures').DataTable({
+                "scrollX": true,
+            });
+            $('#avenants').DataTable({
+                "scrollX": true,
+            });
+            $('#fincontrat').DataTable({
+                "scrollX": true,
+            });
 
 
         } );
