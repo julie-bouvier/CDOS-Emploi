@@ -35,6 +35,12 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ path('affAllSalaries',{'but': 'salarie'}) }}">Salariés</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('ExportInfosAsso') }}">Export Infos Assos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('ExportInfosSalaries')}}">Export Infos Salariés</a>
+                        </li>
                     {% endif %}
                     {% if role == 'ROLE_ADMIN' %}
                         <li class="nav-item">
