@@ -9,6 +9,7 @@ use App\Entity\Conges;
 use App\Entity\Frais;
 use App\Entity\Heures;
 use App\Entity\Prime;
+use App\Entity\Association;
 use App\Entity\SalarieInfosPerso;
 use App\Entity\SalarieInfosPro;
 use App\Form\AjoutInfosPersoType;
@@ -25,7 +26,6 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Entity\Association;
 use App\Entity\Connexion;
 
 
@@ -191,32 +191,35 @@ class AdminController extends AbstractController
         $Page1 = 'Profil d\'une association';
         return $this->render('/Commun/affMonAsso.html.twig', [
             'monAsso'=> $monAsso,
-            'idAsso'=>$MailPersoConnecte,
+            'mailAsso'=>$MailPersoConnecte,
             'Page1'=>$Page1
         ]);
     }
 
     /**
-     * @Route("/modifMonAsso/{idMonAsso}", name="modifMonAsso")
+     * @Route("/modifMonAsso/{mailAsso}/{Page1}", name="modifMonAsso")
      * @param Request $request
      * @param EntityManagerInterface $entityManager
-     * @param $idMonAsso
+     * @param $mailAsso
      * @return RedirectResponse|Response
      */
-    public function modifMonAsso(Request $request,EntityManagerInterface $entityManager,$idMonAsso){
-        $association=$this->getDoctrine()->getRepository(Association::class)->find($idMonAsso);
+    public function modifMonAsso(Request $request,EntityManagerInterface $entityManager,$mailAsso, $Page1){
+        $association=$this->getDoctrine()->getRepository(Association::class)->findOneBy(['amail'=>$mailAsso]);
         $form=$this->createForm(AssociationType::class, $association);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()){
             $entityManager->persist($association);
             $entityManager->flush();
-            return $this->redirectToRoute('MonAssociation');
+            return $this->redirectToRoute('MonAssociation', [
+                'Page1'=> $Page1,
+            ]);
         }
         else{
             return $this->render('SuperAdmin/AjoutAssociation.html.twig', [
                 'form' => $form->createView(),
-                'assoMail'=> $idMonAsso
+                'assoMail'=> $mailAsso,
+                'Page1' => $Page1
             ]);
         }
     }

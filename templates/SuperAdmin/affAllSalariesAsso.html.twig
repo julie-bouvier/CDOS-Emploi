@@ -66,7 +66,7 @@
         {% if assoMail is defined%}
             <a href="{{ path('VerifInfosPerso',{'mailasso': assoMail, 'but':'association', 'role':'SUPER_ADMIN', 'Page1':Page1, 'Page2':Page2}) }}" method="post" type="button" class="btn btn-success">Ajouter un salarié</a>
         {% else %}
-            <a href="{{ path('Choixasso',{'role':'SUPER_ADMIN', 'Page1': Page1}) }}" method="post" type="button" class="btn btn-success">Ajouter un salarié</a>
+            <a href="{{ path('Choixasso',{'role':'SUPER_ADMIN', 'but':but, 'Page1': Page1}) }}" method="post" type="button" class="btn btn-success">Ajouter un salarié</a>
         {% endif %}
 
     </fieldset>

@@ -120,14 +120,14 @@ class CommunController extends AbstractController
     /*######################## SALARIE INFOS PRO ########################*/
 
     /**
-     * @Route("/AjoutInfosPro/{mailasso}/{idinfoperso}/{role}/{Page1}", name="AjoutInfosPro")
+     * @Route("/AjoutInfosPro/{mailasso}/{idinfoperso}/{role}/{but}/{Page1}", name="AjoutInfosPro")
      * @param $idinfoperso
      * @param $mailasso
      * @param Request $request
      * @param EntityManagerInterface $entityManager
      * @return RedirectResponse|Response
      */
-    public function AjoutInfosPro($mailasso, $idinfoperso, $role, Request $request, EntityManagerInterface $entityManager, $Page1) {
+    public function AjoutInfosPro($mailasso, $idinfoperso, $role, $but, Request $request, EntityManagerInterface $entityManager, $Page1) {
         //trouve l'entité salaireinfoperso à partir de lid
         $salarieinfoperso=$this->getDoctrine()->getRepository(SalarieInfosPerso::class)->find($idinfoperso);
         //on trouve l'association avec le mail asso
@@ -176,7 +176,8 @@ class CommunController extends AbstractController
                 return $this->redirectToRoute('affSalaries',[
                     'assomail'=>$mailasso,
                     'Page1'=>$Page1,
-                    'Page2'=>$Page2
+                    'Page2'=>$Page2,
+                    'but'=>$but
                 ]);
             }
             elseif ($role=='ADMIN_ASSO'){
@@ -191,6 +192,7 @@ class CommunController extends AbstractController
                 'mailasso'=> $mailasso,
                 'idinfosperso' => $idinfoperso,
                 'Page1'=>$Page1,
+                'but'=>$but
             ]);
         }
     }

@@ -73,7 +73,7 @@ class SaAssociationsController extends AbstractController
             $entityManager->flush();
             //je redirecte vers page ou route
             return $this->redirectToRoute('affAssociation',[
-                'but'=>'assos'
+                'but'=>'association'
             ]);
         }
         else{
@@ -117,7 +117,7 @@ class SaAssociationsController extends AbstractController
             $entityManager->persist($association);
             $entityManager->flush();
             return $this->redirectToRoute('affAssociation',[
-                'but'=>'assos',
+                'but'=>'association',
                 'Page1'=>$Page1
             ]);
         }
