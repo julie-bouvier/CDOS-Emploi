@@ -7,6 +7,7 @@ use App\Entity\Avenant;
 use App\Entity\Chomage;
 use App\Entity\Conges;
 use App\Entity\Frais;
+use App\Entity\FSalarie;
 use App\Entity\Heures;
 use App\Entity\Prime;
 use App\Entity\Association;
@@ -223,6 +224,48 @@ class AdminController extends AbstractController
             ]);
         }
     }
+
+    /*######################## GESTION DE MON ASSO ########################*/
+
+    /**
+     * @Route("/OngletDocSalaries", name="OngletDocSalaries")
+     */
+    public function OngletDocSalaries(){
+        $MailPersoConnecte=$this-> getUser() -> getUsername();
+        $PersoConnecte =$this -> getDoctrine() -> getRepository(Connexion::class) -> find($MailPersoConnecte);
+        $Associations = $PersoConnecte -> getassociations();
+        //boucle qui va tourner dans la collection d'associations
+        //pour chaque association :
+        for ($i=0; $i <= count($Associations); $i++)
+        {
+            //if c'est pas null
+            if($Associations[$i]!=null){
+                $ListeSalaries = $Associations[$i] -> getsalarieinfosperso();
+            }
+        }
+
+        // renvoie vers le twig affichant la liste des salariés
+        return $this->render('Commun/OngletDocsListeSalarie.html.twig', [ // renvoie vers le twig de la liste des salariés
+            'associations'=> $Associations,
+            'ListeSalaries' => $ListeSalaries,
+        ]);
+    }
+
+    /**
+     * @Route("/ListeDocsSalarie/{idPerso}", name="ListeDocsSalarie")
+     */
+    public function ListeDocsSalarie($idPerso){
+        $infosPerso= $this -> getDoctrine() -> getRepository(SalarieInfosPerso::class) -> findBy(['spersoid'=>$idPerso]);
+        $docsSalarie = $this -> getDoctrine() -> getRepository(FSalarie::class) -> findBy(['spersoid'=> $infosPerso]);
+
+
+        // renvoie vers le twig affichant la liste des salariés
+        return $this->render('Commun/ListeSalariesDocs.html.twig', [ // renvoie vers le twig de la liste des salariés
+            'docsSalarie'=> $docsSalarie,
+            'infosPerso' => $infosPerso
+        ]);
+    }
 }
+
 
 

@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+  <fieldset>
+    <legend style="color:#18BC9C"><B>Liste des Salariés de votre association :</B></legend>
+
+    <table id="" class="display" style="width:100%">
+      <thead>
+      <tr>
+        <th>Nom</th>
+        <th>Prénom</th>
+        <th>Les documents</th>
+      </tr>
+      </thead>
+      <tbody>
+
+      {% for salarie in ListeSalaries %}
+        <tr>
+          <td>{{ salarie.snom }}</td>
+          <td>{{ salarie.sprenom }}</td>
+          <td>
+            <a href="{{ path('ListeDocsSalarie',{'idPerso': salarie.getSpersoid()}) }}" method="post">Voir</a>
+          </td>
+        </tr>
+      {% endfor %}
+
+      </tbody>
+    </table>
+    <br>
+    <hr>
+    <br>
+  </fieldset>
+
+{% endblock %}
+
+{% block javascripts %}
+
+  <script>
+    $(document).ready(function() {
+      $('table.display').DataTable();
+    } );
+  </script>
+
+{% endblock %}
+
+{% block stylesheets %}
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/keytable/2.5.0/css/keyTable.dataTables.min.css">
+{% endblock %}

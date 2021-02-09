@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+
+  <fieldset>
+    <legend style="color:#18BC9C"><B>Voici la liste des documents disponibles pour ce salarié : {#{{ infosPerso.sprenom }}{{ " " }} {{ infosPerso.snom }}#}</B></legend>
+
+    <table id="" class="display" style="width:100%">
+      <thead>
+      <tr>
+        <th>Nom utilisateur</th>
+        <th>Nom générique</th>
+        <th>Chemin</th>
+        <th>Date de depôt</th>
+        <th>Date du dernier téléchargement</th>
+        <th>Catégorie</th>
+        <th>Télécharger</th>
+      </tr>
+      </thead>
+      <tbody>
+
+      {% for doc in docsSalarie %}
+        <tr>
+          <td>{{ doc.fsnomuser }}</td>
+          <td>{{ doc.fsnomgen }}</td>
+          <td>{{ doc.fschemin }}</td>
+          <td>{{ doc.fsdatedepo |date("d/m/Y")}}</td>
+          <td>{{ doc.fsdatetel |date("d/m/Y")}}</td>
+          <td>{{ doc.fscategorie }}</td>
+
+          <td>
+            <a href=" " method="post">Télécharger</a>
+          </td>
+        </tr>
+      {% endfor %}
+
+      </tbody>
+    </table>
+    <br>
+    <hr>
+    <br>
+  </fieldset>
+
+{% endblock %}
+
+{% block javascripts %}
+
+  <script>
+    $(document).ready(function() {
+      $('table.display').DataTable();
+    } );
+  </script>
+
+{% endblock %}
+
+{% block stylesheets %}
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/keytable/2.5.0/css/keyTable.dataTables.min.css">
+{% endblock %}

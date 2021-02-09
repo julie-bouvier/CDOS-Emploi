@@ -274,7 +274,12 @@ class CommunController extends AbstractController
                 ]);
             }
             elseif ($butForReturn=='SUPER_ADMIN_PLUS'){
+                $assoMail=$InfosPro->getSmailasso();
+                $idsalarieperso=$InfosPro->getSPersoId()->getSpersoid();
                 return $this->redirectToRoute('GestionSalarie', [
+                    'idsalarie'=>$idsalarieperso, //id de l'entite salarioinfosperso
+                    'assoMail'=> $assoMail, //id de l'association
+                    'but'=> 'salarie',
                     'idinfospro'=>$sproid, //id de l'entite salarioinfosperso
                     'Page1'=> $Page1,
                     'Page2'=> $Page2
@@ -331,7 +336,12 @@ class CommunController extends AbstractController
                     ]);
                 }
                 elseif ($butForReturn=='SUPER_ADMIN_PLUS'){
+                    $assoMail=$InfosPro->getSmailasso();
+                    $idsalarieperso=$InfosPro->getSPersoId()->getSpersoid();
                     return $this->redirectToRoute('GestionSalarie', [
+                        'idsalarie'=>$idsalarieperso, //id de l'entite salarioinfosperso
+                        'assoMail'=> $assoMail, //id de l'association
+                        'but'=> 'salarie',
                         'idinfospro'=>$sproid, //id de l'entite salarioinfosperso
                         'Page1'=> $Page1,
                         'Page2'=> $Page2
@@ -399,7 +409,12 @@ class CommunController extends AbstractController
                 ]);
             }
             elseif ($butForReturn=='SUPER_ADMIN_PLUS'){
+                $assoMail=$InfosPro->getSmailasso();
+                $idsalarieperso=$InfosPro->getSPersoId()->getSpersoid();
                 return $this->redirectToRoute('GestionSalarie', [
+                    'idsalarie'=>$idsalarieperso, //id de l'entite salarioinfosperso
+                    'assoMail'=> $assoMail, //id de l'association
+                    'but'=> 'salarie',
                     'idinfospro'=>$sproid, //id de l'entite salarioinfosperso
                     'Page1'=> $Page1,
                     'Page2'=> $Page2
@@ -457,7 +472,13 @@ class CommunController extends AbstractController
                 ]);
             }
             elseif ($butForReturn=='SUPER_ADMIN_PLUS'){
+                $InfosPro = $this->getDoctrine()->getRepository(SalarieInfosPro::class)->find($sproid);
+                $assoMail=$InfosPro->getSmailasso();
+                $idsalarieperso=$InfosPro->getSPersoId()->getSpersoid();
                 return $this->redirectToRoute('GestionSalarie', [
+                    'idsalarie'=>$idsalarieperso, //id de l'entite salarioinfosperso
+                    'assoMail'=> $assoMail, //id de l'association
+                    'but'=> 'salarie',
                     'idinfospro'=>$sproid, //id de l'entite salarioinfosperso
                     'Page1'=> $Page1,
                     'Page2'=> $Page2
@@ -524,7 +545,12 @@ class CommunController extends AbstractController
                 ]);
             }
             elseif ($butForReturn=='SUPER_ADMIN_PLUS'){
+                $assoMail=$InfosPro->getSmailasso();
+                $idsalarieperso=$InfosPro->getSPersoId()->getSpersoid();
                 return $this->redirectToRoute('GestionSalarie', [
+                    'idsalarie'=>$idsalarieperso, //id de l'entite salarioinfosperso
+                    'assoMail'=> $assoMail, //id de l'association
+                    'but'=> 'salarie',
                     'idinfospro'=>$sproid, //id de l'entite salarioinfosperso
                     'Page1'=> $Page1,
                     'Page2'=> $Page2
@@ -580,7 +606,12 @@ class CommunController extends AbstractController
                 ]);
             }
             elseif ($butForReturn=='SUPER_ADMIN_PLUS'){
+                $assoMail=$InfosPro->getSmailasso();
+                $idsalarieperso=$InfosPro->getSPersoId()->getSpersoid();
                 return $this->redirectToRoute('GestionSalarie', [
+                    'idsalarie'=>$idsalarieperso, //id de l'entite salarioinfosperso
+                    'assoMail'=> $assoMail, //id de l'association
+                    'but'=> 'salarie',
                     'idinfospro'=>$sproid, //id de l'entite salarioinfosperso
                     'Page1'=> $Page1,
                     'Page2'=> $Page2
@@ -647,8 +678,13 @@ class CommunController extends AbstractController
                 ]);
             }
             elseif ($butForReturn=='SUPER_ADMIN_PLUS'){
+                $assoMail=$InfosPro->getSmailasso();
+                $idsalarieperso=$InfosPro->getSPersoId()->getSpersoid();
                 return $this->redirectToRoute('GestionSalarie', [
-                    'idinfospro'=>$sproid, //id de l'entite salarioinfosperso
+                    'idsalarie'=>$idsalarieperso, //id de l'entite salarioinfosperso
+                    'assoMail'=> $assoMail, //id de l'association
+                    'but'=> 'salarie',
+                    'idinfospro'=>$sproid, //id de l'entite salarioinfospro
                     'Page1'=> $Page1,
                     'Page2'=> $Page2
                 ]);
@@ -703,8 +739,14 @@ class CommunController extends AbstractController
                 ]);
             }
             elseif ($butForReturn=='SUPER_ADMIN_PLUS'){
+                $InfosPro = $this->getDoctrine()->getRepository(SalarieInfosPro::class)->find($sproid);
+                $assoMail=$InfosPro->getSmailasso();
+                $idsalarieperso=$InfosPro->getSPersoId()->getSpersoid();
                 return $this->redirectToRoute('GestionSalarie', [
-                    'idinfospro'=>$sproid, //id de l'entite salarioinfosperso
+                    'idsalarie'=>$idsalarieperso, //id de l'entite salarioinfosperso
+                    'assoMail'=> $assoMail, //id de l'association
+                    'but'=> 'salarie',
+                    'idinfospro'=>$sproid, //id de l'entite salarioinfospro
                     'Page1'=> $Page1,
                     'Page2'=> $Page2
                 ]);
@@ -769,8 +811,13 @@ class CommunController extends AbstractController
                 ]);
             }
             elseif ($butForReturn=='SUPER_ADMIN_PLUS'){
+                $assoMail=$InfosPro->getSmailasso();
+                $idsalarieperso=$InfosPro->getSPersoId()->getSpersoid();
                 return $this->redirectToRoute('GestionSalarie', [
-                    'idinfospro'=>$sproid, //id de l'entite salarioinfosperso
+                    'idsalarie'=>$idsalarieperso, //id de l'entite salarioinfosperso
+                    'assoMail'=> $assoMail, //id de l'association
+                    'but'=> 'salarie',
+                    'idinfospro'=>$sproid, //id de l'entite salarioinfospro
                     'Page1'=> $Page1,
                     'Page2'=> $Page2
                 ]);
@@ -826,8 +873,13 @@ class CommunController extends AbstractController
                 ]);
             }
             elseif ($butForReturn=='SUPER_ADMIN_PLUS'){
+                $assoMail=$InfosPro->getSmailasso();
+                $idsalarieperso=$InfosPro->getSPersoId()->getSpersoid();
                 return $this->redirectToRoute('GestionSalarie', [
-                    'idinfospro'=>$sproid, //id de l'entite salarioinfosperso
+                    'idsalarie'=>$idsalarieperso, //id de l'entite salarioinfosperso
+                    'assoMail'=> $assoMail, //id de l'association
+                    'but'=> 'salarie',
+                    'idinfospro'=>$sproid, //id de l'entite salarioinfospro
                     'Page1'=> $Page1,
                     'Page2'=> $Page2
                 ]);
@@ -910,8 +962,13 @@ class CommunController extends AbstractController
                 ]);
             }
             elseif ($butForReturn=='SUPER_ADMIN_PLUS'){
+                $assoMail=$InfosPro->getSmailasso();
+                $idsalarieperso=$InfosPro->getSPersoId()->getSpersoid();
                 return $this->redirectToRoute('GestionSalarie', [
-                    'idinfospro'=>$sproid, //id de l'entite salarioinfosperso
+                    'idsalarie'=>$idsalarieperso, //id de l'entite salarioinfosperso
+                    'assoMail'=> $assoMail, //id de l'association
+                    'but'=> 'salarie',
+                    'idinfospro'=>$sproid, //id de l'entite salarioinfospro
                     'Page1'=> $Page1,
                     'Page2'=> $Page2
                 ]);
@@ -965,8 +1022,14 @@ class CommunController extends AbstractController
                 ]);
             }
             elseif ($butForReturn=='SUPER_ADMIN_PLUS'){
+                $InfosPro = $this->getDoctrine()->getRepository(SalarieInfosPro::class)->find($sproid);
+                $assoMail=$InfosPro->getSmailasso();
+                $idsalarieperso=$InfosPro->getSPersoId()->getSpersoid();
                 return $this->redirectToRoute('GestionSalarie', [
-                    'idinfospro'=>$sproid, //id de l'entite salarioinfosperso
+                    'idsalarie'=>$idsalarieperso, //id de l'entite salarioinfosperso
+                    'assoMail'=> $assoMail, //id de l'association
+                    'but'=> 'salarie',
+                    'idinfospro'=>$sproid, //id de l'entite salarioinfospro
                     'Page1'=> $Page1,
                     'Page2'=> $Page2
                 ]);
@@ -1032,8 +1095,13 @@ class CommunController extends AbstractController
                 ]);
             }
             elseif ($butForReturn=='SUPER_ADMIN_PLUS'){
+                $assoMail=$InfosPro->getSmailasso();
+                $idsalarieperso=$InfosPro->getSPersoId()->getSpersoid();
                 return $this->redirectToRoute('GestionSalarie', [
-                    'idinfospro'=>$sproid, //id de l'entite salarioinfosperso
+                    'idsalarie'=>$idsalarieperso, //id de l'entite salarioinfosperso
+                    'assoMail'=> $assoMail, //id de l'association
+                    'but'=> 'salarie',
+                    'idinfospro'=>$sproid, //id de l'entite salarioinfospro
                     'Page1'=> $Page1,
                     'Page2'=> $Page2
                 ]);
@@ -1088,8 +1156,14 @@ class CommunController extends AbstractController
                 ]);
             }
             elseif ($butForReturn=='SUPER_ADMIN_PLUS'){
+                $InfosPro = $this->getDoctrine()->getRepository(SalarieInfosPro::class)->find($sproid);
+                $assoMail=$InfosPro->getSmailasso();
+                $idsalarieperso=$InfosPro->getSPersoId()->getSpersoid();
                 return $this->redirectToRoute('GestionSalarie', [
-                    'idinfospro'=>$sproid, //id de l'entite salarioinfosperso
+                    'idsalarie'=>$idsalarieperso, //id de l'entite salarioinfosperso
+                    'assoMail'=> $assoMail, //id de l'association
+                    'but'=> 'salarie',
+                    'idinfospro'=>$sproid, //id de l'entite salarioinfospro
                     'Page1'=> $Page1,
                     'Page2'=> $Page2
                 ]);
@@ -1159,8 +1233,13 @@ class CommunController extends AbstractController
                 ]);
             }
             elseif ($butForReturn=='SUPER_ADMIN_PLUS'){
+                $assoMail=$InfosPro->getSmailasso();
+                $idsalarieperso=$InfosPro->getSPersoId()->getSpersoid();
                 return $this->redirectToRoute('GestionSalarie', [
-                    'idinfospro'=>$sproid, //id de l'entite salarioinfosperso
+                    'idsalarie'=>$idsalarieperso, //id de l'entite salarioinfosperso
+                    'assoMail'=> $assoMail, //id de l'association
+                    'but'=> 'salarie',
+                    'idinfospro'=>$sproid, //id de l'entite salarioinfospro
                     'Page1'=> $Page1,
                     'Page2'=> $Page2
                 ]);
@@ -1220,8 +1299,13 @@ class CommunController extends AbstractController
                 ]);
             }
             elseif ($butForReturn=='SUPER_ADMIN_PLUS'){
+                $assoMail=$InfosPro->getSmailasso();
+                $idsalarieperso=$InfosPro->getSPersoId()->getSpersoid();
                 return $this->redirectToRoute('GestionSalarie', [
-                    'idinfospro'=>$sproid, //id de l'entite salarioinfosperso
+                    'idsalarie'=>$idsalarieperso, //id de l'entite salarioinfosperso
+                    'assoMail'=> $assoMail, //id de l'association
+                    'but'=> 'salarie',
+                    'idinfospro'=>$sproid, //id de l'entite salarioinfospro
                     'Page1'=> $Page1,
                     'Page2'=> $Page2
                 ]);
