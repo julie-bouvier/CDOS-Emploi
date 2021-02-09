@@ -159,12 +159,15 @@ class SaSalariesController extends AbstractController
         }
     }
 
+
     /*########################EXPORT INFOS SALARIES #####################*/
 
     /**
      * @Route("/ExportInfosSalaries/", name="ExportInfosSalaries")
      * @return Response
      */
+
+
     public function ExportInfosSalaries(){
         $associations=$this->getDoctrine()->getRepository(Association::class)->findAll();
         $salariespros=$this->getDoctrine()->getRepository(SalarieInfosPro::class)->findAll();
@@ -178,6 +181,10 @@ class SaSalariesController extends AbstractController
         $heures=$this->getDoctrine()->getRepository(Heures::class)->findAll();
         $avenants=$this->getDoctrine()->getRepository(Avenant::class)->findAll();
 
+
+        setlocale(LC_TIME, 'fr_FR.UTF8', 'fr.UTF8', 'fr_FR.UTF-8', 'fr.UTF-8');
+        $mois=(strftime(" %B"));
+
         return $this->render('SuperAdmin/ExportInfosSalaries.html.twig', [
             'associations'=>$associations,
             'salariespros'=>$salariespros,
@@ -190,6 +197,7 @@ class SaSalariesController extends AbstractController
             'frais' => $frais,
             'heures' => $heures,
             'avenants' => $avenants,
+            'mois'=>$mois
         ]);
 
     }

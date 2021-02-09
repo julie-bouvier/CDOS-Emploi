@@ -16,17 +16,465 @@
     </head>
     <body>
     <div class="container">
+
+
         <legend>Liste des salariés et leurs variables  : </legend>
 
-
-        <table id="arrettravails" class="display nowrap" width="100%" title="Arrets de travail :">
-            <h5 style="color:#052876" > <strong> Arrêts de travail </strong> </h5>
+        <table id="resume" class="display nowrap" width="100%" title="Résumé :">
+            <h5 style="color:#052876" > <strong> Résumé </strong> </h5>
 
             <thead>
             <tr>
+                <th>Nom de l'association</th>
                 <th>Nom du salarié</th>
                 <th>Prénom du salarié</th>
+                <th>Mois concerné </th>
+                <th>Type arret de travail 1 </th> {# penser a mettre les types des colonnes  #}
+                <th>Initial ou prolongation</th>
+                <th>Date de début </th>
+                <th>Date de fin prévisionnelle</th>
+                <th>Maintient des 3 premiers jours </th>
+                <th>Si non, nombre d'heures à déduire  </th>
+                <th>Maintient à compter du 4eme jour  </th>
+                <th>Si non, nombre d'heures à déduire </th>
+                <th>Commentaires </th>
+                <th>Type arret de travail 2 </th> {# penser a mettre les types des colonnes  #}
+                <th>Initial ou prolongation</th>
+                <th>Date de début </th>
+                <th>Date de fin prévisionnelle</th>
+                <th>Maintient des 3 premiers jours </th>
+                <th>Si non, nombre d'heures à déduire  </th>
+                <th>Maintient à compter du 4eme jour  </th>
+                <th>Si non, nombre d'heures à déduire </th>
+                <th>Commentaires </th>
+                <th>Type congé 1 </th>
+                <th>Dernier jour travaillé</th>
+                <th>Jour de reprise</th>
+                <th>Jours normalement travaillés</th>
+                <th>Nombre de jours ouvrables pris</th>
+                <th>Commentaires</th>
+                <th>Type congé 2 </th>
+                <th>Dernier jour travaillé</th>
+                <th>Jour de reprise</th>
+                <th>Jours normalement travaillés</th>
+                <th>Nombre de jours ouvrables pris</th>
+                <th>Commentaires</th>
+                <th>Du </th>
+                <th>Au </th>
+                <th>Nombre d'heures à déduire </th>
+                <th>Maintient à 100% </th>
+                <th>Commentaires</th>
+                <th>Du : </th>
+                <th>Au : </th>
+                <th>Nombre d'heures à déduire </th>
+                <th>Commentaires </th>
+                <th>Du : </th>
+                <th>Au : </th>
+                <th>Nombre d'heures à déduire </th>
+                <th>Commentaires </th>
+                <th>Du : </th>
+                <th>Au : </th>
+                <th>Nombre d'heures à déduire </th>
+                <th>Commentaires </th>
+                <th>Type de prime 1</th>
+                <th>Montant </th>
+                <th>Unité </th>
+                <th>Commentaires </th>
+                <th>Type de prime 2</th>
+                <th>Montant </th>
+                <th>Unité </th>
+                <th>Commentaires </th>
+                <th>Type de frais 1 </th>
+                <th>Quantité </th>
+                <th>Taux Unitaire </th>
+                <th>Total </th>
+                <th>Commentaires </th>
+                <th>Type de frais 2 </th>
+                <th>Quantité </th>
+                <th>Taux Unitaire </th>
+                <th>Total </th>
+                <th>Commentaires </th>
+                <th>Type d'Heures</th>
+                <th>Semaine concernée </th>
+                <th>Nombre d'Heures </th>
+                <th>Commentaires </th>
+                <th>Date d'effet</th>
+                <th>Type de modification </th>
+                <th>Commentaires </th>
+                <th>Date de fin </th>
+                <th>Motif de fin  </th>
+                <th>Commentaires </th>
+
+            </tr>
+            </thead>
+
+            <tbody>
+            {% for association in associations %}
+                {% for salariepro in salariespros %}
+                    {% if salariepro.smailasso==association.amail %}
+                        {% set count1 = 0 %}
+                        {% for arrettravail in arrettravails %}
+                            {% if arrettravail.sproid.sproid==salariepro.sproid %}
+                                {% set count1 = count1 +1 %}
+                            {% endif %}
+                        {% endfor %}
+
+                        {% for salarieperso in salariespersos%}
+                                {% if salarieperso.spersoid == salariepro.sPersoId.spersoid %}
+                                    <tr>
+                                        <td>{{ association.anom}}</td>
+                                        <td>{{ salarieperso.snom }}</td>
+                                        <td>{{ salarieperso.sprenom }}</td>
+                                        <td>{{mois}}</td>
+                                        {% if count1 ==0 %}
+                                            <td> </td>
+                                            <td> </td>
+                                            <td> </td>
+                                            <td> </td>
+                                            <td> </td>
+                                            <td> </td>
+                                            <td> </td>
+                                            <td> </td>
+                                            <td> </td>
+                                            <td> </td>
+                                            <td> </td>
+                                            <td> </td>
+                                            <td> </td>
+                                            <td> </td>
+                                            <td> </td>
+                                            <td> </td>
+                                            <td> </td>
+                                            <td> </td>
+                                        {% elseif count1 ==1 %}
+                                            {% for arrettravail in arrettravails %}
+                                                {% if arrettravail.sproid.sproid==salariepro.sproid %}
+                                                    <td>{{ arrettravail.attype }}</td>
+                                                    <td>{{ arrettravail.atprolongation }}</td>
+                                                    <td>{{ arrettravail.atdebut|date("d/m/Y") }}</td>
+                                                    <td>{{ arrettravail.atfin|date("d/m/Y") }}</td>
+                                                    <td>{{ arrettravail.at3jours}}</td>
+                                                    <td>{{ arrettravail.at3jnbh}}</td>
+                                                    <td>{{ arrettravail.at4jours}}</td>
+                                                    <td>{{ arrettravail.at4jnbh}}</td>
+                                                    <td>{{ arrettravail.atcommentaire}}</td>
+                                                    <td> </td>
+                                                    <td> </td>
+                                                    <td> </td>
+                                                    <td> </td>
+                                                    <td> </td>
+                                                    <td> </td>
+                                                    <td> </td>
+                                                    <td> </td>
+                                                    <td> </td>
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% elseif count1 ==2 %}
+                                            {% for arrettravail in arrettravails %}
+                                                {% if arrettravail.sproid.sproid==salariepro.sproid %}
+                                                    <td>{{ arrettravail.attype }}</td>
+                                                    <td>{{ arrettravail.atprolongation }}</td>
+                                                    <td>{{ arrettravail.atdebut|date("d/m/Y") }}</td>
+                                                    <td>{{ arrettravail.atfin|date("d/m/Y") }}</td>
+                                                    <td>{{ arrettravail.at3jours}}</td>
+                                                    <td>{{ arrettravail.at3jnbh}}</td>
+                                                    <td>{{ arrettravail.at4jours}}</td>
+                                                    <td>{{ arrettravail.at4jnbh}}</td>
+                                                    <td>{{ arrettravail.atcommentaire}}</td>
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% endif %}
+
+                                        {% set count2 = 0 %}
+                                        {% for conge in conges %}
+                                            {% if conge.sproid.sproid==salariepro.sproid %}
+                                                {% set count2 = count2 +1 %}
+                                            {% endif %}
+                                        {% endfor %}
+                                        {% if count2 ==0 %}
+                                            <td> </td>
+                                            <td> </td>
+                                            <td> </td>
+                                            <td> </td>
+                                            <td> </td>
+                                            <td> </td>
+                                            <td> </td>
+                                            <td> </td>
+                                            <td> </td>
+                                            <td> </td>
+                                            <td> </td>
+                                            <td> </td>
+                                        {% elseif count2 ==1 %}
+                                            {% for conge in conges %}
+                                                {% if conge.sproid.sproid==salariepro.sproid %}
+                                                    <td>{{ conge.contype }}</td>
+                                                    <td>{{ conge.condernierjour|date("d/m/Y") }}</td>
+                                                    <td>{{ conge.conjourreprise|date("d/m/Y") }}</td>
+                                                    <td>{{ conge.conjournormaltrav| json_encode }}</td>
+                                                    <td>{{ conge.connbjourouvrablepris}}</td>
+                                                    <td>{{ conge.concommentaire}}</td>
+                                                    <td> </td>
+                                                    <td> </td>
+                                                    <td> </td>
+                                                    <td> </td>
+                                                    <td> </td>
+                                                    <td> </td>
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% elseif count ==2 %}
+                                            {% for conge in conges %}
+                                                {% if conge.sproid.sproid==salariepro.sproid %}
+                                                    <td>{{ conge.contype }}</td>
+                                                    <td>{{ conge.condernierjour|date("d/m/Y") }}</td>
+                                                    <td>{{ conge.conjourreprise|date("d/m/Y") }}</td>
+                                                    <td>{{ conge.conjournormaltrav| json_encode }}</td>
+                                                    <td>{{ conge.connbjourouvrablepris}}</td>
+                                                    <td>{{ conge.concommentaire}}</td>
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% endif %}
+
+                                        {% set count3 = 0 %}
+                                        {% for chomage in chomages %}
+                                            {% if chomage.sproid.sproid==salariepro.sproid %}
+                                                {% set count3 = count3 +1 %}
+                                            {% endif %}
+                                        {% endfor %}
+                                        {% if count3 ==0 %}
+                                            <td> </td>
+                                            <td> </td>
+                                            <td> </td>
+                                            <td> </td>
+                                            <td> </td>
+                                        {% elseif count3 ==1 %}
+                                            {% for chomage in chomages %}
+                                                {% if chomage.sproid.sproid==salariepro.sproid %}
+                                                    <td>{{ chomage.chodebut|date("d/m/Y") }}</td>
+                                                    <td>{{ chomage.chofin|date("d/m/Y") }}</td>
+                                                    <td>{{ chomage.chonbheure }}</td>
+                                                    <td>{{ chomage.chomaintien }}</td>
+                                                    <td>{{ chomage.chocommentaire}}</td>
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% endif %}
+
+                                        {% set count4 = 0 %}
+                                        {% for autreabsence in autreabsences %}
+                                            {% if autreabsence.sproid.sproid==salariepro.sproid %}
+                                                {% set count4 = count4 +1 %}
+                                            {% endif %}
+                                        {% endfor %}
+                                        {% if count4 ==0 %}
+                                            <td> </td>
+                                            <td> </td>
+                                            <td> </td>
+                                            <td> </td>
+                                            <td> </td>
+                                            <td> </td>
+                                            <td> </td>
+                                            <td> </td>
+                                            <td> </td>
+                                            <td> </td>
+                                            <td> </td>
+                                            <td> </td>
+                                        {% elseif count4 ==1 %}
+                                            {% for autreabsence in autreabsences %}
+                                                {% if autreabsence.sproid.sproid==salariepro.sproid %}
+                                                    <td>{{ autreabsence.absdebut|date("d/m/Y") }}</td>
+                                                    <td>{{ autreabsence.absfin|date("d/m/Y") }}</td>
+                                                    <td>{{ autreabsence.absnbheure }}</td>
+                                                    <td>{{ autreabsence.abscommentaire}}</td>
+                                                    <td> </td>
+                                                    <td> </td>
+                                                    <td> </td>
+                                                    <td> </td>
+                                                    <td> </td>
+                                                    <td> </td>
+                                                    <td> </td>
+                                                    <td> </td>
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% elseif count4 ==2 %}
+                                            {% for autreabsence in autreabsences %}
+                                                {% if autreabsence.sproid.sproid==salariepro.sproid %}
+                                                    <td>{{ autreabsence.absdebut|date("d/m/Y") }}</td>
+                                                    <td>{{ autreabsence.absfin|date("d/m/Y") }}</td>
+                                                    <td>{{ autreabsence.absnbheure }}</td>
+                                                    <td>{{ autreabsence.abscommentaire}}</td>
+                                                    <td> </td>
+                                                    <td> </td>
+                                                    <td> </td>
+                                                    <td> </td>
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% elseif count4 ==3 %}
+                                            {% for autreabsence in autreabsences %}
+                                                {% if autreabsence.sproid.sproid==salariepro.sproid %}
+                                                    <td>{{ autreabsence.absdebut|date("d/m/Y") }}</td>
+                                                    <td>{{ autreabsence.absfin|date("d/m/Y") }}</td>
+                                                    <td>{{ autreabsence.absnbheure }}</td>
+                                                    <td>{{ autreabsence.abscommentaire}}</td>
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% endif %}
+                                        {% set count5 = 0 %}
+                                        {% for prime in primes %}
+                                            {% if prime.sproid.sproid==salariepro.sproid %}
+                                                {% set count5 = count5 +1 %}
+                                            {% endif %}
+                                        {% endfor %}
+                                        {% if count5 ==0 %}
+                                            <td> </td>
+                                            <td> </td>
+                                            <td> </td>
+                                            <td> </td>
+                                            <td> </td>
+                                            <td> </td>
+                                            <td> </td>
+                                            <td> </td>
+                                        {% elseif count5 ==1 %}
+                                            {% for prime in primes %}
+                                                {% if prime.sproid.sproid==salariepro.sproid %}
+                                                    <td>{{ prime.primtype }}</td>
+                                                    <td>{{ prime.primmontant }}</td>
+                                                    <td>{{ prime.primnetbrut }}</td>
+                                                    <td>{{ prime.primcommentaire}}</td>
+                                                    <td> </td>
+                                                    <td> </td>
+                                                    <td> </td>
+                                                    <td> </td>
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% elseif count5 ==2 %}
+                                            {% for prime in primes %}
+                                                {% if prime.sproid.sproid==salariepro.sproid %}
+                                                    <td>{{ prime.primtype }}</td>
+                                                    <td>{{ prime.primmontant }}</td>
+                                                    <td>{{ prime.primnetbrut }}</td>
+                                                    <td>{{ prime.primcommentaire}}</td>
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% endif %}
+                                        {% set count6 = 0 %}
+                                            {% for frai in frais %}
+                                                {% if frai.sproid.sproid==salariepro.sproid %}
+                                                    {% set count6 = count6 +1 %}
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% if count6 ==0 %}
+                                            <td> </td>
+                                            <td> </td>
+                                            <td> </td>
+                                            <td> </td>
+                                            <td> </td>
+                                            <td> </td>
+                                            <td> </td>
+                                            <td> </td>
+                                            <td> </td>
+                                            <td> </td>
+                                        {% elseif count6 ==1 %}
+                                            {% for frai in frais %}
+                                                {% if frai.sproid.sproid==salariepro.sproid %}
+                                                    <td>{{ frai.fratype }}</td>
+                                                    <td>{{ frai.fraquantite }}</td>
+                                                    <td>{{ frai.frataux }}</td>
+                                                    <td>{{ frai.fratotal }}</td>
+                                                    <td>{{ frai.fracommentaire}}</td>
+                                                    <td> </td>
+                                                    <td> </td>
+                                                    <td> </td>
+                                                    <td> </td>
+                                                    <td> </td>
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% elseif count6 ==2 %}
+                                            {% for frai in frais %}
+                                                {% if frai.sproid.sproid==salariepro.sproid %}
+                                                    <td>{{ frai.fratype }}</td>
+                                                    <td>{{ frai.fraquantite }}</td>
+                                                    <td>{{ frai.frataux }}</td>
+                                                    <td>{{ frai.fratotal }}</td>
+                                                    <td>{{ frai.fracommentaire}}</td>
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% endif %}
+                                        {% set count7 = 0 %}
+                                            {% for heure in heures %}
+                                                {% if heure.sproid.sproid==salariepro.sproid %}
+                                                    {% set count7 = count7 +1 %}
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% if count7 ==0 %}
+                                            <td> </td>
+                                            <td> </td>
+                                            <td> </td>
+                                            <td> </td>
+                                        {% elseif count7 ==1 %}
+                                            {% for heure in heures %}
+                                                {% if heure.sproid.sproid==salariepro.sproid %}
+                                                    <td>{{ heure.heurtype }}</td>
+                                                    <td>{{ heure.heursem }}</td>
+                                                    <td>{{ heure.heurnb }}</td>
+                                                    <td>{{ heure.heurcommentaire}}</td>
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% endif %}
+                                        {% set count8 = 0 %}
+                                            {% for avenant in avenants %}
+                                                {% if avenant.sproid.sproid==salariepro.sproid %}
+                                                    {% set count8 = count8 +1 %}
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% if count8 ==0 %}
+                                            <td> </td>
+                                            <td> </td>
+                                            <td> </td>
+                                        {% elseif count8 ==1 %}
+                                            {% for avenant in avenants %}
+                                                {% if avenant.sproid.sproid==salariepro.sproid %}
+                                                    <td>{{ avenant.avdebut|date("d/m/Y") }}</td>
+                                                    <td>{{ avenant.avtypemodif }}</td>
+                                                    <td>{{ avenant.avcommentaire}}</td>
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% endif %}
+                                        {% set count9 = 0 %}
+                                            {% for salarieperso in salariespersos%}
+                                                {% if salarieperso.spersoid == salariepro.sPersoId.spersoid %}
+                                                    {% set count9 = count9 +1 %}
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% if count9 ==0 %}
+                                            <td> </td>
+                                            <td> </td>
+                                            <td> </td>
+                                        {% elseif count9 ==1 %}
+                                            {% for salarieperso in salariespersos%}
+                                                {% if salarieperso.spersoid == salariepro.sPersoId.spersoid %}
+                                                    <td>{{ salariepro.sdatefin|date("d/m/Y") }}</td>
+                                                    <td>{{ salariepro.sfinmotif }}</td>
+                                                    <td>{{ salariepro.scomfin}}</td>
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% endif %}
+                                {% endif %}
+                            {% endfor %}
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+
+            </tbody>
+        </table>
+
+        <table id="arrettravails" class="display nowrap" width="100%" title="Arrets de travail :">
+            <h5 style="color:#052876" > <strong> Arrêts de travail </tbody> </h5>
+
+            <thead>
+            <tr>
                 <th>Nom de l'association</th>
+                <th>Nom du salarié</th>
+                <th>Prénom du salarié</th>
+                <th>Mois concerné </th>
                 <th>Type arret de travail</th> {# penser a mettre les types des colonnes  #}
                 <th>Initial ou prolongation</th>
                 <th>Date de début </th>
@@ -49,9 +497,10 @@
                                 {% for arrettravail in arrettravails %}
                                     {% if arrettravail.sproid.sproid==salariepro.sproid %}
                                         <tr>
+                                            <td>{{ association.anom}}</td>
                                             <td>{{ salarieperso.snom }}</td>
                                             <td>{{ salarieperso.sprenom }}</td>
-                                            <td>{{ association.anom}}</td>
+                                            <td>{{mois}}</td>
                                             <td>{{ arrettravail.attype }}</td>
                                             <td>{{ arrettravail.atprolongation }}</td>
                                             <td>{{ arrettravail.atdebut|date("d/m/Y") }}</td>
@@ -78,9 +527,10 @@
             <h5 style="color:#052876" > <strong> Congés </strong> </h5>
             <thead>
             <tr>
+                <th>Nom de l'association</th>
                 <th>Nom du salarié</th>
                 <th>Prénom du salarié</th>
-                <th>Nom de l'association</th>
+                <th>Mois concerné </th>
                 <th>Type congé</th>
                 <th>Dernier jour travaillé</th>
                 <th>Jour de reprise</th>
@@ -99,9 +549,10 @@
                                 {% for conge in conges %}
                                     {% if conge.sproid.sproid==salariepro.sproid %}
                                         <tr>
+                                            <td>{{ association.anom}}</td>
                                             <td>{{ salarieperso.snom }}</td>
                                             <td>{{ salarieperso.sprenom }}</td>
-                                            <td>{{ association.anom}}</td>
+                                            <td>{{mois}}</td>
                                             <td>{{ conge.contype }}</td>
                                             <td>{{ conge.condernierjour|date("d/m/Y") }}</td>
                                             <td>{{ conge.conjourreprise|date("d/m/Y") }}</td>
@@ -123,9 +574,10 @@
             <h5 style="color:#052876" > <strong> Chômage </strong> </h5>
             <thead>
             <tr>
+                <th>Nom de l'association</th>
                 <th>Nom du salarié</th>
                 <th>Prénom du salarié</th>
-                <th>Nom de l'association</th>
+                <th>Mois concerné </th>
                 <th>Du </th>
                 <th>Au </th>
                 <th>Nombre d'heures à déduire </th>
@@ -144,9 +596,10 @@
                                 {% for chomage in chomages %}
                                     {% if chomage.sproid.sproid==salariepro.sproid %}
                                         <tr>
+                                            <td>{{ association.anom}}</td>
                                             <td>{{ salarieperso.snom }}</td>
                                             <td>{{ salarieperso.sprenom }}</td>
-                                            <td>{{ association.anom}}</td>
+                                            <td>{{mois}}</td>
                                             <td>{{ chomage.chodebut|date("d/m/Y") }}</td>
                                             <td>{{ chomage.chofin|date("d/m/Y") }}</td>
                                             <td>{{ chomage.chonbheure }}</td>
@@ -166,9 +619,10 @@
             <h5 style="color:#052876" > <strong> Autres absences </strong> </h5>
             <thead>
             <tr>
+                <th>Nom de l'association</th>
                 <th>Nom du salarié</th>
                 <th>Prénom du salarié</th>
-                <th>Nom de l'association</th>
+                <th>Mois concerné </th>
                 <th>Du : </th>
                 <th>Au : </th>
                 <th>Nombre d'heures à déduire </th>
@@ -187,9 +641,10 @@
                                 {% for autreabsence in autreabsences %}
                                     {% if autreabsence.sproid.sproid==salariepro.sproid %}
                                         <tr>
+                                            <td>{{ association.anom}}</td>
                                             <td>{{ salarieperso.snom }}</td>
                                             <td>{{ salarieperso.sprenom }}</td>
-                                            <td>{{ association.anom}}</td>
+                                            <td>{{mois}}</td>
                                             <td>{{ autreabsence.absdebut|date("d/m/Y") }}</td>
                                             <td>{{ autreabsence.absfin|date("d/m/Y") }}</td>
                                             <td>{{ autreabsence.absnbheure }}</td>
@@ -208,9 +663,10 @@
             <h5 style="color:#052876" > <strong> Primes </strong> </h5>
             <thead>
             <tr>
+                <th>Nom de l'association</th>
                 <th>Nom du salarié</th>
                 <th>Prénom du salarié</th>
-                <th>Nom de l'association</th>
+                <th>Mois concerné </th>
                 <th>Type de prime </th>
                 <th>Montant </th>
                 <th>Unité </th>
@@ -227,9 +683,10 @@
                                 {% for prime in primes %}
                                     {% if prime.sproid.sproid==salariepro.sproid %}
                                         <tr>
+                                            <td>{{ association.anom}}</td>
                                             <td>{{ salarieperso.snom }}</td>
                                             <td>{{ salarieperso.sprenom }}</td>
-                                            <td>{{ association.anom}}</td>
+                                            <td>{{mois}}</td>
                                             <td>{{ prime.primtype }}</td>
                                             <td>{{ prime.primmontant }}</td>
                                             <td>{{ prime.primnetbrut }}</td>
@@ -248,9 +705,10 @@
             <h5 style="color:#052876" > <strong> Frais </strong> </h5>
             <thead>
             <tr>
+                <th>Nom de l'association</th>
                 <th>Nom du salarié</th>
                 <th>Prénom du salarié</th>
-                <th>Nom de l'association</th>
+                <th>Mois concerné </th>
                 <th>Type de frais</th>
                 <th>Quantité </th>
                 <th>Taux Unitaire </th>
@@ -268,9 +726,10 @@
                                 {% for frai in frais %}
                                     {% if frai.sproid.sproid==salariepro.sproid %}
                                         <tr>
+                                            <td>{{ association.anom}}</td>
                                             <td>{{ salarieperso.snom }}</td>
                                             <td>{{ salarieperso.sprenom }}</td>
-                                            <td>{{ association.anom}}</td>
+                                            <td>{{mois}}</td>
                                             <td>{{ frai.fratype }}</td>
                                             <td>{{ frai.fraquantite }}</td>
                                             <td>{{ frai.frataux }}</td>
@@ -290,9 +749,10 @@
             <h5 style="color:#052876" > <strong> Heures </strong> </h5>
             <thead>
             <tr>
+                <th>Nom de l'association</th>
                 <th>Nom du salarié</th>
                 <th>Prénom du salarié</th>
-                <th>Nom de l'association</th>
+                <th>Mois concerné </th>
                 <th>Type d'Heures</th>
                 <th>Semaine concernée </th>
                 <th>Nombre d'Heures </th>
@@ -309,9 +769,10 @@
                                 {% for heure in heures %}
                                     {% if heure.sproid.sproid==salariepro.sproid %}
                                         <tr>
+                                            <td>{{ association.anom}}</td>
                                             <td>{{ salarieperso.snom }}</td>
                                             <td>{{ salarieperso.sprenom }}</td>
-                                            <td>{{ association.anom}}</td>
+                                            <td>{{mois}}</td>
                                             <td>{{ heure.heurtype }}</td>
                                             <td>{{ heure.heursem }}</td>
                                             <td>{{ heure.heurnb }}</td>
@@ -330,9 +791,10 @@
             <h5 style="color:#052876" > <strong> Avenants </strong> </h5>
             <thead>
             <tr>
+                <th>Nom de l'association</th>
                 <th>Nom du salarié</th>
                 <th>Prénom du salarié</th>
-                <th>Nom de l'association</th>
+                <th>Mois concerné </th>
                 <th>Date d'effet</th>
                 <th>Type de modification </th>
                 <th>Commentaires </th>
@@ -348,9 +810,10 @@
                                 {% for avenant in avenants %}
                                     {% if avenant.sproid.sproid==salariepro.sproid %}
                                         <tr>
+                                            <td>{{ association.anom}}</td>
                                             <td>{{ salarieperso.snom }}</td>
                                             <td>{{ salarieperso.sprenom }}</td>
-                                            <td>{{ association.anom}}</td>
+                                            <td>{{mois}}</td>
                                             <td>{{ avenant.avdebut|date("d/m/Y") }}</td>
                                             <td>{{ avenant.avtypemodif }}</td>
                                             <td>{{ avenant.avcommentaire}}</td>
@@ -368,9 +831,10 @@
             <h5 style="color:#052876" > <strong> Fin de contracts </strong> </h5>
             <thead>
             <tr>
+                <th>Nom de l'association</th>
                 <th>Nom du salarié</th>
                 <th>Prénom du salarié</th>
-                <th>Nom de l'association</th>
+                <th>Mois concerné </th>
                 <th>Date de fin </th>
                 <th>Motif de fin  </th>
                 <th>Commentaires </th>
@@ -384,9 +848,10 @@
                         {% for salarieperso in salariespersos%}
                             {% if salarieperso.spersoid == salariepro.sPersoId.spersoid %}
                                 <tr>
+                                    <td>{{ association.anom}}</td>
                                     <td>{{ salarieperso.snom }}</td>
                                     <td>{{ salarieperso.sprenom }}</td>
-                                    <td>{{ association.anom}}</td>
+                                    <td>{{mois}}</td>
                                     <td>{{ salariepro.sdatefin|date("d/m/Y") }}</td>
                                     <td>{{ salariepro.sfinmotif }}</td>
                                     <td>{{ salariepro.scomfin}}</td>
@@ -585,7 +1050,7 @@
 
 
 
-            var table = $('#arrettravails').DataTable({
+            var table = $('#resume').DataTable({
                 "scrollX": true,
                 dom: 'Bftrip',
                 buttons: [
@@ -593,21 +1058,26 @@
                         extend: 'excelHtml5',
                         text: 'Excel',
                         customize: function( xlsx ) {
-                            setSheetName(xlsx, 'ArretsTravail');
-                            addSheet(xlsx, '#conges', 'Salariés et leurs variables', 'Congés', '2');
-                            addSheet(xlsx, '#chomages', 'Salariés et leurs variables', 'Chomages', '3');
-                            addSheet(xlsx, '#absences', 'Salariés et leurs variables', 'AutresAbsences', '4');
-                            addSheet(xlsx, '#primes', 'Salariés et leurs variables', 'Primes', '5');
-                            addSheet(xlsx, '#frais',  'Salariés et leurs variables','Frais', '6');
-                            addSheet(xlsx, '#heures',  'Salariés et leurs variables','Heures', '7');
-                            addSheet(xlsx, '#avenants',  'Salariés et leurs variables','Avenants', '8');
-                            addSheet(xlsx, '#fincontrat',  'Salariés et leurs variables','Fin Contrats', '9');
+                            setSheetName(xlsx, 'Résumé');
+                            addSheet(xlsx, '#arrettravails', 'Salariés et leurs variables', 'ArretsTravail', '2');
+                            addSheet(xlsx, '#conges', 'Salariés et leurs variables', 'Congés', '3');
+                            addSheet(xlsx, '#chomages', 'Salariés et leurs variables', 'Chomages', '4');
+                            addSheet(xlsx, '#absences', 'Salariés et leurs variables', 'AutresAbsences', '5');
+                            addSheet(xlsx, '#primes', 'Salariés et leurs variables', 'Primes', '6');
+                            addSheet(xlsx, '#frais',  'Salariés et leurs variables','Frais', '7');
+                            addSheet(xlsx, '#heures',  'Salariés et leurs variables','Heures', '8');
+                            addSheet(xlsx, '#avenants',  'Salariés et leurs variables','Avenants', '9');
+                            addSheet(xlsx, '#fincontrat',  'Salariés et leurs variables','Fin Contrats', '10');
 
                         }
 
                     }
                 ]
 
+            });
+
+            $('#arrettravails').DataTable({
+                "scrollX": true,
             });
 
             $('#conges').DataTable({
