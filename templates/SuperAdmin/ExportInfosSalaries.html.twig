@@ -17,7 +17,6 @@
     <body>
     <div class="container">
 
-
         <legend>Liste des salariés et leurs variables  : </legend>
 
         <table id="resume" class="display nowrap" width="100%" title="Résumé :">
@@ -25,85 +24,99 @@
 
             <thead>
             <tr>
+                <th colspan=4 bgcolor="#D3D1D1"> Infos général </th>
+                <th colspan=18> Arret de travail </th>
+                <th colspan=12> Congés </th>
+                <th colspan=5> Chomage </th>
+                <th colspan=12> Autres Absences </th>
+                <th colspan=8> Primes </th>
+                <th colspan=10> Frais </th>
+                <th colspan=4> Heure </th>
+                <th colspan=3> Avenants </th>
+                <th colspan=3> Fin </th>
+            </tr>
+            {#</thead>
+            <thead>#}
+            <tr>
                 <th>Nom de l'association</th>
                 <th>Nom du salarié</th>
                 <th>Prénom du salarié</th>
                 <th>Mois concerné </th>
-                <th>Type arret de travail 1 </th> {# penser a mettre les types des colonnes  #}
-                <th>Initial ou prolongation</th>
-                <th>Date de début </th>
-                <th>Date de fin prévisionnelle</th>
-                <th>Maintient des 3 premiers jours </th>
-                <th>Si non, nombre d'heures à déduire  </th>
-                <th>Maintient à compter du 4eme jour  </th>
-                <th>Si non, nombre d'heures à déduire </th>
-                <th>Commentaires </th>
-                <th>Type arret de travail 2 </th> {# penser a mettre les types des colonnes  #}
-                <th>Initial ou prolongation</th>
-                <th>Date de début </th>
-                <th>Date de fin prévisionnelle</th>
-                <th>Maintient des 3 premiers jours </th>
-                <th>Si non, nombre d'heures à déduire  </th>
-                <th>Maintient à compter du 4eme jour  </th>
-                <th>Si non, nombre d'heures à déduire </th>
-                <th>Commentaires </th>
-                <th>Type congé 1 </th>
-                <th>Dernier jour travaillé</th>
-                <th>Jour de reprise</th>
-                <th>Jours normalement travaillés</th>
-                <th>Nombre de jours ouvrables pris</th>
-                <th>Commentaires</th>
-                <th>Type congé 2 </th>
-                <th>Dernier jour travaillé</th>
-                <th>Jour de reprise</th>
-                <th>Jours normalement travaillés</th>
-                <th>Nombre de jours ouvrables pris</th>
-                <th>Commentaires</th>
-                <th>Du </th>
-                <th>Au </th>
-                <th>Nombre d'heures à déduire </th>
-                <th>Maintient à 100% </th>
-                <th>Commentaires</th>
-                <th>Du : </th>
-                <th>Au : </th>
-                <th>Nombre d'heures à déduire </th>
-                <th>Commentaires </th>
-                <th>Du : </th>
-                <th>Au : </th>
-                <th>Nombre d'heures à déduire </th>
-                <th>Commentaires </th>
-                <th>Du : </th>
-                <th>Au : </th>
-                <th>Nombre d'heures à déduire </th>
-                <th>Commentaires </th>
-                <th>Type de prime 1</th>
-                <th>Montant </th>
-                <th>Unité </th>
-                <th>Commentaires </th>
-                <th>Type de prime 2</th>
-                <th>Montant </th>
-                <th>Unité </th>
-                <th>Commentaires </th>
-                <th>Type de frais 1 </th>
-                <th>Quantité </th>
-                <th>Taux Unitaire </th>
-                <th>Total </th>
-                <th>Commentaires </th>
-                <th>Type de frais 2 </th>
-                <th>Quantité </th>
-                <th>Taux Unitaire </th>
-                <th>Total </th>
-                <th>Commentaires </th>
-                <th>Type d'Heures</th>
-                <th>Semaine concernée </th>
-                <th>Nombre d'Heures </th>
-                <th>Commentaires </th>
-                <th>Date d'effet</th>
-                <th>Type de modification </th>
-                <th>Commentaires </th>
-                <th>Date de fin </th>
-                <th>Motif de fin  </th>
-                <th>Commentaires </th>
+                <th>TYPE AT 1 </th> {# penser a mettre les types des colonnes  #}
+                <th>INI/PRO</th>
+                <th>DEBUT</th>
+                <th>FIN</th>
+                <th>MAINTIEN 3PJ</th>
+                <th>NBH DEDUIRE</th>
+                <th>MAINTIEN 4J</th>
+                <th>NBH DEDUIRE</th>
+                <th>COM AT 1 </th>
+                <th>TYPE AT 2 </th> {# penser a mettre les types des colonnes  #}
+                <th>INI/PRO</th>
+                <th>DEBUT</th>
+                <th>FIN</th>
+                <th>MAINTIEN 3PJ</th>
+                <th>NBH DEDUIRE</th>
+                <th>MAINTIEN 4J</th>
+                <th>NBH DEDUIRE</th>
+                <th>COM AT 2 </th>
+                <th>TYPE CONGES 1 </th>
+                <th>DJ TRAVAILLE</th>
+                <th>J REPRISE</th>
+                <th>J TRAVAILLE</th>
+                <th>NBJ OUVRABLE</th>
+                <th>COM CONGES 1</th>
+                <th>TYPE CONGES 1 </th>
+                <th>DJ TRAVAILLE</th>
+                <th>J REPRISE</th>
+                <th>J TRAVAILLE</th>
+                <th>NBJ OUVRABLE</th>
+                <th>COM CONGES 1</th>
+                <th>DU </th>
+                <th>AU </th>
+                <th>NBH DEDUIRE </th>
+                <th>MAINTIEN 100</th>
+                <th>COM CHOMAGE 1</th>
+                <th>DU</th>
+                <th>AU</th>
+                <th>NBH DEDUIRE</th>
+                <th>COM AA 1 </th>
+                <th>DU</th>
+                <th>AU</th>
+                <th>NBH DEDUIRE</th>
+                <th>COM AA 2 </th>
+                <th>DU</th>
+                <th>AU</th>
+                <th>NBH DEDUIRE</th>
+                <th>COM AA 3 </th>
+                <th>TYPE PRIME 1</th>
+                <th>MONTANT</th>
+                <th>UNITE</th>
+                <th>COM PRIME 1</th>
+                <th>TYPE PRIME 2</th>
+                <th>MONTANT</th>
+                <th>UNITE</th>
+                <th>COM PRIME 2 </th>
+                <th>TYPE FRAIS 1</th>
+                <th>QUANTITE</th>
+                <th>TAUX UNIT</th>
+                <th>TOTAL</th>
+                <th>COM FRAIS 1</th>
+                <th>TYPE FRAIS 2</th>
+                <th>QUANTITE</th>
+                <th>TAUX UNIT</th>
+                <th>TOTAL</th>
+                <th>COM FRAIS 2</th>
+                <th>TYPE HEURE</th>
+                <th>SEM CONCERNEE </th>
+                <th>NB HEURES</th>
+                <th> COM HEURE</th>
+                <th>DATE EFFET</th>
+                <th>TYPE MODIF</th>
+                <th>COM AVENANT</th>
+                <th> DATE</th>
+                <th> MOTIF</th>
+                <th>COM FIN</th>
 
             </tr>
             </thead>
@@ -182,6 +195,20 @@
                                                     <td>{{ arrettravail.atcommentaire}}</td>
                                                 {% endif %}
                                             {% endfor %}
+                                        {% else %}
+                                            {% for arrettravail in arrettravails|slice(0,2)%}
+                                                {% if arrettravail.sproid.sproid==salariepro.sproid %}
+                                                    <td>{{ arrettravail.attype}}</td>
+                                                    <td>{{ arrettravail.atprolongation  }}</td>
+                                                    <td>{{ arrettravail.atdebut|date("d/m/Y") }}</td>
+                                                    <td>{{ arrettravail.atfin|date("d/m/Y") }}</td>
+                                                    <td>{{ arrettravail.at3jours}}</td>
+                                                    <td>{{ arrettravail.at3jnbh}}</td>
+                                                    <td>{{ arrettravail.at4jours}}</td>
+                                                    <td>{{ arrettravail.at4jnbh}}</td>
+                                                    <td>{{ arrettravail.atcommentaire}}</td>
+                                                {% endif %}
+                                            {% endfor %}
                                         {% endif %}
 
                                         {% set count2 = 0 %}
@@ -220,8 +247,19 @@
                                                     <td> </td>
                                                 {% endif %}
                                             {% endfor %}
-                                        {% elseif count ==2 %}
+                                        {% elseif count2 ==2 %}
                                             {% for conge in conges %}
+                                                {% if conge.sproid.sproid==salariepro.sproid %}
+                                                    <td>{{ conge.contype }}</td>
+                                                    <td>{{ conge.condernierjour|date("d/m/Y") }}</td>
+                                                    <td>{{ conge.conjourreprise|date("d/m/Y") }}</td>
+                                                    <td>{{ conge.conjournormaltrav| json_encode }}</td>
+                                                    <td>{{ conge.connbjourouvrablepris}}</td>
+                                                    <td>{{ conge.concommentaire}}</td>
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% else%}
+                                            {% for conge in conges|slice(0,3)%}
                                                 {% if conge.sproid.sproid==salariepro.sproid %}
                                                     <td>{{ conge.contype }}</td>
                                                     <td>{{ conge.condernierjour|date("d/m/Y") }}</td>
@@ -247,6 +285,16 @@
                                             <td> </td>
                                         {% elseif count3 ==1 %}
                                             {% for chomage in chomages %}
+                                                {% if chomage.sproid.sproid==salariepro.sproid %}
+                                                    <td>{{ chomage.chodebut|date("d/m/Y") }}</td>
+                                                    <td>{{ chomage.chofin|date("d/m/Y") }}</td>
+                                                    <td>{{ chomage.chonbheure }}</td>
+                                                    <td>{{ chomage.chomaintien }}</td>
+                                                    <td>{{ chomage.chocommentaire}}</td>
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% else%}
+                                            {% for chomage in chomages|slice(0,1)%}
                                                 {% if chomage.sproid.sproid==salariepro.sproid %}
                                                     <td>{{ chomage.chodebut|date("d/m/Y") }}</td>
                                                     <td>{{ chomage.chofin|date("d/m/Y") }}</td>
@@ -315,6 +363,15 @@
                                                     <td>{{ autreabsence.abscommentaire}}</td>
                                                 {% endif %}
                                             {% endfor %}
+                                        {% else%}
+                                            {% for autreabsence in autreabsences|slice(0,4) %}
+                                                {% if autreabsence.sproid.sproid==salariepro.sproid %}
+                                                    <td>{{ autreabsence.absdebut|date("d/m/Y") }}</td>
+                                                    <td>{{ autreabsence.absfin|date("d/m/Y") }}</td>
+                                                    <td>{{ autreabsence.absnbheure }}</td>
+                                                    <td>{{ autreabsence.abscommentaire}}</td>
+                                                {% endif %}
+                                            {% endfor %}
                                         {% endif %}
                                         {% set count5 = 0 %}
                                         {% for prime in primes %}
@@ -346,6 +403,15 @@
                                             {% endfor %}
                                         {% elseif count5 ==2 %}
                                             {% for prime in primes %}
+                                                {% if prime.sproid.sproid==salariepro.sproid %}
+                                                    <td>{{ prime.primtype }}</td>
+                                                    <td>{{ prime.primmontant }}</td>
+                                                    <td>{{ prime.primnetbrut }}</td>
+                                                    <td>{{ prime.primcommentaire}}</td>
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% else%}
+                                            {% for prime in primes|slice(0,3)%}
                                                 {% if prime.sproid.sproid==salariepro.sproid %}
                                                     <td>{{ prime.primtype }}</td>
                                                     <td>{{ prime.primmontant }}</td>
@@ -396,6 +462,16 @@
                                                     <td>{{ frai.fracommentaire}}</td>
                                                 {% endif %}
                                             {% endfor %}
+                                        {% else%}
+                                            {% for frai in frais|slice(0,3) %}
+                                                {% if frai.sproid.sproid==salariepro.sproid %}
+                                                    <td>{{ frai.fratype }}</td>
+                                                    <td>{{ frai.fraquantite }}</td>
+                                                    <td>{{ frai.frataux }}</td>
+                                                    <td>{{ frai.fratotal }}</td>
+                                                    <td>{{ frai.fracommentaire}}</td>
+                                                {% endif %}
+                                            {% endfor %}
                                         {% endif %}
                                         {% set count7 = 0 %}
                                             {% for heure in heures %}
@@ -410,6 +486,15 @@
                                             <td> </td>
                                         {% elseif count7 ==1 %}
                                             {% for heure in heures %}
+                                                {% if heure.sproid.sproid==salariepro.sproid %}
+                                                    <td>{{ heure.heurtype }}</td>
+                                                    <td>{{ heure.heursem }}</td>
+                                                    <td>{{ heure.heurnb }}</td>
+                                                    <td>{{ heure.heurcommentaire}}</td>
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% else %}
+                                            {% for heure in heures|slice(0,1) %}
                                                 {% if heure.sproid.sproid==salariepro.sproid %}
                                                     <td>{{ heure.heurtype }}</td>
                                                     <td>{{ heure.heursem }}</td>
@@ -436,6 +521,14 @@
                                                     <td>{{ avenant.avcommentaire}}</td>
                                                 {% endif %}
                                             {% endfor %}
+                                        {% else %}
+                                            {% for avenant in avenants|slice(0,1) %}
+                                                {% if avenant.sproid.sproid==salariepro.sproid %}
+                                                    <td>{{ avenant.avdebut|date("d/m/Y") }}</td>
+                                                    <td>{{ avenant.avtypemodif }}</td>
+                                                    <td>{{ avenant.avcommentaire}}</td>
+                                                {% endif %}
+                                            {% endfor %}
                                         {% endif %}
                                         {% set count9 = 0 %}
                                             {% for salarieperso in salariespersos%}
@@ -455,6 +548,14 @@
                                                     <td>{{ salariepro.scomfin}}</td>
                                                 {% endif %}
                                             {% endfor %}
+                                        {% else %}
+                                            {% for salarieperso in salariespersos|slice(0,1)%}
+                                                {% if salarieperso.spersoid == salariepro.sPersoId.spersoid %}
+                                                    <td>{{ salariepro.sdatefin|date("d/m/Y") }}</td>
+                                                    <td>{{ salariepro.sfinmotif }}</td>
+                                                    <td>{{ salariepro.scomfin}}</td>
+                                                {% endif %}
+                                            {% endfor %}#}
                                         {% endif %}
                                 {% endif %}
                             {% endfor %}
@@ -467,7 +568,7 @@
         </table>
 
         <table id="arrettravails" class="display nowrap" width="100%" title="Arrets de travail :">
-            <h5 style="color:#052876" > <strong> Arrêts de travail </tbody> </h5>
+            <h5 style="color:#052876" > <strong> Arrêts de travail </strong> </h5>
 
             <thead>
             <tr>
@@ -475,15 +576,15 @@
                 <th>Nom du salarié</th>
                 <th>Prénom du salarié</th>
                 <th>Mois concerné </th>
-                <th>Type arret de travail</th> {# penser a mettre les types des colonnes  #}
-                <th>Initial ou prolongation</th>
-                <th>Date de début </th>
-                <th>Date de fin prévisionnelle</th>
-                <th>Maintient des 3 premiers jours </th>
-                <th>Si non, nombre d'heures à déduire  </th>
-                <th>Maintient à compter du 4eme jour  </th>
-                <th>Si non, nombre d'heures à déduire </th>
-                <th>Commentaires </th>
+                <th>TYPE AT</th> {# penser a mettre les types des colonnes  #}
+                <th>INI/PRO</th>
+                <th>DEBUT</th>
+                <th>FIN</th>
+                <th>MAINTIEN 3PJ</th>
+                <th>NBH DEDUIRE</th>
+                <th>MAINTIEN 4J</th>
+                <th>NBH DEDUIRE</th>
+                <th>COM AT </th>
 
             </tr>
             </thead>
@@ -531,12 +632,12 @@
                 <th>Nom du salarié</th>
                 <th>Prénom du salarié</th>
                 <th>Mois concerné </th>
-                <th>Type congé</th>
-                <th>Dernier jour travaillé</th>
-                <th>Jour de reprise</th>
-                <th>Jours normalement travaillés</th>
-                <th>Nombre de jours ouvrables pris</th>
-                <th>Commentaires</th>
+                <th>TYPE CONGES 1 </th>
+                <th>DJ TRAVAILLE</th>
+                <th>J REPRISE</th>
+                <th>J TRAVAILLE</th>
+                <th>NBJ OUVRABLE</th>
+                <th>COM CONGES 1</th>
             </tr>
             </thead>
 
@@ -578,11 +679,11 @@
                 <th>Nom du salarié</th>
                 <th>Prénom du salarié</th>
                 <th>Mois concerné </th>
-                <th>Du </th>
-                <th>Au </th>
-                <th>Nombre d'heures à déduire </th>
-                <th>Maintient à 100% </th>
-                <th>Commentaires</th>
+                <th>DU </th>
+                <th>AU </th>
+                <th>NBH DEDUIRE </th>
+                <th>MAINTIEN 100</th>
+                <th>COM CHOMAGE 1</th>
             </tr>
             </thead>
 
@@ -623,10 +724,10 @@
                 <th>Nom du salarié</th>
                 <th>Prénom du salarié</th>
                 <th>Mois concerné </th>
-                <th>Du : </th>
-                <th>Au : </th>
-                <th>Nombre d'heures à déduire </th>
-                <th>Commentaires </th>
+                <th>DU</th>
+                <th>AU</th>
+                <th>NBH DEDUIRE</th>
+                <th>COM AA 1 </th>
 
             </tr>
             </thead>
@@ -667,10 +768,10 @@
                 <th>Nom du salarié</th>
                 <th>Prénom du salarié</th>
                 <th>Mois concerné </th>
-                <th>Type de prime </th>
-                <th>Montant </th>
-                <th>Unité </th>
-                <th>Commentaires </th>
+                <th>TYPE PRIME 1</th>
+                <th>MONTANT</th>
+                <th>UNITE</th>
+                <th>COM PRIME 1</th>
             </tr>
             </thead>
 
@@ -709,11 +810,11 @@
                 <th>Nom du salarié</th>
                 <th>Prénom du salarié</th>
                 <th>Mois concerné </th>
-                <th>Type de frais</th>
-                <th>Quantité </th>
-                <th>Taux Unitaire </th>
-                <th>Total </th>
-                <th>Commentaires </th>
+                <th>TYPE FRAIS 1</th>
+                <th>QUANTITE</th>
+                <th>TAUX UNIT</th>
+                <th>TOTAL</th>
+                <th>COM FRAIS 1</th>
             </tr>
             </thead>
 
@@ -753,10 +854,10 @@
                 <th>Nom du salarié</th>
                 <th>Prénom du salarié</th>
                 <th>Mois concerné </th>
-                <th>Type d'Heures</th>
-                <th>Semaine concernée </th>
-                <th>Nombre d'Heures </th>
-                <th>Commentaires </th>
+                <th>TYPE HEURE</th>
+                <th>SEM CONCERNEE </th>
+                <th>NB HEURES</th>
+                <th> COM HEURE</th>
             </tr>
             </thead>
 
@@ -795,9 +896,9 @@
                 <th>Nom du salarié</th>
                 <th>Prénom du salarié</th>
                 <th>Mois concerné </th>
-                <th>Date d'effet</th>
-                <th>Type de modification </th>
-                <th>Commentaires </th>
+                <th>DATE EFFET</th>
+                <th>TYPE MODIF</th>
+                <th>COM AVENANT</th>
             </tr>
             </thead>
 
@@ -828,16 +929,16 @@
             </tbody>
         </table>
         <table id="fincontrat" class="display nowrap" width="100%">
-            <h5 style="color:#052876" > <strong> Fin de contracts </strong> </h5>
+            <h5 style="color:#052876" > <strong> Fin de contrats </strong> </h5>
             <thead>
             <tr>
                 <th>Nom de l'association</th>
                 <th>Nom du salarié</th>
                 <th>Prénom du salarié</th>
                 <th>Mois concerné </th>
-                <th>Date de fin </th>
-                <th>Motif de fin  </th>
-                <th>Commentaires </th>
+                <th> DATE</th>
+                <th> MOTIF</th>
+                <th>COM FIN</th>
             </tr>
             </thead>
 
@@ -861,6 +962,62 @@
                     {% endif %}
                 {% endfor %}
             {% endfor %}
+            </tbody>
+        </table>
+
+        <table id="glossaire" class="display nowrap" width="100%">
+            <h5 style="color:#052876" > <strong> Glossaire </strong> </h5>
+            <thead>
+            <tr>
+                <th>Nom colonne</th>
+                <th>Nom complet</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr> <td> TYPE AT 1 </td> <td> Initial ou prolongation </td></tr>
+            <tr> <td>INI/PRO</td> <td> Initial ou prolongation</td></tr>
+            <tr> <td>>DEBUT</td> <td> Date de début </td></tr>
+            <tr> <td>FIN</td> <td> Date de fin prévisionnelle</td></tr>
+            <tr> <td>MAINTIEN 3PJ</td> <td> Maintient des 3 premiers  </td></tr>
+            <tr> <td>NBH DEDUIRE</td> <td> Si non, nombre d'heures à déduire  </td></tr>
+            <tr> <td>MAINTIEN 4J</td> <td> Maintient à compter du 4eme jour  </td></tr>
+            <tr> <td>NBH DEDUIRE</td> <td> Si non, nombre d'heures à déduire </td></tr>
+            <tr> <td>COM AT 1 </td> <td> Commentaires</td></tr>
+            <tr> <td>TYPE CONGES 1 </td> <td> Type congé</td></tr>
+            <tr> <td>DJ TRAVAILLE</td> <td> Dernier jour travaillé </td></tr>
+            <tr> <td>J REPRISE</td> <td> Jour de reprise</td></tr>
+            <tr> <td>J TRAVAILLE</td> <td> Jours normalement travaillés</td></tr>
+            <tr> <td>NBJ OUVRABLE</td> <td> Nombre de jours ouvrables pris</td></tr>
+            <tr> <td>COM CONGES 1</td> <td> Commentaires</td></tr>
+            <tr> <td>DU </td> <td> Du</td></tr>
+            <tr> <td>AU </td> <td> Au</td></tr>
+            <tr> <td>NBH DEDUIRE </td> <td>Nombre d'heures à déduire  </td></tr>
+            <tr> <td>MAINTIEN 100</td> <td> Maintient à 100% </td></tr>
+            <tr> <td>COM CHOMAGE </td> <td> Commentaires </td></tr>
+            <tr> <td>DU</td> <td> Du</td></tr>
+            <tr> <td>AU</td> <td> Au </td></tr>
+            <tr> <td>NBH DEDUIRE</td> <td> Nombre d'heures à déduire </td></tr>
+            <tr> <td>COM AA 1 </td> <td> Commentaires </td></tr>
+            <tr> <td>TYPE PRIME 1</td> <td> Type de prime </td></tr>
+            <tr> <td>MONTANT</td> <td> Montant</td></tr>
+            <tr> <td>UNITE</td> <td> Unité</td></tr>
+            <tr> <td>COM PRIME 1</td> <td> Commentaires</td></tr>
+            <tr> <td>TYPE FRAIS 1</td> <td> Type de frais</td></tr>
+            <tr> <td>QUANTITE</td> <td> Quantité</td></tr>
+            <tr> <td>TAUX UNIT</td> <td> Taux Unitaire </td></tr>
+            <tr> <td>TOTAL</td> <td> Total</td></tr>
+            <tr> <td>COM FRAIS 1</td> <td> Commentaires </td></tr>
+            <tr> <td>TYPE HEURE</td> <td> Type d'Heures</td></tr>
+            <tr> <td>SEM CONCERNEE</td> <td> Semaine Concernée</td></tr>
+            <tr> <td>NB HEURES</td> <td> Nombre d'Heures</td></tr>
+            <tr> <td>COM HEURE</td> <td> Commentaires</td></tr>
+            <tr> <td>DATE EFFET</td> <td> Date d'effet </td></tr>
+            <tr> <td>TYPE MODIF</td> <td> Type de modification</td></tr>
+            <tr> <td>COM AVENANT</td> <td>Commentaires </td></tr>
+            <tr> <td>DATE</td> <td> Date de fin</td></tr>
+            <tr> <td> MOTIF</td> <td> Motif de fin</td></tr>
+            <tr> <td>COM FIN</td> <td> Commentaires</td></tr>
             </tbody>
         </table>
 
@@ -1068,6 +1225,7 @@
                             addSheet(xlsx, '#heures',  'Salariés et leurs variables','Heures', '8');
                             addSheet(xlsx, '#avenants',  'Salariés et leurs variables','Avenants', '9');
                             addSheet(xlsx, '#fincontrat',  'Salariés et leurs variables','Fin Contrats', '10');
+                            addSheet(xlsx, '#glossaire',  'Glossaire','Glossaire', '11');
 
                         }
 
@@ -1102,6 +1260,9 @@
                 "scrollX": true,
             });
             $('#fincontrat').DataTable({
+                "scrollX": true,
+            });
+            $('#glossaire').DataTable({
                 "scrollX": true,
             });
 
