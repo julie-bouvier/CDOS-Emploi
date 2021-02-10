@@ -41,6 +41,13 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ path('ExportInfosSalaries')}}">Export Infos Salariés</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/OngletDocListeAssociations">Documents Associations</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/OngletDocSalariesParAsso">Documents Salariés</a>
+                        </li>
+
                     {% endif %}
                     {% if role == 'ROLE_ADMIN' %}
                         <li class="nav-item">
@@ -50,7 +57,10 @@
                             <a class="nav-link" href="/MonAssociation">Mon Association</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/OngletDocSalaries">Documents Salariés</a>
+                            <a class="nav-link" href="/OngletDocListeSalaries">Documents Salariés</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/OngletDocAssociations">Documents Associations</a>
                         </li>
                     {% endif %}
                 {% endfor %}

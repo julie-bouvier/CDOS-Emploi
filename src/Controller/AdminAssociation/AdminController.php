@@ -6,6 +6,7 @@ use App\Entity\AutreAbsence;
 use App\Entity\Avenant;
 use App\Entity\Chomage;
 use App\Entity\Conges;
+use App\Entity\FAssociation;
 use App\Entity\Frais;
 use App\Entity\FSalarie;
 use App\Entity\Heures;
@@ -225,10 +226,10 @@ class AdminController extends AbstractController
         }
     }
 
-    /*######################## GESTION DE MON ASSO ########################*/
+    /*######################## Documents Salariés ########################*/
 
     /**
-     * @Route("/OngletDocSalaries", name="OngletDocSalaries")
+     * @Route("/OngletDocListeSalaries", name="OngletDocSalaries")
      */
     public function OngletDocSalaries(){
         $MailPersoConnecte=$this-> getUser() -> getUsername();
@@ -259,10 +260,35 @@ class AdminController extends AbstractController
         $docsSalarie = $this -> getDoctrine() -> getRepository(FSalarie::class) -> findBy(['spersoid'=> $infosPerso]);
 
 
-        // renvoie vers le twig affichant la liste des salariés
+        // renvoie vers le twig affichant la liste des documents salariés
         return $this->render('Commun/ListeSalariesDocs.html.twig', [ // renvoie vers le twig de la liste des salariés
             'docsSalarie'=> $docsSalarie,
             'infosPerso' => $infosPerso
+        ]);
+    }
+
+    /*######################## Documents Associations ########################*/
+
+    /**
+     * @Route("/OngletDocAssociations", name="OngletDocAssociations")
+     */
+    public function OngletDocAssociations()
+    {
+        $MailPersoConnecte = $this->getUser()->getUsername();
+        $PersoConnecte = $this->getDoctrine()->getRepository(Connexion::class)->find($MailPersoConnecte);
+        $Associations = $PersoConnecte->getassociations();
+        //boucle qui va tourner dans la collection d'associations
+        //pour chaque association :
+        for ($i = 0; $i <= count($Associations); $i++) {
+            //if c'est pas null
+            if ($Associations[$i] != null) {
+                $docsAsso = $this -> getDoctrine() -> getRepository(FAssociation::class) -> findBy(['amail'=> $Associations[$i]]);
+            }
+        }
+
+        // renvoie vers le twig affichant la liste des documents salariés
+        return $this->render('Commun/ListeDocsAssociation.html.twig', [ // renvoie vers le twig de la liste des documents de l'asso
+            'docsAsso'=> $docsAsso
         ]);
     }
 }

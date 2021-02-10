@@ -4,6 +4,7 @@ namespace App\Controller\SuperAdmin;
 
 use App\Entity\Association;
 use App\Entity\Connexion;
+use App\Entity\FAssociation;
 use App\Form\AssociationType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -164,5 +165,29 @@ class SaAssociationsController extends AbstractController
 
     }
 
+    /*######################## Documents Salariés ########################*/
+
+    /**
+     * @Route("/OngletDocListeAssociations", name="OngletDocListeAssociations")
+     */
+    public function OngletDocListeAssociations(){
+        $associations=$this->getDoctrine()->getRepository(Association::class)->findAll();
+
+            return $this->render('Commun/OngletDocListeAssociations.html.twig', [
+                'associations' => $associations,
+            ]);
+    }
+
+    /**
+     * @Route("/ListeDocsAssociation/{amail}", name="ListeDocsAssociation")
+     */
+    public function ListeDocsAssociation($amail){
+        $Asso=$this -> getDoctrine() -> getRepository(Association::class) -> find($amail);
+        $docsAsso=$this -> getDoctrine() -> getRepository(FAssociation::class) -> findBy(['amail'=> $Asso]);
+
+        return $this->render('Commun/ListeDocsAssociation.html.twig', [ // renvoie vers le twig de la liste des documents de l'asso
+            'docsAsso'=> $docsAsso
+        ]);
+    }
 
 }

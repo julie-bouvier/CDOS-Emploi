@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+  <fieldset>
+    <legend style="color:#18BC9C"><B>Liste des associations :</B></legend>
+
+    <table id="" class="display" style="width:100%">
+      <thead>
+      <tr>
+        <th>Nom</th>
+        <th>E-Mail</th>
+        <th>Les documents</th>
+      </tr>
+      </thead>
+      <tbody>
+
+      {% for association in associations %}
+        <tr>
+          <td>{{ association.anom }}</td>
+          <td>{{ association.amail }}</td>
+          <td>
+            <a href="{{ path('ListeDocsAssociation',{'amail': association.getAmail()}) }}" method="post">Voir</a>
+          </td>
+        </tr>
+      {% endfor %}
+
+      </tbody>
+    </table>
+    <br>
+    <hr>
+    <br>
+  </fieldset>
+
+{% endblock %}
+
+{% block javascripts %}
+
+  <script>
+    $(document).ready(function() {
+      $('table.display').DataTable();
+    } );
+  </script>
+
+{% endblock %}
+
+{% block stylesheets %}
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/keytable/2.5.0/css/keyTable.dataTables.min.css">
+{% endblock %}

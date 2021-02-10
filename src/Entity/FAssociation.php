@@ -74,4 +74,133 @@ class FAssociation
     private $amail;
 
 
+
+    /**
+     * @return int
+     */
+    public function getFaid(): int
+    {
+        return $this->faid;
+    }
+
+    /**
+     * @param int $faid
+     */
+    public function setFaid(int $faid): void
+    {
+        $this->faid = $faid;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getFanomuser(): ?string
+    {
+        return $this->fanomuser;
+    }
+
+    /**
+     * @param string|null $fanomuser
+     */
+    public function setFanomuser(?string $fanomuser): void
+    {
+        $this->fanomuser = $fanomuser;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getFanomgen(): ?string
+    {
+        return $this->fanomgen;
+    }
+
+    /**
+     * @param string|null $fanomgen
+     */
+    public function setFanomgen(?string $fanomgen): void
+    {
+        $this->fanomgen = $fanomgen;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getFachemin(): ?string
+    {
+        return $this->fachemin;
+    }
+
+    /**
+     * @param string|null $fachemin
+     */
+    public function setFachemin(?string $fachemin): void
+    {
+        $this->fachemin = $fachemin;
+    }
+
+    /**
+     * @return \DateTime|null
+     */
+    public function getFadatedepo(): ?\DateTime
+    {
+        return $this->fadatedepo;
+    }
+
+    /**
+     * @param \DateTime|null $fadatedepo
+     */
+    public function setFadatedepo(?\DateTime $fadatedepo): void
+    {
+        $this->fadatedepo = $fadatedepo;
+    }
+
+    /**
+     * @return \DateTime|null
+     */
+    public function getFadatetel(): ?\DateTime
+    {
+        return $this->fadatetel;
+    }
+
+    /**
+     * @param \DateTime|null $fadatetel
+     */
+    public function setFadatetel(?\DateTime $fadatetel): void
+    {
+        $this->fadatetel = $fadatetel;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getFacategorie(): ?string
+    {
+        return $this->facategorie;
+    }
+
+    /**
+     * @param string|null $facategorie
+     */
+    public function setFacategorie(?string $facategorie): void
+    {
+        $this->facategorie = $facategorie;
+    }
+
+    /**
+     * @return \Association
+     */
+    public function getAmail(): \Association
+    {
+        return $this->amail;
+    }
+
+    /**
+     * @param \Association $amail
+     */
+    public function setAmail(\Association $amail): void
+    {
+        $this->amail = $amail;
+    }
+
 }

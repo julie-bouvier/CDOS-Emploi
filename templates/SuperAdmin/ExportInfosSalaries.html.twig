@@ -220,7 +220,7 @@
                                                     <td> </td>
                                                 {% endif %}
                                             {% endfor %}
-                                        {% elseif count ==2 %}
+                                        {% elseif count2 ==2 %}
                                             {% for conge in conges %}
                                                 {% if conge.sproid.sproid==salariepro.sproid %}
                                                     <td>{{ conge.contype }}</td>
@@ -467,7 +467,7 @@
         </table>
 
         <table id="arrettravails" class="display nowrap" width="100%" title="Arrets de travail :">
-            <h5 style="color:#052876" > <strong> Arrêts de travail </tbody> </h5>
+            <h5 style="color:#052876" > <strong> Arrêts de travail </strong> </h5>
 
             <thead>
             <tr>

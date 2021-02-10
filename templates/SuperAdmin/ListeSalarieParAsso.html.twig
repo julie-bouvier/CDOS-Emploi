@@ -1,0 +1,89 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} salaries {% endblock %}
+
+{% block body %}
+
+    <fieldset>
+
+        <legend>Liste des salariés par association : </legend>
+
+        {#Liste de toutes les assos du salarié#}
+
+        {#Pour une case de l'accordéon on fait tout ça#}
+        <div class="accordion" id="accordionAsso">
+            <div class="card">
+                {# En têtes de l'accordions : les associations liées au salarié #}
+                {% for association in associations %}
+                    <div class="card-header" id="headingOne">
+                        {#Ce qu'il y a d'écrit dans l'entête de l'accordéon#}
+                        <h5 class="mb-0">
+                            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#{{association.anom}}" aria-expanded="false" aria-controls="collapseOne">
+                                {{association.anom}}
+                            </button>
+                        </h5>
+                    </div>
+
+                    {#Ce qu'il y a d'écrit dans l'accordéon#}
+                    <div id="{{association.anom}}" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionAsso">
+                        <div class="card-body">
+
+                                    <table id="" class="display" style="width:100%">
+                                        <thead>
+                                        <tr>
+                                            <th>Nom</th>
+                                            <th>Prénom</th>
+                                            <th>Les documents</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        {% for salariepro in salariespros %}
+                                            {% if salariepro.sMailAsso==association.amail %}
+                                            <tr>
+                                                {% for salarieperso in salariespersos %}
+                                                    {% if salarieperso.spersoid==salariepro.sPersoId.spersoid %}
+                                                <td>{{ salarieperso.snom }}</td>
+                                                <td>{{ salarieperso.sprenom }}</td>
+                                                <td>
+                                                    <a href="{{ path('ListeDocsSalarie',{'idPerso': salariepro.sproid}) }}" method="post">Voir</a>
+                                                </td>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </tr>
+                                            {% endif %}
+                                        {% endfor %}
+
+                                        </tbody>
+                                    </table>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+    </fieldset>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br><br><br>
+    <br>
+
+{% endblock %}
+
+   {% block javascripts %}
+       <script>
+           $(document).ready(function() {
+               $('table.display').DataTable();
+           } );
+       </script>
+   {% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/keytable/2.5.0/css/keyTable.dataTables.min.css">
+{% endblock %}
+
+

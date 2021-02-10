@@ -8,6 +8,7 @@ use App\Entity\AutreAbsence;
 use App\Entity\Avenant;
 use App\Entity\Chomage;
 use App\Entity\Conges;
+use App\Entity\Connexion;
 use App\Entity\Frais;
 use App\Entity\Heures;
 use App\Entity\Prime;
@@ -94,7 +95,6 @@ class SaSalariesController extends AbstractController
             if ($infospros!=null){
                 for ($i=0; $i<count($infospros); $i++){
                     if ($infospros[$i]!=null){
-                        $toto='$infopro[$i] est aps null';
                         $cemaildecetteasso=$infospros[$i]->getSmailasso();
                         // pour chaque entité de cette liste, on vérifie SI son salarieinfospro.smailasso = $assoMail
                         if ($cemaildecetteasso==$assoMail){
@@ -130,7 +130,6 @@ class SaSalariesController extends AbstractController
                 'frais' => $Frais,
                 'heures' => $Heures,
                 'avenants' => $Avenants,
-                'toto'=>$toto,
                 'assoMail'=>$assoMail,
                 'but'=>$but,
                 'Page1'=>$Page1,
@@ -274,5 +273,25 @@ class SaSalariesController extends AbstractController
                 'Page2'=>$Page2
             ]);
         }
+    }
+    
+    
+
+    /*######################## Documents Salariés ########################*/
+
+    /**
+     * @Route("/OngletDocSalariesParAsso", name="OngletDocSalariesParAsso")
+     */
+    public function OngletDocSalariesParAsso(){
+
+        $associations=$this->getDoctrine()->getRepository(Association::class)->findAll();
+        $salariespros=$this->getDoctrine()->getRepository(SalarieInfosPro::class)->findAll();
+        $salariespersos=$this->getDoctrine()->getRepository(SalarieInfosPerso::class)->findAll();
+
+        return $this->render('SuperAdmin/ListeSalarieParAsso.html.twig', [
+            'salariespersos' => $salariespersos, //entité salariéinfoperso
+            'associations'=> $associations, //liste des associations liées à ce salarié
+            'salariespros'=> $salariespros //entité salariéinfopro
+        ]);
     }
 }
