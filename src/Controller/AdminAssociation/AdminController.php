@@ -193,7 +193,6 @@ class AdminController extends AbstractController
         $Page1 = 'Profil d\'une association';
         return $this->render('/Commun/affMonAsso.html.twig', [
             'monAsso'=> $monAsso,
-            'mailAsso'=>$MailPersoConnecte,
             'Page1'=>$Page1
         ]);
     }

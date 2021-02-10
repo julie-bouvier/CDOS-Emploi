@@ -12,8 +12,6 @@
 
         <legend>Informations de mon association : </legend>
 
-        {{ mailAsso }}
-
         {% for monAsso in monAsso %}
         <p>Nom : {{ monAsso.anom }}</p>
         <p>Mail : {{ monAsso.amail }}</p>
@@ -50,7 +48,7 @@
         <p>Coordonnées bancaires  :   {{ monAsso.arib }}</p>
         <p>Informations complémentaires :   {{ monAsso.ainfocomplementaire}}</p>
         <p>Date d'adhésion au service impact emploi :   {{ monAsso.adateadhesion|date("d/m/Y") }}</p>
-        <a href="{{ path('modifMonAsso',{'mailAsso': mailAsso, 'Page1':Page1}) }}" method="post" type="button" class="btn btn-success">Modifier mes informations</a>
+        <a href="{{ path('modifMonAsso',{'mailAsso': monAsso.amail, 'Page1':Page1}) }}" method="post" type="button" class="btn btn-success">Modifier mes informations</a>
         <br><br>
         {% endfor %}
     </fieldset>

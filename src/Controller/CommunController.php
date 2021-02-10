@@ -73,13 +73,13 @@ class CommunController extends AbstractController
     }
 
     /**
-     * @Route("/AjoutInfosPerso/{mailasso}/{role}/{Page1}", name="AjoutInfosPerso")
+     * @Route("/AjoutInfosPerso/{mailasso}/{role}/{but}/{Page1}", name="AjoutInfosPerso")
      * @param $mailasso
      * @param Request $request
      * @param EntityManagerInterface $entityManager
      * @return RedirectResponse|Response
      */
-    public function AjoutInfosPerso($mailasso, $role, Request $request, EntityManagerInterface $entityManager, $Page1) {
+    public function AjoutInfosPerso($mailasso, $role, $but, Request $request, EntityManagerInterface $entityManager, $Page1) {
         //je crée un objet InfosPerso
         $InfosPerso = new SalarieInfosPerso();
         //je li l'association à la bonne entité salarieinfosperso et inversement
@@ -103,6 +103,7 @@ class CommunController extends AbstractController
             return $this->redirectToRoute('AjoutInfosPro', [
                 'idinfoperso' => $idinfosPerso,
                 'mailasso' => $mailasso,
+                'but' => $but,
                 'role' => $role,
                 'Page1'=>$Page1
             ]);
@@ -111,6 +112,7 @@ class CommunController extends AbstractController
             return $this->render('Commun/AjoutInfosPerso.html.twig', [
                 'form' => $form->createView(),
                 'mailasso'=> $mailasso,
+                'but' => $but,
                 'role'=>$role,
                 'Page1'=>$Page1
             ]);
