@@ -33,10 +33,6 @@ class AssociationType extends AbstractType
                 'attr' => ['class' => 'form-control'],
                 'required'=>false
             ])
-            ->add('atel', TelType::class,[
-                'attr' => ['class' => 'form-control'],
-                'required'=>false
-            ])
             ->add('adatecreation', BirthdayType::class, [
                 'format'=> 'dd-MM-yyyy',
                 'attr' => ['class' =>'form-control'],
