@@ -12,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Choice;
 
 class CongesType extends AbstractType
 {
@@ -27,7 +28,12 @@ class CongesType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('contype', TextType::class,[
+            ->add('contype', ChoiceType::class,[
+                'choices' => [
+                    'Congés payés' => 'Congés payés',
+                    'Congés conventionnels: Naissance, Déménagement, Décès (à préciser en commentaire)' => 'Congés conventionnels: Naissance, Déménagement, Décès',
+
+                ],
                 'attr' => ['class' => 'form-control'],
                 'required'=>true
             ])
