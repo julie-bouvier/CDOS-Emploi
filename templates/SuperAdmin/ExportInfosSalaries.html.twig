@@ -196,17 +196,21 @@
                                                 {% endif %}
                                             {% endfor %}
                                         {% else %}
-                                            {% for arrettravail in arrettravails|slice(0,2)%}
+                                            {% set nbat = 0 %}
+                                            {% for arrettravail in arrettravails%}
                                                 {% if arrettravail.sproid.sproid==salariepro.sproid %}
-                                                    <td>{{ arrettravail.attype}}</td>
-                                                    <td>{{ arrettravail.atprolongation  }}</td>
-                                                    <td>{{ arrettravail.atdebut|date("d/m/Y") }}</td>
-                                                    <td>{{ arrettravail.atfin|date("d/m/Y") }}</td>
-                                                    <td>{{ arrettravail.at3jours}}</td>
-                                                    <td>{{ arrettravail.at3jnbh}}</td>
-                                                    <td>{{ arrettravail.at4jours}}</td>
-                                                    <td>{{ arrettravail.at4jnbh}}</td>
-                                                    <td>{{ arrettravail.atcommentaire}}</td>
+                                                    {% set nbat = nbat+1  %}
+                                                    {% if nbat <= 2 %}
+                                                        <td>{{ arrettravail.attype}}</td>
+                                                        <td>{{ arrettravail.atprolongation  }}</td>
+                                                        <td>{{ arrettravail.atdebut|date("d/m/Y") }}</td>
+                                                        <td>{{ arrettravail.atfin|date("d/m/Y") }}</td>
+                                                        <td>{{ arrettravail.at3jours}}</td>
+                                                        <td>{{ arrettravail.at3jnbh}}</td>
+                                                        <td>{{ arrettravail.at4jours}}</td>
+                                                        <td>{{ arrettravail.at4jnbh}}</td>
+                                                        <td>{{ arrettravail.atcommentaire}}</td>
+                                                    {% endif %}
                                                 {% endif %}
                                             {% endfor %}
                                         {% endif %}
