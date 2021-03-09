@@ -263,14 +263,18 @@
                                                 {% endif %}
                                             {% endfor %}
                                         {% else%}
-                                            {% for conge in conges|slice(0,3)%}
+                                            {% set nbco = 0 %}
+                                            {% for conge in conges%}
                                                 {% if conge.sproid.sproid==salariepro.sproid %}
-                                                    <td>{{ conge.contype }}</td>
-                                                    <td>{{ conge.condernierjour|date("d/m/Y") }}</td>
-                                                    <td>{{ conge.conjourreprise|date("d/m/Y") }}</td>
-                                                    <td>{{ conge.conjournormaltrav| json_encode }}</td>
-                                                    <td>{{ conge.connbjourouvrablepris}}</td>
-                                                    <td>{{ conge.concommentaire}}</td>
+                                                    {% set nbco = nbco +1  %}
+                                                    {% if nbco <= 2 %}
+                                                        <td>{{ conge.contype }}</td>
+                                                        <td>{{ conge.condernierjour|date("d/m/Y") }}</td>
+                                                        <td>{{ conge.conjourreprise|date("d/m/Y") }}</td>
+                                                        <td>{{ conge.conjournormaltrav| json_encode }}</td>
+                                                        <td>{{ conge.connbjourouvrablepris}}</td>
+                                                        <td>{{ conge.concommentaire}}</td>
+                                                    {% endif %}
                                                 {% endif %}
                                             {% endfor %}
                                         {% endif %}
@@ -298,13 +302,17 @@
                                                 {% endif %}
                                             {% endfor %}
                                         {% else%}
-                                            {% for chomage in chomages|slice(0,1)%}
+                                            {% set nbch = 0 %}
+                                            {% for chomage in chomages%}
                                                 {% if chomage.sproid.sproid==salariepro.sproid %}
-                                                    <td>{{ chomage.chodebut|date("d/m/Y") }}</td>
-                                                    <td>{{ chomage.chofin|date("d/m/Y") }}</td>
-                                                    <td>{{ chomage.chonbheure }}</td>
-                                                    <td>{{ chomage.chomaintien }}</td>
-                                                    <td>{{ chomage.chocommentaire}}</td>
+                                                    {% set nbch = nbch +1  %}
+                                                    {% if nbch <= 1 %}
+                                                        <td>{{ chomage.chodebut|date("d/m/Y") }}</td>
+                                                        <td>{{ chomage.chofin|date("d/m/Y") }}</td>
+                                                        <td>{{ chomage.chonbheure }}</td>
+                                                        <td>{{ chomage.chomaintien }}</td>
+                                                        <td>{{ chomage.chocommentaire}}</td>
+                                                    {% endif %}
                                                 {% endif %}
                                             {% endfor %}
                                         {% endif %}
@@ -368,12 +376,16 @@
                                                 {% endif %}
                                             {% endfor %}
                                         {% else%}
-                                            {% for autreabsence in autreabsences|slice(0,4) %}
+                                            {% set nbaa = 0 %}
+                                            {% for autreabsence in autreabsences %}
                                                 {% if autreabsence.sproid.sproid==salariepro.sproid %}
-                                                    <td>{{ autreabsence.absdebut|date("d/m/Y") }}</td>
-                                                    <td>{{ autreabsence.absfin|date("d/m/Y") }}</td>
-                                                    <td>{{ autreabsence.absnbheure }}</td>
-                                                    <td>{{ autreabsence.abscommentaire}}</td>
+                                                    {% set nbaa = nbaa +1  %}
+                                                    {% if nbaa <= 3 %}
+                                                        <td>{{ autreabsence.absdebut|date("d/m/Y") }}</td>
+                                                        <td>{{ autreabsence.absfin|date("d/m/Y") }}</td>
+                                                        <td>{{ autreabsence.absnbheure }}</td>
+                                                        <td>{{ autreabsence.abscommentaire}}</td>
+                                                    {% endif %}
                                                 {% endif %}
                                             {% endfor %}
                                         {% endif %}
@@ -415,12 +427,16 @@
                                                 {% endif %}
                                             {% endfor %}
                                         {% else%}
-                                            {% for prime in primes|slice(0,3)%}
+                                            {% set nbpr = 0 %}
+                                            {% for prime in primes %}
                                                 {% if prime.sproid.sproid==salariepro.sproid %}
-                                                    <td>{{ prime.primtype }}</td>
-                                                    <td>{{ prime.primmontant }}</td>
-                                                    <td>{{ prime.primnetbrut }}</td>
-                                                    <td>{{ prime.primcommentaire}}</td>
+                                                    {% set nbpr = nbpr +1  %}
+                                                    {% if nbpr <= 2 %}
+                                                        <td>{{ prime.primtype }}</td>
+                                                        <td>{{ prime.primmontant }}</td>
+                                                        <td>{{ prime.primnetbrut }}</td>
+                                                        <td>{{ prime.primcommentaire}}</td>
+                                                    {% endif %}
                                                 {% endif %}
                                             {% endfor %}
                                         {% endif %}
@@ -467,13 +483,17 @@
                                                 {% endif %}
                                             {% endfor %}
                                         {% else%}
-                                            {% for frai in frais|slice(0,3) %}
+                                            {% set nbfr = 0 %}
+                                            {% for frai in frais %}
                                                 {% if frai.sproid.sproid==salariepro.sproid %}
-                                                    <td>{{ frai.fratype }}</td>
-                                                    <td>{{ frai.fraquantite }}</td>
-                                                    <td>{{ frai.frataux }}</td>
-                                                    <td>{{ frai.fratotal }}</td>
-                                                    <td>{{ frai.fracommentaire}}</td>
+                                                    {% set nbfr = nbfr +1  %}
+                                                    {% if nbfr <= 2 %}
+                                                        <td>{{ frai.fratype }}</td>
+                                                        <td>{{ frai.fraquantite }}</td>
+                                                        <td>{{ frai.frataux }}</td>
+                                                        <td>{{ frai.fratotal }}</td>
+                                                        <td>{{ frai.fracommentaire}}</td>
+                                                    {% endif %}
                                                 {% endif %}
                                             {% endfor %}
                                         {% endif %}
@@ -498,12 +518,16 @@
                                                 {% endif %}
                                             {% endfor %}
                                         {% else %}
-                                            {% for heure in heures|slice(0,1) %}
+                                            {% set nbhe = 0 %}
+                                            {% for heure in heures %}
                                                 {% if heure.sproid.sproid==salariepro.sproid %}
-                                                    <td>{{ heure.heurtype }}</td>
-                                                    <td>{{ heure.heursem }}</td>
-                                                    <td>{{ heure.heurnb }}</td>
-                                                    <td>{{ heure.heurcommentaire}}</td>
+                                                    {% set nbhe = nbhe +1  %}
+                                                    {% if nbhe <= 1 %}
+                                                        <td>{{ heure.heurtype }}</td>
+                                                        <td>{{ heure.heursem }}</td>
+                                                        <td>{{ heure.heurnb }}</td>
+                                                        <td>{{ heure.heurcommentaire}}</td>
+                                                    {% endif %}
                                                 {% endif %}
                                             {% endfor %}
                                         {% endif %}
@@ -526,11 +550,15 @@
                                                 {% endif %}
                                             {% endfor %}
                                         {% else %}
-                                            {% for avenant in avenants|slice(0,1) %}
+                                            {% set nbav = 0 %}
+                                            {% for avenant in avenants%}
                                                 {% if avenant.sproid.sproid==salariepro.sproid %}
-                                                    <td>{{ avenant.avdebut|date("d/m/Y") }}</td>
-                                                    <td>{{ avenant.avtypemodif }}</td>
-                                                    <td>{{ avenant.avcommentaire}}</td>
+                                                    {% set nbav = nbav +1  %}
+                                                    {% if nbav <= 1 %}
+                                                        <td>{{ avenant.avdebut|date("d/m/Y") }}</td>
+                                                        <td>{{ avenant.avtypemodif }}</td>
+                                                        <td>{{ avenant.avcommentaire}}</td>
+                                                    {% endif %}
                                                 {% endif %}
                                             {% endfor %}
                                         {% endif %}
