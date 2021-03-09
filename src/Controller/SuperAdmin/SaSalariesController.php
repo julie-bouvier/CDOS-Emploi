@@ -15,6 +15,7 @@ use App\Entity\Prime;
 use App\Entity\SalarieInfosPerso;
 use App\Entity\SalarieInfosPro;
 use App\Form\AjoutInfosPersoType;
+use App\Form\AjoutInfosProType;
 use App\Form\SalarieInfosProType;
 use App\Form\VerifInfosPersoType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -213,7 +214,7 @@ class SaSalariesController extends AbstractController
      */
     public function modifSalariesPro(Request $request,EntityManagerInterface $entityManager,$idInfoProSalarie, $idSalarie, $assoMail, $but, $Page1, $Page2){
         $infospros=$this->getDoctrine()->getRepository(SalarieInfosPro::class)->find($idInfoProSalarie);
-        $form=$this->createForm(SalarieInfosProType::class, $infospros);
+        $form=$this->createForm(AjoutInfosProType::class, $infospros);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()){
