@@ -21,6 +21,8 @@ class CongesType extends AbstractType
     const Mercredi = 'Mercredi';
     const Jeudi = 'Jeudi';
     const Vendredi = 'Vendredi';
+    const Samedi = 'Samedi';
+    const Dimanche = 'Dimanche';
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -44,6 +46,8 @@ class CongesType extends AbstractType
                     'Mercredi' => self::Mercredi,
                     'Jeudi' => self::Jeudi,
                     'Vendredi' => self::Vendredi,
+                    'Samedi' => self::Samedi,
+                    'Dimanche' => self::Dimanche,
                     ],
                 'expanded' => true,
                 'multiple' => true,
