@@ -3,28 +3,29 @@
 {% block body %}
     <h1>Arrêts de travail</h1>
     <br>
+    <strong>* Champs obligatoires</strong>
     {{ form_start(form) }}
 
-    <h6>Type d'arrêt de travail :
+    <h6>Type d'arrêt de travail <strong>*</strong>:
         {{ form_widget(form.attype) }}
     </h6>
 
-    <h6>Initial ou prolongation  :
+    <h6>Initial ou prolongation  <strong>*</strong>:
         {{ form_widget(form.atprolongation) }}
     </h6>
-    <h6>Date de début de l'arrêt:
+    <h6>Date de début de l'arrêt <strong>*</strong>:
         {{ form_widget(form.atdebut) }}
     </h6>
-    <h6>Date de fin prévisionnel de l'arrêt:
+    <h6>Date de fin prévisionnel de l'arrêt <strong>*</strong>:
         {{ form_widget(form.atfin) }}
     </h6>
-    <h6>En cas de maladie : maintient des trois premiers jours:
+    <h6>En cas de maladie <strong>*</strong>: maintient des trois premiers jours:
         {{ form_widget(form.at3jours) }}
     </h6>
     <h6><B>Si non</B>, nombre d'heures à déduire
         {{ form_widget(form.at3jnbh) }}
     </h6>
-    <h6>En cas de maladie, pour les salariés ayant moins d'un an d'ancienneté, maintien à compter du 4ème jour
+    <h6>En cas de maladie, pour les salariés ayant moins d'un an d'ancienneté, maintien à compter du 4ème jour <strong>*</strong>
         {{ form_widget(form.at4jours) }}
     </h6>
     <h6><B>Si non</B>, nombres d'heures à déduire

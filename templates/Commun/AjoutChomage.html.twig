@@ -3,19 +3,20 @@
 {% block body %}
     <h1>Chômages</h1>
     <br>
+    <strong>* Champs obligatoires</strong>
     {{ form_start(form) }}
 
-    <h6>Date de début du chômage :
+    <h6>Date de début du chômage <strong>*</strong> :
         {{ form_widget(form.chodebut) }}
     </h6>
 
-    <h6>Date de fin du chômage :
+    <h6>Date de fin du chômage <strong>*</strong> :
         {{ form_widget(form.chofin) }}
     </h6>
-    <h6>Nombre d'heure à déduire :
+    <h6>Nombre d'heure à déduire <strong>*</strong> :
         {{ form_widget(form.chonbheure) }}
     </h6>
-    <h6>Maintien du chômage à 100% :
+    <h6>Maintien du chômage à 100% <strong>*</strong> :
         {{ form_widget(form.chomaintien) }}
     </h6>
     <h6>Commentaires :

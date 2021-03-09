@@ -3,16 +3,17 @@
 {% block body %}
     <h1>Frais</h1>
     <br>
+    <strong>* Champs obligatoires</strong>
     {{ form_start(form) }}
 
-    <h6>Type de frais :
+    <h6>Type de frais <strong>*</strong>:
         {{ form_widget(form.fratype) }}
     </h6>
 
-    <h6> Quantité :
+    <h6> Quantité <strong>*</strong>:
         {{ form_widget(form.fraquantite) }}
     </h6>
-    <h6>Taux unitaire :
+    <h6>Taux unitaire <strong>*</strong>:
         {{ form_widget(form.frataux) }}
     </h6>
     <h6> le total de la note de frais sera visible dans l'affichage

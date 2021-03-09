@@ -3,16 +3,17 @@
 {% block body %}
     <h1>Autre absence (injustifiée, autorisée)</h1>
     <br>
+    <strong>* Champs obligatoires</strong>
     {{ form_start(form) }}
 
-    <h6>Du :
+    <h6>Du <strong>*</strong> :
         {{ form_widget(form.absdebut) }}
     </h6>
 
-    <h6>Au  :
+    <h6>Au <strong>*</strong> :
         {{ form_widget(form.absfin) }}
     </h6>
-    <h6>Nombre d'heures à déduire :
+    <h6>Nombre d'heures à déduire <strong>*</strong> :
         {{ form_widget(form.absnbheure) }}
     </h6>
     <h6>Commentaires éventuels sur le type d'absence :

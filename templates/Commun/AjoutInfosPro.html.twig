@@ -3,13 +3,14 @@
 {% block body %}
     <h1>Informations professionnelles d'un salarié</h1>
     <br>
+    <strong>* Champs obligatoires</strong>
     {{ form_start(form) }}
 
 
-    <h6>Nom de l'employeur:
+    <h6>Nom de l'employeur <strong>*</strong> :
         {{ form_widget(form.snomemployeur) }}
     </h6>
-    <h6>Poste occupé :
+    <h6>Poste occupé <strong>*</strong> :
         {{ form_widget(form.sposteoccupe) }}
     </h6>
     <h6>Groupe CCNS:

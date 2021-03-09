@@ -3,8 +3,9 @@
 {% block body %}
     <h1>Heures</h1>
     <br>
+    <strong>* Champs obligatoires</strong>
     {{ form_start(form) }}
-    <h6><strong>Type de temps de travail de ce salarié :
+    <h6><strong>Type de temps de travail de ce salarié <strong>*</strong>:
         {{ typetravail }} </strong>
         <br>
         Si le salarié est à temps partiel, sélectionner "Heures complémentaires"
@@ -14,14 +15,14 @@
         Si le salarié est en contrat intermittant, sélectionner "Heures de dépassement"
     </h6>
 
-    <h6>Type d'heure :
+    <h6>Type d'heure <strong>*</strong>:
         {{ form_widget(form.heurtype) }}
     </h6>
-    <h6>Semaine concernée :
+    <h6>Semaine concernée <strong>*</strong>:
         {{ form_widget(form.heursem) }}
     </h6>
 
-    <h6>Nombre d'heures :
+    <h6>Nombre d'heures <strong>*</strong>:
         {{ form_widget(form.heurnb) }}
     </h6>
     <h6>Commentaires :

@@ -3,22 +3,22 @@
 {% block body %}
     <h1>Primes</h1>
     <br>
+    <strong>* Champs obligatoires</strong>
     {{ form_start(form) }}
 
-    <h6>Type de prime :
+    <h6>Type de prime <strong>*</strong> :
         {{ form_widget(form.primtype) }}
     </h6>
 
-    <h6>Montant de la prime :
+    <h6>Montant de la prime <strong>*</strong> :
         {{ form_widget(form.primmontant) }}
     </h6>
-    <h6>Unité :
+    <h6>Unité <strong>*</strong> :
         {{ form_widget(form.primnetbrut) }}
     </h6>
     <h6>Commentaires :
         {{ form_widget(form.primcommentaire) }}
     </h6>
-
 
     <button type="submit" class="btn btn-success">Valider</button>
     {{ form_end(form) }}

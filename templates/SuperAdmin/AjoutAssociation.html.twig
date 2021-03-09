@@ -3,9 +3,10 @@
 {% block body %}
     <h1>Informations d'une association</h1>
     <br>
+    <strong>* Champs obligatoires</strong>
     {{ form_start(form) }}
 
-    <h6>mail de l'association :
+    <h6>Mail de l'association <strong>*</strong> :
         {{ form_widget(form.amail) }}
     </h6>
 

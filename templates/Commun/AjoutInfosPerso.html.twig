@@ -3,25 +3,26 @@
 {% block body %}
     <h1>Informations personnelles du salarié</h1>
     <br>
+   <strong>* Champs obligatoires</strong>
     {{ form_start(form) }}
 
    {# <h6>Mail de l'association :
         {{ form_widget(form.amail) }}
     </h6>#}
 
-    <h6>Nom :
+    <h6>Nom <strong>*</strong>:
         {{ form_widget(form.snom) }}
     </h6>
     <h6>Nom de jeune fille :
         {{ form_widget(form.snomjeunefille) }}
     </h6>
-    <h6>Prénom:
+    <h6>Prénom <strong>*</strong>:
         {{ form_widget(form.sprenom) }}
     </h6>
-    <h6>Adresse Postale:
+    <h6>Adresse Postale <strong>*</strong> :
         {{ form_widget(form.sadresse) }}
     </h6>
-    <h6>Portable :
+    <h6>Portable <strong>*</strong> :
         {{ form_widget(form.sportable) }}
     </h6>
     <h6>Téléphone :
@@ -42,7 +43,7 @@
     <h6>Autre nationalité :
         {{ form_widget(form.sautre) }}
     </h6>
-    <h6>Numéro de sécurité sociale :
+    <h6>Numéro de sécurité sociale <strong>*</strong> :
         {{ form_widget(form.snumsecu) }}
     </h6>
     <h6>Situation familliale :

@@ -3,13 +3,14 @@
 {% block body %}
     <h1>Avenant au contrat de travail</h1>
     <br>
+    <strong>* Champs obligatoires</strong>
     {{ form_start(form) }}
 
-    <h6>Date d'effet :
+    <h6>Date d'effet <strong>*</strong>:
         {{ form_widget(form.avdebut) }}
     </h6>
 
-    <h6> Type de modification (rémunération, classification, volume horaire, …) :
+    <h6> Type de modification (rémunération, classification, volume horaire, …) <strong>*</strong>:
         {{ form_widget(form.avtypemodif) }}
     </h6>
     <h6>Commentaires éventuels
