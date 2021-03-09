@@ -130,5 +130,8 @@
     <orderEntry type="library" name="jquery-1.11.3" level="application" />
     <orderEntry type="library" name="datatables" level="application" />
     <orderEntry type="library" name="pdfmake" level="application" />
+    <orderEntry type="library" name="jquery-1.11.3" level="application" />
+    <orderEntry type="library" name="datatables" level="application" />
+    <orderEntry type="library" name="pdfmake" level="application" />
   </component>
 </module>

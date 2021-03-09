@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="JavaScriptLibraryMappings">
-    <file url="PROJECT" libraries="{buttons.html5, dataTables.buttons, dataTables.keyTable, datatables, jquery-1.11.3, jquery-3.3.1, jquery-3.5.1, jquery.dataTables, jszip, keyTable.dataTables, pdfmake}" />
+    <file url="PROJECT" libraries="{datatables, jquery-1.11.3, pdfmake}" />
   </component>
 </project>

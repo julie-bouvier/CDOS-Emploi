@@ -290,6 +290,47 @@ class AdminController extends AbstractController
             'docsAsso'=> $docsAsso
         ]);
     }
+
+    /*######################## Export infos salariés pour 1 asso #####################"*/
+
+    /**
+     * @Route("/ExportInfosSalariesAsso", name="Export Infos Salariés")
+     */
+    public function ExportInfosSalariesAsso()
+    {
+        $connexion=$this->getDoctrine()->getRepository(Connexion::class)->findAll();
+        $associations=$this->getDoctrine()->getRepository(Association::class)->findAll();
+        $salariespros=$this->getDoctrine()->getRepository(SalarieInfosPro::class)->findAll();
+        $salariespersos=$this->getDoctrine()->getRepository(SalarieInfosPerso::class)->findAll();
+        $arrettravails=$this->getDoctrine()->getRepository(ArretTravail::class)->findAll();
+        $conges=$this->getDoctrine()->getRepository(Conges::class)->findAll();
+        $chomages=$this->getDoctrine()->getRepository(Chomage::class)->findAll();
+        $autreabsences=$this->getDoctrine()->getRepository(AutreAbsence::class)->findAll();
+        $primes=$this->getDoctrine()->getRepository(Prime::class)->findAll();
+        $frais=$this->getDoctrine()->getRepository(Frais::class)->findAll();
+        $heures=$this->getDoctrine()->getRepository(Heures::class)->findAll();
+        $avenants=$this->getDoctrine()->getRepository(Avenant::class)->findAll();
+
+
+        setlocale(LC_TIME, 'fr_FR.UTF8', 'fr.UTF8', 'fr_FR.UTF-8', 'fr.UTF-8');
+        $mois=(strftime(" %B"));
+
+        return $this->render('Admin/ExportInfosSalariesAsso.html.twig', [
+            'connexion'=>$connexion,
+            'associations'=>$associations,
+            'salariespros'=>$salariespros,
+            'salariespersos'=>$salariespersos,
+            'arrettravails' => $arrettravails,
+            'conges' => $conges,
+            'chomages' => $chomages,
+            'autreabsences' => $autreabsences,
+            'primes' => $primes,
+            'frais' => $frais,
+            'heures' => $heures,
+            'avenants' => $avenants,
+            'mois'=>$mois
+        ]);
+    }
 }
 
 
