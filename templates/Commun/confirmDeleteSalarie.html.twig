@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Supprimer{% endblock %}
+
+{% block body %}
+
+    <fieldset>
+
+        <legend>Confirmer la suppression</legend>
+        <br>
+        <p> <strong>Êtes vous sur de vouloir supprimer le salarié :</strong> </p>
+        <p>{{ salarieinfosperso.snom }} {{ salarieinfosperso.sprenom }}</p>
+        <br>
+{# si j'ai envoyer une liste d'associations alors je tourne et je renvoi que l'id salarie pour effacer toutes ces assos #}
+        {% if associations is defined %}
+
+            <p><strong>Travaillant dans les associations suivantes :</strong> </p>
+
+            {% for association in associations %}
+                <p> {{ association.anom }}, {{ association.aMail }} <br></p>
+            {% endfor %}
+
+            <p class="text-danger">Attention, toutes les informations personnelles de ce salariés seront supprimée, <br>
+                ainsi que toutes ces informations dans les associations précédemment citées</p>
+
+            {# but = associations donc assoMail est vide#}
+            <a href="{{ path('deleteSalarie',{'idsalarie':salarieinfosperso.spersoid, 'assoMail':' ', 'but':but}) }} " method="post" type="button" class="btn btn-danger">Valider la suppression</a>
+            <a href="{{ path('home') }}" method="post" type="button" class="btn btn-success">Annuler</a>
+        {% endif %}
+
+{# si j'ai envoyer une seule asso alors je l'affiche et j'envoi l'id d'une suele asso pour supprimer que celle là #}
+        {% if association is defined %}
+            <p><strong>Travaillant dans l'association suivante :</strong> </p>
+            <p> {{ association.anom }}, {{ association.aMail }} <br></p>
+
+            <p class="text-danger">Attention, toutes les informations professionnelles de ce salarié
+                dans l'association précédemment citée seront supprimées</p>
+
+            {# but = salarie don assoMail = id de l'asso #}
+            <a href="{{ path('deleteSalarie',{'idsalarie':salarieinfosperso.spersoid, 'assoMail':association.amail ,'but':but}) }}" method="post" type="button" class="btn btn-danger">Valider la suppression</a>
+            <a href="{{ path('home') }}" method="post" type="button" class="btn btn-success">Annuler</a>
+        {% endif %}
+    </fieldset>
+
+{% endblock %}

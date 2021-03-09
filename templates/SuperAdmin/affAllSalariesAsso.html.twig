@@ -43,15 +43,19 @@
                             <td>
                                 <a href="{{ path('voirSalarie',{'idsalarie': salarie.spersoid, 'assoMail': assoMail, 'but':'association', 'Page1': Page1, 'Page2': Page2}) }}" method="post">Voir</a>
                             </td>
-                        {% else %}
+                            <td>
+                                <a href="{{ path('validationDeleteSalarie',{'idsalarie': salarie.spersoid, 'assoMail': assoMail, 'but':'association'}) }}" method="post">Supprimer</a>
+                            </td>
+                        {% else %} {# je viens de la route AffAllSalarie de l'onglet associations donc je n'envoi pas de assoMail #}
                             <td>
                                 <a href="{{ path('voirSalarie',{'idsalarie': salarie.spersoid, 'assoMail': ' ', 'but':'salarie', 'Page1': Page1, 'Page2': ' '}) }}" method="post">Voir</a>
                             </td>
+                            <td>
+                                <a href="{{ path('validationDeleteSalarie',{'idsalarie': salarie.spersoid, 'assoMail': ' ', 'but':'salarie'}) }}" method="post">Supprimer</a>
+                            </td>
                         {% endif %}
 
-                        <td>
-                            <a href="" method="post">Supprimer</a>
-                        </td>
+
                     </tr>
                 {% endfor %}
                 </tbody>

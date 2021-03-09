@@ -20,6 +20,7 @@ use App\Form\SalarieInfosProType;
 use App\Form\VerifInfosPersoType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -294,5 +295,80 @@ class SaSalariesController extends AbstractController
             'associations'=> $associations, //liste des associations liées à ce salarié
             'salariespros'=> $salariespros //entité salariéinfopro
         ]);
+    }
+
+
+
+    /*######################## SUPPRESSION SALARIE ########################*/
+
+    /**
+     * @Route("/validationDeleteSalarie/{idsalarie}/{assoMail}/{but}", name="validationDeleteSalarie")
+     * @param $idsalarie
+     * @param $assoMail
+     * @param $but
+     * @return Response
+     */
+    public function validationDeleteSalarie($idsalarie, $assoMail, $but)
+    {
+        if ($but=='salarie'){
+            //envoyer questionnaire ête vous vraiment sur de supprimer ce salarié de ces association : liste des assos
+            $salarieinfosperso=$this->getDoctrine()->getRepository(SalarieInfosPerso::class)->find($idsalarie);
+            $assos=$salarieinfosperso->getAmail();
+            return $this->render('Commun/confirmDeleteSalarie.html.twig',[
+                'associations'=>$assos,
+                'salarieinfosperso'=>$salarieinfosperso,
+                'but'=> $but,
+            ]);
+        }
+        elseif ($but=='association'){
+            //envoyer questionnaire ête vous vraiment sur de supprimer ce salarié de ces association : liste des assos
+            $salarieinfosperso=$this->getDoctrine()->getRepository(SalarieInfosPerso::class)->find($idsalarie);
+            $assos=$this->getDoctrine()->getRepository(Association::class)->find($assoMail);
+            return $this->render('Commun/confirmDeleteSalarie.html.twig',[
+                'association'=>$assos,
+                'salarieinfosperso'=>$salarieinfosperso,
+                'but'=>$but,
+            ]);
+        }
+    }
+
+    /**
+     * @Route("/deleteSalarie/{idsalarie}/{assoMail}/{but}", name="deleteSalarie")
+     * @param $idsalarie
+     * @param $assoMail
+     * @param $but
+     * @return RedirectResponse
+     */
+    public function deleteSalarie($idsalarie, $assoMail,$but){
+        if ($but=='salarie'){
+            //je supprime toutes les infos pro du salarié dans ces assos
+
+            //je supprime son liens avec les association
+
+            //je supprime les infos perso, la table des fichiers F_salariePerso
+
+            //je revoi vers la page AffAllSalarie,de l'onglet salarie
+            return $this->redirectToRoute('affAllSalaries');
+        }
+        elseif ($but=='association'){
+            //je supprime UNIQUEMENT les infos pro de CE salarie pour CETTE asso et les tables secondaires
+
+            //je supprime le liens de ce salarié à CETTE asso
+
+            //je redirige vers la page AffAllSalarie de l'onglet association
+            $Page1='Liste des associations';
+            return $this->redirectToRoute('affSalaries',[
+                'assomail'=>$assoMail,
+                'Page1' => $Page1,
+                ]);
+
+        }
+    }
+
+    /**
+     * @Route("/test/", name="test")
+     */
+    public function test(){
+        return $this->render('home/test.html.twig');
     }
 }
