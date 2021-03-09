@@ -651,7 +651,7 @@ class CommunController extends AbstractController
      */
     public function EnregistrerAutreAbsence(Request $request, EntityManagerInterface $entityManager, $sproid, $butForReturn, $Page1, $Page2)
     {
-        //je veux ajouter des informations dans ma table autreabsence
+        //je veux ajouter des informations dans ma table autreabsencesymfony
         //liée cette table à la table connexion précédente
 
         //je crée un objet conges
