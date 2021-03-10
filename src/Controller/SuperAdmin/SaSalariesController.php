@@ -184,7 +184,7 @@ class SaSalariesController extends AbstractController
 
 
         setlocale(LC_TIME, 'fr_FR.UTF8', 'fr.UTF8', 'fr_FR.UTF-8', 'fr.UTF-8');
-        $mois=(strftime(" %B"));
+        $mois=(strftime(" %B %Y"));
 
         return $this->render('SuperAdmin/ExportInfosSalaries.html.twig', [
             'associations'=>$associations,
