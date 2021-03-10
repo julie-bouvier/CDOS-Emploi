@@ -27,11 +27,11 @@
                 <th colspan=4 bgcolor="#D3D1D1"> Infos général </th>
                 <th colspan=18> Arret de travail </th>
                 <th colspan=12> Congés </th>
-                <th colspan=5> Chomage </th>
+                <th colspan=15> Chomage </th>
                 <th colspan=12> Autres Absences </th>
                 <th colspan=8> Primes </th>
                 <th colspan=10> Frais </th>
-                <th colspan=4> Heure </th>
+                <th colspan=8> Heure </th>
                 <th colspan=3> Avenants </th>
                 <th colspan=3> Fin </th>
             </tr>
@@ -77,6 +77,16 @@
                 <th>NBH DEDUIRE </th>
                 <th>MAINTIEN 100</th>
                 <th>COM CHOMAGE 1</th>
+                <th>DU </th>
+                <th>AU </th>
+                <th>NBH DEDUIRE </th>
+                <th>MAINTIEN 100</th>
+                <th>COM CHOMAGE 2</th>
+                <th>DU </th>
+                <th>AU </th>
+                <th>NBH DEDUIRE </th>
+                <th>MAINTIEN 100</th>
+                <th>COM CHOMAGE 3</th>
                 <th>DU</th>
                 <th>AU</th>
                 <th>NBH DEDUIRE</th>
@@ -110,7 +120,11 @@
                 <th>TYPE HEURE</th>
                 <th>SEM CONCERNEE </th>
                 <th>NB HEURES</th>
-                <th> COM HEURE</th>
+                <th>COM HEURE 1</th>
+                <th>TYPE HEURE</th>
+                <th>SEM CONCERNEE </th>
+                <th>NB HEURES</th>
+                <th>COM HEURE 2</th>
                 <th>DATE EFFET</th>
                 <th>TYPE MODIF</th>
                 <th>COM AVENANT</th>
@@ -291,7 +305,52 @@
                                             <td> </td>
                                             <td> </td>
                                             <td> </td>
+                                            <td> </td>
+                                            <td> </td>
+                                            <td> </td>
+                                            <td> </td>
+                                            <td> </td>
+                                            <td> </td>
+                                            <td> </td>
+                                            <td> </td>
+                                            <td> </td>
+                                            <td> </td>
                                         {% elseif count3 ==1 %}
+                                            {% for chomage in chomages %}
+                                                {% if chomage.sproid.sproid==salariepro.sproid %}
+                                                    <td>{{ chomage.chodebut|date("d/m/Y") }}</td>
+                                                    <td>{{ chomage.chofin|date("d/m/Y") }}</td>
+                                                    <td>{{ chomage.chonbheure }}</td>
+                                                    <td>{{ chomage.chomaintien }}</td>
+                                                    <td>{{ chomage.chocommentaire}}</td>
+                                                    <td> </td>
+                                                    <td> </td>
+                                                    <td> </td>
+                                                    <td> </td>
+                                                    <td> </td>
+                                                    <td> </td>
+                                                    <td> </td>
+                                                    <td> </td>
+                                                    <td> </td>
+                                                    <td> </td>
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% elseif count3 ==2 %}
+                                            {% for chomage in chomages %}
+                                                {% if chomage.sproid.sproid==salariepro.sproid %}
+                                                    <td>{{ chomage.chodebut|date("d/m/Y") }}</td>
+                                                    <td>{{ chomage.chofin|date("d/m/Y") }}</td>
+                                                    <td>{{ chomage.chonbheure }}</td>
+                                                    <td>{{ chomage.chomaintien }}</td>
+                                                    <td>{{ chomage.chocommentaire}}</td>
+                                                {% endif %}
+                                            {% endfor %}
+                                            <td> </td>
+                                            <td> </td>
+                                            <td> </td>
+                                            <td> </td>
+                                            <td> </td>
+                                        {% elseif count3 ==3 %}
                                             {% for chomage in chomages %}
                                                 {% if chomage.sproid.sproid==salariepro.sproid %}
                                                     <td>{{ chomage.chodebut|date("d/m/Y") }}</td>
@@ -306,7 +365,7 @@
                                             {% for chomage in chomages%}
                                                 {% if chomage.sproid.sproid==salariepro.sproid %}
                                                     {% set nbch = nbch +1  %}
-                                                    {% if nbch <= 1 %}
+                                                    {% if nbch <= 3 %}
                                                         <td>{{ chomage.chodebut|date("d/m/Y") }}</td>
                                                         <td>{{ chomage.chofin|date("d/m/Y") }}</td>
                                                         <td>{{ chomage.chonbheure }}</td>
@@ -360,12 +419,12 @@
                                                     <td>{{ autreabsence.absfin|date("d/m/Y") }}</td>
                                                     <td>{{ autreabsence.absnbheure }}</td>
                                                     <td>{{ autreabsence.abscommentaire}}</td>
-                                                    <td> </td>
-                                                    <td> </td>
-                                                    <td> </td>
-                                                    <td> </td>
                                                 {% endif %}
                                             {% endfor %}
+                                            <td> </td>
+                                            <td> </td>
+                                            <td> </td>
+                                            <td> </td>
                                         {% elseif count4 ==3 %}
                                             {% for autreabsence in autreabsences %}
                                                 {% if autreabsence.sproid.sproid==salariepro.sproid %}
@@ -508,7 +567,24 @@
                                             <td> </td>
                                             <td> </td>
                                             <td> </td>
+                                            <td> </td>
+                                            <td> </td>
+                                            <td> </td>
+                                            <td> </td>
                                         {% elseif count7 ==1 %}
+                                            {% for heure in heures %}
+                                                {% if heure.sproid.sproid==salariepro.sproid %}
+                                                    <td>{{ heure.heurtype }}</td>
+                                                    <td>{{ heure.heursem }}</td>
+                                                    <td>{{ heure.heurnb }}</td>
+                                                    <td>{{ heure.heurcommentaire}}</td>
+                                                    <td> </td>
+                                                    <td> </td>
+                                                    <td> </td>
+                                                    <td> </td>
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% elseif count7 ==2 %}
                                             {% for heure in heures %}
                                                 {% if heure.sproid.sproid==salariepro.sproid %}
                                                     <td>{{ heure.heurtype }}</td>
@@ -522,7 +598,7 @@
                                             {% for heure in heures %}
                                                 {% if heure.sproid.sproid==salariepro.sproid %}
                                                     {% set nbhe = nbhe +1  %}
-                                                    {% if nbhe <= 1 %}
+                                                    {% if nbhe <= 2 %}
                                                         <td>{{ heure.heurtype }}</td>
                                                         <td>{{ heure.heursem }}</td>
                                                         <td>{{ heure.heurnb }}</td>
@@ -967,7 +1043,7 @@
                 <th>Nom de l'association</th>
                 <th>Nom du salarié</th>
                 <th>Prénom du salarié</th>
-                <th>Mois et année concerné </th>
+                <th>Mois concerné </th>
                 <th> DATE</th>
                 <th> MOTIF</th>
                 <th>COM FIN</th>
