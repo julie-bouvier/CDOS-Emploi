@@ -44,6 +44,9 @@
                     <li class="nav-item">
                         <a class="nav-link" id="profile-tab" data-toggle="tab" href="#{{idinfospro}}.avenants" role="tab" aria-controls="profile" aria-selected="false">Avenants</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#{{idinfospro}}.fincontrat" role="tab" aria-controls="profile" aria-selected="false">Fin de contrats</a>
+                    </li>
                 </ul>
 
                 {#Début du contenu des onglets#}
@@ -231,6 +234,25 @@
                         <a href="{{ path('EnregistrerAvenant',{'sproid': idinfospro,'butForReturn': 'SUPER_ADMIN_PLUS', 'Page1': Page1, 'Page2': Page2}) }}" method="post" type="button" class="btn btn-danger">Ajouter un avenant</a>
 
                     </div>
+                    <div class="tab-pane" id="{{idinfospro}}.fincontrat" role="tabpanel" aria-labelledby="home-tab">
+                        <br>
+                        <H4 style="color:#F7230C">Voici la page permettant de gérer les fins de contrats :</H4>
+
+                        <div class="card border-primary mb-3" style="max-width: 20rem;">
+                            <div class="card-body">
+                                <p class="card-text">
+                                <li><B>Date de fin de contrat si CDD :</B>  {{ infosPro.sDateFin|date("d/m/Y")}}</li>
+                                <li><B>Motif fin de contrat :</B>  {{ infosPro.sFinMotif}}</li>
+                                <li><B>Commentaire de fin de contrat:</B>  {{ infosPro.sComFin }}</li>
+                                </p>
+                                <a href="{{ path('modifFin',{'sproid': idinfospro,'butForReturn': 'SUPER_ADMIN_PLUS', 'Page1': Page1, 'Page2': Page2}) }}" method="post" type="button" class="btn btn-danger">Ajouter / Modifier fin de contrat</a>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+
                 </div>
             </tr>
         </table>

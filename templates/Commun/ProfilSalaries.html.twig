@@ -154,6 +154,9 @@
                         <li class="nav-item">
                             <a class="nav-link" id="profile-tab" data-toggle="tab" href="#{{idInfoPro}}.avenants" role="tab" aria-controls="profile" aria-selected="false">Avenants</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#{{idInfoPro}}.fincontrat" role="tab" aria-controls="profile" aria-selected="false">Fin de contrats</a>
+                        </li>
                     </ul>
 
                     {#Début du contenu des onglets#}
@@ -330,7 +333,7 @@
                                     <div class="card-body">
                                         <p class="card-text">
                                         <li><B>Date d'effet : </B>  {{ avenant.avdebut|date("d/m/Y") }}</li>
-                                        <li><B>Type de modification :</B>  {{ avenant.avtypemodif}}</li
+                                        <li><B>Type de modification :</B>  {{ avenant.avtypemodif}}</li>
                                         <li><B>Commentaires éventuels:</B> {{ avenant.avcommentaire}}
                                         </li>
                                         </p>
@@ -339,6 +342,24 @@
                                 </div>
                             {% endfor %}
                             <a href="{{ path('EnregistrerAvenant',{'sproid': idInfoPro,'butForReturn': 'ADMIN_ASSO', 'Page1': Page1, 'Page2': Page2}) }}" method="post" type="button" class="btn btn-danger">Ajouter un avenant</a>
+
+                        </div>
+
+
+                        <div class="tab-pane" id="{{idInfoPro}}.fincontrat" role="tabpanel" aria-labelledby="home-tab">
+                            <br>
+                            <H4 style="color:#f7230c">Voici la page permettant de gérer les fins de contrats :</H4>
+
+                            <div class="card border-primary mb-3" style="max-width: 20rem;">
+                                <div class="card-body">
+                                    <p class="card-text">
+                                    <li><B>Date de fin de contrat si CDD :</B>  {{ Infospro.sDateFin|date("d/m/Y")}}</li>
+                                    <li><B>Motif fin de contrat :</B>  {{ Infospro.sFinMotif}}</li>
+                                    <li><B>Commentaire de fin de contrat:</B>  {{ Infospro.sComFin }}</li>
+                                    </p>
+                                    <a href="{{ path('modifFin',{'sproid': idInfoPro,'butForReturn': 'ADMIN_ASSO', 'Page1': Page1, 'Page2': Page2}) }}" method="post" type="button" class="btn btn-danger">Ajouter / Modifier fin de contrat</a>
+                                </div>
+                            </div>
 
                         </div>
                     </div>
