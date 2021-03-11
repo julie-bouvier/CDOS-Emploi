@@ -94,7 +94,7 @@
                                     {% endif %}
                                 </li>
                                 <li><B>Type de contrat (si aide/subventionné) :</B>  {{ Infospro.stypecontrat }}</li>
-                                <li><B>Salarié multi-employeur :</B>
+                                <li><B>Salarié multi-employeurs :</B>
                                     {% if Infospro.smultiemployeur=='Oui' %}
                                         Oui
                                     {% else %}
@@ -104,7 +104,7 @@
                                 <li><B>Volume horaire mensuel :</B>  {{ Infospro.svolhorairemois }}</li>
                                 <li><B>Taux horaire brut (en €) :</B>  {{ Infospro.stauxhorairebrut }}</li>
                                 <li><B>Salaire mensuel brut (en €) par mois :</B>  {{ Infospro.ssalmoisbrut }}</li>
-                                <li><B>Adhésion complémentaire santé obligatoire proposé par l'employeur :</B>
+                                <li><B>Adhésion à la complémentaire santé obligatoire proposé par l'employeur :</B>
                                     {% if Infospro.scomplemsante=='Oui' %}
                                         Oui
                                     {% else %}
@@ -137,7 +137,7 @@
                             <a class="nav-link" id="profile-tab" data-toggle="tab" href="#{{idInfoPro}}.arrets_travail" role="tab" aria-controls="profile" aria-selected="false">Arrêts de travail</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#{{idInfoPro}}.chomages" role="tab" aria-controls="profile" aria-selected="false">Chomages</a>
+                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#{{idInfoPro}}.chomages" role="tab" aria-controls="profile" aria-selected="false">Activité partielle</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" id="profile-tab" data-toggle="tab" href="#{{idInfoPro}}.autres_absences" role="tab" aria-controls="profile" aria-selected="false">Autres absences</a>
@@ -146,7 +146,7 @@
                             <a class="nav-link" id="profile-tab" data-toggle="tab" href="#{{idInfoPro}}.primes" role="tab" aria-controls="profile" aria-selected="false">Primes</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#{{idInfoPro}}.frais" role="tab" aria-controls="profile" aria-selected="false">Frais</a>
+                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#{{idInfoPro}}.frais" role="tab" aria-controls="profile" aria-selected="false">Frais professionnels</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" id="profile-tab" data-toggle="tab" href="#{{idInfoPro}}.heures" role="tab" aria-controls="profile" aria-selected="false">Heures</a>
@@ -219,7 +219,7 @@
 
                         <div class="tab-pane" id="{{idInfoPro}}.chomages" role="tabpanel" aria-labelledby="profile-tab">
                             <br>
-                            <H4 style="color:#F7230C">Voici la page permettant de gérer les périodes de chômage :</H4>
+                            <H4 style="color:#F7230C">Voici la page permettant de gérer les périodes d'activités partielles) :</H4>
 
                             {% for chomage in chomages %}
                                 <div class="card border-primary mb-3" style="max-width: 20rem;">
@@ -232,12 +232,12 @@
                                         </li>
                                         <li><B>Commentaire :</B>  {{ chomage.chocommentaire }} </li>
                                         </p>
-                                        <a href="{{ path('modifChomage',{'sproid': idInfoPro , 'idchomage': chomage.choid,'butForReturn': 'ADMIN_ASSO', 'Page1': Page1, 'Page2': Page2}) }}" method="post" type="button" class="btn btn-danger">Modifier un chômage</a>
+                                        <a href="{{ path('modifChomage',{'sproid': idInfoPro , 'idchomage': chomage.choid,'butForReturn': 'ADMIN_ASSO', 'Page1': Page1, 'Page2': Page2}) }}" method="post" type="button" class="btn btn-danger">Modifier une activité partielle</a>
                                     </div>
                                 </div>
                             {% endfor %}
                             <br>
-                            <p><a href="{{ path('EnregistrerChomage',{'sproid': idInfoPro ,'butForReturn': 'ADMIN_ASSO', 'Page1': Page1, 'Page2': Page2}) }}" method="post" type="button" class="btn btn-danger">Ajouter un chômage</a>
+                            <p><a href="{{ path('EnregistrerChomage',{'sproid': idInfoPro ,'butForReturn': 'ADMIN_ASSO', 'Page1': Page1, 'Page2': Page2}) }}" method="post" type="button" class="btn btn-danger">Ajouter une activité partielle</a>
                             </p>
                         </div>
                         <div class="tab-pane" id="{{idInfoPro}}.autres_absences" role="tabpanel" aria-labelledby="home-tab">
@@ -251,7 +251,7 @@
                                         <li><B>Du :</B>  {{ autresabsence.absdebut|date("d/m/Y") }}</li>
                                         <li><B>Au :</B>  {{ autresabsence.absfin|date("d/m/Y")}}</li>
                                         <li><B>Nombre d'heures à déduire :</B>  {{ autresabsence.absnbheure }}</li>
-                                        <li><B>Commentaires éventuels sur le type d'absence :</B>  {{ autresabsence.abscommentaire }} </li>
+                                        <li><B>Type d'absence à préciser :</B>  {{ autresabsence.abscommentaire }} </li>
                                         </p>
                                         <a href="{{ path('modifAutreAbsence',{'sproid': idInfoPro , 'idautreabsence': autresabsence.absid,'butForReturn': 'ADMIN_ASSO', 'Page1': Page1, 'Page2': Page2}) }}" method="post" type="button" class="btn btn-danger">Modifier une autre absence</a>
 
@@ -285,7 +285,7 @@
                         </div>
 
                         <div class="tab-pane" id="{{idInfoPro}}.frais" role="tabpanel" aria-labelledby="home-tab">
-                            <H4 style="color:#F7230C">Voici la page permettant de gérer les frais :</H4>
+                            <H4 style="color:#F7230C">Voici la page permettant de gérer les frais professionnels:</H4>
 
                             {% for frai in frais %}
                                 <div class="card border-primary mb-3" style="max-width: 20rem;">

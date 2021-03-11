@@ -16,7 +16,7 @@
     <h6>Groupe CCNS:
         {{ form_widget(form.sccns) }}
     </h6>
-    <h6>Nature du contrat:
+    <h6>Nature du contrat (CDD, CDI, CDI intermittent) :
         {{ form_widget(form.snaturecontrat) }}
     </h6>
     <h6>Temps de travail (Temps plein, temps partiel, etc...) :
@@ -28,7 +28,7 @@
     <h6>Date de début du contrat :
         {{ form_widget(form.sdatedebut) }}
     </h6>
-    <h6>Date de fin du contrat :
+    <h6>Date de fin du contrat (si CDD) :
         {{ form_widget(form.sdatefin) }}
     </h6>
     <h6>Motif de fin de contrat :
@@ -46,19 +46,19 @@
     <h6>Type de contrat (s’il s’agit d’un contrat aidé/subventionné):
         {{ form_widget(form.stypecontrat) }}
     </h6>
-    <h6>Salarié multi-employeur :
+    <h6>Salarié multi-employeurs :
         {{ form_widget(form.smultiemployeur) }}
     </h6>
     <h6>Volume horaire mensuel:
         {{ form_widget(form.svolhorairemois) }}
     </h6>
-    <h6>Taux horaires brut (en €) :
+    <h6>Taux horaire brut (en €) :
         {{ form_widget(form.stauxhorairebrut) }}
     </h6>
     <h6>Salaire mensuel brut (€/mois) :
         {{ form_widget(form.ssalmoisbrut) }}
     </h6>
-    <h6>Adhésion complémentaire santé obligatoire proposé par l'employeur :
+    <h6>Adhésion à la complémentaire santé obligatoire proposé par l'employeur :
         {{ form_widget(form.scomplemsante) }}
     </h6>
     <h6>Autres éléments de rémunération :

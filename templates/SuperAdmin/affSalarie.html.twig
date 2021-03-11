@@ -107,20 +107,20 @@
                                                 <B>Motif de fin de contrat : </B>{{ infopro.sFinMotif }}<br>
                                                 <B>Commentaire de fin de contrat : </B>{{ infopro.sComFin }}<br>
                                                 <B>10ème mois de congé payé : </B>{{ infopro.s10congeMois }}<br>
-                                                <B>rest-il des congés à prendre ? </B>{{ infopro.sConge }}<br>
+                                                <B>Reste-il des congés à prendre ? </B>{{ infopro.sConge }}<br>
                                             </td>
                                             <td>
                                                 <B>Type de contrat : </B>{{ infopro.sTypeContrat }}<br>
-                                                <B>Multi-employeur : </B>{{ infopro.sMultiEmployeur }}<br>
+                                                <B>Multi-employeurs : </B>{{ infopro.sMultiEmployeur }}<br>
                                                 <B>Vol horaire par mois : </B>{{ infopro.sVolHoraireMois }}<br>
-                                                <B>taux horaire brut : </B>{{ infopro.sTauxHoraireBrut }}<br>
-                                                <B>salaire brut mensuel :</B>{{ infopro.sSalMoisBrut }}<br>
-                                                <B>complémentaire santé : </B>{{ infopro.sComplemSante }}<br>
+                                                <B>Taux horaire brut : </B>{{ infopro.sTauxHoraireBrut }}<br>
+                                                <B>Salaire brut mensuel :</B>{{ infopro.sSalMoisBrut }}<br>
+                                                <B>Adhésion à la complémentaire santé obligatoire proposée par l'employeur: </B>{{ infopro.sComplemSante }}<br>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>
-                                                <B>autre éléments :</B>{{ infopro.sAutreElement }} <br>
+                                                <B>Autre éléments :</B>{{ infopro.sAutreElement }} <br>
                                             </td>
                                         </tr>
 
@@ -146,13 +146,13 @@
                                                         <a class="nav-link" id="profile-tab" data-toggle="tab" href="#{{infopro.sproid}}.arrets_travail" role="tab" aria-controls="profile" aria-selected="false">Arrêts de travail</a>
                                                     </li>
                                                     <li class="nav-item">
-                                                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#{{infopro.sproid}}.chomages" role="tab" aria-controls="profile" aria-selected="false">Chomages</a>
+                                                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#{{infopro.sproid}}.chomages" role="tab" aria-controls="profile" aria-selected="false">Activité partielle</a>
                                                     </li>
                                                     <li class="nav-item">
                                                         <a class="nav-link" id="profile-tab" data-toggle="tab" href="#{{infopro.sproid}}.autres_absences" role="tab" aria-controls="profile" aria-selected="false">Autres absences</a>
                                                     </li>
                                                     <li class="nav-item">
-                                                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#{{infopro.sproid}}.primes" role="tab" aria-controls="profile" aria-selected="false">Primes</a>
+                                                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#{{infopro.sproid}}.primes" role="tab" aria-controls="profile" aria-selected="false">Primes professionnels</a>
                                                     </li>
                                                     <li class="nav-item">
                                                         <a class="nav-link" id="profile-tab" data-toggle="tab" href="#{{infopro.sproid}}.frais" role="tab" aria-controls="profile" aria-selected="false">Frais</a>
@@ -226,7 +226,7 @@
 
                                                     <div class="tab-pane" id="{{infopro.sproid}}.chomages" role="tabpanel" aria-labelledby="profile-tab">
                                                         <br>
-                                                        <H4 style="color:#F7230C">Voici la page permettant de gérer les périodes de chômage :</H4>
+                                                        <H4 style="color:#F7230C">Voici la page permettant de gérer les périodes de d'activités partielles :</H4>
 
                                                         {% for chomage in chomages %}
                                                             <div class="card border-primary mb-3" style="max-width: 20rem;">
@@ -292,7 +292,7 @@
                                                     </div>
 
                                                     <div class="tab-pane" id="{{infopro.sproid}}.frais" role="tabpanel" aria-labelledby="home-tab">
-                                                        <H4 style="color:#F7230C">Voici la page permettant de gérer les frais :</H4>
+                                                        <H4 style="color:#F7230C">Voici la page permettant de gérer les frais professionnels:</H4>
 
                                                         {% for frai in frais %}
                                                             <div class="card border-primary mb-3" style="max-width: 20rem;">
