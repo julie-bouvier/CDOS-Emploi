@@ -53,11 +53,13 @@ class AjoutInfosProType extends AbstractType
             ])
             ->add('sfinmotif', TextareaType::class,[
                 'attr' => ['class' => 'form-control'],
-                'required'=>false
+                'required'=>false,
+                'disabled'=>true
             ])
             ->add('scomfin', TextareaType::class,[
                 'attr' => ['class' => 'form-control'],
-                'required'=>false
+                'required'=>false,
+                'disabled'=>true
             ])
             ->add('s10congemois', ChoiceType::class,[
                 'choices' => [
