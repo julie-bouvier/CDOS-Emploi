@@ -49,7 +49,8 @@ class AjoutInfosProType extends AbstractType
             ])
             ->add('sdatefin', DateType::class,[
                 'attr' => ['class' => 'form-control'],
-                'required'=>false
+                'required'=>false,
+                'disabled'=>true
             ])
             ->add('sfinmotif', TextareaType::class,[
                 'attr' => ['class' => 'form-control'],
