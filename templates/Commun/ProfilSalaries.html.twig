@@ -70,7 +70,7 @@
                                     {% endif %}
                                 </li>
                                 <li><B>Date de début :</B>  {{ Infospro.sdatedebut|date("d/m/Y") }}</li>
-                                <li><B>Date de fin :</B>
+                                {#<li><B>Date de fin :</B>
                                     {% if Infospro.sdatefin==null  %}
 
                                     {% else %}
@@ -78,7 +78,7 @@
                                     {% endif %}
                                 </li>
                                 <li><B>Motif de fin:</B>  {{ Infospro.sfinmotif }}</li>
-                                <li><B>Commentaire de fin:</B>  {{ Infospro.scomfin }}</li>
+                                <li><B>Commentaire de fin:</B>  {{ Infospro.scomfin }}</li>#}
                                 <li><B>10% de congés payés versé mensuellement:</B>
                                     {% if Infospro.s10congemois=='Oui' %}
                                         Oui
