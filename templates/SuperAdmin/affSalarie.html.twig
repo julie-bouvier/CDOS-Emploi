@@ -152,10 +152,10 @@
                                                         <a class="nav-link" id="profile-tab" data-toggle="tab" href="#{{infopro.sproid}}.autres_absences" role="tab" aria-controls="profile" aria-selected="false">Autres absences</a>
                                                     </li>
                                                     <li class="nav-item">
-                                                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#{{infopro.sproid}}.primes" role="tab" aria-controls="profile" aria-selected="false">Primes professionnels</a>
+                                                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#{{infopro.sproid}}.primes" role="tab" aria-controls="profile" aria-selected="false">Primes</a>
                                                     </li>
                                                     <li class="nav-item">
-                                                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#{{infopro.sproid}}.frais" role="tab" aria-controls="profile" aria-selected="false">Frais</a>
+                                                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#{{infopro.sproid}}.frais" role="tab" aria-controls="profile" aria-selected="false">Frais professionnels</a>
                                                     </li>
                                                     <li class="nav-item">
                                                         <a class="nav-link" id="profile-tab" data-toggle="tab" href="#{{infopro.sproid}}.heures" role="tab" aria-controls="profile" aria-selected="false">Heures</a>
@@ -226,7 +226,7 @@
 
                                                     <div class="tab-pane" id="{{infopro.sproid}}.chomages" role="tabpanel" aria-labelledby="profile-tab">
                                                         <br>
-                                                        <H4 style="color:#F7230C">Voici la page permettant de gérer les périodes de d'activités partielles :</H4>
+                                                        <H4 style="color:#F7230C">Voici la page permettant de gérer les périodes d'activité partielle :</H4>
 
                                                         {% for chomage in chomages %}
                                                             <div class="card border-primary mb-3" style="max-width: 20rem;">
@@ -356,7 +356,7 @@
 
                                                     <div class="tab-pane" id="{{infopro.sproid}}.fincontrat" role="tabpanel" aria-labelledby="home-tab">
                                                         <br>
-                                                        <H4 style="color:#F7230C">Voici la page permettant de gérer les fins de contrats :</H4>
+                                                        <H4 style="color:#F7230C">Voici la page permettant de gérer la fin de contrat :</H4>
 
                                                         <div class="card border-primary mb-3" style="max-width: 20rem;">
                                                             <div class="card-body">
@@ -365,7 +365,7 @@
                                                                 <li><B>Motif fin de contrat :</B>  {{ infopro.sFinMotif}}</li>
                                                                 <li><B>Commentaire de fin de contrat:</B>  {{ infopro.sComFin }}</li>
                                                                 </p>
-                                                                <a href="{{ path('modifFin',{'sproid': infopro.sproid,'butForReturn': 'SUPER_ADMIN_SEUL', 'Page1': Page1, 'Page2': Page2}) }}" method="post" type="button" class="btn btn-danger">Ajouter / Modifier fin de contrat</a>
+                                                                <a href="{{ path('modifFin',{'sproid': infopro.sproid,'butForReturn': 'SUPER_ADMIN_SEUL', 'Page1': Page1, 'Page2': Page2}) }}" method="post" type="button" class="btn btn-danger">Ajouter / Modifier une fin de contrat</a>
                                                             </div>
                                                         </div>
 

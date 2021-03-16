@@ -109,7 +109,7 @@
 
                     <div class="tab-pane" id="{{idinfospro}}.chomages" role="tabpanel" aria-labelledby="profile-tab">
                         <br>
-                        <H4 style="color:#F7230C">Voici la page permettant de gérer les périodes d'activités partielles :</H4>
+                        <H4 style="color:#F7230C">Voici la page permettant de gérer les périodes d'activité partielle :</H4>
 
                         {% for chomage in chomages %}
                             <div class="card border-primary mb-3" style="max-width: 20rem;">
@@ -236,7 +236,7 @@
                     </div>
                     <div class="tab-pane" id="{{idinfospro}}.fincontrat" role="tabpanel" aria-labelledby="home-tab">
                         <br>
-                        <H4 style="color:#F7230C">Voici la page permettant de gérer les fins de contrats :</H4>
+                        <H4 style="color:#F7230C">Voici la page permettant de gérer la fin de contrat :</H4>
 
                         <div class="card border-primary mb-3" style="max-width: 20rem;">
                             <div class="card-body">
@@ -245,7 +245,7 @@
                                 <li><B>Motif fin de contrat :</B>  {{ infosPro.sFinMotif}}</li>
                                 <li><B>Commentaire de fin de contrat:</B>  {{ infosPro.sComFin }}</li>
                                 </p>
-                                <a href="{{ path('modifFin',{'sproid': idinfospro,'butForReturn': 'SUPER_ADMIN_PLUS', 'Page1': Page1, 'Page2': Page2}) }}" method="post" type="button" class="btn btn-danger">Ajouter / Modifier fin de contrat</a>
+                                <a href="{{ path('modifFin',{'sproid': idinfospro,'butForReturn': 'SUPER_ADMIN_PLUS', 'Page1': Page1, 'Page2': Page2}) }}" method="post" type="button" class="btn btn-danger">Ajouter / Modifier une fin de contrat</a>
                             </div>
                         </div>
 

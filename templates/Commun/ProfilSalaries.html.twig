@@ -79,7 +79,7 @@
                                 </li>
                                 <li><B>Motif de fin:</B>  {{ Infospro.sfinmotif }}</li>
                                 <li><B>Commentaire de fin:</B>  {{ Infospro.scomfin }}</li>#}
-                                <li><B>10% de congés payés versé mensuellement:</B>
+                                <li><B>10% de congé payé versé mensuellement:</B>
                                     {% if Infospro.s10congemois=='Oui' %}
                                         Oui
                                     {% else %}
@@ -104,7 +104,7 @@
                                 <li><B>Volume horaire mensuel :</B>  {{ Infospro.svolhorairemois }}</li>
                                 <li><B>Taux horaire brut (en €) :</B>  {{ Infospro.stauxhorairebrut }}</li>
                                 <li><B>Salaire mensuel brut (en €) par mois :</B>  {{ Infospro.ssalmoisbrut }}</li>
-                                <li><B>Adhésion à la complémentaire santé obligatoire proposé par l'employeur :</B>
+                                <li><B>Adhésion à la complémentaire santé obligatoire proposée par l'employeur :</B>
                                     {% if Infospro.scomplemsante=='Oui' %}
                                         Oui
                                     {% else %}
@@ -197,7 +197,7 @@
                                         <li><B>Initial ou prolongation  :</B>  {{ arrettravail.atprolongation}}</li>
                                         <li><B>Date de début de l'arrêt:</B>  {{ arrettravail.atdebut|date("d/m/Y") }}</li>
                                         <li><B>Date de fin prévisionnel de l'arrêt:</B>  {{ arrettravail.atfin|date("d/m/Y") }} </li>
-                                        <li><B>En cas de maladie : maintient des trois premiers jours:</B>  {{ arrettravail.at3jours }} </li>
+                                        <li><B>En cas de maladie : maintien des trois premiers jours:</B>  {{ arrettravail.at3jours }} </li>
                                         {% if arrettravail.at3jours=='non' %}
                                             <li> <B>Si non, nombre d'heures à déduire</B>  {{ arrettravail.at3jnbh}} </li>
                                         {% endif %}
@@ -219,7 +219,7 @@
 
                         <div class="tab-pane" id="{{idInfoPro}}.chomages" role="tabpanel" aria-labelledby="profile-tab">
                             <br>
-                            <H4 style="color:#F7230C">Voici la page permettant de gérer les périodes d'activités partielles) :</H4>
+                            <H4 style="color:#F7230C">Voici la page permettant de gérer les périodes d'activité partielle :</H4>
 
                             {% for chomage in chomages %}
                                 <div class="card border-primary mb-3" style="max-width: 20rem;">
@@ -348,7 +348,7 @@
 
                         <div class="tab-pane" id="{{idInfoPro}}.fincontrat" role="tabpanel" aria-labelledby="home-tab">
                             <br>
-                            <H4 style="color:#f7230c">Voici la page permettant de gérer les fins de contrats :</H4>
+                            <H4 style="color:#f7230c">Voici la page permettant de gérer la fin de contrat :</H4>
 
                             <div class="card border-primary mb-3" style="max-width: 20rem;">
                                 <div class="card-body">
@@ -357,7 +357,7 @@
                                     <li><B>Motif fin de contrat :</B>  {{ Infospro.sFinMotif}}</li>
                                     <li><B>Commentaire de fin de contrat:</B>  {{ Infospro.sComFin }}</li>
                                     </p>
-                                    <a href="{{ path('modifFin',{'sproid': idInfoPro,'butForReturn': 'ADMIN_ASSO', 'Page1': Page1, 'Page2': Page2}) }}" method="post" type="button" class="btn btn-danger">Ajouter / Modifier fin de contrat</a>
+                                    <a href="{{ path('modifFin',{'sproid': idInfoPro,'butForReturn': 'ADMIN_ASSO', 'Page1': Page1, 'Page2': Page2}) }}" method="post" type="button" class="btn btn-danger">Ajouter / Modifier une fin de contrat</a>
                                 </div>
                             </div>
 
