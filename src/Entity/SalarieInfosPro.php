@@ -98,12 +98,7 @@ class SalarieInfosPro
      */
     private $s10congemois;
 
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="sConge", type="string", nullable=true)
-     */
-    private $sconge;
+
 
     /**
      * @var string|null
@@ -363,21 +358,7 @@ class SalarieInfosPro
         $this->s10congemois = $s10congemois;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getSconge(): ?string
-    {
-        return $this->sconge;
-    }
 
-    /**
-     * @param string|null $sconge
-     */
-    public function setSconge(?string $sconge): void
-    {
-        $this->sconge = $sconge;
-    }
 
     /**
      * @return string|null

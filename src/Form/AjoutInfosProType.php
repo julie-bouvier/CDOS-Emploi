@@ -67,11 +67,7 @@ class AjoutInfosProType extends AbstractType
                     'Oui' => 'Oui',
                     'Non' => 'Non'
                 ]])
-            ->add('sconge', ChoiceType::class,[
-                'choices' => [
-                    'Oui' => 'Oui',
-                    'Non' => 'Non'
-            ]])
+
             ->add('stypecontrat', TextType::class,[
                 'attr' => ['class' => 'form-control'],
                 'required'=>false
