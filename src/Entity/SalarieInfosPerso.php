@@ -418,7 +418,7 @@ class SalarieInfosPerso
      */
     public function removeAssociation(Association $association):void
     {
-        $this->amail->remove($association);
+        $this->amail->removeElement($association);
     }
 
     /*######################## SALARIE INFO PRO ########################*/

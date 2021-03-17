@@ -10,6 +10,7 @@ use App\Entity\Chomage;
 use App\Entity\Conges;
 use App\Entity\Connexion;
 use App\Entity\Frais;
+use App\Entity\FSalarie;
 use App\Entity\Heures;
 use App\Entity\Prime;
 use App\Entity\SalarieInfosPerso;
@@ -43,8 +44,8 @@ class SaSalariesController extends AbstractController
             return $this->render('SuperAdmin/affAllSalariesAsso.html.twig', [
                 'message' => $message,
                 'assoMail' => $assomail,
-               // 'Page1'=>$Page1,
-               // 'Page2'=>$Page2
+                // 'Page1'=>$Page1,
+                // 'Page2'=>$Page2
             ]);
         }
         else{
@@ -276,8 +277,8 @@ class SaSalariesController extends AbstractController
             ]);
         }
     }
-    
-    
+
+
 
     /*######################## Documents Salariés ########################*/
 
@@ -311,7 +312,7 @@ class SaSalariesController extends AbstractController
     public function validationDeleteSalarie($idsalarie, $assoMail, $but)
     {
         if ($but=='salarie'){
-            //envoyer questionnaire ête vous vraiment sur de supprimer ce salarié de ces association : liste des assos
+            //envoyer questionnaire êtes-vous vraiment sur de supprimer ce salarié de ces associations : liste des assos
             $salarieinfosperso=$this->getDoctrine()->getRepository(SalarieInfosPerso::class)->find($idsalarie);
             $assos=$salarieinfosperso->getAmail();
             return $this->render('Commun/confirmDeleteSalarie.html.twig',[
@@ -337,33 +338,216 @@ class SaSalariesController extends AbstractController
      * @param $idsalarie
      * @param $assoMail
      * @param $but
-     * @return RedirectResponse
+     * @return Response
      */
-    public function deleteSalarie($idsalarie, $assoMail,$but){
+    public function deleteSalarie(Request $request,EntityManagerInterface $em, $idsalarie, $assoMail,$but){
+        $InfoPerso=$this->getDoctrine()->getRepository(SalarieInfosPerso::class)->find($idsalarie);
         if ($but=='salarie'){
-            //je supprime toutes les infos pro du salarié dans ces assos
 
-            //je supprime son liens avec les association
+            /////// Je supprime toutes les infos pro et les tables secondaires du salarié dans ces assos ///////
+            //Je récupère la liste des infos pros du salarié//
+            $listeInfosPro=$InfoPerso->getSproid();
 
-            //je supprime les infos perso, la table des fichiers F_salariePerso
+            //On parcourt la liste des infos pros liées au salarié
+            for($i=0;$i <= count($listeInfosPro);++$i){
+                //On vérifie si l'info pro existe
+                if($listeInfosPro[$i]!=null){
+                    $chomage= $this -> getDoctrine() -> getRepository(Chomage::class) -> findBy(['sproid'=> $listeInfosPro[$i]]);
+                    for($j=0;$j<count($chomage);++$j){
+                        $em->remove($chomage[$j]);
+                        $em->flush();
+                    }
+                    $conge= $this -> getDoctrine() -> getRepository(Conges::class) -> findBy(['sproid'=> $listeInfosPro[$i]]);
+                    for($k=0;$k < count($conge);++$k){
+                        if($conge[$k]!=null){
+                            $em->remove($conge[$k]);
+                            $em->flush();
+                        }
+                    }
+                    $arretTravail= $this -> getDoctrine() -> getRepository(ArretTravail::class) -> findBy(['sproid'=> $listeInfosPro[$i]]);
+                    for($l=0;$l < count($arretTravail);++$l){
+                        if($arretTravail[$l]!=null){
+                            $em->remove($arretTravail[$l]);
+                            $em->flush();
+                        }
+                    }
+                    $autreAbsence= $this -> getDoctrine() -> getRepository(AutreAbsence::class) -> findBy(['sproid'=> $listeInfosPro[$i]]);
+                    for($p=0;$p < count($autreAbsence);++$p){
+                        if($autreAbsence[$p]!=null){
+                            $em->remove($autreAbsence[$p]);
+                            $em->flush();
+                        }
+                    }
+                    $prime= $this -> getDoctrine() -> getRepository(Prime::class) -> findBy(['sproid'=> $listeInfosPro[$i]]);
+                    for($r=0;$r < count($prime);++$r){
+                        if($prime[$r]!=null){
+                            $em->remove($prime[$r]);
+                            $em->flush();
+                        }
+                    }
+                    $frais= $this -> getDoctrine() -> getRepository(Frais::class) -> findBy(['sproid'=> $listeInfosPro[$i]]);
+                    for($t=0;$t < count($frais);++$t){
+                        if($frais[$t]!=null){
+                            $em->remove($frais[$t]);
+                            $em->flush();
+                        }
+                    }
+                    $heure= $this -> getDoctrine() -> getRepository(Heures::class) -> findBy(['sproid'=> $listeInfosPro[$i]]);
+                    for($v=0;$v < count($heure);++$v){
+                        if($heure[$v]!=null){
+                            $em->remove($heure[$v]);
+                            $em->flush();
+                        }
+                    }
+                    $avenant= $this -> getDoctrine() -> getRepository(Avenant::class) -> findBy(['sproid'=> $listeInfosPro[$i]]);
+                    for($y=0;$y < count($avenant);++$y){
+                        if($avenant[$y]!=null){
+                            $em->remove($avenant[$y]);
+                            $em->flush();
+                        }
+                    }
+                    //Si l'info pro est liée au salarié, alors on supprime le lien
+                    $em->remove($listeInfosPro[$i]);
+                    $em->flush();
+                }
+            }
+
+            /////// Je supprime la table des fichiers F_salariePerso ///////
+
+            //On récupère la liste des associations liées au salarié
+            $listeDocSalarie= $this -> getDoctrine() -> getRepository(FSalarie::class) -> findBy(['spersoid'=> $InfoPerso]);
+            //On parcourt la liste des associations liées au salarié
+            for($i=0;$i < count($listeDocSalarie);++$i){
+                //On vérifie si 'asso existe
+                if($listeDocSalarie[$i]!=null){
+                    //Si le groupe est lié à l'asso, alors on supprime le lien
+                    $em->remove($listeDocSalarie[$i]);
+                    $em->flush();
+                }
+            }
+
+            //On supprime le lien entre les infos persos et les associations
+            $listeAsso= $InfoPerso->getAmail();
+            for($i=0;$i < count($listeAsso);++$i){
+                $ListeSalaries = $listeAsso[$i]->getsalarieinfosperso();
+                //On parcours la liste des salariés
+                for($i=0;$i < count($ListeSalaries);++$i){
+                    //On vérifie si 'asso existe
+                    if($ListeSalaries[$i]==$InfoPerso){
+                        //Si les infos perso du salarie de la liste correspondent aux infos perso du salarié à supprimer
+                        $em->remove($ListeSalaries[$i]);
+                        $em->flush();
+                    }
+                }
+            }
+
+
+            //On supprime les infos persos ce qui va automatiquement supprimer le lien avec les associations
+
+            $em->remove($InfoPerso);
+            $em->flush();
 
             //je revoi vers la page AffAllSalarie,de l'onglet salarie
-            return $this->redirectToRoute('affAllSalaries');
+            return $this->redirectToRoute('affAllSalaries', [
+                'but'=>$but
+            ]);
         }
+
         elseif ($but=='association'){
-            //je supprime UNIQUEMENT les infos pro de CE salarie pour CETTE asso et les tables secondaires
+            $ListeInfoPro=$InfoPerso->getSproid();
 
-            //je supprime le liens de ce salarié à CETTE asso
+            for($i=0;$i <= count($ListeInfoPro);++$i){
+                $amail=$ListeInfoPro[$i]->getSmailasso();
+                if ($amail==$assoMail){
+                    $chomage= $this -> getDoctrine() -> getRepository(Chomage::class) -> findBy(['sproid'=> $ListeInfoPro[$i]]);
+                    for($j=0;$j<count($chomage);++$j){
+                        $em->remove($chomage[$j]);
+                        $em->flush();
+                    }
+                    $conge= $this -> getDoctrine() -> getRepository(Conges::class) -> findBy(['sproid'=> $ListeInfoPro[$i]]);
+                    for($k=0;$k < count($conge);++$k){
+                        if($conge[$k]!=null){
+                            $em->remove($conge[$k]);
+                            $em->flush();
+                        }
+                    }
+                    $arretTravail= $this -> getDoctrine() -> getRepository(ArretTravail::class) -> findBy(['sproid'=> $ListeInfoPro[$i]]);
+                    for($l=0;$l < count($arretTravail);++$l){
+                        if($arretTravail[$l]!=null){
+                            $em->remove($arretTravail[$l]);
+                            $em->flush();
+                        }
+                    }
+                    $autreAbsence= $this -> getDoctrine() -> getRepository(AutreAbsence::class) -> findBy(['sproid'=> $ListeInfoPro[$i]]);
+                    for($p=0;$p < count($autreAbsence);++$p){
+                        if($autreAbsence[$p]!=null){
+                            $em->remove($autreAbsence[$p]);
+                            $em->flush();
+                        }
+                    }
+                    $prime= $this -> getDoctrine() -> getRepository(Prime::class) -> findBy(['sproid'=> $ListeInfoPro[$i]]);
+                    for($r=0;$r < count($prime);++$r){
+                        if($prime[$r]!=null){
+                            $em->remove($prime[$r]);
+                            $em->flush();
+                        }
+                    }
+                    $frais= $this -> getDoctrine() -> getRepository(Frais::class) -> findBy(['sproid'=> $ListeInfoPro[$i]]);
+                    for($t=0;$t < count($frais);++$t){
+                        if($frais[$t]!=null){
+                            $em->remove($frais[$t]);
+                            $em->flush();
+                        }
+                    }
+                    $heure= $this -> getDoctrine() -> getRepository(Heures::class) -> findBy(['sproid'=> $ListeInfoPro[$i]]);
+                    for($v=0;$v < count($heure);++$v){
+                        if($heure[$v]!=null){
+                            $em->remove($heure[$v]);
+                            $em->flush();
+                        }
+                    }
+                    $avenant= $this -> getDoctrine() -> getRepository(Avenant::class) -> findBy(['sproid'=> $ListeInfoPro[$i]]);
+                    for($y=0;$y < count($avenant);++$y){
+                        if($avenant[$y]!=null){
+                            $em->remove($avenant[$y]);
+                            $em->flush();
+                        }
+                    }
+                    //Si l'info pro est liée au salarié, alors on supprime le lien
+                    $em->remove($ListeInfoPro[$i]);
+                    $em->flush();
 
-            //je redirige vers la page AffAllSalarie de l'onglet association
-            $Page1='Liste des associations';
-            return $this->redirectToRoute('affSalaries',[
-                'assomail'=>$assoMail,
-                'Page1' => $Page1,
-                ]);
+                    //On supprime le lien entre les infos persos et l'association
+                    $Asso= $this -> getDoctrine() -> getRepository(Association::class) -> findOneBy(['amail'=>$assoMail]);
+                    $ListeSalaries = $Asso-> getsalarieinfosperso();
+                    //On parcours la liste des salariés
+                    for ($k = 0; $k < count($ListeSalaries); ++$k) {
+                        //Si les infos perso du salarie de la liste correspondent aux infos perso du salarié à supprimer
+                        if ($ListeSalaries[$k] == $InfoPerso) {
+                            //Alors on supprime le lien entre l'asso et l'info perso
+                            $Asso-> removeSalarieinfosperso($ListeSalaries[$k]);
+                            $em->flush();
+
+                            //je redirige vers la page AffAllSalarie de l'onglet association
+                            $Page1='Liste des associations';
+                            return $this->redirectToRoute('affSalaries',[
+                                'assomail'=>$assoMail,
+                                'Page1' => $Page1,
+                            ]);
+
+                        }
+                    }
+
+                }
+            }
 
         }
     }
+
+
+
+
+
 
     /**
      * @Route("/test/", name="test")

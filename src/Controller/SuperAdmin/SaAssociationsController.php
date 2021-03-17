@@ -2,9 +2,19 @@
 
 namespace App\Controller\SuperAdmin;
 
+use App\Entity\ArretTravail;
 use App\Entity\Association;
+use App\Entity\AutreAbsence;
+use App\Entity\Avenant;
+use App\Entity\Chomage;
+use App\Entity\Conges;
 use App\Entity\Connexion;
 use App\Entity\FAssociation;
+use App\Entity\Frais;
+use App\Entity\FSalarie;
+use App\Entity\Heures;
+use App\Entity\Prime;
+use App\Entity\SalarieInfosPerso;
 use App\Form\AssociationType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -190,4 +200,105 @@ class SaAssociationsController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/deleteAsso/{but}/{assoMail}", name="deleteAsso")
+     * @param $assoMail
+     * @param $but
+     * @return RedirectResponse
+     */
+    public function deleteAsso(Request $request,EntityManagerInterface $em, $assoMail,$but)
+    {
+        $Asso = $this->getDoctrine()->getRepository(Association::class)->find($assoMail);
+
+            /////// Je récupère la liste des salariés
+            $listeSalaries = $Asso->getsalarieinfosperso();
+
+            /////// On tourne dans la liste des infos perso des salariés
+            for ($i = 0; $i <= count($listeSalaries); ++$i) {
+
+                /////// Je supprime toutes les infos pro et les tables secondaires du salarié dans ces assos ///////
+
+                $listeInfosPro = $listeSalaries[$i]->getSproid();
+
+                //On parcourt la liste des infos pros liées au salarié
+                for ($i = 0; $i < count($listeInfosPro); ++$i) {
+                    //On vérifie si l'info pro existe
+                    if ($listeInfosPro[$i] != null) {
+                        $chomage = $this->getDoctrine()->getRepository(Chomage::class)->findBy(['sproid' => $listeInfosPro[$i]]);
+                        for ($j = 0; $j < count($chomage); ++$j) {
+                            $em->remove($chomage[$j]);
+                            $em->flush();
+                        }
+                        $conge = $this->getDoctrine()->getRepository(Conges::class)->findBy(['sproid' => $listeInfosPro[$i]]);
+                        for ($k = 0; $k < count($conge); ++$k) {
+                            if ($conge[$k] != null) {
+                                $em->remove($conge[$k]);
+                                $em->flush();
+                            }
+                        }
+                        $arretTravail = $this->getDoctrine()->getRepository(ArretTravail::class)->findBy(['sproid' => $listeInfosPro[$i]]);
+                        for ($l = 0; $l < count($arretTravail); ++$l) {
+                            if ($arretTravail[$l] != null) {
+                                $em->remove($arretTravail[$l]);
+                                $em->flush();
+                            }
+                        }
+                        $autreAbsence = $this->getDoctrine()->getRepository(AutreAbsence::class)->findBy(['sproid' => $listeInfosPro[$i]]);
+                        for ($p = 0; $p < count($autreAbsence); ++$p) {
+                            if ($autreAbsence[$p] != null) {
+                                $em->remove($autreAbsence[$p]);
+                                $em->flush();
+                            }
+                        }
+                        $prime = $this->getDoctrine()->getRepository(Prime::class)->findBy(['sproid' => $listeInfosPro[$i]]);
+                        for ($r = 0; $r < count($prime); ++$r) {
+                            if ($prime[$r] != null) {
+                                $em->remove($prime[$r]);
+                                $em->flush();
+                            }
+                        }
+                        $frais = $this->getDoctrine()->getRepository(Frais::class)->findBy(['sproid' => $listeInfosPro[$i]]);
+                        for ($t = 0; $t < count($frais); ++$t) {
+                            if ($frais[$t] != null) {
+                                $em->remove($frais[$t]);
+                                $em->flush();
+                            }
+                        }
+                        $heure = $this->getDoctrine()->getRepository(Heures::class)->findBy(['sproid' => $listeInfosPro[$i]]);
+                        for ($v = 0; $v < count($heure); ++$v) {
+                            if ($heure[$v] != null) {
+                                $em->remove($heure[$v]);
+                                $em->flush();
+                            }
+                        }
+                        $avenant = $this->getDoctrine()->getRepository(Avenant::class)->findBy(['sproid' => $listeInfosPro[$i]]);
+                        for ($y = 0; $y < count($avenant); ++$y) {
+                            if ($avenant[$y] != null) {
+                                $em->remove($avenant[$y]);
+                                $em->flush();
+                            }
+                        }
+                        //On supprime l'info pro
+                        $em->remove($listeInfosPro[$i]);
+                        $em->flush();
+                    }
+                }
+                // On supprime la connexion lié à l'asso
+                $CoAsso = $this->getDoctrine()->getRepository(Connexion::class)->findBy(['comail' => $assoMail]);
+                for ($y = 0; $y < count($CoAsso); ++$y) {
+                    $em->remove($CoAsso[$y]);
+                    $em->flush();
+                }
+
+
+                // On supprime l'associations
+                $em->remove($Asso);
+                $em->flush();
+            }
+
+            // Je revoi vers la page AffAllSalarie,de l'onglet salarie
+            return $this->redirectToRoute('affAssociation', [
+                'but' => $but
+            ]);
+        }
 }

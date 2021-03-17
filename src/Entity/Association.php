@@ -987,7 +987,7 @@ class Association
      */
     public function removeSalarieinfosperso(SalarieInfosPerso $salarieinfosperso):void
     {
-        $this->salarieinfosperso->remove($salarieinfosperso);
+        $this->salarieinfosperso->removeElement($salarieinfosperso);
     }
 
     /*######################## CONNEXION (comail) ########################*/

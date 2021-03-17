@@ -39,7 +39,7 @@
                         <a href="{{ path('affSalaries',{'assomail': association.amail, 'Page1':Page1}) }}" method="post">Salariés</a>
                     </td>
                     <td>
-                        <a href="" method="post">Supprimer</a>
+                        <a href="{{ path('deleteAsso',{'but':but, 'assoMail': association.amail}) }}" method="post">Supprimer</a>
                     </td>
                 </tr>
                 {% endfor %}
