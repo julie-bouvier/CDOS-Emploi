@@ -19,6 +19,7 @@ use App\Form\AutreAbsenceType;
 use App\Form\AvenantType;
 use App\Form\ChomageType;
 use App\Form\CongesType;
+use App\Form\FinContratType;
 use App\Form\HeuresType;
 use App\Form\FraisType;
 use App\Form\PrimeType;
@@ -231,7 +232,8 @@ class CommunController extends AbstractController
             'avenants' => $Avenants,
             'Page1' => $Page1,
             'Page2' => $Page2,
-            'Page3' => $Page3
+            'Page3' => $Page3,
+            'infosPro' => $infosPro
         ]);
     }
 
@@ -1328,6 +1330,75 @@ class CommunController extends AbstractController
                 'infosheure'=>$heure,
                 'idpro'=>$sproid,
                 'typetravail' => $type,
+                'Page1'=>$Page1,
+                'Page2'=>$Page2
+            ]);
+        }
+
+    }
+
+    /*######################## FIN DE CONTRAT  ########################*/
+
+    /**
+     * @Route("/modifFin/{sproid}/{butForReturn}/{Page1}/{Page2}", name="modifFin")
+     * @param Request $request
+     * @param EntityManagerInterface $entityManager
+     * @param $sproid
+     * @param $butForReturn
+     * @param $Page1
+     * @param $Page2
+     * @return Response
+     */
+    public function modifFin(Request $request,EntityManagerInterface $entityManager,$sproid, $butForReturn, $Page1, $Page2){
+        $infosPro=$this->getDoctrine()->getRepository(SalarieInfosPro::class)->find($sproid);
+
+
+        //je crée un formulaire avec les champs de l'arret de travail
+        $form=$this->createForm(FinContratType::class, $infosPro);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()){
+            $entityManager->persist($infosPro);
+            $entityManager->flush();
+            //je redirecte vers page ou route en fonction du butForReturn :
+            if ($butForReturn=='SUPER_ADMIN_SEUL'){
+                $assoMail=$infosPro->getSmailasso();
+                $idsalarieperso=$infosPro->getSPersoId()->getSpersoid();
+                return $this->redirectToRoute('voirSalarie', [
+                    'idsalarie'=>$idsalarieperso, //id de l'entite salarioinfosperso
+                    'assoMail'=> $assoMail, //id de l'association
+                    'but'=> 'association',
+                    'Page1'=>$Page1,
+                    'Page2'=>$Page2
+                ]);
+            }
+            elseif ($butForReturn=='SUPER_ADMIN_PLUS'){
+                $assoMail=$infosPro->getSmailasso();
+                $idsalarieperso=$infosPro->getSPersoId()->getSpersoid();
+                return $this->redirectToRoute('GestionSalarie', [
+                    'idsalarie'=>$idsalarieperso, //id de l'entite salarioinfosperso
+                    'assoMail'=> $assoMail, //id de l'association
+                    'but'=> 'salarie',
+                    'idinfospro'=>$sproid, //id de l'entite salarioinfospro
+                    'Page1'=> $Page1,
+                    'Page2'=> $Page2
+                ]);
+            }
+            elseif ($butForReturn=='ADMIN_ASSO'){
+                $assoMail=$infosPro->getSmailasso();
+                $idsalarieperso=$infosPro->getSPersoId()->getSpersoid();
+                return $this->redirectToRoute('ProfilSalarie', [
+                    'idPerso'=>$idsalarieperso, //id de l'entite salarioinfosperso
+                    'idmail'=> $assoMail, //id de l'association
+                    'Page1'=> $Page1,
+                ]);
+            }
+        }
+        else{
+            return $this->render('Commun/ModifFinContrat.html.twig', [
+                'form' => $form->createView(),
+                'infosPro'=>$infosPro,
+                'idpro'=>$sproid,
                 'Page1'=>$Page1,
                 'Page2'=>$Page2
             ]);

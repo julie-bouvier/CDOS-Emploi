@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Fin de Contrat </h1>
+    <br>
+    <strong>* Champs obligatoires</strong>
+    {{ form_start(form) }}
+
+    <h6>Date de fin de contrat  <strong>*</strong>:
+        {{ form_widget(form.sdatefin) }}
+    </h6>
+    <h6>Motif de fin  <strong>*</strong>:
+        {{ form_widget(form.sfinmotif) }}
+    </h6>
+
+    <h6>Commentaire de fin de contrat :
+        {{ form_widget(form.scomfin) }}
+    </h6>
+
+    <button type="submit" class="btn btn-success">Valider</button>
+    {{ form_end(form) }}
+
+{% endblock %}

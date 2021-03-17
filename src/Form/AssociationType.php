@@ -63,10 +63,7 @@ class AssociationType extends AbstractType
                 'attr' => ['class' => 'form-control'],
                 'required'=>false
             ])
-            ->add('atauxaccidenttravail', NumberType::class,[
-                'attr' => ['class' => 'form-control'],
-                'required'=>false
-            ])
+
             ->add('apeidentifiant',IntegerType::class,[
                 'attr' => ['class' => 'form-control'],
                 'required'=>false
@@ -87,14 +84,15 @@ class AssociationType extends AbstractType
                 'attr' => ['class' => 'form-control'],
                 'required'=>false
             ])
-            ->add('app',TextType::class,[
+            ->add('app',ChoiceType::class,[
+                'choices' => [
+                    'Oui' => 'Oui',
+                    'Non' => 'Non'
+                ],
                 'attr' => ['class' => 'form-control'],
                 'required'=>false
             ])
-            ->add('ap0',TextType::class,[
-                'attr' => ['class' => 'form-control'],
-                'required'=>false
-            ])
+
             ->add('acomplementaire',TextType::class,[
                 'attr' => ['class' => 'form-control'],
                 'required'=>false
@@ -148,22 +146,6 @@ class AssociationType extends AbstractType
                 'required'=>false
             ])
             ->add('acorrespondmail',EmailType::class,[
-                'attr' => ['class' => 'form-control'],
-                'required'=>false
-            ])
-            ->add('acourriersinternet',ChoiceType::class, [
-                'choices' => [
-                    'Oui' => 'oui',
-                    'Non' => 'non'
-                ],
-                'attr' => ['class' => 'form-control'],
-                'required'=>false
-            ])
-            ->add('aenvoicourrier',ChoiceType::class, [
-                'choices' => [
-                    'du correspondant' => 'correspondant',
-                    'de l\'associaion' => 'association'
-                ],
                 'attr' => ['class' => 'form-control'],
                 'required'=>false
             ])

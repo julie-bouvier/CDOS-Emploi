@@ -103,24 +103,24 @@
                                             </td>
                                             <td style="padding-right: 30px">
                                                 <B>Date de début de contrat : </B>{{ infopro.sDateDebut|date("d/m/Y") }}<br>
-                                                <B>Date de fin de contrat : </B>{{ infopro.sDateFin|date("d/m/Y") }}<br>
+                                                {#<B>Date de fin de contrat : </B>{{ infopro.sDateFin|date("d/m/Y") }}<br>
                                                 <B>Motif de fin de contrat : </B>{{ infopro.sFinMotif }}<br>
-                                                <B>Commentaire de fin de contrat : </B>{{ infopro.sComFin }}<br>
-                                                <B>10ème mois de congé payé : </B>{{ infopro.s10congeMois }}<br>
-                                                <B>rest-il des congés à prendre ? </B>{{ infopro.sConge }}<br>
+                                                <B>Commentaire de fin de contrat : </B>{{ infopro.sComFin }}<br>#}
+                                                <B>10% de congés payés à verser mensuellement : </B>{{ infopro.s10congeMois }}<br>
+                                                {#<B>Reste-il des congés à prendre ? </B>{{ infopro.sConge }}<br>#}
                                             </td>
                                             <td>
                                                 <B>Type de contrat : </B>{{ infopro.sTypeContrat }}<br>
-                                                <B>Multi-employeur : </B>{{ infopro.sMultiEmployeur }}<br>
+                                                <B>Multi-employeurs : </B>{{ infopro.sMultiEmployeur }}<br>
                                                 <B>Vol horaire par mois : </B>{{ infopro.sVolHoraireMois }}<br>
-                                                <B>taux horaire brut : </B>{{ infopro.sTauxHoraireBrut }}<br>
-                                                <B>salaire brut mensuel :</B>{{ infopro.sSalMoisBrut }}<br>
-                                                <B>complémentaire santé : </B>{{ infopro.sComplemSante }}<br>
+                                                <B>Taux horaire brut : </B>{{ infopro.sTauxHoraireBrut }}<br>
+                                                <B>Salaire brut mensuel :</B>{{ infopro.sSalMoisBrut }}<br>
+                                                <B>Adhésion à la complémentaire santé obligatoire proposée par l'employeur: </B>{{ infopro.sComplemSante }}<br>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>
-                                                <B>autre éléments :</B>{{ infopro.sAutreElement }} <br>
+                                                <B>Autre éléments :</B>{{ infopro.sAutreElement }} <br>
                                             </td>
                                         </tr>
 
@@ -146,7 +146,7 @@
                                                         <a class="nav-link" id="profile-tab" data-toggle="tab" href="#{{infopro.sproid}}.arrets_travail" role="tab" aria-controls="profile" aria-selected="false">Arrêts de travail</a>
                                                     </li>
                                                     <li class="nav-item">
-                                                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#{{infopro.sproid}}.chomages" role="tab" aria-controls="profile" aria-selected="false">Chomages</a>
+                                                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#{{infopro.sproid}}.chomages" role="tab" aria-controls="profile" aria-selected="false">Activité partielle</a>
                                                     </li>
                                                     <li class="nav-item">
                                                         <a class="nav-link" id="profile-tab" data-toggle="tab" href="#{{infopro.sproid}}.autres_absences" role="tab" aria-controls="profile" aria-selected="false">Autres absences</a>
@@ -155,13 +155,16 @@
                                                         <a class="nav-link" id="profile-tab" data-toggle="tab" href="#{{infopro.sproid}}.primes" role="tab" aria-controls="profile" aria-selected="false">Primes</a>
                                                     </li>
                                                     <li class="nav-item">
-                                                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#{{infopro.sproid}}.frais" role="tab" aria-controls="profile" aria-selected="false">Frais</a>
+                                                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#{{infopro.sproid}}.frais" role="tab" aria-controls="profile" aria-selected="false">Frais professionnels</a>
                                                     </li>
                                                     <li class="nav-item">
                                                         <a class="nav-link" id="profile-tab" data-toggle="tab" href="#{{infopro.sproid}}.heures" role="tab" aria-controls="profile" aria-selected="false">Heures</a>
                                                     </li>
                                                     <li class="nav-item">
                                                         <a class="nav-link" id="profile-tab" data-toggle="tab" href="#{{infopro.sproid}}.avenants" role="tab" aria-controls="profile" aria-selected="false">Avenants</a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#{{infopro.sproid}}.fincontrat" role="tab" aria-controls="profile" aria-selected="false">Fin de contrats</a>
                                                     </li>
                                                 </ul>
 
@@ -203,7 +206,7 @@
                                                                     <li><B>Initial ou prolongation  :</B>  {{ arrettravail.atprolongation}}</li>
                                                                     <li><B>Date de début de l'arrêt:</B>  {{ arrettravail.atdebut|date("d/m/Y") }}</li>
                                                                     <li><B>Date de fin prévisionnel de l'arrêt:</B>  {{ arrettravail.atfin|date("d/m/Y") }} </li>
-                                                                    <li><B>En cas de maladie : maintient des trois premiers jours:</B>  {{ arrettravail.at3jours }} </li>
+                                                                    <li><B>En cas de maladie : maintien des trois premiers jours:</B>  {{ arrettravail.at3jours }} </li>
                                                                     {% if arrettravail.at3jours=='non' %}
                                                                         <li> <B>Si non, nombre d'heures à déduire</B>  {{ arrettravail.at3jnbh}} </li>
                                                                     {% endif %}
@@ -223,7 +226,7 @@
 
                                                     <div class="tab-pane" id="{{infopro.sproid}}.chomages" role="tabpanel" aria-labelledby="profile-tab">
                                                         <br>
-                                                        <H4 style="color:#F7230C">Voici la page permettant de gérer les périodes de chômage :</H4>
+                                                        <H4 style="color:#F7230C">Voici la page permettant de gérer les périodes d'activité partielle :</H4>
 
                                                         {% for chomage in chomages %}
                                                             <div class="card border-primary mb-3" style="max-width: 20rem;">
@@ -289,7 +292,7 @@
                                                     </div>
 
                                                     <div class="tab-pane" id="{{infopro.sproid}}.frais" role="tabpanel" aria-labelledby="home-tab">
-                                                        <H4 style="color:#F7230C">Voici la page permettant de gérer les frais :</H4>
+                                                        <H4 style="color:#F7230C">Voici la page permettant de gérer les frais professionnels:</H4>
 
                                                         {% for frai in frais %}
                                                             <div class="card border-primary mb-3" style="max-width: 20rem;">
@@ -347,6 +350,24 @@
                                                         {% endfor %}
                                                         <a href="{{ path('EnregistrerAvenant',{'sproid': infopro.sproid ,'butForReturn': 'SUPER_ADMIN_SEUL', 'Page1': Page1, 'Page2': Page2}) }}" method="post" type="button" class="btn btn-danger">Ajouter un avenant</a>
 
+
+                                                    </div>
+
+
+                                                    <div class="tab-pane" id="{{infopro.sproid}}.fincontrat" role="tabpanel" aria-labelledby="home-tab">
+                                                        <br>
+                                                        <H4 style="color:#F7230C">Voici la page permettant de gérer la fin de contrat :</H4>
+
+                                                        <div class="card border-primary mb-3" style="max-width: 20rem;">
+                                                            <div class="card-body">
+                                                                <p class="card-text">
+                                                                <li><B>Date de fin de contrat si CDD :</B>  {{ infopro.sDateFin|date("d/m/Y")}}</li>
+                                                                <li><B>Motif fin de contrat :</B>  {{ infopro.sFinMotif}}</li>
+                                                                <li><B>Commentaire de fin de contrat:</B>  {{ infopro.sComFin }}</li>
+                                                                </p>
+                                                                <a href="{{ path('modifFin',{'sproid': infopro.sproid,'butForReturn': 'SUPER_ADMIN_SEUL', 'Page1': Page1, 'Page2': Page2}) }}" method="post" type="button" class="btn btn-danger">Ajouter / Modifier une fin de contrat</a>
+                                                            </div>
+                                                        </div>
 
                                                     </div>
                                                 </div>

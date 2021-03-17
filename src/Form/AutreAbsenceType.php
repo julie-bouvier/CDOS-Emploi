@@ -30,7 +30,7 @@ class AutreAbsenceType extends AbstractType
             ])
             ->add('abscommentaire',TextType::class,[
                 'attr' => ['class' => 'form-control'],
-                'required'=>false
+                'required'=>true
             ])
            // ->add('sproid')
         ;

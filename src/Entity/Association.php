@@ -91,12 +91,6 @@ class Association
      */
     private $acoderisque;
 
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="aTauxAccidentTravail", type="decimal", precision=10, scale=0, nullable=true)
-     */
-    private $atauxaccidenttravail;
 
     /**
      * @var int|null
@@ -139,13 +133,6 @@ class Association
      * @ORM\Column(name="aPP", type="string", length=50, nullable=true)
      */
     private $app;
-
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="aP0", type="string", length=50, nullable=true)
-     */
-    private $ap0;
 
     /**
      * @var string|null
@@ -245,19 +232,6 @@ class Association
      */
     private $acorrespondmail;
 
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="aCourriersInternet", type="string", nullable=true)
-     */
-    private $acourriersinternet;
-
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="aEnvoiCourrier", type="string", nullable=true)
-     */
-    private $aenvoicourrier;
 
     /**
      * @var string|null
@@ -508,21 +482,6 @@ class Association
         $this->acoderisque = $acoderisque;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getAtauxaccidenttravail(): ?string
-    {
-        return $this->atauxaccidenttravail;
-    }
-
-    /**
-     * @param string|null $atauxaccidenttravail
-     */
-    public function setAtauxaccidenttravail(?string $atauxaccidenttravail): void
-    {
-        $this->atauxaccidenttravail = $atauxaccidenttravail;
-    }
 
     /**
      * @return int|null
@@ -620,21 +579,6 @@ class Association
         $this->app = $app;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getAp0(): ?string
-    {
-        return $this->ap0;
-    }
-
-    /**
-     * @param string|null $ap0
-     */
-    public function setAp0(?string $ap0): void
-    {
-        $this->ap0 = $ap0;
-    }
 
     /**
      * @return string|null
@@ -858,38 +802,6 @@ class Association
     public function setAcorrespondmail(?string $acorrespondmail): void
     {
         $this->acorrespondmail = $acorrespondmail;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getAcourriersinternet(): ?string
-    {
-        return $this->acourriersinternet;
-    }
-
-    /**
-     * @param string|null $acourriersinternet
-     */
-    public function setAcourriersinternet(?string $acourriersinternet): void
-    {
-        $this->acourriersinternet = $acourriersinternet;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getAenvoicourrier(): ?string
-    {
-        return $this->aenvoicourrier;
-    }
-
-    /**
-     * @param string|null $aenvoicourrier
-     */
-    public function setAenvoicourrier(?string $aenvoicourrier): void
-    {
-        $this->aenvoicourrier = $aenvoicourrier;
     }
 
     /**
